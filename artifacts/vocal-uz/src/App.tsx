@@ -2,25 +2,22 @@ import { Switch, Route, Router as WouterRouter } from "wouter";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { Toaster } from "@/components/ui/toaster";
 import { TooltipProvider } from "@/components/ui/tooltip";
+import { LangProvider } from "@/lib/langContext";
+import { Nav } from "@/components/Nav";
+import { Footer } from "@/components/Footer";
+import Home from "@/pages/Home";
+import ExtremeVocals from "@/pages/ExtremeVocals";
+import PopVocals from "@/pages/PopVocals";
 import NotFound from "@/pages/not-found";
 
 const queryClient = new QueryClient();
-
-function Home() {
-  return (
-    <div className="min-h-screen w-full flex items-center justify-center bg-gray-50">
-      <div className="text-center">
-        <h1 className="text-2xl font-bold text-gray-900">Replit Agent is building...</h1>
-        <p className="mt-2 text-sm text-gray-600">Your app will appear here once it's ready.</p>
-      </div>
-    </div>
-  );
-}
 
 function Router() {
   return (
     <Switch>
       <Route path="/" component={Home} />
+      <Route path="/extreme" component={ExtremeVocals} />
+      <Route path="/pop" component={PopVocals} />
       <Route component={NotFound} />
     </Switch>
   );
@@ -30,9 +27,17 @@ function App() {
   return (
     <QueryClientProvider client={queryClient}>
       <TooltipProvider>
-        <WouterRouter base={import.meta.env.BASE_URL.replace(/\/$/, "")}>
-          <Router />
-        </WouterRouter>
+        <LangProvider>
+          <WouterRouter base={import.meta.env.BASE_URL.replace(/\/$/, "")}>
+            <div className="min-h-screen bg-[#080808] text-[#f0eeea]">
+              <Nav />
+              <main>
+                <Router />
+              </main>
+              <Footer />
+            </div>
+          </WouterRouter>
+        </LangProvider>
         <Toaster />
       </TooltipProvider>
     </QueryClientProvider>
