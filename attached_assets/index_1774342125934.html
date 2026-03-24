@@ -1,0 +1,866 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>vocal.uz — Дария Свиридова</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&family=Playfair+Display:ital@1&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --bg:     #080808;
+  --bg2:    #0f0f0f;
+  --bg3:    #141414;
+  --white:  #f0eeea;
+  --muted:  #555;
+  --red:    #e8002d;
+  --border: rgba(240,238,234,.08);
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--bg);
+  color: var(--white);
+  font-family: 'DM Sans', sans-serif;
+  font-weight: 300;
+  overflow-x: hidden;
+}
+
+body::after {
+  content:''; position:fixed; inset:0; z-index:9999; pointer-events:none;
+  opacity:.03;
+  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-size:120px;
+}
+
+/* ── NAV ── */
+nav {
+  position:fixed; top:0; left:0; right:0; z-index:200;
+  display:flex; align-items:center; justify-content:space-between;
+  padding:1.6rem 3rem;
+  border-bottom:1px solid transparent;
+  transition:border-color .4s, background .4s;
+}
+nav.scrolled {
+  background:rgba(8,8,8,.92);
+  border-color:var(--border);
+  backdrop-filter:blur(8px);
+}
+.nav-brand {
+  font-family:'Bebas Neue',sans-serif;
+  font-size:1.5rem; letter-spacing:.08em;
+  color:var(--white); text-decoration:none; transition:color .2s;
+}
+.nav-brand:hover { color:var(--red); }
+.nav-brand span { color:var(--red); }
+
+.nav-right { display:flex; align-items:center; gap:2rem; }
+.nav-links { display:flex; gap:2.5rem; list-style:none; align-items:center; }
+.nav-links a {
+  font-size:.72rem; letter-spacing:.14em; text-transform:uppercase;
+  color:var(--muted); text-decoration:none; transition:color .2s;
+}
+.nav-links a:hover { color:var(--white); }
+
+/* Language toggle */
+.lang-toggle {
+  display:flex; align-items:center;
+  border:1px solid var(--border); overflow:hidden; flex-shrink:0;
+}
+.lang-btn {
+  font-family:'Bebas Neue',sans-serif;
+  font-size:.85rem; letter-spacing:.12em;
+  padding:.45rem .85rem;
+  background:transparent; border:none; cursor:pointer;
+  color:var(--muted);
+  transition:background .2s, color .2s;
+}
+.lang-btn.active { background:var(--white); color:var(--bg); }
+.lang-btn:not(.active):hover { color:var(--white); }
+
+.nav-book-btn {
+  font-size:.72rem; letter-spacing:.14em; text-transform:uppercase;
+  background:var(--red); color:var(--white);
+  padding:.65rem 1.5rem; text-decoration:none;
+  transition:background .2s; white-space:nowrap;
+}
+.nav-book-btn:hover { background:#ff1a3d; color:var(--white); }
+
+/* ── HERO ── */
+#hero {
+  min-height:100vh;
+  display:grid; grid-template-columns:1fr 1fr;
+  position:relative; overflow:hidden;
+}
+
+.hero-left {
+  background:var(--bg);
+  display:flex; flex-direction:column; justify-content:flex-end;
+  padding:7rem 3rem 6rem;
+  position:relative; overflow:hidden;
+  border-right:1px solid var(--border);
+}
+.hero-left::before {
+  content:''; position:absolute; inset:0;
+  background:radial-gradient(ellipse 70% 60% at 30% 60%, rgba(232,0,45,.09) 0%, transparent 70%);
+  pointer-events:none;
+}
+.hero-bg-text-left {
+  position:absolute; top:50%; left:-1.5rem;
+  transform:translateY(-50%) rotate(-90deg);
+  font-family:'Bebas Neue',sans-serif; font-size:18vw;
+  color:rgba(232,0,45,.04); letter-spacing:-.02em;
+  white-space:nowrap; pointer-events:none; line-height:1; transform-origin:left center;
+}
+.hero-tag-left {
+  font-size:.68rem; letter-spacing:.25em; text-transform:uppercase;
+  color:var(--red); margin-bottom:1.2rem;
+  opacity:0; animation:fadeUp .6s .5s forwards;
+}
+.hero-title-left {
+  font-family:'Bebas Neue',sans-serif;
+  font-size:clamp(3.5rem,8vw,7.5rem);
+  line-height:.9; letter-spacing:.02em;
+  opacity:0; animation:fadeUp .7s .65s forwards;
+}
+.hero-title-left span { display:block; color:var(--red); }
+.hero-desc-left {
+  margin-top:1.8rem; font-size:.85rem; line-height:1.8;
+  color:rgba(240,238,234,.45); max-width:320px;
+  opacity:0; animation:fadeUp .6s .9s forwards;
+}
+
+.hero-right {
+  background:var(--bg2);
+  display:flex; flex-direction:column; justify-content:flex-end;
+  padding:7rem 3rem 6rem;
+  position:relative; overflow:hidden;
+}
+.hero-right::before {
+  content:''; position:absolute; inset:0;
+  background:radial-gradient(ellipse 60% 50% at 70% 40%, rgba(240,238,234,.04) 0%, transparent 70%);
+  pointer-events:none;
+}
+.hero-bg-text-right {
+  position:absolute; top:50%; right:-1.5rem;
+  transform:translateY(-50%) rotate(90deg);
+  font-family:'Playfair Display',serif; font-size:16vw; font-style:italic;
+  color:rgba(240,238,234,.025);
+  white-space:nowrap; pointer-events:none; line-height:1; transform-origin:right center;
+}
+.hero-tag-right {
+  font-size:.68rem; letter-spacing:.25em; text-transform:uppercase;
+  color:var(--muted); margin-bottom:1.2rem;
+  opacity:0; animation:fadeUp .6s .8s forwards;
+}
+.hero-title-right {
+  font-family:'Playfair Display',serif; font-style:italic;
+  font-size:clamp(3rem,6.5vw,6.5rem); line-height:.95;
+  opacity:0; animation:fadeUp .7s .95s forwards;
+}
+.hero-title-right span { display:block; color:rgba(240,238,234,.45); }
+.hero-desc-right {
+  margin-top:1.8rem; font-size:.85rem; line-height:1.8;
+  color:rgba(240,238,234,.45); max-width:320px;
+  opacity:0; animation:fadeUp .6s 1.15s forwards;
+}
+
+.hero-center {
+  position:absolute; top:6.5rem; left:50%; transform:translateX(-50%);
+  z-index:10; text-align:center;
+  opacity:0; animation:fadeIn .8s .3s forwards;
+}
+.hero-center-brand {
+  font-family:'Bebas Neue',sans-serif;
+  font-size:clamp(1.4rem,3vw,2.4rem); letter-spacing:.25em; color:var(--white);
+  background:var(--bg); padding:.5rem 1.6rem;
+  border:1px solid var(--border); white-space:nowrap;
+}
+.hero-center-brand span { color:var(--red); }
+.hero-center-name {
+  margin-top:.6rem; font-size:.65rem; letter-spacing:.22em; text-transform:uppercase;
+  color:var(--muted); background:var(--bg); padding:.35rem 1rem;
+  display:block; border:1px solid var(--border); border-top:none;
+}
+
+.hero-cta-strip {
+  position:absolute; bottom:0; left:0; right:0; z-index:10;
+  display:grid; grid-template-columns:1fr 1fr; height:4rem;
+}
+.cta-half {
+  padding:1.4rem 3rem;
+  display:flex; align-items:center; justify-content:space-between;
+  text-decoration:none; transition:background .25s;
+}
+.cta-half-book { background:var(--red); }
+.cta-half-book:hover { background:#ff1a3d; }
+.cta-half-learn { background:var(--bg3); border-top:1px solid var(--border); }
+.cta-half-learn:hover { background:#1a1a1a; }
+.cta-label {
+  font-family:'Bebas Neue',sans-serif; font-size:1.15rem; letter-spacing:.1em; color:var(--white);
+}
+.cta-arrow { font-size:1.1rem; color:var(--white); opacity:.7; transition:transform .25s; }
+.cta-half:hover .cta-arrow { transform:translateX(5px); }
+.cta-half-book .cta-arrow { opacity:1; }
+
+/* ── SECTION BASE ── */
+.section-eyebrow {
+  font-size:.68rem; letter-spacing:.28em; text-transform:uppercase;
+  color:var(--red); display:block; margin-bottom:1rem;
+}
+.section-title {
+  font-family:'Bebas Neue',sans-serif;
+  font-size:clamp(3rem,5vw,5rem); line-height:.95; letter-spacing:.02em;
+}
+.section-title em {
+  font-family:'Playfair Display',serif; font-style:italic;
+  font-size:.7em; color:rgba(240,238,234,.45); display:block; margin-top:.15em;
+}
+.rule { width:40px; height:2px; background:var(--red); margin:2rem 0; }
+
+/* ── BOOKING ── */
+#booking { background:var(--bg3); padding:7rem 3rem; border-top:1px solid var(--border); }
+.booking-inner {
+  max-width:1100px; margin:0 auto;
+  display:grid; grid-template-columns:1fr 1.4fr; gap:5rem; align-items:start;
+}
+.booking-intro p { font-size:.9rem; line-height:1.9; color:rgba(240,238,234,.5); margin-bottom:1.2rem; }
+.booking-intro p strong { color:var(--white); font-weight:400; }
+.perks { display:flex; flex-direction:column; gap:.8rem; margin-top:2rem; }
+.perk { display:flex; align-items:center; gap:1rem; font-size:.82rem; color:rgba(240,238,234,.5); }
+.perk-dot { width:6px; height:6px; border-radius:50%; background:var(--red); flex-shrink:0; }
+
+.booking-form-card { background:var(--bg); border:1px solid var(--border); padding:3rem; }
+.form-row { display:grid; grid-template-columns:1fr 1fr; gap:1px; margin-bottom:1px; }
+.form-row.single { grid-template-columns:1fr; }
+
+.booking-form-card input,
+.booking-form-card select,
+.booking-form-card textarea {
+  background:var(--bg3); border:none; outline:none;
+  width:100%; padding:1.2rem 1.4rem;
+  font-family:'DM Sans',sans-serif; font-size:.85rem; font-weight:300;
+  color:var(--white); transition:background .2s;
+}
+.booking-form-card input::placeholder,
+.booking-form-card textarea::placeholder { color:var(--muted); }
+.booking-form-card select { color:var(--muted); cursor:pointer; }
+.booking-form-card select.has-val { color:var(--white); }
+.booking-form-card input:focus,
+.booking-form-card select:focus,
+.booking-form-card textarea:focus { background:#1a1a1a; }
+.booking-form-card textarea { resize:vertical; min-height:90px; }
+.form-submit-wrap { margin-top:1px; }
+.form-submit {
+  width:100%; background:var(--red); border:none; cursor:pointer;
+  font-family:'Bebas Neue',sans-serif;
+  font-size:1.1rem; letter-spacing:.15em; color:var(--white); padding:1.3rem;
+  transition:background .2s, letter-spacing .25s;
+  display:flex; align-items:center; justify-content:center; gap:.8rem;
+}
+.form-submit:hover { background:#ff1a3d; letter-spacing:.22em; }
+.form-submit svg { transition:transform .25s; }
+.form-submit:hover svg { transform:translateX(4px); }
+.form-note { margin-top:1.2rem; font-size:.72rem; color:var(--muted); text-align:center; letter-spacing:.04em; }
+
+/* ── DISCIPLINES ── */
+#disciplines { padding:7rem 3rem; background:var(--bg); border-top:1px solid var(--border); }
+.disciplines-header { max-width:1100px; margin:0 auto 4rem; }
+.disciplines-grid {
+  max-width:1100px; margin:0 auto;
+  display:grid; grid-template-columns:1fr 1fr; gap:1px; background:var(--border);
+}
+.disc-card { padding:4rem 3.5rem; position:relative; overflow:hidden; transition:background .3s; }
+.disc-card-extreme { background:var(--bg); }
+.disc-card-extreme:hover { background:#0d0a0a; }
+.disc-card-pop { background:var(--bg2); }
+.disc-card-pop:hover { background:#131313; }
+.disc-card::before { content:''; position:absolute; inset:0; opacity:0; transition:opacity .4s; }
+.disc-card-extreme::before { background:radial-gradient(ellipse 60% 50% at 20% 80%, rgba(232,0,45,.08) 0%, transparent 70%); }
+.disc-card-pop::before { background:radial-gradient(ellipse 60% 50% at 80% 20%, rgba(240,238,234,.04) 0%, transparent 70%); }
+.disc-card:hover::before { opacity:1; }
+.disc-num { font-family:'Bebas Neue',sans-serif; font-size:6rem; line-height:1; position:absolute; top:2rem; right:2.5rem; }
+.disc-card-extreme .disc-num { color:rgba(232,0,45,.07); }
+.disc-card-pop .disc-num { color:rgba(240,238,234,.04); }
+.disc-tag { font-size:.65rem; letter-spacing:.28em; text-transform:uppercase; margin-bottom:1.5rem; display:block; }
+.disc-card-extreme .disc-tag { color:var(--red); }
+.disc-card-pop .disc-tag { color:var(--muted); }
+.disc-title-extreme {
+  font-family:'Bebas Neue',sans-serif;
+  font-size:clamp(2.5rem,4.5vw,4rem); letter-spacing:.03em; line-height:.95; margin-bottom:1.5rem;
+}
+.disc-title-pop {
+  font-family:'Playfair Display',serif; font-style:italic;
+  font-size:clamp(2.2rem,4vw,3.5rem); line-height:1; margin-bottom:1.5rem; color:rgba(240,238,234,.9);
+}
+.disc-body { font-size:.88rem; line-height:1.9; color:rgba(240,238,234,.45); margin-bottom:2.5rem; max-width:400px; }
+.disc-list { list-style:none; display:flex; flex-direction:column; gap:.6rem; margin-bottom:2.5rem; }
+.disc-list li { font-size:.8rem; color:rgba(240,238,234,.45); display:flex; align-items:center; gap:.8rem; }
+.disc-list li::before { content:''; width:20px; height:1px; flex-shrink:0; }
+.disc-card-extreme .disc-list li::before { background:var(--red); }
+.disc-card-pop .disc-list li::before { background:var(--muted); }
+.disc-cta {
+  font-size:.72rem; letter-spacing:.2em; text-transform:uppercase;
+  text-decoration:none; display:inline-flex; align-items:center; gap:.7rem;
+  transition:gap .25s, color .2s;
+}
+.disc-card-extreme .disc-cta { color:var(--red); }
+.disc-card-pop .disc-cta { color:var(--white); }
+.disc-cta:hover { gap:1.2rem; }
+
+/* ── ABOUT ── */
+#about { padding:7rem 3rem; background:var(--bg3); border-top:1px solid var(--border); }
+.about-inner {
+  max-width:1100px; margin:0 auto;
+  display:grid; grid-template-columns:1.1fr 1fr; gap:6rem; align-items:center;
+}
+.about-visual { position:relative; }
+.about-frame {
+  aspect-ratio:4/5; background:var(--bg); border:1px solid var(--border);
+  position:relative; overflow:hidden; display:flex; align-items:center; justify-content:center;
+}
+.eq-placeholder { display:flex; align-items:flex-end; gap:4px; height:50%; padding:0 2rem; opacity:.2; }
+.eq-bar {
+  width:8px; background:var(--white); border-radius:2px 2px 0 0;
+  animation:eqBounce var(--d,.6s) ease-in-out infinite alternate;
+}
+.about-frame::after {
+  content:'DARIIA · SVIRIDOVA'; position:absolute; bottom:0; left:0; right:0;
+  font-family:'Bebas Neue',sans-serif; font-size:1.3rem; letter-spacing:.2em;
+  background:var(--bg3); padding:1.2rem 1.8rem;
+  border-top:1px solid var(--border); color:rgba(240,238,234,.5);
+}
+.about-corner {
+  position:absolute; bottom:-1rem; right:-1rem; width:80px; height:80px;
+  border-bottom:2px solid var(--red); border-right:2px solid var(--red); pointer-events:none;
+}
+.about-text p { font-size:.9rem; line-height:1.95; color:rgba(240,238,234,.5); margin-bottom:1.3rem; }
+.about-text p strong { color:var(--white); font-weight:400; }
+.creds { display:grid; grid-template-columns:1fr 1fr; gap:1px; margin-top:3rem; background:var(--border); }
+.cred-item { background:var(--bg); padding:1.5rem 1.4rem; }
+.cred-num { font-family:'Bebas Neue',sans-serif; font-size:2.5rem; line-height:1; color:var(--red); }
+.cred-label { font-size:.7rem; letter-spacing:.1em; text-transform:uppercase; color:var(--muted); margin-top:.4rem; }
+
+/* ── TESTIMONIALS ── */
+#testimonials { padding:7rem 3rem; background:var(--bg); border-top:1px solid var(--border); }
+.testi-grid {
+  max-width:1100px; margin:3rem auto 0;
+  display:grid; grid-template-columns:repeat(3,1fr); gap:1px; background:var(--border);
+}
+.testi-card { background:var(--bg3); padding:2.5rem; transition:background .3s; }
+.testi-card:hover { background:#141414; }
+.testi-genre { font-size:.6rem; letter-spacing:.22em; text-transform:uppercase; margin-bottom:1.2rem; display:block; }
+.testi-card:nth-child(odd) .testi-genre { color:var(--red); }
+.testi-card:nth-child(even) .testi-genre { color:var(--muted); }
+.testi-quote {
+  font-family:'Playfair Display',serif; font-style:italic;
+  font-size:1rem; line-height:1.75; color:rgba(240,238,234,.7); margin-bottom:2rem;
+}
+.testi-who { font-size:.75rem; letter-spacing:.1em; text-transform:uppercase; color:rgba(240,238,234,.3); }
+
+/* ── FOOTER ── */
+footer {
+  background:var(--bg); border-top:1px solid var(--border);
+  padding:2.5rem 3rem; display:flex; align-items:center; justify-content:space-between;
+}
+.footer-brand { font-family:'Bebas Neue',sans-serif; font-size:1.2rem; letter-spacing:.1em; text-decoration:none; color:var(--white); }
+.footer-brand span { color:var(--red); }
+.footer-links { display:flex; gap:2rem; }
+.footer-links a { font-size:.7rem; letter-spacing:.14em; text-transform:uppercase; color:var(--muted); text-decoration:none; transition:color .2s; }
+.footer-links a:hover { color:var(--white); }
+.footer-copy { font-size:.7rem; color:var(--muted); }
+
+/* ── ANIMATIONS ── */
+@keyframes fadeUp { from { opacity:0; transform:translateY(22px); } to { opacity:1; transform:translateY(0); } }
+@keyframes fadeIn { to { opacity:1; } }
+@keyframes eqBounce { from { transform:scaleY(.3); } to { transform:scaleY(1); } }
+.reveal { opacity:0; transform:translateY(28px); transition:opacity .8s ease, transform .8s ease; }
+.reveal.visible { opacity:1; transform:translateY(0); }
+
+/* ── RESPONSIVE ── */
+@media (max-width:900px) {
+  nav { padding:1.2rem 1.5rem; }
+  .nav-links { display:none; }
+  #hero { grid-template-columns:1fr; }
+  .hero-right { display:none; }
+  .hero-left { min-height:100vh; padding:6rem 1.5rem 7rem; }
+  .hero-center { display:none; }
+  .hero-cta-strip { grid-template-columns:1fr; }
+  .booking-inner, .about-inner { grid-template-columns:1fr; gap:3rem; }
+  .disciplines-grid, .testi-grid { grid-template-columns:1fr; }
+  #disciplines, #booking, #about, #testimonials { padding:5rem 1.5rem; }
+  footer { flex-direction:column; gap:1.2rem; text-align:center; }
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="nav">
+  <a class="nav-brand" href="#">vocal<span>.</span>uz</a>
+  <div class="nav-right">
+    <ul class="nav-links">
+      <li><a href="#disciplines" data-i18n="nav_disciplines"></a></li>
+      <li><a href="#about"       data-i18n="nav_about"></a></li>
+      <li><a href="#testimonials" data-i18n="nav_students"></a></li>
+    </ul>
+    <div class="lang-toggle">
+      <button class="lang-btn" id="btn-ru" onclick="setLang('ru')">RU</button>
+      <button class="lang-btn" id="btn-en" onclick="setLang('en')">EN</button>
+    </div>
+    <a href="#booking" class="nav-book-btn" data-i18n="nav_book"></a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-left">
+    <div class="hero-bg-text-left">EXTREME</div>
+    <p class="hero-tag-left"   data-i18n="hero_tag_extreme"></p>
+    <h1 class="hero-title-left" data-i18n-html="hero_title_extreme"></h1>
+    <p class="hero-desc-left"  data-i18n="hero_desc_extreme"></p>
+  </div>
+  <div class="hero-right">
+    <div class="hero-bg-text-right">Pop</div>
+    <p class="hero-tag-right"   data-i18n="hero_tag_pop"></p>
+    <h2 class="hero-title-right" data-i18n-html="hero_title_pop"></h2>
+    <p class="hero-desc-right"  data-i18n="hero_desc_pop"></p>
+  </div>
+  <div class="hero-center">
+    <span class="hero-center-brand">vocal<span>.</span>uz</span>
+    <span class="hero-center-name">Dariia Sviridova</span>
+  </div>
+  <div class="hero-cta-strip">
+    <a href="#booking"     class="cta-half cta-half-book">
+      <span class="cta-label" data-i18n="cta_book"></span>
+      <span class="cta-arrow">→</span>
+    </a>
+    <a href="#disciplines" class="cta-half cta-half-learn">
+      <span class="cta-label" data-i18n="cta_explore"></span>
+      <span class="cta-arrow">→</span>
+    </a>
+  </div>
+</section>
+
+<!-- BOOKING -->
+<section id="booking">
+  <div class="booking-inner">
+    <div class="booking-intro reveal">
+      <span class="section-eyebrow" data-i18n="booking_eyebrow"></span>
+      <h2 class="section-title"     data-i18n-html="booking_title"></h2>
+      <div class="rule"></div>
+      <p data-i18n-html="booking_p1"></p>
+      <p data-i18n-html="booking_p2"></p>
+      <div class="perks">
+        <div class="perk"><div class="perk-dot"></div><span data-i18n="perk1"></span></div>
+        <div class="perk"><div class="perk-dot"></div><span data-i18n="perk2"></span></div>
+        <div class="perk"><div class="perk-dot"></div><span data-i18n="perk3"></span></div>
+        <div class="perk"><div class="perk-dot"></div><span data-i18n="perk4"></span></div>
+        <div class="perk"><div class="perk-dot"></div><span data-i18n="perk5"></span></div>
+      </div>
+    </div>
+    <div class="booking-form-card reveal">
+      <div class="form-row">
+        <input type="text"  id="f-fname" data-i18n-placeholder="form_fname"/>
+        <input type="text"  id="f-lname" data-i18n-placeholder="form_lname"/>
+      </div>
+      <div class="form-row single">
+        <input type="email" id="f-email" data-i18n-placeholder="form_email"/>
+      </div>
+      <div class="form-row single">
+        <input type="tel"   id="f-phone" data-i18n-placeholder="form_phone"/>
+      </div>
+      <div class="form-row">
+        <select id="disc-sel"   onchange="this.classList.add('has-val')">
+          <option value="" disabled selected data-i18n="form_disc_label"></option>
+          <option data-i18n="form_disc_extreme"></option>
+          <option data-i18n="form_disc_pop"></option>
+          <option data-i18n="form_disc_both"></option>
+        </select>
+        <select id="level-sel"  onchange="this.classList.add('has-val')">
+          <option value="" disabled selected data-i18n="form_level_label"></option>
+          <option data-i18n="form_level_1"></option>
+          <option data-i18n="form_level_2"></option>
+          <option data-i18n="form_level_3"></option>
+          <option data-i18n="form_level_4"></option>
+        </select>
+      </div>
+      <div class="form-row single">
+        <select id="format-sel" onchange="this.classList.add('has-val')">
+          <option value="" disabled selected data-i18n="form_format_label"></option>
+          <option data-i18n="form_format_1"></option>
+          <option data-i18n="form_format_2"></option>
+          <option data-i18n="form_format_3"></option>
+        </select>
+      </div>
+      <div class="form-row single">
+        <textarea id="f-msg" data-i18n-placeholder="form_msg"></textarea>
+      </div>
+      <div class="form-submit-wrap">
+        <button class="form-submit" id="submit-btn">
+          <span data-i18n="form_submit"></span>
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+            <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </button>
+      </div>
+      <p class="form-note" data-i18n="form_note"></p>
+    </div>
+  </div>
+</section>
+
+<!-- DISCIPLINES -->
+<section id="disciplines">
+  <div class="disciplines-header reveal">
+    <span class="section-eyebrow" data-i18n="disc_eyebrow"></span>
+    <h2 class="section-title"     data-i18n="disc_heading"></h2>
+  </div>
+  <div class="disciplines-grid">
+    <div class="disc-card disc-card-extreme reveal">
+      <span class="disc-num">01</span>
+      <span class="disc-tag" data-i18n="hero_tag_extreme"></span>
+      <h3 class="disc-title-extreme" data-i18n-html="disc_extreme_title"></h3>
+      <p  class="disc-body"          data-i18n="disc_extreme_body"></p>
+      <ul class="disc-list" id="disc-extreme-list"></ul>
+      <a href="#booking" class="disc-cta" data-i18n="disc_cta"></a>
+    </div>
+    <div class="disc-card disc-card-pop reveal">
+      <span class="disc-num">02</span>
+      <span class="disc-tag" data-i18n="hero_tag_pop"></span>
+      <h3 class="disc-title-pop" data-i18n-html="disc_pop_title"></h3>
+      <p  class="disc-body"      data-i18n="disc_pop_body"></p>
+      <ul class="disc-list" id="disc-pop-list"></ul>
+      <a href="#booking" class="disc-cta" data-i18n="disc_cta"></a>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="about-inner">
+    <div class="about-visual reveal">
+      <div class="about-frame"><div class="eq-placeholder" id="eq"></div></div>
+      <div class="about-corner"></div>
+    </div>
+    <div class="about-text reveal">
+      <span class="section-eyebrow" data-i18n="about_eyebrow"></span>
+      <h2 class="section-title"     data-i18n-html="about_title"></h2>
+      <div class="rule"></div>
+      <p data-i18n-html="about_p1"></p>
+      <p data-i18n="about_p2"></p>
+      <p data-i18n-html="about_p3"></p>
+      <div class="creds">
+        <div class="cred-item"><div class="cred-num">100+</div><div class="cred-label" data-i18n="cred1"></div></div>
+        <div class="cred-item"><div class="cred-num">2</div>   <div class="cred-label" data-i18n="cred2"></div></div>
+        <div class="cred-item"><div class="cred-num">3</div>   <div class="cred-label" data-i18n="cred3"></div></div>
+        <div class="cred-item"><div class="cred-num">∞</div>   <div class="cred-label" data-i18n="cred4"></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section id="testimonials">
+  <div style="max-width:1100px;margin:0 auto;">
+    <div class="reveal">
+      <span class="section-eyebrow" data-i18n="testi_eyebrow"></span>
+      <h2 class="section-title"     data-i18n="testi_heading"></h2>
+    </div>
+    <div class="testi-grid">
+      <div class="testi-card reveal">
+        <span class="testi-genre" data-i18n="hero_tag_extreme"></span>
+        <p class="testi-quote"    data-i18n="testi1_quote"></p>
+        <span class="testi-who"   data-i18n="testi1_who"></span>
+      </div>
+      <div class="testi-card reveal">
+        <span class="testi-genre" data-i18n="hero_tag_pop"></span>
+        <p class="testi-quote"    data-i18n="testi2_quote"></p>
+        <span class="testi-who"   data-i18n="testi2_who"></span>
+      </div>
+      <div class="testi-card reveal">
+        <span class="testi-genre">Extreme + Pop</span>
+        <p class="testi-quote"  data-i18n="testi3_quote"></p>
+        <span class="testi-who" data-i18n="testi3_who"></span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <a class="footer-brand" href="#">vocal<span>.</span>uz</a>
+  <div class="footer-links">
+    <a href="#disciplines"  data-i18n="nav_disciplines"></a>
+    <a href="#about"        data-i18n="nav_about"></a>
+    <a href="#booking"      data-i18n="footer_book"></a>
+    <a href="https://instagram.com" target="_blank">Instagram</a>
+  </div>
+  <p class="footer-copy" data-i18n="footer_copy"></p>
+</footer>
+
+<script>
+/* ═══════════════════════════════
+   TRANSLATIONS
+═══════════════════════════════ */
+const T = {
+  ru: {
+    nav_disciplines:'Направления', nav_about:'О Дарие', nav_students:'Ученики', nav_book:'Записаться',
+
+    hero_tag_extreme:'Экстремальный вокал', hero_tag_pop:'Поп-вокал',
+    hero_title_extreme:'Сломай<br><span>Каждый</span><br>Предел.',
+    hero_title_pop:'Пой С<br><span>Чистым</span><br><i>Намерением.</i>',
+    hero_desc_extreme:'Скримы, гроулы, шрики, дисторшн — обученные правильно, чтобы твой голос служил тебе всю жизнь, а не только один тур.',
+    hero_desc_pop:'Современная поп-техника — тембр, контроль, фразировка и искусство достучаться до каждого слушателя.',
+
+    cta_book:'Записаться на урок', cta_explore:'Узнать о направлениях',
+
+    booking_eyebrow:'Записаться',
+    booking_title:'Забронируй свой<br><em>Первый урок</em>',
+    booking_p1:'Первое занятие — это <strong>бесплатный 30-минутный разговор-знакомство</strong> — без обязательств и давления. Просто ты, Дария и твой голос.',
+    booking_p2:'Уроки доступны очно в Ташкенте или онлайн по видеосвязи. Обучение на русском, узбекском или английском.',
+    perk1:'Бесплатное первое занятие — без обязательств',
+    perk2:'Очно (Ташкент) или онлайн',
+    perk3:'Обучение на русском, узбекском и английском',
+    perk4:'Принимаются все уровни — от новичков',
+    perk5:'Ответ в течение 24 часов',
+
+    form_fname:'Имя', form_lname:'Фамилия', form_email:'Электронная почта',
+    form_phone:'Телефон / Telegram / WhatsApp',
+    form_disc_label:'Направление', form_disc_extreme:'Экстремальный вокал',
+    form_disc_pop:'Поп-вокал', form_disc_both:'Оба / Не уверен(а)',
+    form_level_label:'Уровень', form_level_1:'Полный новичок',
+    form_level_2:'Немного занимался(ась)', form_level_3:'Средний уровень', form_level_4:'Продвинутый',
+    form_format_label:'Формат занятия', form_format_1:'Очно — Ташкент',
+    form_format_2:'Онлайн (видеосвязь)', form_format_3:'Любой вариант',
+    form_msg:'Расскажи Дарие немного о своих целях или задай вопрос…',
+    form_submit:'Отправить заявку',
+    form_note:'Бесплатный 30-минутный разговор · Карта не нужна',
+    form_sent:'✓  Заявка отправлена — Дария ответит в течение 24 часов',
+
+    disc_eyebrow:'Два мира. Один голос.', disc_heading:'Направления',
+    disc_extreme_title:'Скрим.<br>Гроул.<br>Выживи.',
+    disc_extreme_body:'Экстремальный вокал, выполненный правильно — это дисциплина, а не случайность. Дария преподаёт физиологическую механику безопасного дисторшна, чтобы ты мог выдавать убийственные выступления каждую ночь, не уничтожая свой голос.',
+    disc_extreme_items:['Фрай-скрим и техника ложных связок','Дэт-гроулы и низкочастотный дисторшн','Шрики, пиг-скволы и высокие экстримы','Выносливость, восстановление и здоровье голоса','Подготовка к живым выступлениям'],
+    disc_pop_title:'Тембр.<br>Контроль.<br>История.',
+    disc_pop_body:'Современный поп обманчиво сложен. Дария строит голоса, которые богаты, стабильны и эмоционально насыщены — от студии до сцены.',
+    disc_pop_items:['Опора дыхания и позиция звука','Микст и плавное смешение регистров','Runs, riffs и современные украшения','Техника работы с микрофоном','Коучинг по исполнению авторских песен'],
+    disc_cta:'Записаться на урок →',
+
+    about_eyebrow:'О Дарие',
+    about_title:'Голос<br><em>За vocal.uz</em>',
+    about_p1:'Дария Свиридова годами формирует голоса в Центральной Азии и за её пределами — работая в полном диапазоне от <strong>экстремального метал-исполнения</strong> до <strong>отполированного поп-продакшна</strong>.',
+    about_p2:'Её философия проста: каждый голос уже способен на многое. Задача педагога — убрать препятствия. Техника — это средство, а не цель. Цель всегда — подлинное выражение себя.',
+    about_p3:'Хочешь ли ты быть фронтменом метал-группы, записать EP или просто почувствовать себя комфортно в пении — <strong>Дария выстраивает путь конкретно для тебя</strong>.',
+    cred1:'Учеников обучено', cred2:'Направления', cred3:'Языка обучения', cred4:'Потенциал раскрыт',
+
+    testi_eyebrow:'Истории учеников', testi_heading:'Что говорят',
+    testi1_quote:'«Я скримил три года, и мой голос был в ужасном состоянии. После шести месяцев с Дарией я отрабатываю полный сет и просыпаюсь на следующий день в полном порядке.»',
+    testi1_who:'Рустам А. — Метал-вокалист, Ташкент',
+    testi2_quote:'«Она услышала в моём голосе то, чего я сам не знал. Мой тембр полностью изменился — все спрашивают, что я сделал по-другому.»',
+    testi2_who:'Нилуфар К. — Певица-автор',
+    testi3_quote:'«Я хотел совмещать оба жанра, и все говорили, что это невозможно. Дария доказала обратное. Лучшее решение в моей карьере.»',
+    testi3_who:'Алекс М. — Многожанровый исполнитель',
+
+    footer_book:'Записаться', footer_copy:'© 2025 vocal.uz · Дария Свиридова',
+  },
+
+  en: {
+    nav_disciplines:'Disciplines', nav_about:'About', nav_students:'Students', nav_book:'Book a Lesson',
+
+    hero_tag_extreme:'Extreme Vocals', hero_tag_pop:'Pop Vocals',
+    hero_title_extreme:'Break<br><span>Every</span><br>Limit.',
+    hero_title_pop:'Sing With<br><span>Pure</span><br><i>Intention.</i>',
+    hero_desc_extreme:'Screams, growls, shrieks, distortion — trained correctly so your voice lasts a lifetime, not a tour.',
+    hero_desc_pop:'Contemporary pop technique — tone, control, phrasing, and the art of connecting with every single listener.',
+
+    cta_book:'Book a Lesson', cta_explore:'Explore Disciplines',
+
+    booking_eyebrow:'Book Now',
+    booking_title:'Reserve Your<br><em>First Lesson</em>',
+    booking_p1:'Your first session is a <strong>free 30-minute discovery call</strong> — no obligation, no pressure. Just you, Dariia, and your voice.',
+    booking_p2:'Lessons available in-person in Tashkent or online via video call, in Russian, Uzbek, or English.',
+    perk1:'Free discovery session — no commitment',
+    perk2:'In-person (Tashkent) or online',
+    perk3:'Taught in Russian, Uzbek, or English',
+    perk4:'Beginner to advanced welcome',
+    perk5:'Response within 24 hours',
+
+    form_fname:'First Name', form_lname:'Last Name', form_email:'Email Address',
+    form_phone:'Phone / Telegram / WhatsApp',
+    form_disc_label:'Discipline', form_disc_extreme:'Extreme Vocals',
+    form_disc_pop:'Pop Vocals', form_disc_both:'Both / Not Sure',
+    form_level_label:'Level', form_level_1:'Complete Beginner',
+    form_level_2:'Some Experience', form_level_3:'Intermediate', form_level_4:'Advanced',
+    form_format_label:'Lesson Format', form_format_1:'In-person — Tashkent',
+    form_format_2:'Online (video call)', form_format_3:'Either works',
+    form_msg:'Tell Dariia a little about your goals or questions…',
+    form_submit:'Send Booking Request',
+    form_note:'Free 30-min discovery call · No card required',
+    form_sent:'✓  Request Sent — Dariia will reply within 24h',
+
+    disc_eyebrow:'Two Worlds. One Voice.', disc_heading:'The Disciplines',
+    disc_extreme_title:'Scream.<br>Growl.<br>Survive.',
+    disc_extreme_body:'Extreme vocals done right are a discipline — not an accident. Dariia teaches the physiological mechanics of safe distortion, so you can deliver devastating performances every night without destroying your voice.',
+    disc_extreme_items:['Fry screaming & false chord technique','Death growls & low-end distortion','Shrieks, pig squeals & high-range extremes','Stamina, recovery & vocal health','Live performance conditioning'],
+    disc_pop_title:'Tone.<br>Control.<br>Story.',
+    disc_pop_body:'Contemporary pop is deceptively demanding. Dariia builds voices that are rich, consistent, and emotionally present — covering everything from the studio booth to the spotlight.',
+    disc_pop_items:['Breath support & tonal placement','Mixed voice & seamless register blending','Runs, riffs & contemporary ornamentation','Mic technique & studio awareness','Songwriting performance coaching'],
+    disc_cta:'Book a Session →',
+
+    about_eyebrow:'About Dariia',
+    about_title:'The Voice<br><em>Behind vocal.uz</em>',
+    about_p1:'Dariia Sviridova has been shaping voices in Central Asia and beyond for years — working across the full spectrum from <strong>extreme metal performance</strong> to <strong>polished pop production</strong>.',
+    about_p2:"Her philosophy is simple: every voice is already capable. The teacher's job is to get out of the way and remove the obstacles. Technique is the means, not the end — the goal is always authentic expression.",
+    about_p3:'Whether you want to front a metal band, record an EP, or just finally feel comfortable singing, <strong>Dariia builds a path specifically for you</strong>.',
+    cred1:'Students Trained', cred2:'Core Disciplines', cred3:'Languages Taught', cred4:'Potential Unlocked',
+
+    testi_eyebrow:'Student Stories', testi_heading:'What They Say',
+    testi1_quote:'"I\'d been screaming for three years and my voice was a wreck. After six months with Dariia I can perform a full set and wake up fine the next day."',
+    testi1_who:'Rustam A. — Metal vocalist, Tashkent',
+    testi2_quote:'"She heard things in my voice I didn\'t know were there. My tone completely changed — people keep asking what I did differently."',
+    testi2_who:'Nilufar K. — Singer-songwriter',
+    testi3_quote:'"I wanted to do both genres and everyone told me it was impossible. Dariia proved them wrong. Best decision I ever made for my career."',
+    testi3_who:'Alex M. — Multi-genre performer',
+
+    footer_book:'Book', footer_copy:'© 2025 vocal.uz · Dariia Sviridova',
+  }
+};
+
+/* ═══════════════════════════════
+   LANGUAGE ENGINE
+═══════════════════════════════ */
+let currentLang = 'ru';
+
+function setLang(lang) {
+  currentLang = lang;
+  localStorage.setItem('vocal_uz_lang', lang);
+  const t = T[lang];
+  document.documentElement.lang = lang;
+
+  // Text content
+  document.querySelectorAll('[data-i18n]').forEach(el => {
+    const v = t[el.dataset.i18n];
+    if (v !== undefined) el.textContent = v;
+  });
+
+  // Inner HTML (allows tags)
+  document.querySelectorAll('[data-i18n-html]').forEach(el => {
+    const v = t[el.dataset.i18nHtml];
+    if (v !== undefined) el.innerHTML = v;
+  });
+
+  // Placeholders
+  document.querySelectorAll('[data-i18n-placeholder]').forEach(el => {
+    const v = t[el.dataset.i18nPlaceholder];
+    if (v !== undefined) el.placeholder = v;
+  });
+
+  // Select options
+  [
+    { id:'disc-sel',   keys:['form_disc_label','form_disc_extreme','form_disc_pop','form_disc_both'] },
+    { id:'level-sel',  keys:['form_level_label','form_level_1','form_level_2','form_level_3','form_level_4'] },
+    { id:'format-sel', keys:['form_format_label','form_format_1','form_format_2','form_format_3'] },
+  ].forEach(({ id, keys }) => {
+    const sel = document.getElementById(id);
+    if (!sel) return;
+    sel.querySelectorAll('option').forEach((opt, i) => {
+      if (keys[i] && t[keys[i]] !== undefined) opt.textContent = t[keys[i]];
+    });
+  });
+
+  // Discipline lists
+  ['disc-extreme-list','disc-pop-list'].forEach((listId, idx) => {
+    const ul = document.getElementById(listId);
+    const items = idx === 0 ? t.disc_extreme_items : t.disc_pop_items;
+    if (ul && items) ul.innerHTML = items.map(i => `<li>${i}</li>`).join('');
+  });
+
+  // Toggle buttons
+  document.getElementById('btn-ru').classList.toggle('active', lang === 'ru');
+  document.getElementById('btn-en').classList.toggle('active', lang === 'en');
+
+  // Title
+  document.title = lang === 'ru' ? 'vocal.uz — Дария Свиридова' : 'vocal.uz — Dariia Sviridova';
+
+  // Reset submit if not yet sent
+  const btn = document.getElementById('submit-btn');
+  if (btn && !btn.dataset.sent) {
+    btn.querySelector('[data-i18n="form_submit"]') && (btn.querySelector('[data-i18n="form_submit"]').textContent = t.form_submit);
+  }
+}
+
+/* Auto-detect */
+(function() {
+  const saved = localStorage.getItem('vocal_uz_lang');
+  if (saved === 'ru' || saved === 'en') { setLang(saved); return; }
+  const sys = (navigator.language || 'ru').toLowerCase();
+  setLang(sys.startsWith('en') ? 'en' : 'ru');
+})();
+
+/* ═══════════════════════════════
+   NAV SCROLL
+═══════════════════════════════ */
+window.addEventListener('scroll', () => {
+  document.getElementById('nav').classList.toggle('scrolled', window.scrollY > 60);
+});
+
+/* ═══════════════════════════════
+   SCROLL REVEAL
+═══════════════════════════════ */
+new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (!e.isIntersecting) return;
+    const siblings = [...e.target.parentElement.querySelectorAll('.reveal')];
+    e.target.style.transitionDelay = `${siblings.indexOf(e.target) * 0.1}s`;
+    e.target.classList.add('visible');
+  });
+}, { threshold: 0.1 }).observe
+// observe each
+; (() => {
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (!e.isIntersecting) return;
+      const siblings = [...e.target.parentElement.querySelectorAll('.reveal')];
+      e.target.style.transitionDelay = `${siblings.indexOf(e.target) * 0.1}s`;
+      e.target.classList.add('visible');
+    });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.reveal').forEach(r => obs.observe(r));
+})();
+
+/* ═══════════════════════════════
+   EQ BARS
+═══════════════════════════════ */
+const eq = document.getElementById('eq');
+if (eq) {
+  [30,55,80,45,95,60,35,70,50,85,40,65,90,55,30,75,45,88,60,42,70,55,38,80,50,68,95,45,60,35]
+    .forEach((h, i) => {
+      const b = document.createElement('div');
+      b.className = 'eq-bar';
+      b.style.height = h + '%';
+      b.style.setProperty('--d', (.35 + Math.random() * .55) + 's');
+      b.style.animationDelay = (i * .04) + 's';
+      eq.appendChild(b);
+    });
+}
+
+/* ═══════════════════════════════
+   FORM SUBMIT
+═══════════════════════════════ */
+document.getElementById('submit-btn').addEventListener('click', function() {
+  const inputs = document.querySelectorAll('.booking-form-card input, .booking-form-card select');
+  let filled = true;
+  inputs.forEach(i => { if (!i.value) filled = false; });
+  if (filled) {
+    this.dataset.sent = '1';
+    this.innerHTML = T[currentLang].form_sent;
+    this.style.background = '#1a5c2a';
+    this.style.letterSpacing = '.06em';
+  }
+});
+</script>
+</body>
+</html>
