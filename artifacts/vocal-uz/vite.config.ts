@@ -28,6 +28,10 @@ if (!basePath) {
 
 export default defineConfig({
   base: basePath,
+  define: {
+    "import.meta.env.VITE_SANITY_PROJECT_ID": JSON.stringify(process.env.SANITY_PROJECT_ID || "n6dunjsx"),
+    "import.meta.env.VITE_SANITY_DATASET": JSON.stringify(process.env.SANITY_DATASET || "production"),
+  },
   plugins: [
     react(),
     tailwindcss(),

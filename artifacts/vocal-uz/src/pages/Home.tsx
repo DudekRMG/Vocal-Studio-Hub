@@ -1,14 +1,23 @@
-import { useEffect, useRef } from "react";
 import { Link } from "wouter";
 import { useLang } from "@/lib/langContext";
 import { t } from "@/lib/i18n";
 import { SeoHead } from "@/components/SeoHead";
 import { BookingForm } from "@/components/BookingForm";
+import { useSanityContent } from "@/lib/useSanityContent";
 
 export default function Home() {
   const { lang } = useLang();
   const tx = t[lang];
   const base = import.meta.env.BASE_URL.replace(/\/$/, "");
+  const { content } = useSanityContent(lang);
+
+  const teacherName = content?.hero?.teacherName || "Дария Свиридова";
+  const bioLine1 = content?.about?.bio1 || tx.about.bio1;
+  const bioLine2 = content?.about?.bio2 || tx.about.bio2;
+  const bioLine3 = content?.about?.bio3 || tx.about.bio3;
+  const statYearsStage = content?.about?.yearsOnStage || tx.about.stat1;
+  const statYearsTeach = content?.about?.yearsTeaching || tx.about.stat2;
+  const statStudents = content?.about?.studentsCount || tx.about.stat3;
 
   return (
     <>
@@ -228,9 +237,9 @@ export default function Home() {
             {/* Stats */}
             <div className="grid grid-cols-3 gap-[1px] bg-white/[0.08] mt-[1px]">
               {[
-                { val: tx.about.stat1, label: tx.about.stat1Label },
-                { val: tx.about.stat2, label: tx.about.stat2Label },
-                { val: tx.about.stat3, label: tx.about.stat3Label },
+                { val: statYearsStage, label: tx.about.stat1Label },
+                { val: statYearsTeach, label: tx.about.stat2Label },
+                { val: statStudents, label: tx.about.stat3Label },
               ].map(({ val, label }) => (
                 <div key={label} className="bg-[#080808] py-5 text-center">
                   <div className="font-['Bebas_Neue'] text-2xl text-[#e8002d]">{val}</div>
@@ -253,11 +262,11 @@ export default function Home() {
             </h2>
             <div className="w-10 h-[2px] bg-[#e8002d] my-8" />
             <p className="text-[0.9rem] leading-[1.9] text-[rgba(240,238,234,0.5)] mb-5">
-              <strong className="text-[#f0eeea] font-normal">{tx.about.bio1.split('.')[0]}.</strong>
-              {tx.about.bio1.substring(tx.about.bio1.indexOf('.') + 1)}
+              <strong className="text-[#f0eeea] font-normal">{bioLine1.split('.')[0]}.</strong>
+              {bioLine1.substring(bioLine1.indexOf('.') + 1)}
             </p>
-            <p className="text-[0.9rem] leading-[1.9] text-[rgba(240,238,234,0.5)] mb-5">{tx.about.bio2}</p>
-            <p className="text-[0.9rem] leading-[1.9] text-[rgba(240,238,234,0.5)] mb-10">{tx.about.bio3}</p>
+            <p className="text-[0.9rem] leading-[1.9] text-[rgba(240,238,234,0.5)] mb-5">{bioLine2}</p>
+            <p className="text-[0.9rem] leading-[1.9] text-[rgba(240,238,234,0.5)] mb-10">{bioLine3}</p>
             <a
               href="#booking"
               className="inline-flex items-center gap-3 bg-[#e8002d] text-[#f0eeea] font-['Bebas_Neue'] text-[1rem] tracking-[0.15em] px-8 py-4 no-underline transition-all duration-200 hover:bg-[#ff1a3d] hover:gap-5 group"
