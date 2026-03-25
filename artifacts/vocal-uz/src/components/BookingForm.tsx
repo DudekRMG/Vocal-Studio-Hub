@@ -44,7 +44,7 @@ export function BookingForm() {
       {status === "success" ? (
         <div className="text-center py-12">
           <div className="text-[#e8002d] text-5xl mb-4">✓</div>
-          <h3 className="font-['Bebas_Neue'] text-3xl tracking-[0.05em] mb-3">{tx.successTitle}</h3>
+          <h3 className="font-display text-3xl tracking-[0.05em] mb-3">{tx.successTitle}</h3>
           <p className="text-[0.88rem] text-[rgba(240,238,234,0.5)]">{tx.successMsg}</p>
         </div>
       ) : (
@@ -106,7 +106,7 @@ export function BookingForm() {
           <button
             type="submit"
             disabled={status === "sending"}
-            className="w-full bg-[#e8002d] border-none cursor-pointer font-['Bebas_Neue'] text-[1.1rem] tracking-[0.15em] text-[#f0eeea] py-[1.3rem] transition-all duration-200 hover:bg-[#ff1a3d] hover:tracking-[0.22em] flex items-center justify-center gap-3 disabled:opacity-60 disabled:cursor-not-allowed"
+            className="w-full bg-[#e8002d] border-none cursor-pointer font-display text-[1.1rem] tracking-[0.15em] text-[#f0eeea] py-[1.3rem] transition-all duration-200 hover:bg-[#ff1a3d] hover:tracking-[0.22em] flex items-center justify-center gap-3 disabled:opacity-60 disabled:cursor-not-allowed"
           >
             {status === "sending" ? tx.submitting : tx.submit}
             {status !== "sending" && (

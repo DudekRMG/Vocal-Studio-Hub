@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&family=Playfair+Display:ital@1&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Oswald:wght@500;600;700&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&family=Playfair+Display:ital@1&display=swap');
 @import "tailwindcss";
 @import "tw-animate-css";
 
@@ -101,6 +101,7 @@
   --app-font-sans: 'DM Sans', sans-serif;
   --app-font-serif: 'Playfair Display', Georgia, serif;
   --app-font-mono: Menlo, monospace;
+  --font-display-family: 'Bebas Neue', sans-serif;
   --radius: 0rem;
   --shadow-2xs: 0px 2px 0px 0px rgba(0,0,0,0);
   --shadow-xs: 0px 2px 0px 0px rgba(0,0,0,0);
@@ -120,6 +121,16 @@
   --muted-border: hsl(var(--muted));
   --accent-border: hsl(var(--accent));
   --destructive-border: hsl(var(--destructive));
+}
+
+/* Language-aware display font: Bebas Neue (EN) → Oswald (RU) */
+body[data-lang="ru"] {
+  --font-display-family: 'Oswald', sans-serif;
+}
+
+@utility font-display {
+  font-family: var(--font-display-family);
+  text-transform: uppercase;
 }
 
 @layer base {

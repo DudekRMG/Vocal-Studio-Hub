@@ -12,10 +12,17 @@ export function LangProvider({ children }: { children: ReactNode }) {
   const [lang, setLang] = useState<Lang>("ru");
 
   useEffect(() => {
-    setLang(detectLanguage());
+    const detected = detectLanguage();
+    setLang(detected);
+    document.body.dataset.lang = detected;
   }, []);
 
-  return <LangContext.Provider value={{ lang, setLang }}>{children}</LangContext.Provider>;
+  const handleSetLang = (l: Lang) => {
+    setLang(l);
+    document.body.dataset.lang = l;
+  };
+
+  return <LangContext.Provider value={{ lang, setLang: handleSetLang }}>{children}</LangContext.Provider>;
 }
 
 export function useLang() {

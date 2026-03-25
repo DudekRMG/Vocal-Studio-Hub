@@ -58,7 +58,7 @@ export function Nav() {
         <div className="flex items-center border border-white/[0.08] overflow-hidden">
           <button
             onClick={() => setLang("ru")}
-            className={`font-['Bebas_Neue'] text-[0.85rem] tracking-[0.12em] px-3 py-[0.45rem] border-none cursor-pointer transition-all duration-200 ${
+            className={`font-display text-[0.85rem] tracking-[0.12em] px-3 py-[0.45rem] border-none cursor-pointer transition-all duration-200 ${
               lang === "ru" ? "bg-[#f0eeea] text-[#080808]" : "bg-transparent text-[#555] hover:text-[#f0eeea]"
             }`}
           >
@@ -66,7 +66,7 @@ export function Nav() {
           </button>
           <button
             onClick={() => setLang("en")}
-            className={`font-['Bebas_Neue'] text-[0.85rem] tracking-[0.12em] px-3 py-[0.45rem] border-none cursor-pointer transition-all duration-200 ${
+            className={`font-display text-[0.85rem] tracking-[0.12em] px-3 py-[0.45rem] border-none cursor-pointer transition-all duration-200 ${
               lang === "en" ? "bg-[#f0eeea] text-[#080808]" : "bg-transparent text-[#555] hover:text-[#f0eeea]"
             }`}
           >
@@ -87,7 +87,7 @@ export function Nav() {
         <div className="flex items-center border border-white/[0.08] overflow-hidden">
           <button
             onClick={() => setLang("ru")}
-            className={`font-['Bebas_Neue'] text-[0.85rem] tracking-[0.12em] px-2 py-1 border-none cursor-pointer transition-all duration-200 ${
+            className={`font-display text-[0.85rem] tracking-[0.12em] px-2 py-1 border-none cursor-pointer transition-all duration-200 ${
               lang === "ru" ? "bg-[#f0eeea] text-[#080808]" : "bg-transparent text-[#555]"
             }`}
           >
@@ -95,7 +95,7 @@ export function Nav() {
           </button>
           <button
             onClick={() => setLang("en")}
-            className={`font-['Bebas_Neue'] text-[0.85rem] tracking-[0.12em] px-2 py-1 border-none cursor-pointer transition-all duration-200 ${
+            className={`font-display text-[0.85rem] tracking-[0.12em] px-2 py-1 border-none cursor-pointer transition-all duration-200 ${
               lang === "en" ? "bg-[#f0eeea] text-[#080808]" : "bg-transparent text-[#555]"
             }`}
           >

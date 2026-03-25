@@ -50,7 +50,7 @@ export default function Home() {
             style={{ background: "radial-gradient(ellipse 70% 60% at 30% 60%, rgba(232,0,45,.09) 0%, transparent 70%)" }}
           />
           <div
-            className="absolute top-1/2 -left-6 -translate-y-1/2 -rotate-90 font-['Bebas_Neue'] text-[18vw] text-[rgba(232,0,45,0.04)] pointer-events-none whitespace-nowrap leading-none"
+            className="absolute top-1/2 -left-6 -translate-y-1/2 -rotate-90 font-display text-[18vw] text-[rgba(232,0,45,0.04)] pointer-events-none whitespace-nowrap leading-none"
             style={{ transformOrigin: "left center" }}
           >
             EXTREME
@@ -58,7 +58,7 @@ export default function Home() {
           <span className="text-[0.68rem] tracking-[0.25em] uppercase text-[#e8002d] mb-5 animate-[fadeUp_0.6s_0.5s_both]">
             {tx.hero.tagLeft}
           </span>
-          <h1 className="font-['Bebas_Neue'] text-[clamp(3.5rem,8vw,7.5rem)] leading-[0.9] tracking-[0.02em] animate-[fadeUp_0.7s_0.65s_both]">
+          <h1 className="font-display text-[clamp(3.5rem,8vw,7.5rem)] leading-[0.9] tracking-[0.02em] animate-[fadeUp_0.7s_0.65s_both]">
             {tx.hero.titleLeft1}
             <span className="block text-[#e8002d]">{tx.hero.titleLeft2}</span>
           </h1>
@@ -111,7 +111,7 @@ export default function Home() {
 
         {/* Center brand */}
         <div className="absolute top-24 left-1/2 -translate-x-1/2 z-10 text-center animate-[fadeIn_0.8s_0.3s_both]">
-          <div className="font-['Bebas_Neue'] text-[clamp(1.4rem,3vw,2.4rem)] tracking-[0.25em] text-[#f0eeea] bg-[#080808] px-6 py-2 border border-white/[0.08] whitespace-nowrap">
+          <div className="font-display text-[clamp(1.4rem,3vw,2.4rem)] tracking-[0.25em] text-[#f0eeea] bg-[#080808] px-6 py-2 border border-white/[0.08] whitespace-nowrap">
             {tx.hero.brand}<span className="text-[#e8002d]">{tx.hero.brandDot}</span>{tx.hero.brandUz}
           </div>
           <span className="block mt-0 text-[0.65rem] tracking-[0.22em] uppercase text-[#555] bg-[#080808] px-4 py-[0.35rem] border border-white/[0.08] border-t-0">
@@ -125,7 +125,7 @@ export default function Home() {
             href="#booking"
             className="bg-[#e8002d] px-8 flex items-center justify-between no-underline transition-colors duration-200 hover:bg-[#ff1a3d] group"
           >
-            <span className="font-['Bebas_Neue'] text-[1.15rem] tracking-[0.1em] text-[#f0eeea]">
+            <span className="font-display text-[1.15rem] tracking-[0.1em] text-[#f0eeea]">
               {tx.hero.ctaBook}
             </span>
             <span className="text-[#f0eeea] transition-transform duration-200 group-hover:translate-x-1">→</span>
@@ -134,7 +134,7 @@ export default function Home() {
             href="#about"
             className="bg-[#141414] border-t border-white/[0.08] px-8 flex items-center justify-between no-underline transition-colors duration-200 hover:bg-[#1a1a1a] group"
           >
-            <span className="font-['Bebas_Neue'] text-[1.15rem] tracking-[0.1em] text-[#f0eeea]">
+            <span className="font-display text-[1.15rem] tracking-[0.1em] text-[#f0eeea]">
               {tx.hero.ctaLearn}
             </span>
             <span className="text-[rgba(240,238,234,0.7)] transition-transform duration-200 group-hover:translate-x-1">→</span>
@@ -148,7 +148,7 @@ export default function Home() {
           <span className="text-[0.68rem] tracking-[0.28em] uppercase text-[#e8002d] block mb-4">
             {tx.disciplines.eyebrow}
           </span>
-          <h2 className="font-['Bebas_Neue'] text-[clamp(3rem,5vw,5rem)] leading-[0.95] tracking-[0.02em]">
+          <h2 className="font-display text-[clamp(3rem,5vw,5rem)] leading-[0.95] tracking-[0.02em]">
             {tx.disciplines.title}
             <em className="font-['Playfair_Display'] not-italic italic text-[0.7em] text-[rgba(240,238,234,0.45)] block mt-1">
               {tx.disciplines.titleEm}
@@ -163,9 +163,9 @@ export default function Home() {
               className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-400 pointer-events-none"
               style={{ background: "radial-gradient(ellipse 60% 50% at 20% 80%, rgba(232,0,45,.08) 0%, transparent 70%)" }}
             />
-            <span className="absolute top-8 right-10 font-['Bebas_Neue'] text-[6rem] leading-none text-[rgba(232,0,45,0.07)]">01</span>
+            <span className="absolute top-8 right-10 font-display text-[6rem] leading-none text-[rgba(232,0,45,0.07)]">01</span>
             <span className="text-[0.65rem] tracking-[0.28em] uppercase text-[#e8002d] mb-6 block">{tx.disciplines.extremeTag}</span>
-            <h3 className="font-['Bebas_Neue'] text-[clamp(2.5rem,4.5vw,4rem)] tracking-[0.03em] leading-[0.95] mb-6">
+            <h3 className="font-display text-[clamp(2.5rem,4.5vw,4rem)] tracking-[0.03em] leading-[0.95] mb-6">
               {tx.disciplines.extremeTitle}
             </h3>
             <p className="text-[0.88rem] leading-[1.9] text-[rgba(240,238,234,0.45)] mb-8 max-w-[400px]">
@@ -194,7 +194,7 @@ export default function Home() {
               className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-400 pointer-events-none"
               style={{ background: "radial-gradient(ellipse 60% 50% at 80% 20%, rgba(240,238,234,.04) 0%, transparent 70%)" }}
             />
-            <span className="absolute top-8 right-10 font-['Bebas_Neue'] text-[6rem] leading-none text-[rgba(240,238,234,0.04)]">02</span>
+            <span className="absolute top-8 right-10 font-display text-[6rem] leading-none text-[rgba(240,238,234,0.04)]">02</span>
             <span className="text-[0.65rem] tracking-[0.28em] uppercase text-[#555] mb-6 block">{tx.disciplines.popTag}</span>
             <h3 className="font-['Playfair_Display'] italic text-[clamp(2.2rem,4vw,3.5rem)] leading-[1] mb-6 text-[rgba(240,238,234,0.9)]">
               {tx.disciplines.popTitle}
@@ -242,7 +242,7 @@ export default function Home() {
                 { val: statStudents, label: tx.about.stat3Label },
               ].map(({ val, label }) => (
                 <div key={label} className="bg-[#080808] py-5 text-center">
-                  <div className="font-['Bebas_Neue'] text-2xl text-[#e8002d]">{val}</div>
+                  <div className="font-display text-2xl text-[#e8002d]">{val}</div>
                   <div className="text-[0.65rem] tracking-[0.12em] uppercase text-[#555] mt-1">{label}</div>
                 </div>
               ))}
@@ -254,7 +254,7 @@ export default function Home() {
             <span className="text-[0.68rem] tracking-[0.28em] uppercase text-[#e8002d] block mb-4">
               {tx.about.eyebrow}
             </span>
-            <h2 className="font-['Bebas_Neue'] text-[clamp(3rem,5vw,5rem)] leading-[0.95] tracking-[0.02em]">
+            <h2 className="font-display text-[clamp(3rem,5vw,5rem)] leading-[0.95] tracking-[0.02em]">
               {tx.about.title}
               <em className="font-['Playfair_Display'] not-italic italic text-[0.7em] text-[rgba(240,238,234,0.45)] block mt-1">
                 {tx.about.titleEm}
@@ -269,7 +269,7 @@ export default function Home() {
             <p className="text-[0.9rem] leading-[1.9] text-[rgba(240,238,234,0.5)] mb-10">{bioLine3}</p>
             <a
               href="#booking"
-              className="inline-flex items-center gap-3 bg-[#e8002d] text-[#f0eeea] font-['Bebas_Neue'] text-[1rem] tracking-[0.15em] px-8 py-4 no-underline transition-all duration-200 hover:bg-[#ff1a3d] hover:gap-5 group"
+              className="inline-flex items-center gap-3 bg-[#e8002d] text-[#f0eeea] font-display text-[1rem] tracking-[0.15em] px-8 py-4 no-underline transition-all duration-200 hover:bg-[#ff1a3d] hover:gap-5 group"
             >
               {tx.about.cta}
               <svg className="transition-transform duration-200 group-hover:translate-x-1" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M5 12h14M12 5l7 7-7 7" /></svg>
@@ -283,7 +283,7 @@ export default function Home() {
         <div className="absolute inset-0 opacity-[0.07]" style={{ backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")`, backgroundSize: "120px" }} />
         <div className="max-w-[1100px] mx-auto flex flex-col md:flex-row items-center justify-between gap-8">
           <div>
-            <h2 className="font-['Bebas_Neue'] text-[clamp(2rem,4vw,3.5rem)] leading-[0.95] tracking-[0.02em] text-[#f0eeea]">
+            <h2 className="font-display text-[clamp(2rem,4vw,3.5rem)] leading-[0.95] tracking-[0.02em] text-[#f0eeea]">
               {lang === "ru" ? "Ваш голос ждёт своего потенциала" : "Your voice is waiting for its potential"}
             </h2>
             <p className="text-[0.9rem] text-[rgba(240,238,234,0.75)] mt-3">
@@ -294,7 +294,7 @@ export default function Home() {
           </div>
           <a
             href="#booking"
-            className="flex-shrink-0 bg-[#f0eeea] text-[#080808] font-['Bebas_Neue'] text-[1.1rem] tracking-[0.15em] px-10 py-5 no-underline transition-all duration-200 hover:bg-white whitespace-nowrap inline-flex items-center gap-3 group"
+            className="flex-shrink-0 bg-[#f0eeea] text-[#080808] font-display text-[1.1rem] tracking-[0.15em] px-10 py-5 no-underline transition-all duration-200 hover:bg-white whitespace-nowrap inline-flex items-center gap-3 group"
           >
             {lang === "ru" ? "Записаться сейчас" : "Book Now"}
             <svg className="transition-transform duration-200 group-hover:translate-x-1" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M5 12h14M12 5l7 7-7 7" /></svg>
@@ -309,7 +309,7 @@ export default function Home() {
             <span className="text-[0.68rem] tracking-[0.28em] uppercase text-[#e8002d] block mb-4">
               {tx.booking.eyebrow}
             </span>
-            <h2 className="font-['Bebas_Neue'] text-[clamp(3rem,5vw,5rem)] leading-[0.95] tracking-[0.02em]">
+            <h2 className="font-display text-[clamp(3rem,5vw,5rem)] leading-[0.95] tracking-[0.02em]">
               {tx.booking.title}
               <em className="font-['Playfair_Display'] not-italic italic text-[0.7em] text-[rgba(240,238,234,0.45)] block mt-1">
                 {tx.booking.titleEm}

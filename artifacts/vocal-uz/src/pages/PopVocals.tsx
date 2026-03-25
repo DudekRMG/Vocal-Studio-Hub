@@ -184,11 +184,11 @@ export default function PopVocals() {
             {hero.title}
             <span className="block text-[#e8002d]">{hero.titleRed}</span>
           </h1>
-          <p className="font-['Bebas_Neue'] text-[clamp(1.2rem,2.5vw,1.8rem)] tracking-[0.08em] text-[rgba(240,238,234,0.45)] mb-8 max-w-[500px]">{hero.sub}</p>
+          <p className="font-display text-[clamp(1.2rem,2.5vw,1.8rem)] tracking-[0.08em] text-[rgba(240,238,234,0.45)] mb-8 max-w-[500px]">{hero.sub}</p>
           <p className="text-[0.9rem] leading-[1.9] text-[rgba(240,238,234,0.45)] max-w-[520px] mb-10">{hero.desc}</p>
           <a
             href="#book-pop"
-            className="inline-flex items-center gap-3 bg-[#f0eeea] text-[#080808] font-['Bebas_Neue'] text-[1.1rem] tracking-[0.15em] px-10 py-5 no-underline transition-all duration-200 hover:bg-white group"
+            className="inline-flex items-center gap-3 bg-[#f0eeea] text-[#080808] font-display text-[1.1rem] tracking-[0.15em] px-10 py-5 no-underline transition-all duration-200 hover:bg-white group"
           >
             {bookHeroLabel}
             <svg className="transition-transform duration-200 group-hover:translate-x-1" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M5 12h14M12 5l7 7-7 7" /></svg>
@@ -210,7 +210,7 @@ export default function PopVocals() {
             {pillars.map((p) => (
               <div key={p.title} className="bg-[#0f0f0f] p-8">
                 <div className="text-2xl text-[rgba(240,238,234,0.2)] mb-4">{p.icon}</div>
-                <h3 className="font-['Bebas_Neue'] text-[1.2rem] tracking-[0.08em] mb-3 text-[#f0eeea]">{p.title}</h3>
+                <h3 className="font-display text-[1.2rem] tracking-[0.08em] mb-3 text-[#f0eeea]">{p.title}</h3>
                 <p className="text-[0.8rem] leading-[1.7] text-[rgba(240,238,234,0.4)]">{p.desc}</p>
               </div>
             ))}
@@ -225,7 +225,7 @@ export default function PopVocals() {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-[1px] bg-white/[0.08]">
             {forWhom.map((item) => (
               <div key={item.title} className="bg-[#141414] p-10">
-                <h3 className="font-['Bebas_Neue'] text-[1.4rem] tracking-[0.08em] mb-4 text-[#f0eeea]">{item.title}</h3>
+                <h3 className="font-display text-[1.4rem] tracking-[0.08em] mb-4 text-[#f0eeea]">{item.title}</h3>
                 <p className="text-[0.85rem] leading-[1.8] text-[rgba(240,238,234,0.45)]">{item.desc}</p>
               </div>
             ))}
@@ -240,8 +240,8 @@ export default function PopVocals() {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-[1px] bg-white/[0.08]">
             {programSteps.map((step) => (
               <div key={step.num} className="bg-[#0f0f0f] p-10">
-                <div className="font-['Bebas_Neue'] text-[3.5rem] leading-none text-[rgba(240,238,234,0.06)] mb-6">{step.num}</div>
-                <h3 className="font-['Bebas_Neue'] text-[1.2rem] tracking-[0.08em] mb-4 text-[#f0eeea]">{step.title}</h3>
+                <div className="font-display text-[3.5rem] leading-none text-[rgba(240,238,234,0.06)] mb-6">{step.num}</div>
+                <h3 className="font-display text-[1.2rem] tracking-[0.08em] mb-4 text-[#f0eeea]">{step.title}</h3>
                 <p className="text-[0.82rem] leading-[1.8] text-[rgba(240,238,234,0.45)]">{step.desc}</p>
               </div>
             ))}
@@ -273,7 +273,7 @@ export default function PopVocals() {
           </div>
           <a
             href="#book-pop"
-            className="flex-shrink-0 bg-[#080808] text-[#f0eeea] font-['Bebas_Neue'] text-[1.1rem] tracking-[0.15em] px-10 py-5 no-underline hover:bg-[#1a1a1a] whitespace-nowrap inline-flex items-center gap-3 group transition-colors duration-200"
+            className="flex-shrink-0 bg-[#080808] text-[#f0eeea] font-display text-[1.1rem] tracking-[0.15em] px-10 py-5 no-underline hover:bg-[#1a1a1a] whitespace-nowrap inline-flex items-center gap-3 group transition-colors duration-200"
           >
             {ctaBtn}
             <svg className="transition-transform duration-200 group-hover:translate-x-1" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M5 12h14M12 5l7 7-7 7" /></svg>
