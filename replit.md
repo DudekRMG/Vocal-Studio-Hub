@@ -74,6 +74,40 @@ artifacts-monorepo/
 - `TELEGRAM_BOT_TOKEN` — Telegram bot token
 - `TELEGRAM_CHAT_ID` — owner's Telegram chat ID
 
+## Sanity CMS Integration
+
+### Project
+- **Project ID**: `n6dunjsx`
+- **Dataset**: `production` (public)
+- **Studio schemas**: `sanity-studio/schemas/` (homePage, extremePage, popPage)
+- **Reference config**: `sanity-studio/sanity.config.ts`
+
+### How it works
+- The frontend fetches content from Sanity on every page load using `@sanity/client`
+- If Sanity content is present → it overrides the hardcoded i18n strings
+- If Sanity is unreachable or a field is empty → falls back to hardcoded content silently
+- All 3 documents are pre-populated in Sanity with full RU/EN content
+
+### Documents
+- `homePage` — site title, phone, hero section, teacher bio, stats, booking section
+- `extremePage` — hero, techniques array, process steps, FAQs
+- `popPage` — hero, pillars array, for-whom cards, FAQs
+
+### To use the Sanity Studio (CMS editor)
+1. Use the schema files in `sanity-studio/schemas/` with your Sanity CLI project
+2. Run `sanity deploy` from your CLI project to host the studio
+3. Go to your deployed studio URL and edit content — changes appear on the site immediately
+
+### CORS Origins Configured
+- `https://vocal.uz`, `https://www.vocal.uz`
+- `https://*.worf.replit.dev`, `https://*.replit.dev`
+- `http://localhost`, `http://localhost:*`
+
+### Key Files
+- `artifacts/vocal-uz/src/lib/sanityClient.ts` — Sanity client setup
+- `artifacts/vocal-uz/src/lib/useSanityContent.ts` — React hook for fetching home page content
+- `sanity-studio/schemas/` — Schema definitions to copy into Sanity CLI project
+
 ## SEO
 - Structured data: MusicSchool schema in `index.html`
 - Per-page meta via `SeoHead` component

@@ -7,7 +7,7 @@ export const sanityClient = createClient({
   projectId: projectId || "n6dunjsx",
   dataset,
   apiVersion: "2024-01-01",
-  useCdn: true,
+  useCdn: false,
 });
 
 export const isConfigured = Boolean(projectId);
