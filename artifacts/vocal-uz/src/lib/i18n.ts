@@ -12,6 +12,7 @@ export const t = {
       home: "Главная",
       extreme: "Экстремальный вокал",
       pop: "Поп-вокал",
+      karaoke: "Экспресс-Карaoке",
       book: "Записаться",
     },
     hero: {
@@ -34,7 +35,7 @@ export const t = {
     },
     disciplines: {
       eyebrow: "Направления",
-      title: "Два стиля,",
+      title: "Три курса,",
       titleEm: "один голос",
       extremeTag: "Экстремальный вокал",
       extremeTitle: "Гроул. Скрим. Фрай.",
@@ -60,6 +61,18 @@ export const t = {
         "Запись и работа в студии",
       ],
       popCta: "Подробнее о поп-вокале",
+      karaokeTag: "Экспресс-курс · 12 уроков",
+      karaokeTitle: "Пой уже сегодня.",
+      karaokeBody:
+        "Интенсивный курс для тех, кто хочет быстро освоить основы и выйти на любительский уровень. 12 уроков — от нуля до первого выступления в карaoке.",
+      karaokeList: [
+        "Дыхание и опора с первого урока",
+        "Интонация и чистота звука",
+        "Работа с микрофоном",
+        "Сценическая уверенность",
+        "Готовность к карaoке",
+      ],
+      karaokeCta: "Подробнее о курсе",
     },
     about: {
       eyebrow: "Преподаватель",
@@ -100,7 +113,8 @@ export const t = {
       goalOptions: [
         { value: "extreme", label: "Экстремальный вокал" },
         { value: "pop", label: "Поп-вокал" },
-        { value: "both", label: "Оба направления" },
+        { value: "karaoke", label: "Экспресс-карaoке (12 уроков)" },
+        { value: "both", label: "Несколько направлений" },
         { value: "other", label: "Другое" },
       ],
       messagePlaceholder: "Расскажите о себе (необязательно)",
@@ -120,7 +134,7 @@ export const t = {
       home: {
         title: "Vocal.uz — Уроки вокала в Ташкенте | Дария Свиридова",
         description:
-          "Уроки экстремального вокала и поп-вокала в Ташкенте. Авторская методика безопасной постановки голоса. Запишитесь на пробный урок.",
+          "Уроки экстремального вокала, поп-вокала и экспресс-карaoке в Ташкенте. Авторская методика безопасной постановки голоса. Запишитесь на пробный урок.",
       },
       extreme: {
         title: "Экстремальный вокал — Vocal.uz | Гроул, Скрим, Фрай",
@@ -132,6 +146,11 @@ export const t = {
         description:
           "Уроки поп-вокала в Ташкенте: постановка дыхания, расширение диапазона, работа с микрофоном. Для начинающих и продолжающих.",
       },
+      karaoke: {
+        title: "Экспресс-карaoке — Vocal.uz | 12 уроков с нуля до сцены",
+        description:
+          "Интенсивный курс вокала для начинающих: 12 уроков, дыхание, интонация, микрофон и уверенность на сцене. Запишитесь в Ташкенте.",
+      },
     },
   },
   en: {
@@ -139,6 +158,7 @@ export const t = {
       home: "Home",
       extreme: "Extreme Vocals",
       pop: "Pop Vocals",
+      karaoke: "Express Karaoke",
       book: "Book a Lesson",
     },
     hero: {
@@ -161,7 +181,7 @@ export const t = {
     },
     disciplines: {
       eyebrow: "Disciplines",
-      title: "Two Styles,",
+      title: "Three Courses,",
       titleEm: "One Voice",
       extremeTag: "Extreme Vocals",
       extremeTitle: "Growl. Scream. Fry.",
@@ -187,6 +207,18 @@ export const t = {
         "Recording and studio work",
       ],
       popCta: "More about pop vocals",
+      karaokeTag: "Express Course · 12 Lessons",
+      karaokeTitle: "Sing Today.",
+      karaokeBody:
+        "An intensive course for those who want to master the basics fast and reach amateur level. 12 lessons — from zero to your first karaoke performance.",
+      karaokeList: [
+        "Breathing and support from lesson one",
+        "Intonation and clean tone",
+        "Microphone technique",
+        "Stage confidence",
+        "Karaoke-ready performance",
+      ],
+      karaokeCta: "More about the course",
     },
     about: {
       eyebrow: "Your Teacher",
@@ -227,7 +259,8 @@ export const t = {
       goalOptions: [
         { value: "extreme", label: "Extreme Vocals" },
         { value: "pop", label: "Pop Vocals" },
-        { value: "both", label: "Both disciplines" },
+        { value: "karaoke", label: "Express Karaoke (12 lessons)" },
+        { value: "both", label: "Multiple disciplines" },
         { value: "other", label: "Other" },
       ],
       messagePlaceholder: "Tell us about yourself (optional)",
@@ -247,7 +280,7 @@ export const t = {
       home: {
         title: "Vocal.uz — Singing Lessons in Tashkent | Dariya Sviridova",
         description:
-          "Extreme vocal and pop vocal lessons in Tashkent. Safe voice placement method. Book a trial lesson today.",
+          "Extreme vocal, pop vocal, and express karaoke lessons in Tashkent. Safe voice placement method. Book a trial lesson today.",
       },
       extreme: {
         title: "Extreme Vocals — Vocal.uz | Growl, Scream, Fry Lessons",
@@ -258,6 +291,11 @@ export const t = {
         title: "Pop Vocals — Vocal.uz | Singing Lessons in Tashkent",
         description:
           "Pop vocal lessons in Tashkent: breath placement, range expansion, microphone technique. For beginners and advanced singers.",
+      },
+      karaoke: {
+        title: "Express Karaoke Course — Vocal.uz | 12 Lessons from Zero to Stage",
+        description:
+          "Intensive vocal course for beginners: 12 lessons covering breathing, intonation, microphone technique and stage confidence. Book in Tashkent.",
       },
     },
   },

@@ -156,24 +156,24 @@ export default function Home() {
           </h2>
         </div>
 
-        <div className="max-w-[1100px] mx-auto grid grid-cols-1 md:grid-cols-2 gap-[1px] bg-white/[0.08]">
+        <div className="max-w-[1100px] mx-auto grid grid-cols-1 md:grid-cols-3 gap-[1px] bg-white/[0.08]">
           {/* Extreme card */}
-          <div className="bg-[#080808] p-14 relative overflow-hidden group transition-colors duration-300 hover:bg-[#0d0a0a]">
+          <div className="bg-[#080808] p-10 relative overflow-hidden group transition-colors duration-300 hover:bg-[#0d0a0a]">
             <div
               className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-400 pointer-events-none"
               style={{ background: "radial-gradient(ellipse 60% 50% at 20% 80%, rgba(232,0,45,.08) 0%, transparent 70%)" }}
             />
-            <span className="absolute top-8 right-10 font-display text-[6rem] leading-none text-[rgba(232,0,45,0.07)]">01</span>
+            <span className="absolute top-8 right-8 font-display text-[5rem] leading-none text-[rgba(232,0,45,0.07)]">01</span>
             <span className="text-[0.65rem] tracking-[0.28em] uppercase text-[#e8002d] mb-6 block">{tx.disciplines.extremeTag}</span>
-            <h3 className="font-display text-[clamp(2.5rem,4.5vw,4rem)] tracking-[0.03em] leading-[0.95] mb-6">
+            <h3 className="font-display text-[clamp(2rem,3.5vw,3rem)] tracking-[0.03em] leading-[0.95] mb-6">
               {tx.disciplines.extremeTitle}
             </h3>
-            <p className="text-[0.88rem] leading-[1.9] text-[rgba(240,238,234,0.45)] mb-8 max-w-[400px]">
+            <p className="text-[0.85rem] leading-[1.9] text-[rgba(240,238,234,0.45)] mb-8">
               {tx.disciplines.extremeBody}
             </p>
             <ul className="list-none m-0 p-0 flex flex-col gap-3 mb-10">
               {tx.disciplines.extremeList.map((item) => (
-                <li key={item} className="text-[0.8rem] text-[rgba(240,238,234,0.45)] flex items-center gap-4">
+                <li key={item} className="text-[0.78rem] text-[rgba(240,238,234,0.45)] flex items-center gap-4">
                   <span className="w-5 h-[1px] bg-[#e8002d] flex-shrink-0" />
                   {item}
                 </li>
@@ -189,22 +189,22 @@ export default function Home() {
           </div>
 
           {/* Pop card */}
-          <div className="bg-[#0f0f0f] p-14 relative overflow-hidden group transition-colors duration-300 hover:bg-[#131313]">
+          <div className="bg-[#0f0f0f] p-10 relative overflow-hidden group transition-colors duration-300 hover:bg-[#131313]">
             <div
               className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-400 pointer-events-none"
               style={{ background: "radial-gradient(ellipse 60% 50% at 80% 20%, rgba(240,238,234,.04) 0%, transparent 70%)" }}
             />
-            <span className="absolute top-8 right-10 font-display text-[6rem] leading-none text-[rgba(240,238,234,0.04)]">02</span>
+            <span className="absolute top-8 right-8 font-display text-[5rem] leading-none text-[rgba(240,238,234,0.04)]">02</span>
             <span className="text-[0.65rem] tracking-[0.28em] uppercase text-[#555] mb-6 block">{tx.disciplines.popTag}</span>
-            <h3 className="font-['Playfair_Display'] italic text-[clamp(2.2rem,4vw,3.5rem)] leading-[1] mb-6 text-[rgba(240,238,234,0.9)]">
+            <h3 className="font-['Playfair_Display'] italic text-[clamp(1.8rem,3vw,2.8rem)] leading-[1] mb-6 text-[rgba(240,238,234,0.9)]">
               {tx.disciplines.popTitle}
             </h3>
-            <p className="text-[0.88rem] leading-[1.9] text-[rgba(240,238,234,0.45)] mb-8 max-w-[400px]">
+            <p className="text-[0.85rem] leading-[1.9] text-[rgba(240,238,234,0.45)] mb-8">
               {tx.disciplines.popBody}
             </p>
             <ul className="list-none m-0 p-0 flex flex-col gap-3 mb-10">
               {tx.disciplines.popList.map((item) => (
-                <li key={item} className="text-[0.8rem] text-[rgba(240,238,234,0.45)] flex items-center gap-4">
+                <li key={item} className="text-[0.78rem] text-[rgba(240,238,234,0.45)] flex items-center gap-4">
                   <span className="w-5 h-[1px] bg-[#555] flex-shrink-0" />
                   {item}
                 </li>
@@ -215,6 +215,38 @@ export default function Home() {
               className="text-[0.72rem] tracking-[0.2em] uppercase text-[#f0eeea] no-underline inline-flex items-center gap-3 transition-all duration-200 hover:gap-5"
             >
               {tx.disciplines.popCta}
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M5 12h14M12 5l7 7-7 7" /></svg>
+            </Link>
+          </div>
+
+          {/* Karaoke card */}
+          <div className="bg-[#0c0b08] p-10 relative overflow-hidden group transition-colors duration-300 hover:bg-[#100e09]">
+            <div
+              className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-400 pointer-events-none"
+              style={{ background: "radial-gradient(ellipse 60% 50% at 50% 80%, rgba(201,168,76,.07) 0%, transparent 70%)" }}
+            />
+            <span className="absolute top-8 right-8 font-display text-[5rem] leading-none" style={{ color: "rgba(201,168,76,0.07)" }}>03</span>
+            <span className="text-[0.65rem] tracking-[0.28em] uppercase mb-6 block" style={{ color: "#c9a84c" }}>{tx.disciplines.karaokeTag}</span>
+            <h3 className="font-display text-[clamp(2rem,3.5vw,3rem)] tracking-[0.03em] leading-[0.95] mb-6">
+              {tx.disciplines.karaokeTitle}
+            </h3>
+            <p className="text-[0.85rem] leading-[1.9] text-[rgba(240,238,234,0.45)] mb-8">
+              {tx.disciplines.karaokeBody}
+            </p>
+            <ul className="list-none m-0 p-0 flex flex-col gap-3 mb-10">
+              {tx.disciplines.karaokeList.map((item) => (
+                <li key={item} className="text-[0.78rem] text-[rgba(240,238,234,0.45)] flex items-center gap-4">
+                  <span className="w-5 h-[1px] flex-shrink-0" style={{ backgroundColor: "#c9a84c" }} />
+                  {item}
+                </li>
+              ))}
+            </ul>
+            <Link
+              href={`${base}/karaoke`}
+              className="text-[0.72rem] tracking-[0.2em] uppercase no-underline inline-flex items-center gap-3 transition-all duration-200 hover:gap-5"
+              style={{ color: "#c9a84c" }}
+            >
+              {tx.disciplines.karaokeCta}
               <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M5 12h14M12 5l7 7-7 7" /></svg>
             </Link>
           </div>

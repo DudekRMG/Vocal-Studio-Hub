@@ -8,6 +8,7 @@ import { Footer } from "@/components/Footer";
 import Home from "@/pages/Home";
 import ExtremeVocals from "@/pages/ExtremeVocals";
 import PopVocals from "@/pages/PopVocals";
+import KaraokeCourse from "@/pages/KaraokeCourse";
 import NotFound from "@/pages/not-found";
 
 const queryClient = new QueryClient();
@@ -18,6 +19,7 @@ function Router() {
       <Route path="/" component={Home} />
       <Route path="/extreme" component={ExtremeVocals} />
       <Route path="/pop" component={PopVocals} />
+      <Route path="/karaoke" component={KaraokeCourse} />
       <Route component={NotFound} />
     </Switch>
   );
