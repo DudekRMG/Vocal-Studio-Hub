@@ -1,0 +1,13 @@
+I need you to make a bunch of changes to a design and they should be implemented in several steps.
+
+First - we will redesign blocks and add a page to the website.
+we're adding a new course - Express Karaoke Course with 12-lesson intensive curriculum emphasis. This is an intensive course for beggiters who wants to level up fast, to get foundations and start to understand the subjet and be ready to sing on amateur level. Adding a new page means that we're adding one more page to the main one and adding one more separate landing page for the course that will give more details on it.
+
+After that we will have to add animation to the hero section of the home page and possibly to the landing pages as well. It'll be a high-quality audio visualization of vocal wave imagery. when you come to this stage I'll provide you the animation that you will rig and remake to fit into the website. Animation will be in code inside an html page so just ask e to provide it when you're ready
+
+Then we'll rework design a bit. The animation piece code will be used as an inspiration for you to retouch the design a bit to make it more dynamic and contemporary. The website will have to feature clear navigation to three course offerings (Extreme Vocals, Pop Vocals, and Express Karaoke Course with 12-lesson intensive curriculum emphasis), instructor profile highlighting Dariia's expertise, course details with pricing/enrollment CTAs, student testimonials, and a contact/booking section. And include smooth scrolling, modern typography, subtle animations on course cards, and a professional yet energetic aesthetic that appeals to serious vocal enthusiasts and beginners alike. real logo will also have to be inplemented
+
+then some audio functionality will be added. I'll need you to add a small player with audio recordings to every feedback window so that users can listen to students progress. You should position it as a "hear the difference" block where there will be feedbacks augmented by audio samples. And at the top i need a little interactive widget. It should be a part of cta and a catchy feature. Some kind of check your range or check your voice type widget. User should be able to sing the highest and lowest notes they can into microphone and it should show a kind of user's voice (bass, baritone, etc). It should also offer to send a full range analysis together with a special offer to user's telegram and ask for name and number of a user. You could use Web Audio API for that.
+
+All the landing pages for each and every specific course will have to feature a widget too.
+After that we will fix mobile compatibility, fix fonts and layouts of necessary and after that we will redo the Sanity integration
