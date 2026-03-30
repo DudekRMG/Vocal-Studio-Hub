@@ -256,33 +256,33 @@ export default function Home() {
         <div className="max-w-[1100px] mx-auto mt-[1px]">
           <div
             className="relative overflow-hidden group transition-colors duration-300"
-            style={{ backgroundColor: "#0a1632" }}
-            onMouseEnter={e => (e.currentTarget.style.backgroundColor = "#102040")}
-            onMouseLeave={e => (e.currentTarget.style.backgroundColor = "#0a1632")}
+            style={{ backgroundColor: "#3b82f6" }}
+            onMouseEnter={e => (e.currentTarget.style.backgroundColor = "#2563eb")}
+            onMouseLeave={e => (e.currentTarget.style.backgroundColor = "#3b82f6")}
           >
             <div
               className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"
-              style={{ background: "radial-gradient(ellipse 50% 80% at 80% 50%, rgba(59,130,246,0.12) 0%, transparent 70%)" }}
+              style={{ background: "radial-gradient(ellipse 50% 80% at 80% 50%, rgba(255,255,255,0.08) 0%, transparent 70%)" }}
             />
             <div
               className="absolute top-1/2 right-8 -translate-y-1/2 font-display text-[12rem] leading-none pointer-events-none"
-              style={{ color: "rgba(59,130,246,0.06)" }}
+              style={{ color: "rgba(255,255,255,0.06)" }}
             >
               04
             </div>
             <div className="px-10 py-12 grid grid-cols-1 md:grid-cols-[1fr_auto] gap-10 items-center relative">
               <div>
-                <span className="text-[0.65rem] tracking-[0.28em] uppercase mb-4 block" style={{ color: "#3b82f6" }}>{tx.disciplines.kidsTag}</span>
-                <h3 className="font-display text-[clamp(2.2rem,4vw,3.5rem)] tracking-[0.03em] leading-[0.95] mb-5 text-[#f0eeea]">
+                <span className="text-[0.65rem] tracking-[0.28em] uppercase mb-4 block" style={{ color: "rgba(255,255,255,0.7)" }}>{tx.disciplines.kidsTag}</span>
+                <h3 className="font-display text-[clamp(2.2rem,4vw,3.5rem)] tracking-[0.03em] leading-[0.95] mb-5 text-white">
                   {tx.disciplines.kidsTitle}
                 </h3>
-                <p className="text-[0.88rem] leading-[1.9] text-[rgba(240,238,234,0.45)] max-w-[620px] mb-8">
+                <p className="text-[0.88rem] leading-[1.9] text-[rgba(255,255,255,0.6)] max-w-[620px] mb-8">
                   {tx.disciplines.kidsBody}
                 </p>
                 <ul className="list-none m-0 p-0 grid grid-cols-2 gap-x-12 gap-y-3 mb-0">
                   {tx.disciplines.kidsList.map((item) => (
-                    <li key={item} className="text-[0.78rem] text-[rgba(240,238,234,0.45)] flex items-center gap-3">
-                      <span className="w-4 h-[1px] flex-shrink-0" style={{ backgroundColor: "#3b82f6" }} />
+                    <li key={item} className="text-[0.78rem] text-[rgba(255,255,255,0.65)] flex items-center gap-3">
+                      <span className="w-4 h-[1px] flex-shrink-0" style={{ backgroundColor: "rgba(255,255,255,0.7)" }} />
                       {item}
                     </li>
                   ))}
@@ -290,8 +290,7 @@ export default function Home() {
               </div>
               <Link
                 href={`${base}/kids`}
-                className="flex-shrink-0 text-[0.72rem] tracking-[0.2em] uppercase no-underline inline-flex items-center gap-3 transition-all duration-200 hover:gap-5 self-start md:self-center"
-                style={{ color: "#3b82f6" }}
+                className="flex-shrink-0 text-[0.72rem] tracking-[0.2em] uppercase no-underline inline-flex items-center gap-3 transition-all duration-200 hover:gap-5 self-start md:self-center text-white hover:text-white/80"
               >
                 {tx.disciplines.kidsCta}
                 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M5 12h14M12 5l7 7-7 7" /></svg>
