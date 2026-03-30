@@ -9,7 +9,7 @@ export function Footer() {
   const isKids = location === "/kids";
 
   return (
-    <footer className={`${isKids ? "bg-[#c8d4f0] border-t border-black/[0.07]" : "bg-[#080808] border-t border-white/[0.08]"} py-14 px-6 lg:px-12`}>
+    <footer className={`${isKids ? "bg-[#1a3060] border-t border-white/[0.1]" : "bg-[#080808] border-t border-white/[0.08]"} py-14 px-6 lg:px-12`}>
       <div className="max-w-[1100px] mx-auto">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-10 mb-12">
           <div>
@@ -23,7 +23,7 @@ export function Footer() {
             </p>
             <a
               href="tel:+998338622589"
-              className={`text-[0.9rem] no-underline transition-colors duration-200 block mb-3 ${isKids ? "text-[#0f1016] hover:text-[#3b82f6]" : "text-[#f0eeea] hover:text-[#e8002d]"}`}
+              className="text-[#f0eeea] text-[0.9rem] no-underline hover:text-[#e8002d] transition-colors duration-200 block mb-3"
             >
               {tx.footer.phone}
             </a>
@@ -37,7 +37,7 @@ export function Footer() {
                   key={label}
                   href="#"
                   aria-label={label}
-                  className={`w-9 h-9 flex items-center justify-center transition-all duration-200 ${isKids ? "border border-black/[0.12] text-[#555] hover:text-[#0f1016] hover:border-black/30" : "border border-white/[0.08] text-[#555] hover:text-[#f0eeea] hover:border-white/20"}`}
+                  className="w-9 h-9 border border-white/[0.08] flex items-center justify-center text-[#555] hover:text-[#f0eeea] hover:border-white/20 transition-all duration-200"
                 >
                   <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d={path} /></svg>
                 </a>
@@ -60,7 +60,7 @@ export function Footer() {
                 <li key={href}>
                   <a
                     href={href}
-                    className={`text-[0.82rem] text-[#888] no-underline transition-colors duration-200 ${isKids ? "hover:text-[#0f1016]" : "hover:text-[#f0eeea]"}`}
+                    className="text-[0.82rem] text-[#888] no-underline hover:text-[#f0eeea] transition-colors duration-200"
                   >
                     {label}
                   </a>
@@ -70,7 +70,7 @@ export function Footer() {
           </div>
         </div>
 
-        <div className={`border-t pt-8 flex flex-col md:flex-row items-center justify-between gap-4 ${isKids ? "border-black/[0.07]" : "border-white/[0.08]"}`}>
+        <div className="border-t border-white/[0.08] pt-8 flex flex-col md:flex-row items-center justify-between gap-4">
           <p className="text-[0.72rem] text-[#555] tracking-[0.06em]">
             © {new Date().getFullYear()} Vocal.uz. {tx.footer.rights}.
           </p>

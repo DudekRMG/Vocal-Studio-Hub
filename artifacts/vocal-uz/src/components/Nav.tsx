@@ -23,7 +23,7 @@ export function Nav() {
     <nav
       className={`fixed top-0 left-0 right-0 z-[200] flex items-center justify-between px-6 lg:px-12 py-5 transition-all duration-300 ${
         isKids
-          ? "bg-[rgba(200,212,240,0.97)] border-b border-black/[0.07] backdrop-blur-[8px]"
+          ? "bg-[rgba(26,48,96,0.97)] border-b border-white/[0.1] backdrop-blur-[8px]"
           : scrolled ? "bg-[rgba(8,8,8,0.92)] border-b border-white/[0.08] backdrop-blur-[8px]" : "border-b border-transparent"
       }`}
     >
@@ -36,7 +36,7 @@ export function Nav() {
           <li>
             <Link
               href={`${base}/`}
-              className={`text-[0.72rem] tracking-[0.14em] uppercase no-underline transition-colors duration-200 ${location === "/" ? (isKids ? "text-[#0f1016]" : "text-[#f0eeea]") : `text-[#555] ${isKids ? "hover:text-[#0f1016]" : "hover:text-[#f0eeea]"}`}`}
+              className={`text-[0.72rem] tracking-[0.14em] uppercase no-underline transition-colors duration-200 ${location === "/" ? "text-[#f0eeea]" : "text-[#555] hover:text-[#f0eeea]"}`}
             >
               {tx.nav.home}
             </Link>
@@ -44,7 +44,7 @@ export function Nav() {
           <li>
             <Link
               href={`${base}/extreme`}
-              className={`text-[0.72rem] tracking-[0.14em] uppercase no-underline transition-colors duration-200 ${location === "/extreme" ? (isKids ? "text-[#0f1016]" : "text-[#f0eeea]") : `text-[#555] ${isKids ? "hover:text-[#0f1016]" : "hover:text-[#f0eeea]"}`}`}
+              className={`text-[0.72rem] tracking-[0.14em] uppercase no-underline transition-colors duration-200 ${location === "/extreme" ? "text-[#f0eeea]" : "text-[#555] hover:text-[#f0eeea]"}`}
             >
               {tx.nav.extreme}
             </Link>
@@ -52,7 +52,7 @@ export function Nav() {
           <li>
             <Link
               href={`${base}/pop`}
-              className={`text-[0.72rem] tracking-[0.14em] uppercase no-underline transition-colors duration-200 ${location === "/pop" ? (isKids ? "text-[#0f1016]" : "text-[#f0eeea]") : `text-[#555] ${isKids ? "hover:text-[#0f1016]" : "hover:text-[#f0eeea]"}`}`}
+              className={`text-[0.72rem] tracking-[0.14em] uppercase no-underline transition-colors duration-200 ${location === "/pop" ? "text-[#f0eeea]" : "text-[#555] hover:text-[#f0eeea]"}`}
             >
               {tx.nav.pop}
             </Link>
@@ -60,7 +60,7 @@ export function Nav() {
           <li>
             <Link
               href={`${base}/karaoke`}
-              className={`text-[0.72rem] tracking-[0.14em] uppercase no-underline transition-colors duration-200 ${location === "/karaoke" ? "text-[#c9a84c]" : `text-[#555] ${isKids ? "hover:text-[#0f1016]" : "hover:text-[#c9a84c]"}`}`}
+              className={`text-[0.72rem] tracking-[0.14em] uppercase no-underline transition-colors duration-200 ${location === "/karaoke" ? "text-[#c9a84c]" : "text-[#555] hover:text-[#c9a84c]"}`}
             >
               {tx.nav.karaoke}
             </Link>
@@ -75,13 +75,11 @@ export function Nav() {
           </li>
         </ul>
 
-        <div className={`flex items-center overflow-hidden border ${isKids ? "border-black/[0.12]" : "border-white/[0.08]"}`}>
+        <div className="flex items-center border border-white/[0.08] overflow-hidden">
           <button
             onClick={() => setLang("ru")}
             className={`font-display text-[0.85rem] tracking-[0.12em] px-3 py-[0.45rem] border-none cursor-pointer transition-all duration-200 ${
-              lang === "ru"
-                ? (isKids ? "bg-[#0f1016] text-[#f0eeea]" : "bg-[#f0eeea] text-[#080808]")
-                : `bg-transparent text-[#555] ${isKids ? "hover:text-[#0f1016]" : "hover:text-[#f0eeea]"}`
+              lang === "ru" ? "bg-[#f0eeea] text-[#080808]" : "bg-transparent text-[#555] hover:text-[#f0eeea]"
             }`}
           >
             RU
@@ -89,9 +87,7 @@ export function Nav() {
           <button
             onClick={() => setLang("en")}
             className={`font-display text-[0.85rem] tracking-[0.12em] px-3 py-[0.45rem] border-none cursor-pointer transition-all duration-200 ${
-              lang === "en"
-                ? (isKids ? "bg-[#0f1016] text-[#f0eeea]" : "bg-[#f0eeea] text-[#080808]")
-                : `bg-transparent text-[#555] ${isKids ? "hover:text-[#0f1016]" : "hover:text-[#f0eeea]"}`
+              lang === "en" ? "bg-[#f0eeea] text-[#080808]" : "bg-transparent text-[#555] hover:text-[#f0eeea]"
             }`}
           >
             EN
