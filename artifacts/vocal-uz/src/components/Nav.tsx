@@ -30,6 +30,7 @@ export function Nav() {
       <Link href={`${base}/`} className="flex-shrink-0">
         <img src="/logo.png" alt="Vocal.uz" className="h-9 w-auto" />
       </Link>
+
       <div className="hidden md:flex items-center gap-8">
         <ul className="flex gap-8 list-none m-0 p-0 items-center">
           <li>
@@ -95,11 +96,12 @@ export function Nav() {
 
         <Link
           href={`${base}/#booking`}
-          className="text-[0.72rem] tracking-[0.14em] uppercase px-5 py-[0.65rem] no-underline transition-colors duration-200 hover:bg-[#ff1a3d] whitespace-nowrap text-[#3b82f6] bg-[#f0eeea]"
+          className="text-[0.72rem] tracking-[0.14em] uppercase bg-[#e8002d] text-[#f0eeea] px-5 py-[0.65rem] no-underline transition-colors duration-200 hover:bg-[#ff1a3d] whitespace-nowrap"
         >
           {tx.nav.book}
         </Link>
       </div>
+
       {/* Mobile */}
       <div className="flex md:hidden items-center gap-3">
         <div className="flex items-center border border-white/[0.08] overflow-hidden">
