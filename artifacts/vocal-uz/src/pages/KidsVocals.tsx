@@ -384,18 +384,18 @@ export default function KidsVocals() {
       </section>
 
       {/* ── BOOKING ── */}
-      <section id="book-kids" className="py-28 px-6 lg:px-12 border-t" style={{ backgroundColor: bgCardAlt, borderColor: "rgba(0,0,0,0.07)" }}>
+      <section id="book-kids" className="py-28 px-6 lg:px-12 border-t" style={{ backgroundColor: "#07091e", borderColor: "rgba(255,255,255,0.08)" }}>
         <div className="max-w-[1100px] mx-auto grid grid-cols-1 md:grid-cols-[1fr_1.4fr] gap-20 items-start">
           <div>
             <span className="text-[0.68rem] tracking-[0.28em] uppercase block mb-4" style={{ color: blue }}>{tx.booking.eyebrow}</span>
-            <h2 className="font-display text-[clamp(3rem,5vw,5rem)] leading-[0.95] tracking-[0.02em] text-[#0f1016]">
+            <h2 className="font-display text-[clamp(3rem,5vw,5rem)] leading-[0.95] tracking-[0.02em] text-[#f0eeea]">
               {c.bookTitle}
-              <em className="font-['Playfair_Display'] not-italic italic text-[0.7em] text-[rgba(15,16,22,0.45)] block mt-1">{c.bookTitleEm}</em>
+              <em className="font-['Playfair_Display'] not-italic italic text-[0.7em] text-[rgba(240,238,234,0.45)] block mt-1">{c.bookTitleEm}</em>
             </h2>
             <div className="w-10 h-[2px] my-8" style={{ backgroundColor: blue }} />
-            <p className="text-[0.9rem] leading-[1.9] text-[rgba(15,16,22,0.5)]">{c.bookIntro}</p>
+            <p className="text-[0.9rem] leading-[1.9] text-[rgba(240,238,234,0.5)]">{c.bookIntro}</p>
           </div>
-          <BookingForm />
+          <BookingForm variant="kids" />
         </div>
       </section>
     </>

@@ -2,7 +2,11 @@ import { useState } from "react";
 import { useLang } from "@/lib/langContext";
 import { t } from "@/lib/i18n";
 
-export function BookingForm() {
+interface BookingFormProps {
+  variant?: "kids";
+}
+
+export function BookingForm({ variant }: BookingFormProps = {}) {
   const { lang } = useLang();
   const tx = t[lang].booking;
 
@@ -36,11 +40,13 @@ export function BookingForm() {
     }
   };
 
-  const inputClass =
-    "bg-[#141414] border-none outline-none w-full px-[1.4rem] py-[1.2rem] font-['DM_Sans'] text-[0.85rem] font-light text-[#f0eeea] placeholder-[#555] transition-colors duration-200 focus:bg-[#1a1a1a]";
+  const isKids = variant === "kids";
+  const inputClass = isKids
+    ? "bg-[#0d1833] border-none outline-none w-full px-[1.4rem] py-[1.2rem] font-['DM_Sans'] text-[0.85rem] font-light text-[#f0eeea] placeholder-[rgba(240,238,234,0.3)] transition-colors duration-200 focus:bg-[#0f1e3f]"
+    : "bg-[#141414] border-none outline-none w-full px-[1.4rem] py-[1.2rem] font-['DM_Sans'] text-[0.85rem] font-light text-[#f0eeea] placeholder-[#555] transition-colors duration-200 focus:bg-[#1a1a1a]";
 
   return (
-    <form onSubmit={handleSubmit} className="bg-[#080808] border border-white/[0.08] p-10">
+    <form onSubmit={handleSubmit} className={isKids ? "bg-[#070f26] border border-white/[0.1] p-10" : "bg-[#080808] border border-white/[0.08] p-10"}>
       {status === "success" ? (
         <div className="text-center py-12">
           <div className="text-[#e8002d] text-5xl mb-4">✓</div>
@@ -106,7 +112,7 @@ export function BookingForm() {
           <button
             type="submit"
             disabled={status === "sending"}
-            className="w-full bg-[#e8002d] border-none cursor-pointer font-display text-[1.1rem] tracking-[0.15em] text-[#f0eeea] py-[1.3rem] transition-all duration-200 hover:bg-[#ff1a3d] hover:tracking-[0.22em] flex items-center justify-center gap-3 disabled:opacity-60 disabled:cursor-not-allowed"
+            className={`w-full border-none cursor-pointer font-display text-[1.1rem] tracking-[0.15em] text-[#f0eeea] py-[1.3rem] transition-all duration-200 hover:tracking-[0.22em] flex items-center justify-center gap-3 disabled:opacity-60 disabled:cursor-not-allowed ${isKids ? "bg-[#3b82f6] hover:bg-[#2563eb]" : "bg-[#e8002d] hover:bg-[#ff1a3d]"}`}
           >
             {status === "sending" ? tx.submitting : tx.submit}
             {status !== "sending" && (

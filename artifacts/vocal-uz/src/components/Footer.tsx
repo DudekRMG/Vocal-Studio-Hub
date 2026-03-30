@@ -1,12 +1,15 @@
+import { useLocation } from "wouter";
 import { useLang } from "@/lib/langContext";
 import { t } from "@/lib/i18n";
 
 export function Footer() {
   const { lang } = useLang();
   const tx = t[lang];
+  const [location] = useLocation();
+  const isKids = location === "/kids";
 
   return (
-    <footer className="bg-[#080808] border-t border-white/[0.08] py-14 px-6 lg:px-12">
+    <footer className={`${isKids ? "bg-[#07091e] border-t border-white/[0.1]" : "bg-[#080808] border-t border-white/[0.08]"} py-14 px-6 lg:px-12`}>
       <div className="max-w-[1100px] mx-auto">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-10 mb-12">
           <div>
@@ -64,11 +67,13 @@ export function Footer() {
                 { href: "/", label: t[lang].nav.home },
                 { href: "/extreme", label: t[lang].nav.extreme },
                 { href: "/pop", label: t[lang].nav.pop },
+                { href: "/karaoke", label: t[lang].nav.karaoke },
+                { href: "/kids", label: t[lang].nav.kids },
               ].map(({ href, label }) => (
                 <li key={href}>
                   <a
                     href={href}
-                    className="text-[0.82rem] text-[#555] no-underline hover:text-[#f0eeea] transition-colors duration-200"
+                    className="text-[0.82rem] text-[#888] no-underline hover:text-[#f0eeea] transition-colors duration-200"
                   >
                     {label}
                   </a>

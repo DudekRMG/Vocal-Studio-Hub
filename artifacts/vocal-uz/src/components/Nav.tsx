@@ -17,10 +17,14 @@ export function Nav() {
 
   const base = import.meta.env.BASE_URL.replace(/\/$/, "");
 
+  const isKids = location === "/kids";
+
   return (
     <nav
       className={`fixed top-0 left-0 right-0 z-[200] flex items-center justify-between px-6 lg:px-12 py-5 transition-all duration-300 ${
-        scrolled ? "bg-[rgba(8,8,8,0.92)] border-b border-white/[0.08] backdrop-blur-[8px]" : "border-b border-transparent"
+        isKids
+          ? "bg-[rgba(5,7,22,0.96)] border-b border-white/[0.1] backdrop-blur-[8px]"
+          : scrolled ? "bg-[rgba(8,8,8,0.92)] border-b border-white/[0.08] backdrop-blur-[8px]" : "border-b border-transparent"
       }`}
     >
       <Link href={`${base}/`} className="flex-shrink-0">
