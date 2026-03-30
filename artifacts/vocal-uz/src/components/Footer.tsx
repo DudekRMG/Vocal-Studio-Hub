@@ -9,21 +9,21 @@ export function Footer() {
   const isKids = location === "/kids";
 
   return (
-    <footer className={`${isKids ? "bg-[#152444] border-t border-white/[0.1]" : "bg-[#080808] border-t border-white/[0.08]"} py-14 px-6 lg:px-12`}>
+    <footer className={`${isKids ? "bg-[#1e2d4a] border-t border-[#2e4060]" : "bg-[#080808] border-t border-white/[0.08]"} py-14 px-6 lg:px-12`}>
       <div className="max-w-[1100px] mx-auto">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-10 mb-12">
           <div>
             <img src="/logo.png" alt="Vocal.uz" className="h-10 w-auto mb-4" />
-            <p className="text-[0.82rem] text-[#555] tracking-[0.06em]">{tx.footer.tagline}</p>
+            <p className={`text-[0.82rem] tracking-[0.06em] ${isKids ? "text-[#7a90aa]" : "text-[#555]"}`}>{tx.footer.tagline}</p>
           </div>
 
           <div>
-            <p className="text-[0.65rem] tracking-[0.25em] uppercase text-[#555] mb-4">
+            <p className={`text-[0.65rem] tracking-[0.25em] uppercase mb-4 ${isKids ? "text-[#5a7090]" : "text-[#555]"}`}>
               {lang === "ru" ? "Контакты" : "Contact"}
             </p>
             <a
               href="tel:+998338622589"
-              className="text-[#f0eeea] text-[0.9rem] no-underline hover:text-[#e8002d] transition-colors duration-200 block mb-3"
+              className={`text-[0.9rem] no-underline transition-colors duration-200 block mb-3 ${isKids ? "text-[#c8d8e8] hover:text-white" : "text-[#f0eeea] hover:text-[#e8002d]"}`}
             >
               {tx.footer.phone}
             </a>
@@ -37,7 +37,7 @@ export function Footer() {
                   key={label}
                   href="#"
                   aria-label={label}
-                  className="w-9 h-9 border border-white/[0.08] flex items-center justify-center text-[#555] hover:text-[#f0eeea] hover:border-white/20 transition-all duration-200"
+                  className={`w-9 h-9 flex items-center justify-center transition-all duration-200 ${isKids ? "border border-[#2e4060] text-[#5a7090] hover:text-[#a0b4c8] hover:border-[#3e5070]" : "border border-white/[0.08] text-[#555] hover:text-[#f0eeea] hover:border-white/20"}`}
                 >
                   <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d={path} /></svg>
                 </a>
@@ -46,7 +46,7 @@ export function Footer() {
           </div>
 
           <div>
-            <p className="text-[0.65rem] tracking-[0.25em] uppercase text-[#555] mb-4">
+            <p className={`text-[0.65rem] tracking-[0.25em] uppercase mb-4 ${isKids ? "text-[#5a7090]" : "text-[#555]"}`}>
               {lang === "ru" ? "Навигация" : "Navigation"}
             </p>
             <ul className="list-none m-0 p-0 flex flex-col gap-2">
@@ -60,7 +60,7 @@ export function Footer() {
                 <li key={href}>
                   <a
                     href={href}
-                    className="text-[0.82rem] text-[#888] no-underline hover:text-[#f0eeea] transition-colors duration-200"
+                    className={`text-[0.82rem] no-underline transition-colors duration-200 ${isKids ? "text-[#a0b4c8] hover:text-white" : "text-[#888] hover:text-[#f0eeea]"}`}
                   >
                     {label}
                   </a>
@@ -70,11 +70,11 @@ export function Footer() {
           </div>
         </div>
 
-        <div className="border-t border-white/[0.08] pt-8 flex flex-col md:flex-row items-center justify-between gap-4">
-          <p className="text-[0.72rem] text-[#555] tracking-[0.06em]">
+        <div className={`pt-8 flex flex-col md:flex-row items-center justify-between gap-4 ${isKids ? "border-t border-[#2e4060]" : "border-t border-white/[0.08]"}`}>
+          <p className={`text-[0.72rem] tracking-[0.06em] ${isKids ? "text-[#4a6080]" : "text-[#555]"}`}>
             © {new Date().getFullYear()} Vocal.uz. {tx.footer.rights}.
           </p>
-          <p className="text-[0.65rem] text-[#333] tracking-[0.08em]">
+          <p className={`text-[0.65rem] tracking-[0.08em] ${isKids ? "text-[#4a6080]" : "text-[#333]"}`}>
             vocal.uz
           </p>
         </div>

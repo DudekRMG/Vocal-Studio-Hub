@@ -1,0 +1,267 @@
+Apply the following color changes to the /kids page only. Do not touch any other pages, layouts, spacing, typography, or content.
+
+1. Navigation / header
+
+
+
+
+
+Background: #ffffff
+
+
+
+Bottom border: 1px solid #dde3ee
+
+
+
+All nav link text: #7a8fa8
+
+
+
+Active nav link ("Kids Vocals"): #1a2535, font-weight 700
+
+
+
+"Book a Lesson" button: transparent background, 1.5px solid #1a2535 border, #1a2535 text
+
+2. Hero section
+
+
+
+
+
+Background: #dde7f5
+
+
+
+Eyebrow label text: #5a7898
+
+
+
+H1 heading: #111827
+
+
+
+Italic tagline ("Individual. Safe. Engaging."): #5a7898
+
+
+
+Body text: #4a5e72
+
+
+
+"Book a Trial Lesson" button: #3d6fd4 background, #ffffff text
+
+
+
+Watermark "KIDS" text (decorative background text): #c8d8ea
+
+3. Page base background
+
+
+
+
+
+#eef2f8 — used as the default background for all standard sections
+
+4. Alternate sections (every other section that currently uses a darker background)
+
+
+
+
+
+Background: #e4ecf6
+
+5. Cards and component backgrounds (age group cards, style cards, step cards, safety items)
+
+
+
+
+
+Background: #f4f8fd
+
+
+
+Border: 1px solid #c8d8ea
+
+
+
+Card title text: #111827
+
+
+
+Card body text: #4a5e72
+
+
+
+Card tag / label text: #5a7898
+
+
+
+List marker dashes and accent dots: #3d6fd4
+
+
+
+Step numbers (large decorative): #3d6fd4 at 30% opacity
+
+
+
+Safety checkbox borders: 1.5px solid #3d6fd4
+
+6. Section typography
+
+
+
+
+
+Section label / eyebrow: #5a7898
+
+
+
+Section headings: #111827
+
+
+
+Body paragraphs: #4a5e72
+
+
+
+Check / bullet items: #2a3a50
+
+7. FAQ section
+
+
+
+
+
+Divider lines between items: 1px solid #c8d8ea
+
+
+
+Question text: #111827, font-weight 700
+
+
+
+Answer text: #4a5e72
+
+8. CTA banner ("Give your child their voice")
+
+
+
+
+
+Background: #1e2d4a — keep as dark navy, do not change
+
+
+
+Heading text: #eef2f8
+
+
+
+Subtext: #7a90aa
+
+
+
+Button: transparent background, 1.5px solid #eef2f8 border, #eef2f8 text
+
+9. Booking section
+
+
+
+
+
+Section background: #eef2f8 (same as page base, no separate treatment needed)
+
+
+
+Label text: #5a7898
+
+
+
+"BOOK" heading: #111827
+
+
+
+Italic subtitle ("A Kids' Vocal Lesson"): #5a7898
+
+
+
+Divider bar under title: #3d6fd4, 2px tall, 28px wide
+
+
+
+Body text: #4a5e72
+
+
+
+Form card background: #ffffff
+
+
+
+Form card border: 1px solid #d0dae8
+
+
+
+Form field backgrounds: #f4f7fc
+
+
+
+Form field borders: 1px solid #ccd5e3
+
+
+
+Form field placeholder text: #7a8fa8
+
+
+
+"Send Inquiry" button: #3d6fd4 background, #ffffff text — no change
+
+
+
+"We respond within 24 hours" note: #7a8fa8
+
+10. Footer
+
+
+
+
+
+Background: #1e2d4a — same navy as CTA banner, consistent bookend
+
+
+
+Logo text: #eef2f8
+
+
+
+Tagline: #7a90aa
+
+
+
+Column labels: #5a7090
+
+
+
+Nav links: #a0b4c8
+
+
+
+Contact number: #c8d8e8
+
+
+
+Social icon borders: 1px solid #2e4060
+
+
+
+Social icon fill dots: #5a7090
+
+
+
+Divider between top and bottom footer: 1px solid #2e4060
+
+
+
+Copyright text: #4a6080
+
+Do not change anything on any other page. Do not change any layout, font, spacing, or content anywhere.
