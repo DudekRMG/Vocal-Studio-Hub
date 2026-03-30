@@ -13,6 +13,7 @@ export const t = {
       extreme: "Экстремальный вокал",
       pop: "Поп-вокал",
       karaoke: "Экспресс-Карaoке",
+      kids: "Вокал для детей",
       book: "Записаться",
     },
     hero: {
@@ -35,8 +36,8 @@ export const t = {
     },
     disciplines: {
       eyebrow: "Направления",
-      title: "Три курса,",
-      titleEm: "один голос",
+      title: "Четыре направления,",
+      titleEm: "один педагог",
       extremeTag: "Экстремальный вокал",
       extremeTitle: "Гроул. Скрим. Фрай.",
       extremeBody:
@@ -73,6 +74,18 @@ export const t = {
         "Готовность к карaoке",
       ],
       karaokeCta: "Подробнее о курсе",
+      kidsTag: "Вокал для детей · 5–16 лет",
+      kidsTitle: "Голос начинается здесь.",
+      kidsBody:
+        "Индивидуальная программа для каждого ребёнка. Педагог находит подход, опирается на интересы ученика и выстраивает обучение по его возможностям и темпу. Безопасно, интересно, с реальным результатом.",
+      kidsList: [
+        "Полностью индивидуальная программа",
+        "Обучение через интерес ребёнка",
+        "Безопасные техники для каждого возраста",
+        "Поп, рок и другие стили — по желанию",
+        "Опытный педагог с детьми",
+      ],
+      kidsCta: "Подробнее о детском вокале",
     },
     about: {
       eyebrow: "Преподаватель",
@@ -114,6 +127,7 @@ export const t = {
         { value: "extreme", label: "Экстремальный вокал" },
         { value: "pop", label: "Поп-вокал" },
         { value: "karaoke", label: "Экспресс-карaoке (12 уроков)" },
+        { value: "kids", label: "Вокал для детей (5–16 лет)" },
         { value: "both", label: "Несколько направлений" },
         { value: "other", label: "Другое" },
       ],
@@ -151,6 +165,11 @@ export const t = {
         description:
           "Интенсивный курс вокала для начинающих: 12 уроков, дыхание, интонация, микрофон и уверенность на сцене. Запишитесь в Ташкенте.",
       },
+      kids: {
+        title: "Вокал для детей — Vocal.uz | Уроки пения для детей в Ташкенте",
+        description:
+          "Индивидуальные уроки вокала для детей 5–16 лет в Ташкенте. Безопасный подход, обучение через интересы ребёнка. Запишитесь на пробный урок.",
+      },
     },
   },
   en: {
@@ -159,6 +178,7 @@ export const t = {
       extreme: "Extreme Vocals",
       pop: "Pop Vocals",
       karaoke: "Express Karaoke",
+      kids: "Kids Vocals",
       book: "Book a Lesson",
     },
     hero: {
@@ -181,8 +201,8 @@ export const t = {
     },
     disciplines: {
       eyebrow: "Disciplines",
-      title: "Three Courses,",
-      titleEm: "One Voice",
+      title: "Four Directions,",
+      titleEm: "One Teacher",
       extremeTag: "Extreme Vocals",
       extremeTitle: "Growl. Scream. Fry.",
       extremeBody:
@@ -219,6 +239,18 @@ export const t = {
         "Karaoke-ready performance",
       ],
       karaokeCta: "More about the course",
+      kidsTag: "Kids Vocals · Ages 5–16",
+      kidsTitle: "Voice Starts Here.",
+      kidsBody:
+        "A fully individual programme for every child. The teacher finds the right approach, builds on the student's interests, and shapes learning around their pace and physical development. Safe, engaging, with real results.",
+      kidsList: [
+        "Fully individual programme",
+        "Learning through the child's interests",
+        "Age-safe techniques at every stage",
+        "Pop, rock and more — by request",
+        "Experienced teacher with children",
+      ],
+      kidsCta: "More about kids' vocals",
     },
     about: {
       eyebrow: "Your Teacher",
@@ -260,6 +292,7 @@ export const t = {
         { value: "extreme", label: "Extreme Vocals" },
         { value: "pop", label: "Pop Vocals" },
         { value: "karaoke", label: "Express Karaoke (12 lessons)" },
+        { value: "kids", label: "Kids' Vocals (ages 5–16)" },
         { value: "both", label: "Multiple disciplines" },
         { value: "other", label: "Other" },
       ],
@@ -296,6 +329,11 @@ export const t = {
         title: "Express Karaoke Course — Vocal.uz | 12 Lessons from Zero to Stage",
         description:
           "Intensive vocal course for beginners: 12 lessons covering breathing, intonation, microphone technique and stage confidence. Book in Tashkent.",
+      },
+      kids: {
+        title: "Kids' Vocals — Vocal.uz | Singing Lessons for Children in Tashkent",
+        description:
+          "Individual singing lessons for children aged 5–16 in Tashkent. Safe, interest-based approach tailored to every child's development. Book a trial lesson.",
       },
     },
   },

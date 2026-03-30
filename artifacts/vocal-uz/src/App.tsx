@@ -9,6 +9,7 @@ import Home from "@/pages/Home";
 import ExtremeVocals from "@/pages/ExtremeVocals";
 import PopVocals from "@/pages/PopVocals";
 import KaraokeCourse from "@/pages/KaraokeCourse";
+import KidsVocals from "@/pages/KidsVocals";
 import NotFound from "@/pages/not-found";
 
 const queryClient = new QueryClient();
@@ -20,6 +21,7 @@ function Router() {
       <Route path="/extreme" component={ExtremeVocals} />
       <Route path="/pop" component={PopVocals} />
       <Route path="/karaoke" component={KaraokeCourse} />
+      <Route path="/kids" component={KidsVocals} />
       <Route component={NotFound} />
     </Switch>
   );

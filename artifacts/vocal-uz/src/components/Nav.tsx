@@ -61,6 +61,14 @@ export function Nav() {
               {tx.nav.karaoke}
             </Link>
           </li>
+          <li>
+            <Link
+              href={`${base}/kids`}
+              className={`text-[0.72rem] tracking-[0.14em] uppercase no-underline transition-colors duration-200 ${location === "/kids" ? "text-[#3b82f6]" : "text-[#555] hover:text-[#3b82f6]"}`}
+            >
+              {tx.nav.kids}
+            </Link>
+          </li>
         </ul>
 
         <div className="flex items-center border border-white/[0.08] overflow-hidden">
