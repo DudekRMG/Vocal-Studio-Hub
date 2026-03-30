@@ -256,9 +256,9 @@ export default function Home() {
         <div className="max-w-[1100px] mx-auto mt-[1px]">
           <div
             className="relative overflow-hidden group transition-colors duration-300"
-            style={{ backgroundColor: "#07091e" }}
-            onMouseEnter={e => (e.currentTarget.style.backgroundColor = "#0c1230")}
-            onMouseLeave={e => (e.currentTarget.style.backgroundColor = "#07091e")}
+            style={{ backgroundColor: "#1a3060" }}
+            onMouseEnter={e => (e.currentTarget.style.backgroundColor = "#213b70")}
+            onMouseLeave={e => (e.currentTarget.style.backgroundColor = "#1a3060")}
           >
             <div
               className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"
@@ -279,7 +279,7 @@ export default function Home() {
                 <p className="text-[0.88rem] leading-[1.9] text-[rgba(240,238,234,0.45)] max-w-[620px] mb-8">
                   {tx.disciplines.kidsBody}
                 </p>
-                <ul className="list-none m-0 p-0 flex flex-wrap gap-x-10 gap-y-2 mb-0">
+                <ul className="list-none m-0 p-0 grid grid-cols-2 gap-x-12 gap-y-3 mb-0">
                   {tx.disciplines.kidsList.map((item) => (
                     <li key={item} className="text-[0.78rem] text-[rgba(240,238,234,0.45)] flex items-center gap-3">
                       <span className="w-4 h-[1px] flex-shrink-0" style={{ backgroundColor: "#3b82f6" }} />
