@@ -23,7 +23,7 @@ export function Nav() {
     <nav
       className={`fixed top-0 left-0 right-0 z-[200] flex items-center justify-between px-6 lg:px-12 py-5 transition-all duration-300 ${
         isKids
-          ? "bg-[rgba(21,36,68,0.97)] border-b border-white/[0.1] backdrop-blur-[8px]"
+          ? "bg-white border-b border-[#dde3ee]"
           : scrolled ? "bg-[rgba(8,8,8,0.92)] border-b border-white/[0.08] backdrop-blur-[8px]" : "border-b border-transparent"
       }`}
     >
@@ -36,7 +36,7 @@ export function Nav() {
           <li>
             <Link
               href={`${base}/`}
-              className={`text-[0.72rem] tracking-[0.14em] uppercase no-underline transition-colors duration-200 ${location === "/" ? "text-[#f0eeea]" : "text-[#888] hover:text-[#f0eeea]"}`}
+              className={`text-[0.72rem] tracking-[0.14em] uppercase no-underline transition-colors duration-200 ${isKids ? "text-[#1a2535]/50 hover:text-[#1a2535]" : location === "/" ? "text-[#f0eeea]" : "text-[#888] hover:text-[#f0eeea]"}`}
             >
               {tx.nav.home}
             </Link>
@@ -44,7 +44,7 @@ export function Nav() {
           <li>
             <Link
               href={`${base}/extreme`}
-              className={`text-[0.72rem] tracking-[0.14em] uppercase no-underline transition-colors duration-200 ${location === "/extreme" ? "text-[#f0eeea]" : "text-[#888] hover:text-[#f0eeea]"}`}
+              className={`text-[0.72rem] tracking-[0.14em] uppercase no-underline transition-colors duration-200 ${isKids ? "text-[#1a2535]/50 hover:text-[#1a2535]" : location === "/extreme" ? "text-[#f0eeea]" : "text-[#888] hover:text-[#f0eeea]"}`}
             >
               {tx.nav.extreme}
             </Link>
@@ -52,7 +52,7 @@ export function Nav() {
           <li>
             <Link
               href={`${base}/pop`}
-              className={`text-[0.72rem] tracking-[0.14em] uppercase no-underline transition-colors duration-200 ${location === "/pop" ? "text-[#f0eeea]" : "text-[#888] hover:text-[#f0eeea]"}`}
+              className={`text-[0.72rem] tracking-[0.14em] uppercase no-underline transition-colors duration-200 ${isKids ? "text-[#1a2535]/50 hover:text-[#1a2535]" : location === "/pop" ? "text-[#f0eeea]" : "text-[#888] hover:text-[#f0eeea]"}`}
             >
               {tx.nav.pop}
             </Link>
@@ -60,7 +60,7 @@ export function Nav() {
           <li>
             <Link
               href={`${base}/karaoke`}
-              className={`text-[0.72rem] tracking-[0.14em] uppercase no-underline transition-colors duration-200 ${location === "/karaoke" ? "text-[#c9a84c]" : "text-[#888] hover:text-[#c9a84c]"}`}
+              className={`text-[0.72rem] tracking-[0.14em] uppercase no-underline transition-colors duration-200 ${isKids ? "text-[#1a2535]/50 hover:text-[#1a2535]" : location === "/karaoke" ? "text-[#c9a84c]" : "text-[#888] hover:text-[#c9a84c]"}`}
             >
               {tx.nav.karaoke}
             </Link>
@@ -68,18 +68,20 @@ export function Nav() {
           <li>
             <Link
               href={`${base}/kids`}
-              className={`text-[0.72rem] tracking-[0.14em] uppercase no-underline transition-colors duration-200 ${location === "/kids" ? "text-[#3b82f6]" : "text-[#888] hover:text-[#3b82f6]"}`}
+              className={`text-[0.72rem] tracking-[0.14em] uppercase no-underline transition-colors duration-200 ${location === "/kids" ? (isKids ? "text-[#1a2535] font-semibold" : "text-[#3b82f6]") : "text-[#888] hover:text-[#3b82f6]"}`}
             >
               {tx.nav.kids}
             </Link>
           </li>
         </ul>
 
-        <div className="flex items-center border border-white/[0.08] overflow-hidden">
+        <div className={`flex items-center overflow-hidden border ${isKids ? "border-[#dde3ee]" : "border-white/[0.08]"}`}>
           <button
             onClick={() => setLang("ru")}
             className={`font-display text-[0.85rem] tracking-[0.12em] px-3 py-[0.45rem] border-none cursor-pointer transition-all duration-200 ${
-              lang === "ru" ? "bg-[#f0eeea] text-[#080808]" : "bg-transparent text-[#555] hover:text-[#f0eeea]"
+              lang === "ru"
+                ? isKids ? "bg-[#1a2535] text-white" : "bg-[#f0eeea] text-[#080808]"
+                : isKids ? "bg-transparent text-[#1a2535]/50 hover:text-[#1a2535]" : "bg-transparent text-[#555] hover:text-[#f0eeea]"
             }`}
           >
             RU
@@ -87,7 +89,9 @@ export function Nav() {
           <button
             onClick={() => setLang("en")}
             className={`font-display text-[0.85rem] tracking-[0.12em] px-3 py-[0.45rem] border-none cursor-pointer transition-all duration-200 ${
-              lang === "en" ? "bg-[#f0eeea] text-[#080808]" : "bg-transparent text-[#555] hover:text-[#f0eeea]"
+              lang === "en"
+                ? isKids ? "bg-[#1a2535] text-white" : "bg-[#f0eeea] text-[#080808]"
+                : isKids ? "bg-transparent text-[#1a2535]/50 hover:text-[#1a2535]" : "bg-transparent text-[#555] hover:text-[#f0eeea]"
             }`}
           >
             EN
@@ -98,7 +102,7 @@ export function Nav() {
           href={isKids ? `${base}/kids#book-kids` : `${base}/#booking`}
           className={`text-[0.72rem] tracking-[0.14em] uppercase px-5 py-[0.65rem] no-underline transition-colors duration-200 whitespace-nowrap border ${
             isKids
-              ? "bg-[#f0eeea] text-[#3b82f6] border-[#f0eeea]/60 hover:bg-white"
+              ? "bg-transparent text-[#1a2535] border-[#1a2535] hover:bg-[#1a2535]/5"
               : "bg-[#e8002d] text-[#f0eeea] border-transparent hover:bg-[#ff1a3d]"
           }`}
         >
@@ -108,11 +112,13 @@ export function Nav() {
 
       {/* Mobile */}
       <div className="flex md:hidden items-center gap-3">
-        <div className="flex items-center border border-white/[0.08] overflow-hidden">
+        <div className={`flex items-center overflow-hidden border ${isKids ? "border-[#dde3ee]" : "border-white/[0.08]"}`}>
           <button
             onClick={() => setLang("ru")}
             className={`font-display text-[0.85rem] tracking-[0.12em] px-2 py-1 border-none cursor-pointer transition-all duration-200 ${
-              lang === "ru" ? "bg-[#f0eeea] text-[#080808]" : "bg-transparent text-[#555]"
+              lang === "ru"
+                ? isKids ? "bg-[#1a2535] text-white" : "bg-[#f0eeea] text-[#080808]"
+                : isKids ? "bg-transparent text-[#1a2535]/50" : "bg-transparent text-[#555]"
             }`}
           >
             RU
@@ -120,7 +126,9 @@ export function Nav() {
           <button
             onClick={() => setLang("en")}
             className={`font-display text-[0.85rem] tracking-[0.12em] px-2 py-1 border-none cursor-pointer transition-all duration-200 ${
-              lang === "en" ? "bg-[#f0eeea] text-[#080808]" : "bg-transparent text-[#555]"
+              lang === "en"
+                ? isKids ? "bg-[#1a2535] text-white" : "bg-[#f0eeea] text-[#080808]"
+                : isKids ? "bg-transparent text-[#1a2535]/50" : "bg-transparent text-[#555]"
             }`}
           >
             EN
@@ -130,7 +138,7 @@ export function Nav() {
           href={isKids ? `${base}/kids#book-kids` : `${base}/#booking`}
           className={`text-[0.65rem] tracking-[0.14em] uppercase px-3 py-2 no-underline border ${
             isKids
-              ? "bg-[#f0eeea] text-[#3b82f6] border-[#f0eeea]/60"
+              ? "bg-transparent text-[#1a2535] border-[#1a2535]"
               : "bg-[#e8002d] text-[#f0eeea] border-transparent"
           }`}
         >
