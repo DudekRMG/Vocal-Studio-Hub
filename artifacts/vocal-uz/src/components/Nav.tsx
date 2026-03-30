@@ -75,7 +75,7 @@ export function Nav() {
           </li>
         </ul>
 
-        <div className={`flex items-center overflow-hidden border ${isKids ? "border-[#dde3ee]" : "border-white/[0.08]"}`}>
+        <div className={`flex items-center overflow-hidden border ${isKids ? "border-[#1a2535]" : "border-white/[0.08]"}`}>
           <button
             onClick={() => setLang("ru")}
             className={`font-display text-[0.85rem] tracking-[0.12em] px-3 py-[0.45rem] border-none cursor-pointer transition-all duration-200 ${
@@ -112,7 +112,7 @@ export function Nav() {
 
       {/* Mobile */}
       <div className="flex md:hidden items-center gap-3">
-        <div className={`flex items-center overflow-hidden border ${isKids ? "border-[#dde3ee]" : "border-white/[0.08]"}`}>
+        <div className={`flex items-center overflow-hidden border ${isKids ? "border-[#1a2535]" : "border-white/[0.08]"}`}>
           <button
             onClick={() => setLang("ru")}
             className={`font-display text-[0.85rem] tracking-[0.12em] px-2 py-1 border-none cursor-pointer transition-all duration-200 ${
