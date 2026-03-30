@@ -364,16 +364,16 @@ export default function KidsVocals() {
       </section>
 
       {/* ── CTA BANNER ── */}
-      <section className="py-20 px-6 lg:px-12 relative overflow-hidden" style={{ backgroundColor: blue }}>
-        <div className="absolute inset-0 opacity-[0.05]" style={{ backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")`, backgroundSize: "120px" }} />
+      <section className="py-20 px-6 lg:px-12 relative overflow-hidden" style={{ backgroundColor: "#c9a84c" }}>
+        <div className="absolute inset-0 opacity-[0.06]" style={{ backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")`, backgroundSize: "120px" }} />
         <div className="max-w-[1100px] mx-auto flex flex-col md:flex-row items-center justify-between gap-8">
           <div>
-            <h2 className="font-display text-[clamp(2rem,4vw,3.5rem)] leading-[0.95] text-white">{c.ctaBanner}</h2>
-            <p className="text-[0.9rem] text-[rgba(255,255,255,0.7)] mt-3">{c.ctaBannerSub}</p>
+            <h2 className="font-display text-[clamp(2rem,4vw,3.5rem)] leading-[0.95] text-[#080808]">{c.ctaBanner}</h2>
+            <p className="text-[0.9rem] text-[rgba(8,8,8,0.65)] mt-3">{c.ctaBannerSub}</p>
           </div>
           <a
             href="#book-kids"
-            className="flex-shrink-0 bg-white text-[#080808] font-display text-[1.1rem] tracking-[0.15em] px-10 py-5 no-underline transition-colors duration-200 hover:bg-[#f0f0f0] whitespace-nowrap inline-flex items-center gap-3 group"
+            className="flex-shrink-0 bg-[#080808] text-[#f0eeea] font-display text-[1.1rem] tracking-[0.15em] px-10 py-5 no-underline transition-colors duration-200 hover:bg-[#1a1a1a] whitespace-nowrap inline-flex items-center gap-3 group"
           >
             {c.ctaBtn}
             <svg className="transition-transform duration-200 group-hover:translate-x-1" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M5 12h14M12 5l7 7-7 7" /></svg>
