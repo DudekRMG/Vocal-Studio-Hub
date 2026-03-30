@@ -256,9 +256,9 @@ export default function Home() {
         <div className="max-w-[1100px] mx-auto mt-[1px]">
           <div
             className="relative overflow-hidden group transition-colors duration-300"
-            style={{ backgroundColor: "#1a3060" }}
-            onMouseEnter={e => (e.currentTarget.style.backgroundColor = "#213b70")}
-            onMouseLeave={e => (e.currentTarget.style.backgroundColor = "#1a3060")}
+            style={{ backgroundColor: "#0a1632" }}
+            onMouseEnter={e => (e.currentTarget.style.backgroundColor = "#102040")}
+            onMouseLeave={e => (e.currentTarget.style.backgroundColor = "#0a1632")}
           >
             <div
               className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"

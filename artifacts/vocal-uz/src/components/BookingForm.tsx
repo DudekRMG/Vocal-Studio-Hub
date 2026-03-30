@@ -42,11 +42,11 @@ export function BookingForm({ variant }: BookingFormProps = {}) {
 
   const isKids = variant === "kids";
   const inputClass = isKids
-    ? "bg-[#203878] border-none outline-none w-full px-[1.4rem] py-[1.2rem] font-['DM_Sans'] text-[0.85rem] font-light text-[#f0eeea] placeholder-[rgba(240,238,234,0.35)] transition-colors duration-200 focus:bg-[#254090]"
+    ? "bg-[#142248] border-none outline-none w-full px-[1.4rem] py-[1.2rem] font-['DM_Sans'] text-[0.85rem] font-light text-[#f0eeea] placeholder-[rgba(240,238,234,0.35)] transition-colors duration-200 focus:bg-[#182a58]"
     : "bg-[#141414] border-none outline-none w-full px-[1.4rem] py-[1.2rem] font-['DM_Sans'] text-[0.85rem] font-light text-[#f0eeea] placeholder-[#555] transition-colors duration-200 focus:bg-[#1a1a1a]";
 
   return (
-    <form onSubmit={handleSubmit} className={isKids ? "bg-[#1a3060] border border-white/[0.1] p-10" : "bg-[#080808] border border-white/[0.08] p-10"}>
+    <form onSubmit={handleSubmit} className={isKids ? "bg-[#0a1632] border border-white/[0.1] p-10" : "bg-[#080808] border border-white/[0.08] p-10"}>
       {status === "success" ? (
         <div className="text-center py-12">
           <div className={`text-5xl mb-4 ${isKids ? "text-[#3b82f6]" : "text-[#e8002d]"}`}>✓</div>
