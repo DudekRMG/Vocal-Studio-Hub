@@ -95,8 +95,12 @@ export function Nav() {
         </div>
 
         <Link
-          href={`${base}/#booking`}
-          className="text-[0.72rem] tracking-[0.14em] uppercase bg-[#e8002d] text-[#f0eeea] px-5 py-[0.65rem] no-underline transition-colors duration-200 hover:bg-[#ff1a3d] whitespace-nowrap"
+          href={isKids ? `${base}/kids#book-kids` : `${base}/#booking`}
+          className={`text-[0.72rem] tracking-[0.14em] uppercase px-5 py-[0.65rem] no-underline transition-colors duration-200 whitespace-nowrap border ${
+            isKids
+              ? "bg-[#f0eeea] text-[#3b82f6] border-[#f0eeea]/60 hover:bg-white"
+              : "bg-[#e8002d] text-[#f0eeea] border-transparent hover:bg-[#ff1a3d]"
+          }`}
         >
           {tx.nav.book}
         </Link>
@@ -123,8 +127,12 @@ export function Nav() {
           </button>
         </div>
         <Link
-          href={`${base}/#booking`}
-          className="text-[0.65rem] tracking-[0.14em] uppercase bg-[#e8002d] text-[#f0eeea] px-3 py-2 no-underline"
+          href={isKids ? `${base}/kids#book-kids` : `${base}/#booking`}
+          className={`text-[0.65rem] tracking-[0.14em] uppercase px-3 py-2 no-underline border ${
+            isKids
+              ? "bg-[#f0eeea] text-[#3b82f6] border-[#f0eeea]/60"
+              : "bg-[#e8002d] text-[#f0eeea] border-transparent"
+          }`}
         >
           {tx.nav.book}
         </Link>
