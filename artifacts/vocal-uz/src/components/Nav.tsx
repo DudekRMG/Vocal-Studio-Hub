@@ -74,7 +74,7 @@ export function Nav() {
           </li>
         </ul>
 
-        <div className="flex items-center overflow-hidden border border-[#dde3ee] border-t-[#1a2535] border-r-[#1a2535] border-b-[#1a2535] border-l-[#1a2535]">
+        <div className="flex items-center overflow-hidden border border-[#dde3ee] border-t-[#8afa23] border-r-[#8afa23] border-b-[#8afa23] border-l-[#8afa23]">
           <button
             onClick={() => setLang("ru")}
             className={`font-display text-[0.85rem] tracking-[0.12em] px-3 py-[0.45rem] border-none cursor-pointer transition-all duration-200 ${
