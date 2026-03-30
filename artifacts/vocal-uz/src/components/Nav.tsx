@@ -30,6 +30,7 @@ export function Nav() {
       <Link href={`${base}/`} className="flex-shrink-0">
         <img src="/logo.png" alt="Vocal.uz" className="h-9 w-auto" />
       </Link>
+
       <div className="hidden md:flex items-center gap-8">
         <ul className="flex gap-8 list-none m-0 p-0 items-center">
           <li>
@@ -74,7 +75,7 @@ export function Nav() {
           </li>
         </ul>
 
-        <div className="flex items-center overflow-hidden border border-[#dde3ee] border-t-[#8afa23] border-r-[#8afa23] border-b-[#8afa23] border-l-[#8afa23]">
+        <div className={`flex items-center overflow-hidden border ${isKids ? "border-[#dde3ee]" : "border-white/[0.08]"}`}>
           <button
             onClick={() => setLang("ru")}
             className={`font-display text-[0.85rem] tracking-[0.12em] px-3 py-[0.45rem] border-none cursor-pointer transition-all duration-200 ${
@@ -108,6 +109,7 @@ export function Nav() {
           {tx.nav.book}
         </Link>
       </div>
+
       {/* Mobile */}
       <div className="flex md:hidden items-center gap-3">
         <div className={`flex items-center overflow-hidden border ${isKids ? "border-[#dde3ee]" : "border-white/[0.08]"}`}>
