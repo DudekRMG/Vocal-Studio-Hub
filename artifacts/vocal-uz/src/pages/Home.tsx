@@ -256,32 +256,32 @@ export default function Home() {
         <div className="max-w-[1100px] mx-auto mt-[1px]">
           <div
             className="relative overflow-hidden group transition-colors duration-300"
-            style={{ backgroundColor: "#07090f" }}
-            onMouseEnter={e => (e.currentTarget.style.backgroundColor = "#0b0d18")}
-            onMouseLeave={e => (e.currentTarget.style.backgroundColor = "#07090f")}
+            style={{ backgroundColor: "#f0f2fa" }}
+            onMouseEnter={e => (e.currentTarget.style.backgroundColor = "#e8eaf5")}
+            onMouseLeave={e => (e.currentTarget.style.backgroundColor = "#f0f2fa")}
           >
             <div
               className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"
-              style={{ background: "radial-gradient(ellipse 50% 80% at 80% 50%, rgba(59,130,246,0.07) 0%, transparent 70%)" }}
+              style={{ background: "radial-gradient(ellipse 50% 80% at 80% 50%, rgba(59,130,246,0.09) 0%, transparent 70%)" }}
             />
             <div
               className="absolute top-1/2 right-8 -translate-y-1/2 font-display text-[12rem] leading-none pointer-events-none"
-              style={{ color: "rgba(59,130,246,0.04)" }}
+              style={{ color: "rgba(59,130,246,0.08)" }}
             >
               04
             </div>
             <div className="px-10 py-12 grid grid-cols-1 md:grid-cols-[1fr_auto] gap-10 items-center relative">
               <div>
                 <span className="text-[0.65rem] tracking-[0.28em] uppercase mb-4 block" style={{ color: "#3b82f6" }}>{tx.disciplines.kidsTag}</span>
-                <h3 className="font-display text-[clamp(2.2rem,4vw,3.5rem)] tracking-[0.03em] leading-[0.95] mb-5 text-[#f0eeea]">
+                <h3 className="font-display text-[clamp(2.2rem,4vw,3.5rem)] tracking-[0.03em] leading-[0.95] mb-5 text-[#0f1016]">
                   {tx.disciplines.kidsTitle}
                 </h3>
-                <p className="text-[0.88rem] leading-[1.9] text-[rgba(240,238,234,0.45)] max-w-[620px] mb-8">
+                <p className="text-[0.88rem] leading-[1.9] text-[rgba(15,16,22,0.5)] max-w-[620px] mb-8">
                   {tx.disciplines.kidsBody}
                 </p>
                 <ul className="list-none m-0 p-0 flex flex-wrap gap-x-10 gap-y-2 mb-0">
                   {tx.disciplines.kidsList.map((item) => (
-                    <li key={item} className="text-[0.78rem] text-[rgba(240,238,234,0.45)] flex items-center gap-3">
+                    <li key={item} className="text-[0.78rem] text-[rgba(15,16,22,0.5)] flex items-center gap-3">
                       <span className="w-4 h-[1px] flex-shrink-0" style={{ backgroundColor: "#3b82f6" }} />
                       {item}
                     </li>

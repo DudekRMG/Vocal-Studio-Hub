@@ -4,12 +4,14 @@ import { SeoHead } from "@/components/SeoHead";
 import { BookingForm } from "@/components/BookingForm";
 
 const blue = "#3b82f6";
-const blueDim = "rgba(59,130,246,0.08)";
-const blueFaint = "rgba(59,130,246,0.05)";
-const indigo = "#818cf8";
-const bgBase = "#07080e";
-const bgCard = "#0d0f1a";
-const bgCardAlt = "#111420";
+const blueDim = "rgba(59,130,246,0.09)";
+const blueFaint = "rgba(59,130,246,0.07)";
+const indigo = "#4f46e5";
+const bgBase = "#f0f2fa";
+const bgCard = "#e8eaf5";
+const bgCardAlt = "#e3e5f0";
+const textPrimary = "#0f1016";
+const textDivider = "rgba(0,0,0,0.07)";
 
 const kidsContent = {
   ru: {
@@ -211,7 +213,7 @@ export default function KidsVocals() {
       {/* ── HERO ── */}
       <section
         className="min-h-[70vh] flex flex-col justify-end px-6 lg:px-12 pt-36 pb-20 relative overflow-hidden border-b"
-        style={{ backgroundColor: bgBase, borderColor: "rgba(255,255,255,0.06)" }}
+        style={{ backgroundColor: bgBase, borderColor: "rgba(0,0,0,0.07)" }}
       >
         <div className="absolute inset-0 pointer-events-none" style={{ background: `radial-gradient(ellipse 70% 60% at 20% 60%, ${blueDim} 0%, transparent 70%)` }} />
         <div
@@ -222,9 +224,9 @@ export default function KidsVocals() {
         </div>
         <div className="max-w-[1100px] mx-auto w-full">
           <span className="text-[0.68rem] tracking-[0.28em] uppercase block mb-5" style={{ color: blue }}>{c.heroTag}</span>
-          <h1 className="font-display text-[clamp(4rem,10vw,9rem)] leading-[0.85] tracking-[0.02em] mb-6 text-[#f0eeea]">{c.heroTitle}</h1>
-          <p className="font-['Playfair_Display'] italic text-[clamp(1.2rem,2.5vw,1.8rem)] text-[rgba(240,238,234,0.45)] mb-8 max-w-[500px]">{c.heroSub}</p>
-          <p className="text-[0.9rem] leading-[1.9] text-[rgba(240,238,234,0.45)] max-w-[520px] mb-10">{c.heroDesc}</p>
+          <h1 className="font-display text-[clamp(4rem,10vw,9rem)] leading-[0.85] tracking-[0.02em] mb-6 text-[#0f1016]">{c.heroTitle}</h1>
+          <p className="font-['Playfair_Display'] italic text-[clamp(1.2rem,2.5vw,1.8rem)] text-[rgba(15,16,22,0.45)] mb-8 max-w-[500px]">{c.heroSub}</p>
+          <p className="text-[0.9rem] leading-[1.9] text-[rgba(15,16,22,0.45)] max-w-[520px] mb-10">{c.heroDesc}</p>
           <a
             href="#book-kids"
             className="inline-flex items-center gap-3 text-white font-display text-[1.1rem] tracking-[0.15em] px-10 py-5 no-underline transition-all duration-200 group"
@@ -239,22 +241,22 @@ export default function KidsVocals() {
       </section>
 
       {/* ── ABOUT THE APPROACH ── */}
-      <section className="py-28 px-6 lg:px-12 border-b" style={{ backgroundColor: bgCard, borderColor: "rgba(255,255,255,0.06)" }}>
+      <section className="py-28 px-6 lg:px-12 border-b" style={{ backgroundColor: bgCard, borderColor: "rgba(0,0,0,0.07)" }}>
         <div className="max-w-[1100px] mx-auto grid grid-cols-1 md:grid-cols-2 gap-20 items-start">
           <div>
             <span className="text-[0.68rem] tracking-[0.28em] uppercase block mb-4" style={{ color: blue }}>
               {lang === "ru" ? "О подходе" : "The Approach"}
             </span>
-            <h2 className="font-display text-[clamp(2.5rem,4vw,4rem)] leading-[0.95] tracking-[0.02em] mb-8 text-[#f0eeea]">{c.aboutTitle}</h2>
+            <h2 className="font-display text-[clamp(2.5rem,4vw,4rem)] leading-[0.95] tracking-[0.02em] mb-8 text-[#0f1016]">{c.aboutTitle}</h2>
             <div className="w-10 h-[2px] mb-8" style={{ backgroundColor: blue }} />
-            <p className="text-[0.9rem] leading-[1.9] text-[rgba(240,238,234,0.5)] mb-5">{c.aboutBody1}</p>
-            <p className="text-[0.9rem] leading-[1.9] text-[rgba(240,238,234,0.5)]">{c.aboutBody2}</p>
+            <p className="text-[0.9rem] leading-[1.9] text-[rgba(15,16,22,0.5)] mb-5">{c.aboutBody1}</p>
+            <p className="text-[0.9rem] leading-[1.9] text-[rgba(15,16,22,0.5)]">{c.aboutBody2}</p>
           </div>
-          <div className="grid grid-cols-2 gap-[1px]" style={{ backgroundColor: "rgba(255,255,255,0.06)" }}>
+          <div className="grid grid-cols-2 gap-[1px]" style={{ backgroundColor: "rgba(0,0,0,0.07)" }}>
             {c.aboutFeatures.map((item) => (
               <div key={item} className="p-6 flex items-center" style={{ backgroundColor: bgCardAlt }}>
                 <span className="w-3 h-[1px] mr-4 flex-shrink-0" style={{ backgroundColor: blue }} />
-                <span className="text-[0.82rem] text-[rgba(240,238,234,0.6)]">{item}</span>
+                <span className="text-[0.82rem] text-[rgba(15,16,22,0.6)]">{item}</span>
               </div>
             ))}
           </div>
@@ -262,21 +264,21 @@ export default function KidsVocals() {
       </section>
 
       {/* ── AGE GROUPS ── */}
-      <section className="py-28 px-6 lg:px-12 border-b" style={{ backgroundColor: bgBase, borderColor: "rgba(255,255,255,0.06)" }}>
+      <section className="py-28 px-6 lg:px-12 border-b" style={{ backgroundColor: bgBase, borderColor: "rgba(0,0,0,0.07)" }}>
         <div className="max-w-[1100px] mx-auto">
-          <h2 className="font-display text-[clamp(2.5rem,4vw,4rem)] leading-[0.95] tracking-[0.02em] mb-16 text-[#f0eeea]">{c.ageGroupsTitle}</h2>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-[1px]" style={{ backgroundColor: "rgba(255,255,255,0.06)" }}>
+          <h2 className="font-display text-[clamp(2.5rem,4vw,4rem)] leading-[0.95] tracking-[0.02em] mb-16 text-[#0f1016]">{c.ageGroupsTitle}</h2>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-[1px]" style={{ backgroundColor: "rgba(0,0,0,0.07)" }}>
             {c.ageGroups.map((group, i) => (
               <div key={group.range} className="p-10 relative group hover:opacity-95 transition-opacity" style={{ backgroundColor: i % 2 === 0 ? bgCard : bgCardAlt }}>
-                <div className="font-display text-[4rem] leading-none absolute top-4 right-6 pointer-events-none" style={{ color: "rgba(59,130,246,0.06)" }}>
+                <div className="font-display text-[4rem] leading-none absolute top-4 right-6 pointer-events-none" style={{ color: "rgba(59,130,246,0.12)" }}>
                   {String(i + 1).padStart(2, "0")}
                 </div>
                 <div className="font-display text-[0.8rem] tracking-[0.2em] mb-2" style={{ color: indigo }}>{group.range}</div>
                 <h3 className="font-display text-[1.8rem] tracking-[0.05em] mb-4" style={{ color: blue }}>{group.label}</h3>
-                <p className="text-[0.85rem] leading-[1.8] text-[rgba(240,238,234,0.5)] mb-6">{group.desc}</p>
+                <p className="text-[0.85rem] leading-[1.8] text-[rgba(15,16,22,0.5)] mb-6">{group.desc}</p>
                 <ul className="list-none m-0 p-0 flex flex-col gap-2">
                   {group.points.map((pt) => (
-                    <li key={pt} className="text-[0.78rem] text-[rgba(240,238,234,0.45)] flex items-center gap-3">
+                    <li key={pt} className="text-[0.78rem] text-[rgba(15,16,22,0.45)] flex items-center gap-3">
                       <span className="w-4 h-[1px] flex-shrink-0" style={{ backgroundColor: blue }} />
                       {pt}
                     </li>
@@ -289,18 +291,18 @@ export default function KidsVocals() {
       </section>
 
       {/* ── STYLES ── */}
-      <section className="py-28 px-6 lg:px-12 border-b" style={{ backgroundColor: bgCard, borderColor: "rgba(255,255,255,0.06)" }}>
+      <section className="py-28 px-6 lg:px-12 border-b" style={{ backgroundColor: bgCard, borderColor: "rgba(0,0,0,0.07)" }}>
         <div className="max-w-[1100px] mx-auto">
-          <h2 className="font-display text-[clamp(2.5rem,4vw,4rem)] leading-[0.95] tracking-[0.02em] mb-4 text-[#f0eeea]">{c.stylesTitle}</h2>
-          <p className="text-[0.9rem] leading-[1.9] text-[rgba(240,238,234,0.4)] mb-14 max-w-[560px]">{c.stylesSub}</p>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-[1px]" style={{ backgroundColor: "rgba(255,255,255,0.06)" }}>
+          <h2 className="font-display text-[clamp(2.5rem,4vw,4rem)] leading-[0.95] tracking-[0.02em] mb-4 text-[#0f1016]">{c.stylesTitle}</h2>
+          <p className="text-[0.9rem] leading-[1.9] text-[rgba(15,16,22,0.4)] mb-14 max-w-[560px]">{c.stylesSub}</p>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-[1px]" style={{ backgroundColor: "rgba(0,0,0,0.07)" }}>
             {c.styles.map((style, i) => (
               <div key={style.name} className="p-10 relative group hover:brightness-110 transition-all duration-300" style={{ backgroundColor: bgCard }}>
-                <span className="font-display text-[5rem] leading-none absolute top-4 right-6 pointer-events-none" style={{ color: "rgba(59,130,246,0.05)" }}>
+                <span className="font-display text-[5rem] leading-none absolute top-4 right-6 pointer-events-none" style={{ color: "rgba(59,130,246,0.10)" }}>
                   {String(i + 1).padStart(2, "0")}
                 </span>
                 <h3 className="font-display text-[1.5rem] tracking-[0.05em] mb-4" style={{ color: blue }}>{style.name}</h3>
-                <p className="text-[0.85rem] leading-[1.8] text-[rgba(240,238,234,0.45)]">{style.desc}</p>
+                <p className="text-[0.85rem] leading-[1.8] text-[rgba(15,16,22,0.45)]">{style.desc}</p>
               </div>
             ))}
           </div>
@@ -308,15 +310,15 @@ export default function KidsVocals() {
       </section>
 
       {/* ── PROCESS ── */}
-      <section className="py-28 px-6 lg:px-12 border-b" style={{ backgroundColor: bgCardAlt, borderColor: "rgba(255,255,255,0.06)" }}>
+      <section className="py-28 px-6 lg:px-12 border-b" style={{ backgroundColor: bgCardAlt, borderColor: "rgba(0,0,0,0.07)" }}>
         <div className="max-w-[1100px] mx-auto">
-          <h2 className="font-display text-[clamp(2.5rem,4vw,4rem)] leading-[0.95] tracking-[0.02em] mb-16 text-[#f0eeea]">{c.processTitle}</h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-[1px]" style={{ backgroundColor: "rgba(255,255,255,0.06)" }}>
+          <h2 className="font-display text-[clamp(2.5rem,4vw,4rem)] leading-[0.95] tracking-[0.02em] mb-16 text-[#0f1016]">{c.processTitle}</h2>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-[1px]" style={{ backgroundColor: "rgba(0,0,0,0.07)" }}>
             {c.processSteps.map((step) => (
               <div key={step.num} className="p-10" style={{ backgroundColor: bgCardAlt }}>
-                <div className="font-display text-[3.5rem] leading-none mb-6" style={{ color: "rgba(59,130,246,0.2)" }}>{step.num}</div>
-                <h3 className="font-display text-[1.15rem] tracking-[0.08em] mb-4 text-[#f0eeea]">{step.title}</h3>
-                <p className="text-[0.82rem] leading-[1.8] text-[rgba(240,238,234,0.45)]">{step.desc}</p>
+                <div className="font-display text-[3.5rem] leading-none mb-6" style={{ color: "rgba(59,130,246,0.30)" }}>{step.num}</div>
+                <h3 className="font-display text-[1.15rem] tracking-[0.08em] mb-4 text-[#0f1016]">{step.title}</h3>
+                <p className="text-[0.82rem] leading-[1.8] text-[rgba(15,16,22,0.45)]">{step.desc}</p>
               </div>
             ))}
           </div>
@@ -324,24 +326,24 @@ export default function KidsVocals() {
       </section>
 
       {/* ── SAFETY ── */}
-      <section className="py-28 px-6 lg:px-12 border-b" style={{ backgroundColor: bgBase, borderColor: "rgba(255,255,255,0.06)" }}>
+      <section className="py-28 px-6 lg:px-12 border-b" style={{ backgroundColor: bgBase, borderColor: "rgba(0,0,0,0.07)" }}>
         <div className="max-w-[1100px] mx-auto grid grid-cols-1 md:grid-cols-2 gap-20 items-start">
           <div>
             <span className="text-[0.68rem] tracking-[0.28em] uppercase block mb-4" style={{ color: blue }}>
               {lang === "ru" ? "Безопасность" : "Safety"}
             </span>
-            <h2 className="font-display text-[clamp(2.5rem,4vw,4rem)] leading-[0.95] tracking-[0.02em] mb-8 text-[#f0eeea]">{c.safetyTitle}</h2>
+            <h2 className="font-display text-[clamp(2.5rem,4vw,4rem)] leading-[0.95] tracking-[0.02em] mb-8 text-[#0f1016]">{c.safetyTitle}</h2>
             <div className="w-10 h-[2px] mb-8" style={{ backgroundColor: blue }} />
-            <p className="text-[0.9rem] leading-[1.9] text-[rgba(240,238,234,0.5)] mb-5">{c.safetyBody1}</p>
-            <p className="text-[0.9rem] leading-[1.9] text-[rgba(240,238,234,0.5)]">{c.safetyBody2}</p>
+            <p className="text-[0.9rem] leading-[1.9] text-[rgba(15,16,22,0.5)] mb-5">{c.safetyBody1}</p>
+            <p className="text-[0.9rem] leading-[1.9] text-[rgba(15,16,22,0.5)]">{c.safetyBody2}</p>
           </div>
-          <div className="flex flex-col gap-[1px]" style={{ backgroundColor: "rgba(255,255,255,0.06)" }}>
+          <div className="flex flex-col gap-[1px]" style={{ backgroundColor: "rgba(0,0,0,0.07)" }}>
             {c.safetyPoints.map((point) => (
               <div key={point} className="flex items-start gap-5 p-7" style={{ backgroundColor: bgCard }}>
                 <div className="w-5 h-5 flex-shrink-0 flex items-center justify-center mt-[2px]">
                   <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke={blue} strokeWidth="2.5"><polyline points="20 6 9 17 4 12" /></svg>
                 </div>
-                <p className="text-[0.88rem] leading-[1.7] text-[rgba(240,238,234,0.6)]">{point}</p>
+                <p className="text-[0.88rem] leading-[1.7] text-[rgba(15,16,22,0.6)]">{point}</p>
               </div>
             ))}
           </div>
@@ -349,14 +351,14 @@ export default function KidsVocals() {
       </section>
 
       {/* ── FAQ ── */}
-      <section className="py-28 px-6 lg:px-12 border-b" style={{ backgroundColor: bgCard, borderColor: "rgba(255,255,255,0.06)" }}>
+      <section className="py-28 px-6 lg:px-12 border-b" style={{ backgroundColor: bgCard, borderColor: "rgba(0,0,0,0.07)" }}>
         <div className="max-w-[800px] mx-auto">
-          <h2 className="font-display text-[clamp(2.5rem,4vw,4rem)] leading-[0.95] tracking-[0.02em] mb-16 text-[#f0eeea]">{c.faqTitle}</h2>
-          <div className="flex flex-col gap-[1px]" style={{ backgroundColor: "rgba(255,255,255,0.06)" }}>
+          <h2 className="font-display text-[clamp(2.5rem,4vw,4rem)] leading-[0.95] tracking-[0.02em] mb-16 text-[#0f1016]">{c.faqTitle}</h2>
+          <div className="flex flex-col gap-[1px]" style={{ backgroundColor: "rgba(0,0,0,0.07)" }}>
             {c.faqs.map((faq) => (
               <div key={faq.q} className="px-10 py-8" style={{ backgroundColor: bgCard }}>
-                <h3 className="font-display text-[1.15rem] tracking-[0.05em] text-[#f0eeea] mb-3">{faq.q}</h3>
-                <p className="text-[0.88rem] leading-[1.8] text-[rgba(240,238,234,0.5)]">{faq.a}</p>
+                <h3 className="font-display text-[1.15rem] tracking-[0.05em] text-[#0f1016] mb-3">{faq.q}</h3>
+                <p className="text-[0.88rem] leading-[1.8] text-[rgba(15,16,22,0.5)]">{faq.a}</p>
               </div>
             ))}
           </div>
@@ -373,7 +375,7 @@ export default function KidsVocals() {
           </div>
           <a
             href="#book-kids"
-            className="flex-shrink-0 bg-[#080808] text-[#f0eeea] font-display text-[1.1rem] tracking-[0.15em] px-10 py-5 no-underline transition-colors duration-200 hover:bg-[#1a1a1a] whitespace-nowrap inline-flex items-center gap-3 group"
+            className="flex-shrink-0 bg-[#0f1016] text-[#f0eeea] font-display text-[1.1rem] tracking-[0.15em] px-10 py-5 no-underline transition-colors duration-200 hover:bg-[#1a1a1a] whitespace-nowrap inline-flex items-center gap-3 group"
           >
             {c.ctaBtn}
             <svg className="transition-transform duration-200 group-hover:translate-x-1" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M5 12h14M12 5l7 7-7 7" /></svg>
@@ -382,16 +384,16 @@ export default function KidsVocals() {
       </section>
 
       {/* ── BOOKING ── */}
-      <section id="book-kids" className="py-28 px-6 lg:px-12 border-t" style={{ backgroundColor: bgCardAlt, borderColor: "rgba(255,255,255,0.06)" }}>
+      <section id="book-kids" className="py-28 px-6 lg:px-12 border-t" style={{ backgroundColor: bgCardAlt, borderColor: "rgba(0,0,0,0.07)" }}>
         <div className="max-w-[1100px] mx-auto grid grid-cols-1 md:grid-cols-[1fr_1.4fr] gap-20 items-start">
           <div>
             <span className="text-[0.68rem] tracking-[0.28em] uppercase block mb-4" style={{ color: blue }}>{tx.booking.eyebrow}</span>
-            <h2 className="font-display text-[clamp(3rem,5vw,5rem)] leading-[0.95] tracking-[0.02em] text-[#f0eeea]">
+            <h2 className="font-display text-[clamp(3rem,5vw,5rem)] leading-[0.95] tracking-[0.02em] text-[#0f1016]">
               {c.bookTitle}
-              <em className="font-['Playfair_Display'] not-italic italic text-[0.7em] text-[rgba(240,238,234,0.45)] block mt-1">{c.bookTitleEm}</em>
+              <em className="font-['Playfair_Display'] not-italic italic text-[0.7em] text-[rgba(15,16,22,0.45)] block mt-1">{c.bookTitleEm}</em>
             </h2>
             <div className="w-10 h-[2px] my-8" style={{ backgroundColor: blue }} />
-            <p className="text-[0.9rem] leading-[1.9] text-[rgba(240,238,234,0.5)]">{c.bookIntro}</p>
+            <p className="text-[0.9rem] leading-[1.9] text-[rgba(15,16,22,0.5)]">{c.bookIntro}</p>
           </div>
           <BookingForm />
         </div>
