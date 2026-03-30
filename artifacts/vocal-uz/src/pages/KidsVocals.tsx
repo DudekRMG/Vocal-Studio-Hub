@@ -217,8 +217,8 @@ export default function KidsVocals() {
       >
         <div className="absolute inset-0 pointer-events-none" style={{ background: `radial-gradient(ellipse 70% 60% at 20% 60%, ${blueDim} 0%, transparent 70%)` }} />
         <div
-          className="absolute top-1/2 -left-6 -translate-y-1/2 -rotate-90 font-display text-[22vw] pointer-events-none whitespace-nowrap leading-none"
-          style={{ color: blueFaint, transformOrigin: "left center" }}
+          className="absolute bottom-[-20px] right-[-10px] font-display pointer-events-none whitespace-nowrap leading-none select-none"
+          style={{ color: blueFaint, fontSize: "clamp(8rem,20vw,22rem)" }}
         >
           KIDS
         </div>
@@ -366,7 +366,7 @@ export default function KidsVocals() {
       </section>
 
       {/* ── CTA BANNER ── */}
-      <section className="py-20 px-6 lg:px-12 relative overflow-hidden" style={{ backgroundColor: "#c9a84c" }}>
+      <section className="py-20 px-6 lg:px-12 relative overflow-hidden" style={{ backgroundColor: "#c8d4f0" }}>
         <div className="absolute inset-0 opacity-[0.06]" style={{ backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")`, backgroundSize: "120px" }} />
         <div className="max-w-[1100px] mx-auto flex flex-col md:flex-row items-center justify-between gap-8">
           <div>
@@ -384,16 +384,16 @@ export default function KidsVocals() {
       </section>
 
       {/* ── BOOKING ── */}
-      <section id="book-kids" className="py-28 px-6 lg:px-12 border-t" style={{ backgroundColor: "#07091e", borderColor: "rgba(255,255,255,0.08)" }}>
+      <section id="book-kids" className="py-28 px-6 lg:px-12 border-t" style={{ backgroundColor: bgCardAlt, borderColor: "rgba(0,0,0,0.07)" }}>
         <div className="max-w-[1100px] mx-auto grid grid-cols-1 md:grid-cols-[1fr_1.4fr] gap-20 items-start">
           <div>
             <span className="text-[0.68rem] tracking-[0.28em] uppercase block mb-4" style={{ color: blue }}>{tx.booking.eyebrow}</span>
-            <h2 className="font-display text-[clamp(3rem,5vw,5rem)] leading-[0.95] tracking-[0.02em] text-[#f0eeea]">
+            <h2 className="font-display text-[clamp(3rem,5vw,5rem)] leading-[0.95] tracking-[0.02em] text-[#0f1016]">
               {c.bookTitle}
-              <em className="font-['Playfair_Display'] not-italic italic text-[0.7em] text-[rgba(240,238,234,0.45)] block mt-1">{c.bookTitleEm}</em>
+              <em className="font-['Playfair_Display'] not-italic italic text-[0.7em] text-[rgba(15,16,22,0.45)] block mt-1">{c.bookTitleEm}</em>
             </h2>
             <div className="w-10 h-[2px] my-8" style={{ backgroundColor: blue }} />
-            <p className="text-[0.9rem] leading-[1.9] text-[rgba(240,238,234,0.5)]">{c.bookIntro}</p>
+            <p className="text-[0.9rem] leading-[1.9] text-[rgba(15,16,22,0.5)]">{c.bookIntro}</p>
           </div>
           <BookingForm variant="kids" />
         </div>

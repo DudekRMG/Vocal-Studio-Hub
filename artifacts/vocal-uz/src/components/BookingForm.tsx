@@ -42,16 +42,16 @@ export function BookingForm({ variant }: BookingFormProps = {}) {
 
   const isKids = variant === "kids";
   const inputClass = isKids
-    ? "bg-[#0d1833] border-none outline-none w-full px-[1.4rem] py-[1.2rem] font-['DM_Sans'] text-[0.85rem] font-light text-[#f0eeea] placeholder-[rgba(240,238,234,0.3)] transition-colors duration-200 focus:bg-[#0f1e3f]"
+    ? "bg-[#cdd8f2] border-none outline-none w-full px-[1.4rem] py-[1.2rem] font-['DM_Sans'] text-[0.85rem] font-light text-[#0f1016] placeholder-[rgba(15,16,22,0.4)] transition-colors duration-200 focus:bg-[#d4def6]"
     : "bg-[#141414] border-none outline-none w-full px-[1.4rem] py-[1.2rem] font-['DM_Sans'] text-[0.85rem] font-light text-[#f0eeea] placeholder-[#555] transition-colors duration-200 focus:bg-[#1a1a1a]";
 
   return (
-    <form onSubmit={handleSubmit} className={isKids ? "bg-[#070f26] border border-white/[0.1] p-10" : "bg-[#080808] border border-white/[0.08] p-10"}>
+    <form onSubmit={handleSubmit} className={isKids ? "bg-[#bcc8e8] border border-black/[0.1] p-10" : "bg-[#080808] border border-white/[0.08] p-10"}>
       {status === "success" ? (
         <div className="text-center py-12">
-          <div className="text-[#e8002d] text-5xl mb-4">✓</div>
-          <h3 className="font-display text-3xl tracking-[0.05em] mb-3">{tx.successTitle}</h3>
-          <p className="text-[0.88rem] text-[rgba(240,238,234,0.5)]">{tx.successMsg}</p>
+          <div className={`text-5xl mb-4 ${isKids ? "text-[#3b82f6]" : "text-[#e8002d]"}`}>✓</div>
+          <h3 className={`font-display text-3xl tracking-[0.05em] mb-3 ${isKids ? "text-[#0f1016]" : ""}`}>{tx.successTitle}</h3>
+          <p className={`text-[0.88rem] ${isKids ? "text-[rgba(15,16,22,0.5)]" : "text-[rgba(240,238,234,0.5)]"}`}>{tx.successMsg}</p>
         </div>
       ) : (
         <>
@@ -121,7 +121,7 @@ export function BookingForm({ variant }: BookingFormProps = {}) {
               </svg>
             )}
           </button>
-          <p className="mt-5 text-[0.72rem] text-[#555] text-center tracking-[0.04em]">{tx.note}</p>
+          <p className={`mt-5 text-[0.72rem] text-center tracking-[0.04em] ${isKids ? "text-[rgba(15,16,22,0.45)]" : "text-[#555]"}`}>{tx.note}</p>
         </>
       )}
     </form>
