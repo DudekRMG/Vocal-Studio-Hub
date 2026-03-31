@@ -162,10 +162,10 @@ export default function Home() {
               </ul>
               <Link
                 href={`${base}/extreme#hero-bottom`}
-                className="text-[0.72rem] tracking-[0.2em] uppercase text-[#e8002d] no-underline inline-flex items-center gap-3 transition-all duration-200 hover:gap-5"
+                className="group text-[0.72rem] tracking-[0.2em] uppercase text-[#e8002d] no-underline inline-flex items-center gap-3"
               >
                 {tx.disciplines.extremeCta}
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M5 12h14M12 5l7 7-7 7" /></svg>
+                <svg className="transition-transform duration-200 group-hover:translate-x-1" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M5 12h14M12 5l7 7-7 7" /></svg>
               </Link>
             </div>
           </div>
@@ -195,11 +195,11 @@ export default function Home() {
               </ul>
               <Link
                 href={`${base}/pop#hero-bottom`}
-                className="text-[0.72rem] tracking-[0.2em] uppercase no-underline inline-flex items-center gap-3 transition-all duration-200 hover:gap-5"
+                className="group text-[0.72rem] tracking-[0.2em] uppercase no-underline inline-flex items-center gap-3"
                 style={{ color: "#9d4edd" }}
               >
                 {tx.disciplines.popCta}
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M5 12h14M12 5l7 7-7 7" /></svg>
+                <svg className="transition-transform duration-200 group-hover:translate-x-1" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M5 12h14M12 5l7 7-7 7" /></svg>
               </Link>
             </div>
           </div>
@@ -229,11 +229,11 @@ export default function Home() {
               </ul>
               <Link
                 href={`${base}/karaoke#hero-bottom`}
-                className="text-[0.72rem] tracking-[0.2em] uppercase no-underline inline-flex items-center gap-3 transition-all duration-200 hover:gap-5"
+                className="group text-[0.72rem] tracking-[0.2em] uppercase no-underline inline-flex items-center gap-3"
                 style={{ color: "#c9a84c" }}
               >
                 {tx.disciplines.karaokeCta}
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M5 12h14M12 5l7 7-7 7" /></svg>
+                <svg className="transition-transform duration-200 group-hover:translate-x-1" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M5 12h14M12 5l7 7-7 7" /></svg>
               </Link>
             </div>
           </div>
@@ -277,11 +277,11 @@ export default function Home() {
               </div>
               <Link
                 href={`${base}/kids#hero-bottom`}
-                className="flex-shrink-0 text-[0.72rem] tracking-[0.2em] uppercase no-underline inline-flex items-center gap-3 transition-all duration-200 hover:gap-5 self-start md:self-center"
+                className="group flex-shrink-0 text-[0.72rem] tracking-[0.2em] uppercase no-underline inline-flex items-center gap-3 self-start md:self-center"
                 style={{ color: "#3b82f6" }}
               >
                 {tx.disciplines.kidsCta}
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M5 12h14M12 5l7 7-7 7" /></svg>
+                <svg className="transition-transform duration-200 group-hover:translate-x-1" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M5 12h14M12 5l7 7-7 7" /></svg>
               </Link>
             </div>
           </div>
