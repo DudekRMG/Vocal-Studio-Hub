@@ -36,23 +36,22 @@ export default function Home() {
       {/* ── HERO ── */}
       <section id="hero" className="relative flex flex-col bg-[#080808] overflow-x-hidden md:h-screen md:overflow-hidden">
 
-        {/* Wrapper: canvas lives here so on mobile it's exactly 100svh tall —
-            100svh is the stable small viewport (address bar visible) so the layout
-            never reflowing when iOS Safari hides/shows its chrome on scroll */}
-        <div className="relative flex flex-col min-h-[100svh] md:min-h-0 md:flex-1">
+        {/* Stage canvas — absolute inset-0 on the section so canvas H = full h-screen on
+            desktop, matching the reference. mobileStepMult widens mobile wave bundle 20%. */}
+        <StageCanvas className="absolute inset-0" mobileStepMult={1.2} />
 
-          {/* Stage canvas — constrained to this wrapper's height.
-              mobileStepMult widens the mobile wave bundle by 20% on the home page. */}
-          <StageCanvas className="absolute inset-0" mobileStepMult={1.2} />
+        {/* Noise overlay — also covers the full section */}
+        <div
+          className="absolute inset-0 z-[1] pointer-events-none opacity-[0.035]"
+          style={{
+            backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")`,
+            backgroundSize: "120px",
+          }}
+        />
 
-          {/* Noise overlay */}
-          <div
-            className="absolute inset-0 z-[1] pointer-events-none opacity-[0.035]"
-            style={{
-              backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")`,
-              backgroundSize: "120px",
-            }}
-          />
+        {/* Wrapper: z-10 so text/CTAs sit above the canvas. On mobile min-h-[100svh]
+            keeps the text block exactly one stable viewport tall (immune to iOS chrome). */}
+        <div className="relative z-10 flex flex-col min-h-[100svh] md:min-h-0 md:flex-1">
 
         {/* Text composition — purely centered; pt offsets for the fixed nav */}
         <div className="relative z-10 flex-1 flex flex-col items-center justify-center pointer-events-none text-center px-6 pt-[4.75rem] md:pt-[calc(12vh_+_7rem)]">

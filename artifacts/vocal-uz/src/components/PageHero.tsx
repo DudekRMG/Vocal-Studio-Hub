@@ -94,25 +94,26 @@ export function PageHero({
       className="relative overflow-x-hidden flex flex-col md:h-screen md:overflow-hidden"
       style={{ background: bgColor, borderBottom: `1px solid ${sectionBorder}` }}
     >
-      {/* ── Mobile: exactly 100svh wrapper — canvas lives here (same as Home.tsx).
-             Desktop: flex-1 fills the space above hero-bottom inside min-h-screen. ── */}
-      <div className="relative flex flex-col min-h-[100svh] md:min-h-0 md:flex-1">
+      {/* Canvas — absolute inset-0 on the section so canvas H = full h-screen on desktop,
+          exactly matching the reference. mobileStepMult={1.2} widens mobile wave bundle. */}
+      <StageCanvas
+        className="absolute inset-0"
+        accentColor={accentColor}
+        bgColor={bgColor}
+        spotColorRgb={spotColorRgb}
+        mobileStepMult={1.2}
+      />
 
-        {/* Canvas inside the wrapper — absolute inset-0 within the 100svh area.
-            mobileStepMult={1.2} matches the wider wave bundle from Home.tsx. */}
-        <StageCanvas
-          className="absolute inset-0"
-          accentColor={accentColor}
-          bgColor={bgColor}
-          spotColorRgb={spotColorRgb}
-          mobileStepMult={1.2}
-        />
+      {/* Noise overlay — covers the full section */}
+      <div
+        className="absolute inset-0 z-[1] pointer-events-none opacity-[0.035]"
+        style={noiseStyle}
+      />
 
-        {/* Noise overlay — same as Home.tsx */}
-        <div
-          className="absolute inset-0 z-[1] pointer-events-none opacity-[0.035]"
-          style={noiseStyle}
-        />
+      {/* ── Mobile: min-h-[100svh] keeps text exactly one stable viewport tall.
+             Desktop: flex-1 fills the space above hero-bottom inside h-screen.
+             z-10 ensures content sits above the canvas. ── */}
+      <div className="relative z-10 flex flex-col min-h-[100svh] md:min-h-0 md:flex-1">
 
         {/* Text composition — pt, translate, classes copied verbatim from Home.tsx;
             only color values swapped to match each page's accent scheme */}
