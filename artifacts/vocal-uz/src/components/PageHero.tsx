@@ -135,7 +135,7 @@ export function PageHero({
             >
               {courseTag}
             </div>
-            <div className="font-['Playfair_Display'] italic text-[0.9rem] text-[rgba(240,238,234,0.5)]">
+            <div className="font-['Playfair_Display'] italic text-[0.9rem] text-[rgba(240,238,234,0.5)] mt-1">
               {courseSub}
             </div>
           </div>
