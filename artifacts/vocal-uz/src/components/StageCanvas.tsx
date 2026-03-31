@@ -9,7 +9,8 @@ export function StageCanvas({ className }: { className?: string }) {
     const ctx = canvas.getContext("2d");
     if (!ctx) return;
 
-    const prefersReduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const mq = window.matchMedia("(prefers-reduced-motion: reduce)");
+    let prefersReduced = mq.matches;
 
     let W = 0, H = 0, CX = 0;
     let time = 0;
@@ -237,24 +238,21 @@ export function StageCanvas({ className }: { className?: string }) {
         ctx!.stroke();
       }
       ctx!.restore();
-
-      time += 0.01;
     }
+
+    const onMqChange = (e: MediaQueryListEvent) => {
+      prefersReduced = e.matches;
+    };
+    mq.addEventListener("change", onMqChange);
 
     ctx.fillStyle = "#080808";
     ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-    if (prefersReduced) {
-      time = 1.5;
-      draw();
-      return () => {
-        ro.disconnect();
-        document.removeEventListener("mousemove", onMouse);
-      };
-    }
+    time = prefersReduced ? 1.5 : 0;
 
     function loop() {
       draw();
+      if (!prefersReduced) time += 0.01;
       rafId = requestAnimationFrame(loop);
     }
     rafId = requestAnimationFrame(loop);
@@ -263,6 +261,7 @@ export function StageCanvas({ className }: { className?: string }) {
       cancelAnimationFrame(rafId);
       ro.disconnect();
       document.removeEventListener("mousemove", onMouse);
+      mq.removeEventListener("change", onMqChange);
     };
   }, []);
 
