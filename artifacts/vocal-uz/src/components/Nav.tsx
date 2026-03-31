@@ -41,7 +41,7 @@ export function Nav() {
     <nav
       className={`fixed top-0 left-0 right-0 z-[200] flex items-center justify-between px-6 lg:px-12 py-5 transition-all duration-300 ${
         isKids
-          ? "bg-white border-b border-[#dde3ee]"
+          ? "bg-white"
           : scrolled ? "bg-[rgba(8,8,8,0.92)] border-b border-white/[0.08] backdrop-blur-[8px]" : "border-b border-transparent"
       }`}
     >

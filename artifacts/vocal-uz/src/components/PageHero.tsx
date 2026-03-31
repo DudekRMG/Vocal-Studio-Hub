@@ -17,6 +17,7 @@ interface PageHeroProps {
   ctaText?: string;
   lightMode?: boolean;
   bottomBandBg?: string;
+  hideBandTopBorder?: boolean;
 }
 
 const noiseStyle: CSSProperties = {
@@ -38,6 +39,7 @@ export function PageHero({
   ctaText = "#f0eeea",
   lightMode = false,
   bottomBandBg,
+  hideBandTopBorder = false,
 }: PageHeroProps) {
   const { lang } = useLang();
   const tx = t[lang];
@@ -143,7 +145,7 @@ export function PageHero({
           background: bandBg,
           backdropFilter: "blur(16px)",
           WebkitBackdropFilter: "blur(16px)",
-          borderTop: `1px solid ${bandBorder}`,
+          borderTop: hideBandTopBorder ? "none" : `1px solid ${bandBorder}`,
         }}
       >
         <div className="px-8 py-4 flex flex-col md:flex-row items-center md:items-stretch justify-between gap-4 max-w-6xl mx-auto">

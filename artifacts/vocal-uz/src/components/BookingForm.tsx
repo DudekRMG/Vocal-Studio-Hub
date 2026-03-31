@@ -48,6 +48,8 @@ export function BookingForm({ variant, accentColor }: BookingFormProps = {}) {
     ? "bg-[#f4f7fc] border border-[#ccd5e3] outline-none w-full px-[1.4rem] py-[1.2rem] font-['DM_Sans'] text-[0.85rem] font-light text-[#7a8fa8] placeholder-[#7a8fa8] transition-colors duration-200 focus:bg-[#eef1f8] focus:border-[#aab8cc]"
     : "bg-[#141414] border-none outline-none w-full px-[1.4rem] py-[1.2rem] font-['DM_Sans'] text-[0.85rem] font-light text-[#f0eeea] placeholder-[#555] transition-colors duration-200 focus:bg-[#1a1a1a]";
 
+  const kidsInnerInputClass = "bg-[#f4f7fc] border-none outline-none w-full px-[1.4rem] py-[1.2rem] font-['DM_Sans'] text-[0.85rem] font-light text-[#7a8fa8] placeholder-[#7a8fa8] transition-colors duration-200 focus:bg-[#eef1f8]";
+
   const dividerColor = isKids ? "rgba(0,0,0,0.12)" : "rgba(255,255,255,0.08)";
   const dividerTextColor = isKids ? "rgba(0,0,0,0.3)" : "rgba(255,255,255,0.22)";
 
@@ -70,54 +72,105 @@ export function BookingForm({ variant, accentColor }: BookingFormProps = {}) {
             <span className={`ml-2 ${isKids ? "text-[#1a2535]" : "text-white"}`}>{tx.socialProof}</span>
           </p>
 
-          <div className="flex flex-col gap-[1px] mb-[1px]">
-            <input
-              name="name"
-              value={form.name}
-              onChange={handleChange}
-              required
-              placeholder={tx.namePlaceholder}
-              className={inputClass}
-            />
-            <input
-              name="phone"
-              value={form.phone}
-              onChange={handleChange}
-              required
-              placeholder={tx.phonePlaceholder}
-              className={inputClass}
-            />
-            <select
-              name="goal"
-              value={form.goal}
-              onChange={handleChange}
-              required
-              className={`${inputClass} cursor-pointer ${form.goal ? (isKids ? "text-[#1a2535]" : "text-[#f0eeea]") : isKids ? "" : "text-[#555]"}`}
-            >
-              <option value="" disabled>{tx.goalPlaceholder}</option>
-              {tx.goalOptions.map((opt) => (
-                <option key={opt.value} value={opt.value}>{opt.label}</option>
-              ))}
-            </select>
-          </div>
+          {isKids ? (
+            <div className="border border-[#ccd5e3] divide-y divide-[#ccd5e3]">
+              <input
+                name="name"
+                value={form.name}
+                onChange={handleChange}
+                required
+                placeholder={tx.namePlaceholder}
+                className={kidsInnerInputClass}
+              />
+              <input
+                name="phone"
+                value={form.phone}
+                onChange={handleChange}
+                required
+                placeholder={tx.phonePlaceholder}
+                className={kidsInnerInputClass}
+              />
+              <select
+                name="goal"
+                value={form.goal}
+                onChange={handleChange}
+                required
+                className={`${kidsInnerInputClass} cursor-pointer ${form.goal ? "text-[#1a2535]" : ""}`}
+              >
+                <option value="" disabled>{tx.goalPlaceholder}</option>
+                {tx.goalOptions.map((opt) => (
+                  <option key={opt.value} value={opt.value}>{opt.label}</option>
+                ))}
+              </select>
+              {status === "error" && (
+                <p className="text-[#e8002d] text-[0.8rem] px-4 py-2 bg-[rgba(232,0,45,0.08)]">{tx.errorMsg}</p>
+              )}
+              <button
+                type="submit"
+                disabled={status === "sending"}
+                className="w-full border-none cursor-pointer font-display text-[1.1rem] tracking-[0.15em] py-[1.3rem] transition-all duration-200 hover:tracking-[0.22em] hover:opacity-90 flex items-center justify-center gap-3 disabled:opacity-60 disabled:cursor-not-allowed text-[#f0eeea]"
+                style={{ backgroundColor: btnColor }}
+              >
+                {status === "sending" ? tx.submitting : tx.submit}
+                {status !== "sending" && (
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                    <path d="M5 12h14M12 5l7 7-7 7" />
+                  </svg>
+                )}
+              </button>
+            </div>
+          ) : (
+            <>
+              <div className="flex flex-col gap-[1px] mb-[1px]">
+                <input
+                  name="name"
+                  value={form.name}
+                  onChange={handleChange}
+                  required
+                  placeholder={tx.namePlaceholder}
+                  className={inputClass}
+                />
+                <input
+                  name="phone"
+                  value={form.phone}
+                  onChange={handleChange}
+                  required
+                  placeholder={tx.phonePlaceholder}
+                  className={inputClass}
+                />
+                <select
+                  name="goal"
+                  value={form.goal}
+                  onChange={handleChange}
+                  required
+                  className={`${inputClass} cursor-pointer ${form.goal ? "text-[#f0eeea]" : "text-[#555]"}`}
+                >
+                  <option value="" disabled>{tx.goalPlaceholder}</option>
+                  {tx.goalOptions.map((opt) => (
+                    <option key={opt.value} value={opt.value}>{opt.label}</option>
+                  ))}
+                </select>
+              </div>
 
-          {status === "error" && (
-            <p className="text-[#e8002d] text-[0.8rem] px-4 py-2 mb-[1px] bg-[rgba(232,0,45,0.08)]">{tx.errorMsg}</p>
+              {status === "error" && (
+                <p className="text-[#e8002d] text-[0.8rem] px-4 py-2 mb-[1px] bg-[rgba(232,0,45,0.08)]">{tx.errorMsg}</p>
+              )}
+
+              <button
+                type="submit"
+                disabled={status === "sending"}
+                className="w-full border-none cursor-pointer font-display text-[1.1rem] tracking-[0.15em] py-[1.3rem] transition-all duration-200 hover:tracking-[0.22em] hover:opacity-90 flex items-center justify-center gap-3 disabled:opacity-60 disabled:cursor-not-allowed text-[#f0eeea]"
+                style={{ backgroundColor: btnColor }}
+              >
+                {status === "sending" ? tx.submitting : tx.submit}
+                {status !== "sending" && (
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                    <path d="M5 12h14M12 5l7 7-7 7" />
+                  </svg>
+                )}
+              </button>
+            </>
           )}
-
-          <button
-            type="submit"
-            disabled={status === "sending"}
-            className="w-full border-none cursor-pointer font-display text-[1.1rem] tracking-[0.15em] py-[1.3rem] transition-all duration-200 hover:tracking-[0.22em] hover:opacity-90 flex items-center justify-center gap-3 disabled:opacity-60 disabled:cursor-not-allowed text-[#f0eeea]"
-            style={{ backgroundColor: btnColor }}
-          >
-            {status === "sending" ? tx.submitting : tx.submit}
-            {status !== "sending" && (
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                <path d="M5 12h14M12 5l7 7-7 7" />
-              </svg>
-            )}
-          </button>
 
           {/* Note */}
           <p className={`mt-4 text-[0.72rem] text-center tracking-[0.04em] ${isKids ? "text-[#7a8fa8]" : "text-[#555]"}`}>{tx.note}</p>

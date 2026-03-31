@@ -229,6 +229,7 @@ export default function KidsVocals() {
         ctaText="#ffffff"
         lightMode
         bottomBandBg="rgba(210,215,238,0.97)"
+        hideBandTopBorder
       />
 
       {/* ── ABOUT THE APPROACH ── */}
