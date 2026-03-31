@@ -48,7 +48,7 @@ export function BookingForm({ variant, accentColor }: BookingFormProps = {}) {
     : "bg-[#141414] border-none outline-none w-full px-[1.4rem] py-[1.2rem] font-['DM_Sans'] text-[0.85rem] font-light text-[#f0eeea] placeholder-[#555] transition-colors duration-200 focus:bg-[#1a1a1a]";
 
   return (
-    <form onSubmit={handleSubmit} className={isKids ? "bg-white border border-[#d0dae8] p-10" : "bg-[#080808] border border-white/[0.08] p-10"}>
+    <form onSubmit={handleSubmit} className={isKids ? "bg-white border border-[#d0dae8] pt-5 px-10 pb-10" : "bg-[#080808] border border-white/[0.08] pt-5 px-10 pb-10"}>
       {status === "success" ? (
         <div className="text-center py-12">
           <div className="text-5xl mb-4" style={{ color: btnColor }}>✓</div>
@@ -58,8 +58,9 @@ export function BookingForm({ variant, accentColor }: BookingFormProps = {}) {
       ) : (
         <>
           {/* Social proof */}
-          <p className={`text-[0.75rem] tracking-[0.04em] text-center mb-6 pb-6 ${isKids ? "text-[#5a7a9f] border-b border-[#ccd5e3]" : "text-[rgba(240,238,234,0.38)] border-b border-white/[0.07]"}`}>
-            {tx.socialProof}
+          <p className="text-[0.7rem] tracking-[0.14em] uppercase text-center mb-4">
+            <span style={{ color: "#e8002d" }}>★★★★★&nbsp;&nbsp;</span>
+            <span style={{ color: "#ffffff" }}>{tx.socialProof}</span>
           </p>
 
           <div className="flex flex-col gap-[1px] mb-[1px]">
