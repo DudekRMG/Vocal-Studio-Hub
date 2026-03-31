@@ -94,13 +94,17 @@ export default function Home() {
 
         </div>{/* end mobile-viewport wrapper */}
 
-        {/* Course preview strip — min-h-[220px] on mobile aligns with landing page hero-bottom band height */}
+        {/* Course preview strip — styled to match landing-page hero-bottom band exactly.
+            Mobile: grid-cols-2 min-h-[220px] unchanged. Desktop: 4 equal columns,
+            same background/blur/border as PageHero hero-bottom, md:min-h-0 for
+            natural height matching the landing pages. */}
         <div
-          className="relative z-20 grid grid-cols-2 md:grid-cols-4 border-t border-white/[0.06] min-h-[220px] md:min-h-[160px]"
+          className="relative z-20 grid grid-cols-2 md:grid-cols-4 min-h-[220px] md:min-h-0"
           style={{
-            background: "rgba(8,8,8,0.6)",
-            backdropFilter: "blur(12px)",
-            WebkitBackdropFilter: "blur(12px)",
+            background: "rgba(4,4,4,0.92)",
+            backdropFilter: "blur(16px)",
+            WebkitBackdropFilter: "blur(16px)",
+            borderTop: "1px solid rgba(255,255,255,0.14)",
           }}
         >
           {(
@@ -114,7 +118,7 @@ export default function Home() {
             <Link
               key={c.href}
               href={c.href}
-              className={`px-5 pt-4 pb-5 md:pt-5 md:pb-6 no-underline group transition-all duration-300 hover:bg-white/[0.035]${i < 3 ? " border-r border-white/[0.05]" : ""}`}
+              className={`px-5 pt-4 pb-5 md:pt-5 md:pb-6 no-underline group transition-all duration-300 hover:bg-white/[0.035]${i < 3 ? " border-r border-white/[0.14]" : ""}`}
             >
               <div
                 className="text-[0.54rem] tracking-[0.28em] mb-2 font-display"
