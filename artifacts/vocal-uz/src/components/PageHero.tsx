@@ -124,7 +124,11 @@ export function PageHero({
             </span>
             <div
               className="font-display leading-none tracking-[0.03em] text-[#f0eeea]"
-              style={{ fontSize: "clamp(1.9rem, 3.5vw, 3.8rem)" }}
+              style={{
+                fontSize: lang === "en"
+                  ? "clamp(2.4rem, 4.5vw, 5rem)"
+                  : "clamp(1.9rem, 3.5vw, 3.8rem)",
+              }}
             >
               {courseTag}
             </div>
