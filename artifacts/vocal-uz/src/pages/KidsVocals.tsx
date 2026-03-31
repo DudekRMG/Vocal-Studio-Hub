@@ -19,7 +19,7 @@ const textDivider = "rgba(0,0,0,0.07)";
 
 const kidsContent = {
   ru: {
-    heroTag: "Вокал для детей",
+    heroTag: "Вокал для детей · 5–16 лет",
     heroTitle: "Голос начинается здесь.",
     heroSub: "Индивидуально. Безопасно. Интересно.",
     heroDesc:
@@ -109,7 +109,7 @@ const kidsContent = {
     bookIntro: "Напишите нам — обсудим возраст ребёнка, цели и формат занятий. Первый урок — пробный.",
   },
   en: {
-    heroTag: "Kids Vocals",
+    heroTag: "Kids Vocals · Ages 5–16",
     heroTitle: "Voice Starts Here.",
     heroSub: "Individual. Safe. Engaging.",
     heroDesc:
@@ -217,6 +217,7 @@ export default function KidsVocals() {
       {/* ── HERO ── */}
       <PageHero
         accentColor="#3b82f6"
+        spotColorRgb="100,149,255"
         courseTag={c.heroTag}
         courseTitle={c.heroTitle}
         courseSub={c.heroSub}
@@ -225,7 +226,6 @@ export default function KidsVocals() {
         ctaLabel={lang === "ru" ? "Записаться на пробный урок" : "Book a Trial Lesson"}
         ctaBg="#3b82f6"
         ctaText="#ffffff"
-        isLight
       />
 
       {/* ── ABOUT THE APPROACH ── */}
