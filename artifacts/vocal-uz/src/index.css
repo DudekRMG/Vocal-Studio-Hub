@@ -128,6 +128,12 @@ body[data-lang="ru"] {
   --font-display-family: 'Oswald', sans-serif;
 }
 
+/* Reduce form input font size in Russian so Cyrillic appears the same visual size as Latin */
+body[data-lang="ru"] input,
+body[data-lang="ru"] select {
+  font-size: 0.76rem;
+}
+
 @utility font-display {
   font-family: var(--font-display-family);
   text-transform: uppercase;
