@@ -184,7 +184,7 @@ export default function PopVocals() {
       />
 
       {/* ── WHAT IS ── */}
-      <section className="py-28 px-6 lg:px-12 bg-[#080808] border-b border-white/[0.08]">
+      <section id="course-content" className="py-28 px-6 lg:px-12 bg-[#080808] border-b border-white/[0.08]">
         <div className="max-w-[1100px] mx-auto grid grid-cols-1 md:grid-cols-2 gap-20 items-center">
           <div>
             <span className="text-[0.68rem] tracking-[0.28em] uppercase text-[#555] block mb-4">{what.eyebrow}</span>
