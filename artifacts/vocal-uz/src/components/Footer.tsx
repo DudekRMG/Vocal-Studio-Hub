@@ -15,7 +15,7 @@ export function Footer() {
       <div className="max-w-[1100px] mx-auto">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-10 mb-12">
           <div>
-            <img src={isKaraoke ? "/logo_yellow.png" : isPop ? "/logo_purple.png" : "/logo.png"} alt="Vocal.uz" className="h-10 w-auto mb-4" />
+            <img src={isKaraoke ? "/logo_yellow.png" : isPop ? "/logo_purple.png" : isKids ? "/logo_blue.png" : "/logo.png"} alt="Vocal.uz" className="h-10 w-auto mb-4" />
             <p className="text-[0.82rem] text-[#555] tracking-[0.06em]">{tx.footer.tagline}</p>
           </div>
 
