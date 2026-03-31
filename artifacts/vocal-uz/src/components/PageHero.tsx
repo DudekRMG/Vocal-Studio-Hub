@@ -73,43 +73,52 @@ export function PageHero({
   };
 
   const sectionBorder = lightMode ? "rgba(0,0,0,0.09)" : "rgba(255,255,255,0.06)";
-  const sloganColor = lightMode ? "rgba(15,16,22,0.55)" : "rgba(240,238,234,0.65)";
-  const titleColor = lightMode ? "#0f1016" : "#f0eeea";
-  const mottoColor = lightMode ? "rgba(15,16,22,0.38)" : "rgba(240,238,234,0.45)";
-  const trainingColor = lightMode ? "rgba(15,16,22,0.4)" : "rgba(240,238,234,0.35)";
-  const ghostBorder = lightMode ? "rgba(15,16,22,0.18)" : "rgba(255,255,255,0.18)";
-  const ghostText = lightMode ? "rgba(15,16,22,0.6)" : "rgba(240,238,234,0.6)";
-  const ghostHoverText = lightMode ? "#0f1016" : "#f0eeea";
-  const bandBg = bottomBandBg ?? (lightMode ? "rgba(240,242,250,0.96)" : "rgba(4,4,4,0.92)");
-  const bandBorder = lightMode ? "rgba(0,0,0,0.1)" : "rgba(255,255,255,0.14)";
-  const bandTagColor = titleColor;
-  const bandSubColor = lightMode ? "rgba(15,16,22,0.5)" : "rgba(240,238,234,0.5)";
-  const bandDescColor = lightMode ? "rgba(15,16,22,0.45)" : "rgba(240,238,234,0.45)";
+  const sloganColor   = lightMode ? "rgba(15,16,22,0.55)"  : "rgba(240,238,234,0.65)";
+  const titleColor    = lightMode ? "#0f1016"               : "#f0eeea";
+  const mottoColor    = lightMode ? "rgba(15,16,22,0.38)"   : "rgba(240,238,234,0.45)";
+  const trainingColor = lightMode ? "rgba(15,16,22,0.4)"    : "rgba(240,238,234,0.35)";
+  const ghostBorder   = lightMode ? "rgba(15,16,22,0.18)"   : "rgba(255,255,255,0.18)";
+  const ghostText     = lightMode ? "rgba(15,16,22,0.6)"    : "rgba(240,238,234,0.6)";
+  const ghostHoverBorder = lightMode ? "rgba(15,16,22,0.4)" : "rgba(255,255,255,0.4)";
+  const ghostHoverText   = lightMode ? "#0f1016"            : "#f0eeea";
+  const bandBg        = bottomBandBg ?? (lightMode ? "rgba(240,242,250,0.96)" : "rgba(4,4,4,0.92)");
+  const bandBorder    = lightMode ? "rgba(0,0,0,0.1)"       : "rgba(255,255,255,0.14)";
+  const bandTagColor  = titleColor;
+  const bandSubColor  = lightMode ? "rgba(15,16,22,0.5)"    : "rgba(240,238,234,0.5)";
+  const bandDescColor = lightMode ? "rgba(15,16,22,0.45)"   : "rgba(240,238,234,0.45)";
   const bandGhostBorder = lightMode ? "rgba(15,16,22,0.22)" : "rgba(255,255,255,0.22)";
-  const bandGhostText = lightMode ? "rgba(15,16,22,0.65)" : "rgba(240,238,234,0.65)";
+  const bandGhostText   = lightMode ? "rgba(15,16,22,0.65)" : "rgba(240,238,234,0.65)";
 
   return (
     <section
       className="relative overflow-x-hidden flex flex-col md:min-h-screen"
       style={{ background: bgColor, borderBottom: `1px solid ${sectionBorder}` }}
     >
-      {/* Canvas and noise cover the full section (absolute) */}
-      <StageCanvas
-        className="absolute inset-0"
-        accentColor={accentColor}
-        bgColor={bgColor}
-        spotColorRgb={spotColorRgb}
-      />
-      <div className="absolute inset-0 z-[1] pointer-events-none opacity-[0.035]" style={noiseStyle} />
-
-      {/* ── Mobile: exactly 100svh tall wrapper (like Home.tsx)
-             Desktop: flex-1 so it fills available space above hero-bottom ── */}
+      {/* ── Mobile: exactly 100svh wrapper — canvas lives here (same as Home.tsx).
+             Desktop: flex-1 fills the space above hero-bottom inside min-h-screen. ── */}
       <div className="relative flex flex-col min-h-[100svh] md:min-h-0 md:flex-1">
 
-        {/* VOCAL.UZ text composition — centered, same mobile treatment as Home */}
-        <div className="relative z-10 flex-1 flex flex-col items-center justify-center pointer-events-none text-center px-6 pt-[4.75rem] md:pt-[calc(12vh+7rem)]">
-          {/* Mobile: shift sign block 7% lower via CSS translate (no layout side-effects) */}
+        {/* Canvas inside the wrapper — absolute inset-0 within the 100svh area.
+            mobileStepMult={1.2} matches the wider wave bundle from Home.tsx. */}
+        <StageCanvas
+          className="absolute inset-0"
+          accentColor={accentColor}
+          bgColor={bgColor}
+          spotColorRgb={spotColorRgb}
+          mobileStepMult={1.2}
+        />
+
+        {/* Noise overlay — same as Home.tsx */}
+        <div
+          className="absolute inset-0 z-[1] pointer-events-none opacity-[0.035]"
+          style={noiseStyle}
+        />
+
+        {/* Text composition — pt, translate, classes copied verbatim from Home.tsx;
+            only color values swapped to match each page's accent scheme */}
+        <div className="relative z-10 flex-1 flex flex-col items-center justify-center pointer-events-none text-center px-6 pt-[4.75rem] md:pt-[calc(12vh_+_7rem)]">
           <div className="[transform:translateY(7svh)] md:[transform:translateY(0)]">
+
             <div
               className="font-['Playfair_Display'] italic text-[clamp(1rem,1.8vw,1.35rem)] mb-4 leading-snug animate-[fadeUp_0.6s_0.3s_both]"
               style={{ color: sloganColor }}
@@ -130,10 +139,13 @@ export function PageHero({
             >
               {tx.hero.motto}
             </div>
+
           </div>
         </div>
 
-        {/* CTA band — mb-[7svh] lifts block 7% off wrapper bottom on mobile, matches Home */}
+        {/* CTAs — py-6 mb-[7svh] md:mb-0 copied from Home.tsx;
+            button padding is font-display text-[0.72rem] tracking-[0.16em] px-6 py-3.5
+            which matches Home exactly; only background color swapped */}
         <div className="relative z-10 flex flex-col items-center gap-3 pointer-events-auto animate-[fadeUp_0.5s_0.5s_both] py-6 mb-[7svh] md:mb-0">
           <span
             className="text-[0.6rem] tracking-[0.22em] uppercase pointer-events-none"
@@ -144,8 +156,8 @@ export function PageHero({
           <div className="flex flex-row flex-wrap items-center justify-center gap-3">
             <a
               href={ctaHref}
-              className="no-underline transition-all duration-200 hover:opacity-90 uppercase"
-              style={{ backgroundColor: btnBg, color: ctaText, fontFamily: "var(--font-display-family)", fontWeight: 700, fontSize: "0.72rem", letterSpacing: "0.16em", padding: "0.875rem 1.5rem" }}
+              className="font-display text-[0.72rem] tracking-[0.16em] px-6 py-3.5 no-underline transition-all duration-200 hover:opacity-90 uppercase"
+              style={{ backgroundColor: btnBg, color: ctaText }}
             >
               {ctaLabel}
             </a>
@@ -154,8 +166,14 @@ export function PageHero({
               onClick={scrollToContent}
               className="font-display text-[0.72rem] tracking-[0.16em] px-6 py-3.5 no-underline transition-all duration-200 uppercase"
               style={{ border: `1px solid ${ghostBorder}`, color: ghostText }}
-              onMouseEnter={e => { (e.currentTarget as HTMLElement).style.color = ghostHoverText; (e.currentTarget as HTMLElement).style.borderColor = lightMode ? "rgba(15,16,22,0.4)" : "rgba(255,255,255,0.4)"; }}
-              onMouseLeave={e => { (e.currentTarget as HTMLElement).style.color = ghostText; (e.currentTarget as HTMLElement).style.borderColor = ghostBorder; }}
+              onMouseEnter={e => {
+                (e.currentTarget as HTMLElement).style.color = ghostHoverText;
+                (e.currentTarget as HTMLElement).style.borderColor = ghostHoverBorder;
+              }}
+              onMouseLeave={e => {
+                (e.currentTarget as HTMLElement).style.color = ghostText;
+                (e.currentTarget as HTMLElement).style.borderColor = ghostBorder;
+              }}
             >
               {tx.hero.ctaLearn}
             </a>
@@ -165,9 +183,9 @@ export function PageHero({
       </div>{/* end 100svh mobile wrapper */}
 
       {/* ── Course bottom band ──
-          On mobile: sits naturally below the 100svh wrapper (starts just off-screen).
-          On desktop: pushed to the bottom of the min-h-screen section by the flex-1 wrapper above. */}
-      {/* min-h-[220px] on mobile matches the home course-strip height */}
+          Mobile: sits naturally below the 100svh wrapper — starts just off-screen.
+          Desktop: pushed to the bottom of the md:min-h-screen section by md:flex-1 above.
+          min-h-[220px] on mobile matches the home course-strip block height. ── */}
       <div
         id="hero-bottom"
         className="relative z-20 min-h-[220px] md:min-h-0 flex flex-col justify-center md:block"
@@ -219,8 +237,14 @@ export function PageHero({
               onClick={scrollToHeroBottom}
               className="inline-flex items-center gap-2 no-underline transition-all duration-200 uppercase"
               style={{ fontFamily: "var(--font-display-family)", fontWeight: 700, fontSize: "0.78rem", letterSpacing: "0.14em", padding: "0.6rem 1.4rem", border: `1px solid ${bandGhostBorder}`, color: bandGhostText }}
-              onMouseEnter={e => { (e.currentTarget as HTMLElement).style.color = lightMode ? "#0f1016" : "#f0eeea"; (e.currentTarget as HTMLElement).style.borderColor = lightMode ? "rgba(15,16,22,0.45)" : "rgba(255,255,255,0.45)"; }}
-              onMouseLeave={e => { (e.currentTarget as HTMLElement).style.color = bandGhostText; (e.currentTarget as HTMLElement).style.borderColor = bandGhostBorder; }}
+              onMouseEnter={e => {
+                (e.currentTarget as HTMLElement).style.color = lightMode ? "#0f1016" : "#f0eeea";
+                (e.currentTarget as HTMLElement).style.borderColor = lightMode ? "rgba(15,16,22,0.45)" : "rgba(255,255,255,0.45)";
+              }}
+              onMouseLeave={e => {
+                (e.currentTarget as HTMLElement).style.color = bandGhostText;
+                (e.currentTarget as HTMLElement).style.borderColor = bandGhostBorder;
+              }}
             >
               {tx.hero.ctaLearn}
               <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
