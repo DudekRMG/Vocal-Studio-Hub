@@ -125,7 +125,7 @@ export function BookingForm({ variant, accentColor }: BookingFormProps = {}) {
           {/* Divider */}
           <div className="flex items-center gap-3 mt-5 mb-4">
             <div className="flex-1 h-px" style={{ backgroundColor: dividerColor }} />
-            <span className={`text-[0.72rem] tracking-[0.04em] whitespace-nowrap ${isKids ? "text-[#7a8fa8]" : "text-[#555]"}`}>
+            <span className={`text-[0.72rem] tracking-[0.04em] uppercase whitespace-nowrap ${isKids ? "text-[#7a8fa8]" : "text-[#555]"}`}>
               {tx.callDivider}
             </span>
             <div className="flex-1 h-px" style={{ backgroundColor: dividerColor }} />
