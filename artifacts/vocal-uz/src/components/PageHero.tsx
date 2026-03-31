@@ -62,6 +62,16 @@ export function PageHero({
     else window.scrollBy({ top: window.innerHeight, behavior: "smooth" });
   };
 
+  const scrollToHeroBottom = (e: React.MouseEvent) => {
+    e.preventDefault();
+    const el = document.getElementById("hero-bottom");
+    if (!el) return;
+    const nav = document.querySelector("nav");
+    const navH = nav ? (nav as HTMLElement).offsetHeight : 0;
+    const top = el.getBoundingClientRect().top + window.scrollY - navH;
+    window.scrollTo({ top, behavior: "smooth" });
+  };
+
   const sectionBorder = lightMode ? "rgba(0,0,0,0.09)" : "rgba(255,255,255,0.06)";
   const sloganColor = lightMode ? "rgba(15,16,22,0.55)" : "rgba(240,238,234,0.65)";
   const titleColor = lightMode ? "#0f1016" : "#f0eeea";
@@ -196,8 +206,8 @@ export function PageHero({
               {courseDesc}
             </p>
             <a
-              href="#course-content"
-              onClick={scrollToContent}
+              href="#hero-bottom"
+              onClick={scrollToHeroBottom}
               className="inline-flex items-center gap-2 no-underline transition-all duration-200 uppercase"
               style={{ fontFamily: "var(--font-display-family)", fontWeight: 700, fontSize: "0.78rem", letterSpacing: "0.14em", padding: "0.6rem 1.4rem", border: `1px solid ${bandGhostBorder}`, color: bandGhostText }}
               onMouseEnter={e => { (e.currentTarget as HTMLElement).style.color = lightMode ? "#0f1016" : "#f0eeea"; (e.currentTarget as HTMLElement).style.borderColor = lightMode ? "rgba(15,16,22,0.45)" : "rgba(255,255,255,0.45)"; }}

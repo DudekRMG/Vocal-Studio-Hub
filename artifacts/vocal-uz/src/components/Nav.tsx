@@ -22,6 +22,27 @@ export function Nav() {
   const isKaraoke = location === "/karaoke";
   const isExtreme = location === "/extreme";
 
+  const bookingId = isKids
+    ? "book-kids"
+    : isPop
+    ? "book-pop"
+    : isKaraoke
+    ? "book-karaoke"
+    : isExtreme
+    ? "book-extreme"
+    : "booking";
+
+  const handleBookClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
+    const el = document.getElementById(bookingId);
+    if (el) {
+      e.preventDefault();
+      const nav = document.querySelector("nav");
+      const navH = nav ? (nav as HTMLElement).offsetHeight : 0;
+      const top = el.getBoundingClientRect().top + window.scrollY - navH;
+      window.scrollTo({ top, behavior: "smooth" });
+    }
+  };
+
   const navBookHref = isKids
     ? `${base}/kids#book-kids`
     : isPop
@@ -121,6 +142,7 @@ export function Nav() {
 
         <Link
           href={navBookHref}
+          onClick={handleBookClick}
           className="text-[0.72rem] tracking-[0.14em] uppercase px-5 py-[0.65rem] no-underline transition-opacity duration-200 hover:opacity-85 whitespace-nowrap border"
           style={navBookStyle}
         >
@@ -154,6 +176,7 @@ export function Nav() {
         </div>
         <Link
           href={navBookHref}
+          onClick={handleBookClick}
           className="text-[0.65rem] tracking-[0.14em] uppercase px-3 py-2 no-underline transition-opacity duration-200 hover:opacity-85 border"
           style={navBookStyle}
         >
