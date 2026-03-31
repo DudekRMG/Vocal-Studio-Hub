@@ -91,7 +91,7 @@ export function PageHero({
 
   return (
     <section
-      className="relative overflow-x-hidden flex flex-col md:min-h-screen"
+      className="relative overflow-x-hidden flex flex-col md:h-screen md:overflow-hidden"
       style={{ background: bgColor, borderBottom: `1px solid ${sectionBorder}` }}
     >
       {/* ── Mobile: exactly 100svh wrapper — canvas lives here (same as Home.tsx).

@@ -34,7 +34,7 @@ export default function Home() {
       />
 
       {/* ── HERO ── */}
-      <section id="hero" className="relative min-h-screen overflow-x-hidden bg-[#080808] flex flex-col">
+      <section id="hero" className="relative flex flex-col bg-[#080808] overflow-x-hidden md:h-screen md:overflow-hidden">
 
         {/* Wrapper: canvas lives here so on mobile it's exactly 100svh tall —
             100svh is the stable small viewport (address bar visible) so the layout
