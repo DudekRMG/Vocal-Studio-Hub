@@ -285,6 +285,7 @@ export default function KaraokeCourse() {
         ctaLabel={lang === "ru" ? "Записаться на курс" : "Enrol in Course"}
         ctaBg="#c9a84c"
         ctaText="#0a0a0a"
+        mobileTrainingLabel={lang === "ru" ? "Курс экспресс-карaоке" : "Express Karaoke Course"}
       />
 
       {/* ── WHAT IS ── */}

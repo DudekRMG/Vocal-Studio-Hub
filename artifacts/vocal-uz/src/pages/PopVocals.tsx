@@ -184,6 +184,7 @@ export default function PopVocals() {
         ctaLabel={bookHeroLabel}
         ctaBg="#9d4edd"
         ctaText="#ffffff"
+        mobileTrainingLabel={lang === "ru" ? "Курс поп-вокала" : "Pop Vocals Course"}
       />
 
       {/* ── WHAT IS ── */}

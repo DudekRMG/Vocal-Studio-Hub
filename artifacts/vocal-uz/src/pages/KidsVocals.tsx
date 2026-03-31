@@ -230,6 +230,7 @@ export default function KidsVocals() {
         lightMode
         bottomBandBg="rgba(210,215,238,0.97)"
         hideBandTopBorder
+        mobileTrainingLabel={lang === "ru" ? "Курс детского вокала" : "Kids Vocals Course"}
       />
 
       {/* ── ABOUT THE APPROACH ── */}

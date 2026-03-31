@@ -18,6 +18,7 @@ interface PageHeroProps {
   lightMode?: boolean;
   bottomBandBg?: string;
   hideBandTopBorder?: boolean;
+  mobileTrainingLabel?: string;
 }
 
 const noiseStyle: CSSProperties = {
@@ -48,6 +49,7 @@ export function PageHero({
   lightMode = false,
   bottomBandBg,
   hideBandTopBorder = false,
+  mobileTrainingLabel,
 }: PageHeroProps) {
   const { lang } = useLang();
   const tx = t[lang];
@@ -191,8 +193,11 @@ export function PageHero({
           </div>
 
           <div className="relative z-10 flex flex-col items-center gap-3 pointer-events-auto animate-[fadeUp_0.5s_0.5s_both] py-6 mb-[7svh]">
-            <span className="text-[0.6rem] tracking-[0.22em] uppercase pointer-events-none" style={{ color: trainingColor }}>
-              {tx.hero.training}
+            <span
+              className="text-[0.6rem] tracking-[0.22em] uppercase pointer-events-none"
+              style={{ color: mobileTrainingLabel ? accentColor : trainingColor }}
+            >
+              {mobileTrainingLabel ?? tx.hero.training}
             </span>
             <div className="flex flex-row flex-wrap items-center justify-center gap-3">
               <a
