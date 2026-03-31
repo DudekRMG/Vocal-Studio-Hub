@@ -196,7 +196,7 @@ export function BookingForm({ variant, accentColor }: BookingFormProps = {}) {
             </svg>
             <span className="flex flex-col items-center leading-tight">
               <span className="font-display text-[1.05rem] tracking-[0.1em] uppercase">+998·33·VOCALUZ</span>
-              <span className="text-[0.58rem] mt-[4px] tracking-[0.06em] uppercase" style={{ opacity: 0.5 }}>OR DIAL +998 33 862-25-89</span>
+              <span className="text-[0.58rem] mt-[4px] tracking-[0.06em] uppercase" style={{ opacity: 0.5 }}>OR +998 33 862-25-89</span>
             </span>
           </a>
         </>
