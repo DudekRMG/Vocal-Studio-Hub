@@ -269,7 +269,7 @@ export function Nav() {
             {navLinks.map((link, i) => (
               <li
                 key={link.href}
-                style={{ borderBottom: i < navLinks.length - 1 ? `1px solid ${isKids ? "rgba(26,37,53,0.07)" : "rgba(255,255,255,0.05)"}` : "none" }}
+                style={{ borderBottom: `1px solid ${isKids ? "rgba(26,37,53,0.07)" : "rgba(255,255,255,0.05)"}` }}
               >
                 <Link
                   href={link.href}
@@ -285,6 +285,31 @@ export function Nav() {
               </li>
             ))}
           </ul>
+          {/* Language switcher inside dropdown */}
+          <div className="px-6 py-4">
+            <div className={`flex items-center overflow-hidden border w-fit ${isKids ? "border-[#1a2535]" : "border-white/[0.08]"}`}>
+              <button
+                onClick={() => { setLang("ru"); setMenuOpen(false); }}
+                className={`font-display text-[0.85rem] tracking-[0.12em] px-3 py-[0.45rem] border-none cursor-pointer transition-all duration-200 ${
+                  lang === "ru"
+                    ? isKids ? "bg-[#1a2535] text-white" : "bg-[#f0eeea] text-[#080808]"
+                    : isKids ? "bg-transparent text-[#1a2535]/50" : "bg-transparent text-[#555]"
+                }`}
+              >
+                RU
+              </button>
+              <button
+                onClick={() => { setLang("en"); setMenuOpen(false); }}
+                className={`font-display text-[0.85rem] tracking-[0.12em] px-3 py-[0.45rem] border-none cursor-pointer transition-all duration-200 ${
+                  lang === "en"
+                    ? isKids ? "bg-[#1a2535] text-white" : "bg-[#f0eeea] text-[#080808]"
+                    : isKids ? "bg-transparent text-[#1a2535]/50" : "bg-transparent text-[#555]"
+                }`}
+              >
+                EN
+              </button>
+            </div>
+          </div>
         </div>
       </div>
     </nav>
