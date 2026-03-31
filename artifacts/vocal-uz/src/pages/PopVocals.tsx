@@ -263,6 +263,14 @@ export default function PopVocals() {
           </div>
           <a
             href="#book-pop"
+            onClick={(e) => {
+              e.preventDefault();
+              const el = document.getElementById("book-pop");
+              if (!el) return;
+              const nav = document.querySelector("nav");
+              const navH = nav ? (nav as HTMLElement).offsetHeight : 0;
+              window.scrollTo({ top: el.getBoundingClientRect().top + window.scrollY - navH, behavior: "smooth" });
+            }}
             className="flex-shrink-0 bg-white text-[#9d4edd] font-display text-[1.1rem] tracking-[0.15em] px-10 py-5 no-underline hover:bg-[#f0eeea] whitespace-nowrap inline-flex items-center gap-3 group transition-colors duration-200"
           >
             {ctaBtn}
