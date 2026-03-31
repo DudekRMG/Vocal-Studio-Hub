@@ -12,7 +12,9 @@ export function Footer() {
   const base = import.meta.env.BASE_URL.replace(/\/$/, "");
 
   const btnColor = isKids ? "#3b82f6" : isKaraoke ? "#c9a84c" : isPop ? "#9d4edd" : "#e8002d";
-  const callTextColor = isKids ? btnColor : "#f0eeea";
+  const callBorderColor = isKids ? "#ffffff" : btnColor;
+  const callIconColor = isKids ? "#ffffff" : btnColor;
+  const callTextColor = isKids ? "#ffffff" : "#f0eeea";
 
   return (
     <footer className={`${isKids ? "bg-[#1e2d4a] border-t border-white/[0.1]" : "bg-[#080808] border-t border-white/[0.08]"} py-8 px-6 lg:px-12`}>
@@ -20,19 +22,19 @@ export function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-10 mb-6">
           <div>
             <img src={isKaraoke ? "/logo_yellow.png" : isPop ? "/logo_purple.png" : isKids ? "/logo_white.png" : "/logo.png"} alt="Vocal.uz" className="h-10 w-auto mb-4" />
-            <p className="text-[0.82rem] text-[#888] tracking-[0.06em]">{tx.footer.tagline}</p>
+            <p className={`text-[0.82rem] tracking-[0.06em] ${isKids ? "text-white" : "text-[#888]"}`}>{tx.footer.tagline}</p>
           </div>
 
           <div>
-            <p className="text-[0.65rem] tracking-[0.25em] uppercase text-[#888] mb-4">
+            <p className={`text-[0.65rem] tracking-[0.25em] uppercase mb-4 ${isKids ? "text-white" : "text-[#888]"}`}>
               {lang === "ru" ? "Контакты" : "Contact"}
             </p>
             <a
               href="tel:+998338622589"
               className="inline-flex items-center gap-2 py-[0.45rem] px-[0.9rem] border bg-transparent no-underline transition-all duration-200 hover:opacity-75 mb-4"
-              style={{ borderColor: btnColor, color: callTextColor }}
+              style={{ borderColor: callBorderColor, color: callTextColor }}
             >
-              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke={btnColor} strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" style={{ flexShrink: 0 }}>
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke={callIconColor} strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" style={{ flexShrink: 0 }}>
                 <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.4 12a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.51 1.2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.73A16 16 0 0 0 15.27 16.09l.86-.86a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/>
               </svg>
               <span className="flex flex-col leading-tight">
@@ -50,7 +52,7 @@ export function Footer() {
                   key={label}
                   href="#"
                   aria-label={label}
-                  className="w-8 h-8 border border-white/[0.08] flex items-center justify-center text-[#555] hover:text-[#f0eeea] hover:border-white/20 transition-all duration-200"
+                  className={`w-8 h-8 border flex items-center justify-center transition-all duration-200 ${isKids ? "border-white/30 text-white hover:border-white hover:text-white" : "border-white/[0.08] text-[#555] hover:text-[#f0eeea] hover:border-white/20"}`}
                 >
                   <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d={path} /></svg>
                 </a>
@@ -59,7 +61,7 @@ export function Footer() {
           </div>
 
           <div>
-            <p className="text-[0.65rem] tracking-[0.25em] uppercase text-[#888] mb-4">
+            <p className={`text-[0.65rem] tracking-[0.25em] uppercase mb-4 ${isKids ? "text-white" : "text-[#888]"}`}>
               {lang === "ru" ? "Навигация" : "Navigation"}
             </p>
             <ul className="list-none m-0 p-0 flex flex-col gap-2">
@@ -84,8 +86,8 @@ export function Footer() {
           </div>
         </div>
 
-        <div className="border-t border-white/[0.08] pt-4 flex flex-col md:flex-row items-center justify-between gap-2">
-          <p className="text-[0.72rem] text-[#888] tracking-[0.06em]">
+        <div className={`border-t pt-4 flex flex-col md:flex-row items-center justify-between gap-2 ${isKids ? "border-white/30" : "border-white/[0.08]"}`}>
+          <p className={`text-[0.72rem] tracking-[0.06em] ${isKids ? "text-white" : "text-[#888]"}`}>
             © {new Date().getFullYear()} Vocal.uz. {tx.footer.rights}.
           </p>
           <p className="text-[0.65rem] text-[#555] tracking-[0.08em]">
