@@ -189,8 +189,8 @@ export function StageCanvas({ className }: { className?: string }) {
       const tX = CX;
       const tY = H * 0.55;
 
-      drawSpotlight(sw * W * 0.04, -H * 0.02, tX, tY, Math.PI / 9 * 1.07 * 1.15, pulse);
-      drawSpotlight(W + sw * W * 0.04, -H * 0.02, tX, tY, Math.PI / 9 * 1.07 * 1.15, pulse);
+      drawSpotlight(sw * W * 0.04, -H * 0.02, tX, tY, Math.PI / 9 * 1.07 * 1.15 * 1.07, pulse);
+      drawSpotlight(W + sw * W * 0.04, -H * 0.02, tX, tY, Math.PI / 9 * 1.07 * 1.15 * 1.07, pulse);
 
       drawFloor(floorY);
       drawFloorWave(floorY);
