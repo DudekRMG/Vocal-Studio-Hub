@@ -36,9 +36,10 @@ export default function Home() {
       {/* ── HERO ── */}
       <section id="hero" className="relative min-h-screen overflow-x-hidden bg-[#080808] flex flex-col">
 
-        {/* Wrapper: canvas lives here so on mobile it's exactly 100dvh tall —
-            spotlight + waves align with the visible viewport, not the full section */}
-        <div className="relative flex flex-col min-h-[100dvh] md:min-h-0 md:flex-1">
+        {/* Wrapper: canvas lives here so on mobile it's exactly 100svh tall —
+            100svh is the stable small viewport (address bar visible) so the layout
+            never reflowing when iOS Safari hides/shows its chrome on scroll */}
+        <div className="relative flex flex-col min-h-[100svh] md:min-h-0 md:flex-1">
 
           {/* Stage canvas — constrained to this wrapper's height */}
           <StageCanvas className="absolute inset-0" />
@@ -67,8 +68,8 @@ export default function Home() {
           </div>
         </div>
 
-        {/* Professional tag + CTAs */}
-        <div className="relative z-10 flex flex-col items-center gap-3 pointer-events-auto animate-[fadeUp_0.5s_0.5s_both] py-6">
+        {/* Professional tag + CTAs — mb-[7svh] lifts block 7% off wrapper bottom on mobile */}
+        <div className="relative z-10 flex flex-col items-center gap-3 pointer-events-auto animate-[fadeUp_0.5s_0.5s_both] py-6 mb-[7svh] md:mb-0">
           <span className="text-[0.6rem] tracking-[0.22em] uppercase text-[rgba(240,238,234,0.35)] pointer-events-none">
             {tx.hero.training}
           </span>
