@@ -11,7 +11,7 @@ const extremeContent = {
     heroTitle: "Гроул. Скрим. Фрай.",
     heroSub: "Техника, которой можно научиться безопасно",
     heroDesc:
-      "Многие думают, что экстремальный вокал — это просто крик. Это не так. Это особая дисциплина со своей физиологией и безопасными техниками. Учим петь тяжёлую музыку без вреда для голоса.",
+      "Экстремальный вокал — это не просто крик. Это особая дисциплина со своей физиологией и безопасными техниками. Учим петь тяжёлую музыку без вреда для голоса.",
     whatTitle: "Что такое экстремальный вокал?",
     whatBody:
       "Экстремальный вокал — собирательное название для различных техник, используемых в металле, хардкоре и родственных жанрах. В отличие от чистого вокала, здесь задействованы ложные голосовые складки, специфические резонаторы и особые положения гортани.",
@@ -98,7 +98,7 @@ const extremeContent = {
     heroTitle: "Growl. Scream. Fry.",
     heroSub: "Technique you can learn safely",
     heroDesc:
-      "Many think extreme vocals are just screaming — they are not. This is a separate vocal discipline with its own physiology, techniques, and safe practices. Sing heavy music without harming your voice.",
+      "Extreme vocals are not just screaming. This is a separate vocal discipline with its own physiology, techniques, and safe practices. Sing heavy music without harming your voice.",
     whatTitle: "What are extreme vocals?",
     whatBody:
       "Extreme vocals is an umbrella term for various techniques used in metal, hardcore, and related genres. Unlike clean singing, they involve the false vocal folds, specific resonators, and particular laryngeal positions.",
