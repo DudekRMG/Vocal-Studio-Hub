@@ -1,4 +1,4 @@
-import { useLocation } from "wouter";
+import { Link, useLocation } from "wouter";
 import { useLang } from "@/lib/langContext";
 import { t } from "@/lib/i18n";
 
@@ -9,6 +9,7 @@ export function Footer() {
   const isKids = location === "/kids";
   const isKaraoke = location === "/karaoke";
   const isPop = location === "/pop";
+  const base = import.meta.env.BASE_URL.replace(/\/$/, "");
 
   return (
     <footer className={`${isKids ? "bg-[#1e2d4a] border-t border-white/[0.1]" : "bg-[#080808] border-t border-white/[0.08]"} py-14 px-6 lg:px-12`}>
@@ -60,12 +61,13 @@ export function Footer() {
                 { href: "/kids", label: t[lang].nav.kids },
               ].map(({ href, label }) => (
                 <li key={href}>
-                  <a
-                    href={href}
+                  <Link
+                    href={`${base}${href}`}
+                    onClick={() => window.scrollTo(0, 0)}
                     className="text-[0.82rem] text-[#888] no-underline hover:text-[#f0eeea] transition-colors duration-200"
                   >
                     {label}
-                  </a>
+                  </Link>
                 </li>
               ))}
             </ul>
