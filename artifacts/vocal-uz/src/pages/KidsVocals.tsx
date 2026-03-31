@@ -367,6 +367,7 @@ export default function KidsVocals() {
           </div>
           <a
             href="#book-kids"
+            onClick={e => { e.preventDefault(); const el = document.getElementById("book-kids"); if (el) { const navH = (document.querySelector("nav") as HTMLElement)?.offsetHeight ?? 0; window.scrollTo({ top: el.getBoundingClientRect().top + window.scrollY - navH, behavior: "smooth" }); } }}
             className="flex-shrink-0 font-display text-[1.1rem] tracking-[0.15em] px-10 py-5 no-underline transition-all duration-200 whitespace-nowrap inline-flex items-center gap-3 group text-[#0f1016]"
             style={{ backgroundColor: "#d4e0f8" }}
             onMouseEnter={e => (e.currentTarget.style.backgroundColor = "#e0eaff")}
