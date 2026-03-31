@@ -172,24 +172,25 @@ export default function PopVocals() {
 
       {/* ── HERO ── */}
       <PageHero
-        accentColor="#b8b8b8"
+        accentColor="#9d4edd"
+        spotColorRgb="157,78,221"
         courseTag={hero.tag}
-        courseTitle={<>{hero.title} <span style={{ color: "#e8002d" }}>{hero.titleRed}</span></>}
+        courseTitle={<>{hero.title} <span style={{ color: "#9d4edd" }}>{hero.titleRed}</span></>}
         courseSub={hero.sub}
         courseDesc={hero.desc}
         ctaHref="#book-pop"
         ctaLabel={bookHeroLabel}
-        ctaBg="#f0eeea"
-        ctaText="#080808"
+        ctaBg="#9d4edd"
+        ctaText="#ffffff"
       />
 
       {/* ── WHAT IS ── */}
       <section id="course-content" className="py-28 px-6 lg:px-12 bg-[#080808] border-b border-white/[0.08]">
         <div className="max-w-[1100px] mx-auto grid grid-cols-1 md:grid-cols-2 gap-20 items-center">
           <div>
-            <span className="text-[0.68rem] tracking-[0.28em] uppercase text-[#555] block mb-4">{what.eyebrow}</span>
+            <span className="text-[0.68rem] tracking-[0.28em] uppercase text-[#9d4edd] block mb-4">{what.eyebrow}</span>
             <h2 className="font-['Playfair_Display'] italic text-[clamp(2.2rem,4vw,3.5rem)] leading-[1.05] mb-8">{what.title}</h2>
-            <div className="w-10 h-[2px] bg-[#555] mb-8" />
+            <div className="w-10 h-[2px] bg-[#9d4edd] mb-8" />
             <p className="text-[0.9rem] leading-[1.9] text-[rgba(240,238,234,0.5)] mb-5">{what.body1}</p>
             <p className="text-[0.9rem] leading-[1.9] text-[rgba(240,238,234,0.5)]">{what.body2}</p>
           </div>
@@ -272,12 +273,12 @@ export default function PopVocals() {
       <section id="book-pop" className="py-28 px-6 lg:px-12 bg-[#141414] border-t border-white/[0.08]">
         <div className="max-w-[1100px] mx-auto grid grid-cols-1 md:grid-cols-[1fr_1.4fr] gap-20 items-start">
           <div>
-            <span className="text-[0.68rem] tracking-[0.28em] uppercase text-[#555] block mb-4">{tx.booking.eyebrow}</span>
+            <span className="text-[0.68rem] tracking-[0.28em] uppercase text-[#9d4edd] block mb-4">{tx.booking.eyebrow}</span>
             <h2 className="font-['Playfair_Display'] italic text-[clamp(2.5rem,4vw,4rem)] leading-[1]">
               {bookTitle}
               <em className="not-italic text-[0.7em] text-[rgba(240,238,234,0.45)] block mt-1 italic">{bookTitleEm}</em>
             </h2>
-            <div className="w-10 h-[2px] bg-[#555] my-8" />
+            <div className="w-10 h-[2px] bg-[#9d4edd] my-8" />
             <p className="text-[0.9rem] leading-[1.9] text-[rgba(240,238,234,0.5)]">{bookIntro}</p>
           </div>
           <BookingForm />
