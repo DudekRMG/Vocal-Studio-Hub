@@ -67,18 +67,29 @@ export function StageCanvas({ className }: { className?: string }) {
       ctx!.fill();
     }
 
-    function drawSpotlight(tipX: number, spreadRad: number, offsetAngle: number, alpha: number) {
-      const tipY = -H * 0.03;
-      const len = H * 0.95;
-      const half = spreadRad / 2;
-      const x1 = tipX + Math.sin(offsetAngle - half) * len;
-      const y1 = tipY + Math.cos(offsetAngle - half) * len;
-      const x2 = tipX + Math.sin(offsetAngle + half) * len;
-      const y2 = tipY + Math.cos(offsetAngle + half) * len;
+    function drawSpotlight(
+      tipX: number, tipY: number,
+      targetX: number, targetY: number,
+      spreadRad: number, alpha: number
+    ) {
+      const dx = targetX - tipX;
+      const dy = targetY - tipY;
+      const dist = Math.sqrt(dx * dx + dy * dy);
+      const baseAngle = Math.atan2(dy, dx);
+      const len = dist * 1.65;
 
-      const grad = ctx!.createLinearGradient(tipX, tipY, tipX, tipY + len * 0.72);
-      grad.addColorStop(0, `rgba(255,248,220,${(alpha * 2.2).toFixed(3)})`);
-      grad.addColorStop(0.4, `rgba(255,248,220,${(alpha * 0.7).toFixed(3)})`);
+      const a1 = baseAngle - spreadRad / 2;
+      const a2 = baseAngle + spreadRad / 2;
+      const x1 = tipX + Math.cos(a1) * len;
+      const y1 = tipY + Math.sin(a1) * len;
+      const x2 = tipX + Math.cos(a2) * len;
+      const y2 = tipY + Math.sin(a2) * len;
+
+      const gradEndX = tipX + Math.cos(baseAngle) * dist * 1.1;
+      const gradEndY = tipY + Math.sin(baseAngle) * dist * 1.1;
+      const grad = ctx!.createLinearGradient(tipX, tipY, gradEndX, gradEndY);
+      grad.addColorStop(0, `rgba(255,248,220,${(alpha * 3.5).toFixed(3)})`);
+      grad.addColorStop(0.45, `rgba(255,248,220,${(alpha * 1.1).toFixed(3)})`);
       grad.addColorStop(1, "rgba(255,248,220,0)");
 
       ctx!.save();
@@ -96,7 +107,7 @@ export function StageCanvas({ className }: { className?: string }) {
       ctx!.save();
       ctx!.globalAlpha = alpha;
       ctx!.strokeStyle = color;
-      ctx!.lineWidth = 0.8;
+      ctx!.lineWidth = 1.5;
       ctx!.beginPath();
       const N = 72;
       for (let i = 0; i <= N; i++) {
@@ -115,7 +126,7 @@ export function StageCanvas({ className }: { className?: string }) {
     }
 
     function drawMic(cx: number, floorY: number): { hx: number; hy: number } {
-      const poleH = Math.max(100, H * 0.36);
+      const poleH = Math.max(150, H * 0.55);
       const topY = floorY - poleH;
       const capsW = Math.max(9, poleH * 0.088);
       const capsH = Math.max(24, poleH * 0.135);
@@ -163,17 +174,17 @@ export function StageCanvas({ className }: { className?: string }) {
     function drawFloorWave(floorY: number) {
       ctx!.save();
       ctx!.strokeStyle = "#e8002d";
-      ctx!.lineWidth = 1.2;
-      ctx!.globalAlpha = 0.09;
+      ctx!.lineWidth = 1.5;
+      ctx!.globalAlpha = 0.22;
       ctx!.beginPath();
-      const mx = (mX - 0.5) * 24;
+      const mx = (mX - 0.5) * 45;
       for (let x = 0; x <= W; x += 2) {
         const nx = x / W;
         const env = Math.sin(nx * Math.PI);
         const y =
           floorY +
-          Math.sin(nx * 9 + time * 1.4 + mx) * 15 * env +
-          Math.sin(nx * 4.5 + time * 0.9) * 7 * env;
+          Math.sin(nx * 9 + time * 1.4 + mx) * 35 * env +
+          Math.sin(nx * 4.5 + time * 0.9) * 18 * env;
         x === 0 ? ctx!.moveTo(x, y) : ctx!.lineTo(x, y);
       }
       ctx!.stroke();
@@ -206,13 +217,14 @@ export function StageCanvas({ className }: { className?: string }) {
       ctx!.fillRect(0, 0, W, H);
 
       const floorY = H * 0.64;
-
       const sw = Math.sin(time * 0.13);
-      const pulse = 0.026 + Math.sin(time * 0.5) * 0.006;
+      const pulse = 0.06 + Math.sin(time * 0.5) * 0.015;
 
-      drawSpotlight(W * 0.22 + sw * W * 0.038, Math.PI / 6.8, 0.16 + sw * 0.048, pulse * 0.85);
-      drawSpotlight(CX, Math.PI / 5.6, sw * 0.04, pulse * 1.35);
-      drawSpotlight(W * 0.78 - sw * W * 0.038, Math.PI / 6.8, -0.16 - sw * 0.048, pulse * 0.9);
+      const tX = CX;
+      const tY = H * 0.38;
+
+      drawSpotlight(sw * W * 0.04, -H * 0.02, tX, tY, Math.PI / 5.5, pulse);
+      drawSpotlight(W + sw * W * 0.04, -H * 0.02, tX, tY, Math.PI / 5.5, pulse);
 
       drawFloor(floorY);
       drawFloorWave(floorY);
@@ -220,9 +232,9 @@ export function StageCanvas({ className }: { className?: string }) {
       const { hx, hy } = drawMic(CX, floorY);
 
       const rp = 0.55 + Math.sin(time * 0.55) * 0.45;
-      drawRing(hx, hy, 24 + Math.sin(time * 0.4) * 2.5, 0, "rgba(255,255,255,0.9)", 0.065 * rp);
-      drawRing(hx, hy, 38 + Math.sin(time * 0.33 + 1) * 3.5, 2.1, "rgba(232,0,45,0.9)", 0.09 * rp);
-      drawRing(hx, hy, 55 + Math.sin(time * 0.42 + 2) * 4, 4.2, "rgba(255,255,255,0.8)", 0.045 * rp);
+      drawRing(hx, hy, 24 + Math.sin(time * 0.4) * 2.5, 0, "rgba(255,255,255,0.9)", 0.14 * rp);
+      drawRing(hx, hy, 38 + Math.sin(time * 0.33 + 1) * 3.5, 2.1, "rgba(232,0,45,0.9)", 0.19 * rp);
+      drawRing(hx, hy, 55 + Math.sin(time * 0.42 + 2) * 4, 4.2, "rgba(255,255,255,0.8)", 0.10 * rp);
 
       particles.forEach(p => { updateParticle(p); drawParticle(p); });
 

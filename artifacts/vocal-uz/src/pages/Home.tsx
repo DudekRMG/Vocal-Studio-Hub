@@ -44,37 +44,45 @@ export default function Home() {
           }}
         />
 
-        {/* Center overlay */}
+        {/* Text block: training eyebrow → slogan → VOCAL.UZ wordmark → motto */}
         <div
-          className="absolute inset-0 z-10 flex flex-col items-center justify-center pointer-events-none text-center px-6"
-          style={{ paddingBottom: "9vh" }}
+          className="absolute z-10 left-0 right-0 top-0 flex flex-col items-center justify-start pointer-events-none text-center px-6"
+          style={{ height: "52vh", paddingTop: "17vh" }}
         >
-          <span className="text-[0.6rem] tracking-[0.45em] uppercase text-[rgba(240,238,234,0.26)] mb-8 animate-[fadeUp_0.6s_0.3s_both]">
-            {tx.hero.tagline}
+          <span className="text-[0.62rem] tracking-[0.22em] uppercase text-[rgba(240,238,234,0.38)] mb-3 animate-[fadeUp_0.6s_0.3s_both]">
+            {tx.hero.training}
           </span>
 
-          <div className="font-display text-[clamp(3.8rem,10.5vw,10rem)] leading-none tracking-[0.1em] text-[#f0eeea] animate-[fadeUp_0.7s_0.45s_both]">
+          <div className="text-[clamp(1rem,1.8vw,1.35rem)] text-[rgba(240,238,234,0.65)] mb-4 leading-snug animate-[fadeUp_0.6s_0.4s_both]">
+            {tx.hero.slogan}
+          </div>
+
+          <div className="font-display text-[clamp(3.8rem,10.5vw,10rem)] leading-none tracking-[0.1em] text-[#f0eeea] animate-[fadeUp_0.7s_0.5s_both]">
             VOCAL<span className="text-[#e8002d]">.</span>UZ
           </div>
 
-          <div className="mt-4 font-['Playfair_Display'] italic text-[clamp(0.85rem,1.5vw,1.25rem)] text-[rgba(240,238,234,0.3)] tracking-[0.08em] animate-[fadeUp_0.6s_0.6s_both]">
-            {tx.hero.teacher}
+          <div className="mt-4 font-['Playfair_Display'] italic text-[clamp(1.1rem,2vw,1.5rem)] text-[rgba(240,238,234,0.7)] animate-[fadeUp_0.6s_0.65s_both]">
+            {tx.hero.motto}
           </div>
+        </div>
 
-          <div className="mt-11 flex flex-col sm:flex-row gap-4 pointer-events-auto animate-[fadeUp_0.6s_0.8s_both]">
-            <a
-              href="#booking"
-              className="bg-[#e8002d] text-[#f0eeea] font-display text-[0.76rem] tracking-[0.18em] px-8 py-3.5 no-underline transition-all duration-200 hover:bg-[#ff1a3d] uppercase"
-            >
-              {tx.hero.ctaBook}
-            </a>
-            <a
-              href="#about"
-              className="border border-white/[0.18] text-[rgba(240,238,234,0.6)] font-display text-[0.76rem] tracking-[0.18em] px-8 py-3.5 no-underline transition-all duration-200 hover:border-white/40 hover:text-[#f0eeea] uppercase"
-            >
-              {tx.hero.ctaLearn}
-            </a>
-          </div>
+        {/* CTA row: sits above the floor wave at 64vh */}
+        <div
+          className="absolute z-10 left-0 right-0 flex flex-row flex-wrap items-center justify-center gap-3 pointer-events-auto animate-[fadeUp_0.5s_0.5s_both]"
+          style={{ top: "52vh" }}
+        >
+          <a
+            href="#booking"
+            className="bg-[#e8002d] text-[#f0eeea] font-display text-[0.72rem] tracking-[0.16em] px-6 py-3.5 no-underline transition-all duration-200 hover:bg-[#ff1a3d] uppercase"
+          >
+            {tx.hero.ctaBook}
+          </a>
+          <a
+            href="#about"
+            className="border border-white/[0.18] text-[rgba(240,238,234,0.6)] font-display text-[0.72rem] tracking-[0.16em] px-6 py-3.5 no-underline transition-all duration-200 hover:border-white/40 hover:text-[#f0eeea] uppercase"
+          >
+            {tx.hero.ctaLearn}
+          </a>
         </div>
 
         {/* Course preview strip */}
@@ -97,7 +105,7 @@ export default function Home() {
             <Link
               key={c.href}
               href={c.href}
-              className={`px-5 py-5 no-underline group transition-all duration-300 hover:bg-white/[0.035]${i < 3 ? " border-r border-white/[0.05]" : ""}`}
+              className={`px-5 py-6 md:py-8 no-underline group transition-all duration-300 hover:bg-white/[0.035]${i < 3 ? " border-r border-white/[0.05]" : ""}`}
             >
               <div
                 className="text-[0.54rem] tracking-[0.28em] mb-2 font-display"
