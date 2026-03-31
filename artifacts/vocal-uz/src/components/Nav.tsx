@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Link, useLocation } from "wouter";
 import { useLang } from "@/lib/langContext";
 import { t } from "@/lib/i18n";
@@ -18,6 +18,24 @@ export function Nav() {
   const base = import.meta.env.BASE_URL.replace(/\/$/, "");
 
   const isKids = location === "/kids";
+  const isPop = location === "/pop";
+  const isKaraoke = location === "/karaoke";
+
+  const navBookHref = isKids
+    ? `${base}/kids#book-kids`
+    : isPop
+    ? `${base}/pop#book-pop`
+    : isKaraoke
+    ? `${base}/karaoke#book-karaoke`
+    : `${base}/#booking`;
+
+  const navBookStyle: React.CSSProperties = isKids
+    ? { background: "transparent", color: "#1a2535", borderColor: "#1a2535" }
+    : isPop
+    ? { background: "#9d4edd", color: "#ffffff", borderColor: "transparent" }
+    : isKaraoke
+    ? { background: "#c9a84c", color: "#080808", borderColor: "transparent" }
+    : { background: "#e8002d", color: "#f0eeea", borderColor: "transparent" };
 
   return (
     <nav
@@ -99,12 +117,9 @@ export function Nav() {
         </div>
 
         <Link
-          href={isKids ? `${base}/kids#book-kids` : `${base}/#booking`}
-          className={`text-[0.72rem] tracking-[0.14em] uppercase px-5 py-[0.65rem] no-underline transition-colors duration-200 whitespace-nowrap border ${
-            isKids
-              ? "bg-transparent text-[#1a2535] border-[#1a2535] hover:bg-[#1a2535]/5"
-              : "bg-[#e8002d] text-[#f0eeea] border-transparent hover:bg-[#ff1a3d]"
-          }`}
+          href={navBookHref}
+          className="text-[0.72rem] tracking-[0.14em] uppercase px-5 py-[0.65rem] no-underline transition-opacity duration-200 hover:opacity-85 whitespace-nowrap border"
+          style={navBookStyle}
         >
           {tx.nav.book}
         </Link>
@@ -135,12 +150,9 @@ export function Nav() {
           </button>
         </div>
         <Link
-          href={isKids ? `${base}/kids#book-kids` : `${base}/#booking`}
-          className={`text-[0.65rem] tracking-[0.14em] uppercase px-3 py-2 no-underline border ${
-            isKids
-              ? "bg-transparent text-[#1a2535] border-[#1a2535]"
-              : "bg-[#e8002d] text-[#f0eeea] border-transparent"
-          }`}
+          href={navBookHref}
+          className="text-[0.65rem] tracking-[0.14em] uppercase px-3 py-2 no-underline transition-opacity duration-200 hover:opacity-85 border"
+          style={navBookStyle}
         >
           {tx.nav.book}
         </Link>

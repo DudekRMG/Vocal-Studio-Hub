@@ -399,7 +399,7 @@ export default function KaraokeCourse() {
             <div className="w-10 h-[2px] my-8" style={{ backgroundColor: gold }} />
             <p className="text-[0.9rem] leading-[1.9] text-[rgba(240,238,234,0.5)]">{c.bookIntro}</p>
           </div>
-          <BookingForm />
+          <BookingForm accentColor="#c9a84c" />
         </div>
       </section>
     </>
