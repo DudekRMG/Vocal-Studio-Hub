@@ -131,6 +131,7 @@ body[data-lang="ru"] {
 @utility font-display {
   font-family: var(--font-display-family);
   text-transform: uppercase;
+  font-weight: 700;
 }
 
 @layer base {

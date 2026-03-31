@@ -214,10 +214,11 @@ export default function KidsVocals() {
       {/* ── HERO ── */}
       <PageHero
         accentColor="#3b82f6"
-        heroTag={c.heroTag}
-        heroTitle={c.heroTitle}
-        heroSub={c.heroSub}
-        heroDesc={c.heroDesc}
+        spotColorRgb="100,149,255"
+        courseTag={c.heroTag}
+        courseTitle={c.heroTitle}
+        courseSub={c.heroSub}
+        courseDesc={c.heroDesc}
         ctaHref="#book-kids"
         ctaLabel={lang === "ru" ? "Записаться на пробный урок" : "Book a Trial Lesson"}
         ctaBg="#3b82f6"

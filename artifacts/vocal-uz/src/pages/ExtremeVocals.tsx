@@ -200,10 +200,10 @@ export default function ExtremeVocals() {
       {/* ── HERO ── */}
       <PageHero
         accentColor="#e8002d"
-        heroTag={c.heroTag}
-        heroTitle={c.heroTitle}
-        heroSub={c.heroSub}
-        heroDesc={c.heroDesc}
+        courseTag={c.heroTag}
+        courseTitle={c.heroTitle}
+        courseSub={c.heroSub}
+        courseDesc={c.heroDesc}
         ctaHref="#book-extreme"
         ctaLabel={lang === "ru" ? "Записаться на пробный урок" : "Book a Trial Lesson"}
       />

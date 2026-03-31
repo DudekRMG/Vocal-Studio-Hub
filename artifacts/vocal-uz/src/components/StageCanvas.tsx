@@ -3,9 +3,16 @@ import { useEffect, useRef } from "react";
 interface StageCanvasProps {
   className?: string;
   accentColor?: string;
+  bgColor?: string;
+  spotColorRgb?: string;
 }
 
-export function StageCanvas({ className, accentColor = "#e8002d" }: StageCanvasProps) {
+export function StageCanvas({
+  className,
+  accentColor = "#e8002d",
+  bgColor = "#080808",
+  spotColorRgb = "255,248,220",
+}: StageCanvasProps) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
 
   useEffect(() => {
@@ -79,7 +86,7 @@ export function StageCanvas({ className, accentColor = "#e8002d" }: StageCanvasP
       const a = Math.max(0, p.life) * 0.5;
       ctx!.fillStyle = p.red
         ? hexToRgba(accentColor, a * 0.7)
-        : `rgba(255,255,255,${(a * 0.16).toFixed(3)})`;
+        : `rgba(${spotColorRgb},${(a * 0.16).toFixed(3)})`;
       ctx!.beginPath();
       ctx!.arc(p.x, p.y, p.size, 0, Math.PI * 2);
       ctx!.fill();
@@ -104,9 +111,9 @@ export function StageCanvas({ className, accentColor = "#e8002d" }: StageCanvasP
       const gradEndX = tipX + Math.cos(baseAngle) * dist * 1.1;
       const gradEndY = tipY + Math.sin(baseAngle) * dist * 1.1;
       const grad = ctx!.createLinearGradient(tipX, tipY, gradEndX, gradEndY);
-      grad.addColorStop(0, `rgba(255,248,220,${(alpha * 3.5).toFixed(3)})`);
-      grad.addColorStop(0.45, `rgba(255,248,220,${(alpha * 1.1).toFixed(3)})`);
-      grad.addColorStop(1, "rgba(255,248,220,0)");
+      grad.addColorStop(0, `rgba(${spotColorRgb},${(alpha * 3.5).toFixed(3)})`);
+      grad.addColorStop(0.45, `rgba(${spotColorRgb},${(alpha * 1.1).toFixed(3)})`);
+      grad.addColorStop(1, `rgba(${spotColorRgb},0)`);
       ctx!.save();
       ctx!.beginPath();
       ctx!.moveTo(tipX, tipY);
@@ -133,7 +140,7 @@ export function StageCanvas({ className, accentColor = "#e8002d" }: StageCanvasP
 
       waves.forEach(w => {
         ctx!.save();
-        ctx!.strokeStyle = w.red ? accentColor : "rgba(255,255,255,1)";
+        ctx!.strokeStyle = w.red ? accentColor : `rgba(${spotColorRgb},1)`;
         ctx!.lineWidth = w.red ? 1.3 : 0.85;
         ctx!.globalAlpha = w.alpha;
         ctx!.beginPath();
@@ -173,13 +180,13 @@ export function StageCanvas({ className, accentColor = "#e8002d" }: StageCanvasP
 
     function drawFloor(floorY: number) {
       ctx!.save();
-      ctx!.strokeStyle = "rgba(255,255,255,0.09)";
+      ctx!.strokeStyle = `rgba(${spotColorRgb},0.09)`;
       ctx!.lineWidth = 1;
       ctx!.beginPath();
       ctx!.moveTo(0, floorY);
       ctx!.lineTo(W, floorY);
       ctx!.stroke();
-      ctx!.strokeStyle = "rgba(255,255,255,0.022)";
+      ctx!.strokeStyle = `rgba(${spotColorRgb},0.022)`;
       ctx!.lineWidth = 0.5;
       for (let i = 1; i <= 4; i++) {
         const y = floorY + (H - floorY) * (i / 5);
@@ -192,7 +199,7 @@ export function StageCanvas({ className, accentColor = "#e8002d" }: StageCanvasP
     }
 
     function draw() {
-      ctx!.fillStyle = "#080808";
+      ctx!.fillStyle = bgColor;
       ctx!.fillRect(0, 0, W, H);
 
       const floorY = H * 0.64;
@@ -214,7 +221,7 @@ export function StageCanvas({ className, accentColor = "#e8002d" }: StageCanvasP
     const onMqChange = (e: MediaQueryListEvent) => { prefersReduced = e.matches; };
     mq.addEventListener("change", onMqChange);
 
-    ctx.fillStyle = "#080808";
+    ctx.fillStyle = bgColor;
     ctx.fillRect(0, 0, canvas.width, canvas.height);
 
     const TARGET_MS = 1000 / 30;
@@ -236,7 +243,7 @@ export function StageCanvas({ className, accentColor = "#e8002d" }: StageCanvasP
       document.removeEventListener("visibilitychange", onVisibility);
       mq.removeEventListener("change", onMqChange);
     };
-  }, [accentColor]);
+  }, [accentColor, bgColor, spotColorRgb]);
 
   return (
     <canvas

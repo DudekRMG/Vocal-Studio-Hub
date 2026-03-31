@@ -274,10 +274,10 @@ export default function KaraokeCourse() {
       {/* ── HERO ── */}
       <PageHero
         accentColor="#c9a84c"
-        heroTag={c.heroTag}
-        heroTitle={c.heroTitle}
-        heroSub={c.heroSub}
-        heroDesc={c.heroDesc}
+        courseTag={c.heroTag}
+        courseTitle={c.heroTitle}
+        courseSub={c.heroSub}
+        courseDesc={c.heroDesc}
         ctaHref="#book-karaoke"
         ctaLabel={lang === "ru" ? "Записаться на курс" : "Enrol in Course"}
         ctaBg="#c9a84c"

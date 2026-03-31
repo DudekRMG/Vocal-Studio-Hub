@@ -173,10 +173,10 @@ export default function PopVocals() {
       {/* ── HERO ── */}
       <PageHero
         accentColor="#b8b8b8"
-        heroTag={hero.tag}
-        heroTitle={<>{hero.title} <span style={{ color: "#e8002d" }}>{hero.titleRed}</span></>}
-        heroSub={hero.sub}
-        heroDesc={hero.desc}
+        courseTag={hero.tag}
+        courseTitle={<>{hero.title} <span style={{ color: "#e8002d" }}>{hero.titleRed}</span></>}
+        courseSub={hero.sub}
+        courseDesc={hero.desc}
         ctaHref="#book-pop"
         ctaLabel={bookHeroLabel}
         ctaBg="#f0eeea"
