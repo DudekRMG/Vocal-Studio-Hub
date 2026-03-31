@@ -205,7 +205,7 @@ export function BookingForm({ variant, accentColor }: BookingFormProps = {}) {
               <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.4 12a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.51 1.2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.73A16 16 0 0 0 15.27 16.09l.86-.86a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/>
             </svg>
             <span className="flex flex-col items-center leading-tight">
-              <span className="font-display text-[1.5rem] tracking-[0.14em] uppercase">33·VOCALUZ</span>
+              <span className="font-display text-[1.0rem] tracking-[0.1em] uppercase">+998-33-VOCAL-UZ</span>
               <span className="text-[0.58rem] mt-[4px] tracking-[0.06em] uppercase" style={{ opacity: 0.5 }}>{tx.dialPrefix} +998 33 862-25-89</span>
             </span>
           </a>
