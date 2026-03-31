@@ -117,8 +117,11 @@ export function PageHero({
           {/* Left: slogan (small colored) + section name (huge) + sub */}
           <div className="flex flex-col gap-1.5 text-center md:text-left min-w-0">
             <span
-              className="font-display text-[0.75rem] tracking-[0.24em] block"
-              style={{ color: accentColor }}
+              className="font-display tracking-[0.24em] block"
+              style={{
+                color: accentColor,
+                fontSize: lang === "en" ? "0.95rem" : "0.75rem",
+              }}
             >
               {courseTitle}
             </span>
