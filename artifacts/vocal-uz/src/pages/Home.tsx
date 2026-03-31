@@ -35,26 +35,25 @@ export default function Home() {
 
       {/* ── HERO ── */}
       <section id="hero" className="relative min-h-screen overflow-x-hidden bg-[#080808] flex flex-col">
-        {/* Stage canvas animation — fills entire section */}
-        <StageCanvas className="absolute inset-0" />
 
-        {/* Noise overlay (scoped to hero) */}
-        <div
-          className="absolute inset-0 z-[1] pointer-events-none opacity-[0.035]"
-          style={{
-            backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")`,
-            backgroundSize: "120px",
-          }}
-        />
+        {/* Wrapper: canvas lives here so on mobile it's exactly 100dvh tall —
+            spotlight + waves align with the visible viewport, not the full section */}
+        <div className="relative flex flex-col min-h-[100dvh] md:min-h-0 md:flex-1">
 
-        {/* Wrapper: on mobile takes full dynamic viewport (100dvh accounts for iOS browser chrome)
-            so strip is always pushed below the fold */}
-        <div className="flex flex-col min-h-[100dvh] md:min-h-0 md:flex-1">
+          {/* Stage canvas — constrained to this wrapper's height */}
+          <StageCanvas className="absolute inset-0" />
 
-        {/* Text composition — centered between nav and CTAs.
-            Mobile: pt-20 ≈ nav height only, so justify-center lands on true visual center.
-            Desktop: larger top offset keeps text in the upper-center zone of the big canvas. */}
-        <div className="relative z-10 flex-1 flex flex-col items-center justify-center pointer-events-none text-center px-6 pt-20 md:pt-[calc(12vh_+_7rem)]">
+          {/* Noise overlay */}
+          <div
+            className="absolute inset-0 z-[1] pointer-events-none opacity-[0.035]"
+            style={{
+              backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")`,
+              backgroundSize: "120px",
+            }}
+          />
+
+        {/* Text composition — purely centered; pt offsets for the fixed nav */}
+        <div className="relative z-10 flex-1 flex flex-col items-center justify-center pointer-events-none text-center px-6 pt-[4.75rem] md:pt-[calc(12vh_+_7rem)]">
           <div className="font-['Playfair_Display'] italic text-[clamp(1rem,1.8vw,1.35rem)] text-[rgba(240,238,234,0.65)] mb-4 leading-snug animate-[fadeUp_0.6s_0.3s_both]">
             {tx.hero.slogan}
           </div>

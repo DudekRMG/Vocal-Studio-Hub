@@ -131,11 +131,11 @@ export function StageCanvas({
 
       type Wave = { y: number; amp: number; freq: number; spd: number; alpha: number; red?: boolean };
       const waves: Wave[] = [
-        { y: H * 0.53, amp: 14, freq: 7.0, spd: 1.35, alpha: 0.10 },
-        { y: H * 0.55, amp: 22, freq: 4.0, spd: 0.80, alpha: 0.09, red: true },
-        { y: H * 0.57, amp: 18, freq: 6.0, spd: 1.10, alpha: 0.11 },
-        { y: H * 0.59, amp: 24, freq: 3.5, spd: 0.65, alpha: 0.08 },
-        { y: H * 0.61, amp: 20, freq: 5.5, spd: 0.95, alpha: 0.10, red: true },
+        { y: H * 0.46, amp: 14, freq: 7.0, spd: 1.35, alpha: 0.10 },
+        { y: H * 0.48, amp: 22, freq: 4.0, spd: 0.80, alpha: 0.09, red: true },
+        { y: H * 0.50, amp: 18, freq: 6.0, spd: 1.10, alpha: 0.11 },
+        { y: H * 0.52, amp: 24, freq: 3.5, spd: 0.65, alpha: 0.08 },
+        { y: H * 0.54, amp: 20, freq: 5.5, spd: 0.95, alpha: 0.10, red: true },
       ];
 
       waves.forEach(w => {
@@ -202,11 +202,11 @@ export function StageCanvas({
       ctx!.fillStyle = bgColor;
       ctx!.fillRect(0, 0, W, H);
 
-      const floorY = H * 0.64;
+      const floorY = H * 0.56;
       const sw = Math.sin(time * 0.13);
       const pulse = 0.055 + Math.sin(time * 0.5) * 0.012;
       const tX = CX;
-      const tY = H * 0.57;
+      const tY = H * 0.50;
 
       drawSpotlight(sw * W * 0.04, -H * 0.02, tX, tY, Math.PI / 9 * 1.07 * 1.15 * 1.07, pulse);
       drawSpotlight(W + sw * W * 0.04, -H * 0.02, tX, tY, Math.PI / 9 * 1.07 * 1.15 * 1.07, pulse);
