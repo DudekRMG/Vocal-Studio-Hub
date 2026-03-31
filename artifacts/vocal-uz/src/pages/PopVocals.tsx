@@ -197,7 +197,7 @@ export default function PopVocals() {
           <div className="grid grid-cols-2 gap-[1px] bg-white/[0.08]">
             {pillars.map((p) => (
               <div key={p.title} className="bg-[#0f0f0f] p-8">
-                <div className="text-2xl text-[rgba(240,238,234,0.2)] mb-4">{p.icon}</div>
+                <div className="text-2xl mb-4" style={{ color: "#9d4edd" }}>{p.icon}</div>
                 <h3 className="font-display text-[1.2rem] tracking-[0.08em] mb-3 text-[#f0eeea]">{p.title}</h3>
                 <p className="text-[0.8rem] leading-[1.7] text-[rgba(240,238,234,0.4)]">{p.desc}</p>
               </div>
@@ -213,7 +213,7 @@ export default function PopVocals() {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-[1px] bg-white/[0.08]">
             {forWhom.map((item) => (
               <div key={item.title} className="bg-[#141414] p-10">
-                <h3 className="font-display text-[1.4rem] tracking-[0.08em] mb-4 text-[#f0eeea]">{item.title}</h3>
+                <h3 className="font-display text-[1.4rem] tracking-[0.08em] mb-4" style={{ color: "#9d4edd" }}>{item.title}</h3>
                 <p className="text-[0.85rem] leading-[1.8] text-[rgba(240,238,234,0.45)]">{item.desc}</p>
               </div>
             ))}
@@ -228,7 +228,7 @@ export default function PopVocals() {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-[1px] bg-white/[0.08]">
             {programSteps.map((step) => (
               <div key={step.num} className="bg-[#0f0f0f] p-10">
-                <div className="font-display text-[3.5rem] leading-none text-[rgba(240,238,234,0.06)] mb-6">{step.num}</div>
+                <div className="font-display text-[3.5rem] leading-none mb-6" style={{ color: "rgba(157,78,221,0.3)" }}>{step.num}</div>
                 <h3 className="font-display text-[1.2rem] tracking-[0.08em] mb-4 text-[#f0eeea]">{step.title}</h3>
                 <p className="text-[0.82rem] leading-[1.8] text-[rgba(240,238,234,0.45)]">{step.desc}</p>
               </div>
@@ -253,15 +253,15 @@ export default function PopVocals() {
       </section>
 
       {/* ── CTA BANNER ── */}
-      <section className="py-20 px-6 lg:px-12 bg-[#f0eeea] relative overflow-hidden">
+      <section className="py-20 px-6 lg:px-12 relative overflow-hidden" style={{ backgroundColor: "#9d4edd" }}>
         <div className="max-w-[1100px] mx-auto flex flex-col md:flex-row items-center justify-between gap-8">
           <div>
-            <h2 className="font-['Playfair_Display'] italic text-[clamp(2rem,4vw,3.5rem)] leading-[1] text-[#080808]">{ctaBannerText}</h2>
-            <p className="text-[0.9rem] text-[rgba(8,8,8,0.6)] mt-3">{ctaBannerSub}</p>
+            <h2 className="font-['Playfair_Display'] italic text-[clamp(2rem,4vw,3.5rem)] leading-[1] text-white">{ctaBannerText}</h2>
+            <p className="text-[0.9rem] text-[rgba(255,255,255,0.75)] mt-3">{ctaBannerSub}</p>
           </div>
           <a
             href="#book-pop"
-            className="flex-shrink-0 bg-[#080808] text-[#f0eeea] font-display text-[1.1rem] tracking-[0.15em] px-10 py-5 no-underline hover:bg-[#1a1a1a] whitespace-nowrap inline-flex items-center gap-3 group transition-colors duration-200"
+            className="flex-shrink-0 bg-white text-[#9d4edd] font-display text-[1.1rem] tracking-[0.15em] px-10 py-5 no-underline hover:bg-[#f0eeea] whitespace-nowrap inline-flex items-center gap-3 group transition-colors duration-200"
           >
             {ctaBtn}
             <svg className="transition-transform duration-200 group-hover:translate-x-1" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M5 12h14M12 5l7 7-7 7" /></svg>
@@ -281,7 +281,7 @@ export default function PopVocals() {
             <div className="w-10 h-[2px] bg-[#9d4edd] my-8" />
             <p className="text-[0.9rem] leading-[1.9] text-[rgba(240,238,234,0.5)]">{bookIntro}</p>
           </div>
-          <BookingForm />
+          <BookingForm accentColor="#9d4edd" />
         </div>
       </section>
     </>

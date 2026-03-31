@@ -4,9 +4,10 @@ import { t } from "@/lib/i18n";
 
 interface BookingFormProps {
   variant?: "kids";
+  accentColor?: string;
 }
 
-export function BookingForm({ variant }: BookingFormProps = {}) {
+export function BookingForm({ variant, accentColor }: BookingFormProps = {}) {
   const { lang } = useLang();
   const tx = t[lang].booking;
 
@@ -41,6 +42,7 @@ export function BookingForm({ variant }: BookingFormProps = {}) {
   };
 
   const isKids = variant === "kids";
+  const btnColor = accentColor ?? (isKids ? "#3b82f6" : "#e8002d");
   const inputClass = isKids
     ? "bg-[#f4f7fc] border border-[#ccd5e3] outline-none w-full px-[1.4rem] py-[1.2rem] font-['DM_Sans'] text-[0.85rem] font-light text-[#7a8fa8] placeholder-[#7a8fa8] transition-colors duration-200 focus:bg-[#eef1f8] focus:border-[#aab8cc]"
     : "bg-[#141414] border-none outline-none w-full px-[1.4rem] py-[1.2rem] font-['DM_Sans'] text-[0.85rem] font-light text-[#f0eeea] placeholder-[#555] transition-colors duration-200 focus:bg-[#1a1a1a]";
@@ -49,7 +51,7 @@ export function BookingForm({ variant }: BookingFormProps = {}) {
     <form onSubmit={handleSubmit} className={isKids ? "bg-white border border-[#d0dae8] p-10" : "bg-[#080808] border border-white/[0.08] p-10"}>
       {status === "success" ? (
         <div className="text-center py-12">
-          <div className={`text-5xl mb-4 ${isKids ? "text-[#3b82f6]" : "text-[#e8002d]"}`}>✓</div>
+          <div className="text-5xl mb-4" style={{ color: btnColor }}>✓</div>
           <h3 className={`font-display text-3xl tracking-[0.05em] mb-3 ${isKids ? "text-[#1a2535]" : ""}`}>{tx.successTitle}</h3>
           <p className={`text-[0.88rem] ${isKids ? "text-[#7a8fa8]" : "text-[rgba(240,238,234,0.5)]"}`}>{tx.successMsg}</p>
         </div>
@@ -112,7 +114,8 @@ export function BookingForm({ variant }: BookingFormProps = {}) {
           <button
             type="submit"
             disabled={status === "sending"}
-            className={`w-full border-none cursor-pointer font-display text-[1.1rem] tracking-[0.15em] py-[1.3rem] transition-all duration-200 hover:tracking-[0.22em] flex items-center justify-center gap-3 disabled:opacity-60 disabled:cursor-not-allowed ${isKids ? "bg-[#3b82f6] hover:bg-[#2563eb] text-[#f0eeea]" : "bg-[#e8002d] hover:bg-[#ff1a3d] text-[#f0eeea]"}`}
+            className="w-full border-none cursor-pointer font-display text-[1.1rem] tracking-[0.15em] py-[1.3rem] transition-all duration-200 hover:tracking-[0.22em] hover:opacity-90 flex items-center justify-center gap-3 disabled:opacity-60 disabled:cursor-not-allowed text-[#f0eeea]"
+            style={{ backgroundColor: btnColor }}
           >
             {status === "sending" ? tx.submitting : tx.submit}
             {status !== "sending" && (
