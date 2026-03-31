@@ -187,7 +187,7 @@ export function StageCanvas({ className }: { className?: string }) {
       const pulse = 0.055 + Math.sin(time * 0.5) * 0.012;
 
       const tX = CX;
-      const tY = H * 0.55;
+      const tY = H * 0.58;
 
       drawSpotlight(sw * W * 0.04, -H * 0.02, tX, tY, Math.PI / 9 * 1.07 * 1.15 * 1.07, pulse);
       drawSpotlight(W + sw * W * 0.04, -H * 0.02, tX, tY, Math.PI / 9 * 1.07 * 1.15 * 1.07, pulse);
