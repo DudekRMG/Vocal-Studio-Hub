@@ -31,8 +31,8 @@ export default function Home() {
       />
 
       {/* ── HERO ── */}
-      <section id="hero" className="relative h-screen overflow-hidden bg-[#080808]">
-        {/* Stage canvas animation */}
+      <section id="hero" className="relative h-screen overflow-hidden bg-[#080808] flex flex-col">
+        {/* Stage canvas animation — fills entire section */}
         <StageCanvas className="absolute inset-0" />
 
         {/* Noise overlay (scoped to hero) */}
@@ -44,10 +44,8 @@ export default function Home() {
           }}
         />
 
-        {/* Text composition — slogan (italic) → VOCAL.UZ → motto; group centered at 50vh */}
-        <div
-          className="absolute z-10 left-0 right-0 top-1/2 -translate-y-1/2 flex flex-col items-center pointer-events-none text-center px-6"
-        >
+        {/* Text composition — centered in the space above CTA + strip */}
+        <div className="relative z-10 flex-1 flex flex-col items-center justify-center pointer-events-none text-center px-6">
           <div className="font-['Playfair_Display'] italic text-[clamp(1rem,1.8vw,1.35rem)] text-[rgba(240,238,234,0.65)] mb-4 leading-snug animate-[fadeUp_0.6s_0.3s_both]">
             {tx.hero.slogan}
           </div>
@@ -61,11 +59,8 @@ export default function Home() {
           </div>
         </div>
 
-        {/* Professional tag + CTAs — below the sound waves, below floor wave */}
-        <div
-          className="absolute z-10 left-0 right-0 flex flex-col items-center gap-3 pointer-events-auto animate-[fadeUp_0.5s_0.5s_both]"
-          style={{ top: "70vh" }}
-        >
+        {/* Professional tag + CTAs */}
+        <div className="relative z-10 flex flex-col items-center gap-3 pointer-events-auto animate-[fadeUp_0.5s_0.5s_both] py-6">
           <span className="text-[0.6rem] tracking-[0.22em] uppercase text-[rgba(240,238,234,0.35)] pointer-events-none">
             {tx.hero.training}
           </span>
@@ -87,7 +82,7 @@ export default function Home() {
 
         {/* Course preview strip */}
         <div
-          className="absolute bottom-0 left-0 right-0 z-20 grid grid-cols-2 md:grid-cols-4 border-t border-white/[0.06]"
+          className="relative z-20 grid grid-cols-2 md:grid-cols-4 border-t border-white/[0.06]"
           style={{
             background: "rgba(8,8,8,0.6)",
             backdropFilter: "blur(12px)",
