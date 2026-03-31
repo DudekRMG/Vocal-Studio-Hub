@@ -129,13 +129,15 @@ export function StageCanvas({
       const mx = (mX - 0.5) * 38;
       const myAmp = 1 + (mY - 0.5) * 0.35;
 
+      const isMobile = W < 768;
+      const waveOffset = isMobile ? 0.30 : 0;
       type Wave = { y: number; amp: number; freq: number; spd: number; alpha: number; red?: boolean };
       const waves: Wave[] = [
-        { y: H * 0.46, amp: 14, freq: 7.0, spd: 1.35, alpha: 0.10 },
-        { y: H * 0.48, amp: 22, freq: 4.0, spd: 0.80, alpha: 0.09, red: true },
-        { y: H * 0.50, amp: 18, freq: 6.0, spd: 1.10, alpha: 0.11 },
-        { y: H * 0.52, amp: 24, freq: 3.5, spd: 0.65, alpha: 0.08 },
-        { y: H * 0.54, amp: 20, freq: 5.5, spd: 0.95, alpha: 0.10, red: true },
+        { y: H * (0.46 + waveOffset), amp: 14, freq: 7.0, spd: 1.35, alpha: 0.10 },
+        { y: H * (0.48 + waveOffset), amp: 22, freq: 4.0, spd: 0.80, alpha: 0.09, red: true },
+        { y: H * (0.50 + waveOffset), amp: 18, freq: 6.0, spd: 1.10, alpha: 0.11 },
+        { y: H * (0.52 + waveOffset), amp: 24, freq: 3.5, spd: 0.65, alpha: 0.08 },
+        { y: H * (0.54 + waveOffset), amp: 20, freq: 5.5, spd: 0.95, alpha: 0.10, red: true },
       ];
 
       waves.forEach(w => {
@@ -208,8 +210,9 @@ export function StageCanvas({
       const tX = CX;
       const tY = H * 0.50;
 
-      drawSpotlight(sw * W * 0.04, -H * 0.02, tX, tY, Math.PI / 9 * 1.07 * 1.15 * 1.07, pulse);
-      drawSpotlight(W + sw * W * 0.04, -H * 0.02, tX, tY, Math.PI / 9 * 1.07 * 1.15 * 1.07, pulse);
+      const spreadBase = Math.PI / 9 * 1.07 * 1.15 * 1.07 * (W < 768 ? 1.3 : 1);
+      drawSpotlight(sw * W * 0.04, -H * 0.02, tX, tY, spreadBase, pulse);
+      drawSpotlight(W + sw * W * 0.04, -H * 0.02, tX, tY, spreadBase, pulse);
 
       drawFloor(floorY);
       drawFloorWave(floorY);
