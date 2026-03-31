@@ -66,7 +66,7 @@ export function CourseStrip({ exclude, isLight }: CourseStripProps) {
             <div className="text-[0.54rem] tracking-[0.28em] mb-2 font-display" style={{ color: c.color }}>
               {c.num}
             </div>
-            <div className="text-[0.88rem] font-bold mb-2 leading-tight transition-colors duration-200" style={{ color: titleColor }}>
+            <div className="text-[0.88rem] font-bold mb-2 leading-[1.45] transition-colors duration-200" style={{ color: titleColor }}>
               {titles[c.key]}
             </div>
             <div className="text-[0.75rem] leading-relaxed" style={{ color: descColor }}>

@@ -119,7 +119,7 @@ export function PageHero({
             {courseTitle}
           </span>
           <div
-            className="font-display leading-none tracking-[0.03em]"
+            className="font-display leading-[1.2] tracking-[0.03em]"
             style={{
               color: bandTagColor,
               fontSize: lang === "en" ? "clamp(2.4rem, 4.5vw, 5rem)" : "clamp(1.9rem, 3.5vw, 3.8rem)",
@@ -127,7 +127,7 @@ export function PageHero({
           >
             {courseTag}
           </div>
-          <div className="font-['Playfair_Display'] italic text-[0.9rem] mt-1" style={{ color: bandSubColor }}>
+          <div className="font-['Playfair_Display'] italic text-[0.9rem] mt-1 leading-[1.5]" style={{ color: bandSubColor }}>
             {courseSub}
           </div>
         </div>
@@ -243,10 +243,10 @@ export function PageHero({
               <span className="font-display tracking-[0.24em] block" style={{ color: accentColor, fontSize: lang === "en" ? "0.95rem" : "0.75rem" }}>
                 {courseTitle}
               </span>
-              <div className="font-display leading-none tracking-[0.03em]" style={{ color: bandTagColor, fontSize: lang === "en" ? "clamp(2.4rem, 4.5vw, 5rem)" : "clamp(1.9rem, 3.5vw, 3.8rem)" }}>
+              <div className="font-display leading-[1.2] tracking-[0.03em]" style={{ color: bandTagColor, fontSize: lang === "en" ? "clamp(2.4rem, 4.5vw, 5rem)" : "clamp(1.9rem, 3.5vw, 3.8rem)" }}>
                 {courseTag}
               </div>
-              <div className="font-['Playfair_Display'] italic text-[0.9rem] mt-1" style={{ color: bandSubColor }}>
+              <div className="font-['Playfair_Display'] italic text-[0.9rem] mt-1 leading-[1.5]" style={{ color: bandSubColor }}>
                 {courseSub}
               </div>
             </div>

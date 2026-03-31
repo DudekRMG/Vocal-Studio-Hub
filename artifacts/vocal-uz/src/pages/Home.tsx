@@ -98,7 +98,7 @@ export default function Home() {
               className={`px-5 pt-4 pb-5 no-underline group transition-all duration-300 hover:bg-white/[0.035]${i < 3 ? " border-r border-white/[0.05]" : ""}`}
             >
               <div className="text-[0.54rem] tracking-[0.28em] mb-2 font-display" style={{ color: c.color }}>{c.num}</div>
-              <div className="text-[0.88rem] font-bold text-[rgba(240,238,234,0.88)] mb-2 leading-tight group-hover:text-[#f0eeea] transition-colors duration-200">{c.title}</div>
+              <div className="text-[0.88rem] font-bold text-[rgba(240,238,234,0.88)] mb-2 leading-[1.45] group-hover:text-[#f0eeea] transition-colors duration-200">{c.title}</div>
               <div className="text-[0.75rem] text-[rgba(240,238,234,0.40)] leading-relaxed">{c.desc}</div>
             </Link>
           ))}
@@ -167,7 +167,7 @@ export default function Home() {
               className={`px-5 pt-5 pb-6 no-underline group transition-all duration-300 hover:bg-white/[0.035]${i < 3 ? " border-r border-white/[0.14]" : ""}`}
             >
               <div className="text-[0.54rem] tracking-[0.28em] mb-2 font-display" style={{ color: c.color }}>{c.num}</div>
-              <div className="text-[0.88rem] font-bold text-[rgba(240,238,234,0.88)] mb-2 leading-tight group-hover:text-[#f0eeea] transition-colors duration-200">{c.title}</div>
+              <div className="text-[0.88rem] font-bold text-[rgba(240,238,234,0.88)] mb-2 leading-[1.45] group-hover:text-[#f0eeea] transition-colors duration-200">{c.title}</div>
               <div className="text-[0.75rem] text-[rgba(240,238,234,0.40)] leading-relaxed">{c.desc}</div>
             </Link>
           ))}
