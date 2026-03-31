@@ -196,29 +196,6 @@ export function Nav() {
 
         {/* Mobile right controls */}
         <div className="flex md:hidden items-center gap-2">
-          <div className={`flex items-center overflow-hidden border ${isKids ? "border-[#1a2535]" : "border-white/[0.08]"}`}>
-            <button
-              onClick={() => setLang("ru")}
-              className={`font-display text-[0.85rem] tracking-[0.12em] px-2 py-1 border-none cursor-pointer transition-all duration-200 ${
-                lang === "ru"
-                  ? isKids ? "bg-[#1a2535] text-white" : "bg-[#f0eeea] text-[#080808]"
-                  : isKids ? "bg-transparent text-[#1a2535]/50" : "bg-transparent text-[#555]"
-              }`}
-            >
-              RU
-            </button>
-            <button
-              onClick={() => setLang("en")}
-              className={`font-display text-[0.85rem] tracking-[0.12em] px-2 py-1 border-none cursor-pointer transition-all duration-200 ${
-                lang === "en"
-                  ? isKids ? "bg-[#1a2535] text-white" : "bg-[#f0eeea] text-[#080808]"
-                  : isKids ? "bg-transparent text-[#1a2535]/50" : "bg-transparent text-[#555]"
-              }`}
-            >
-              EN
-            </button>
-          </div>
-
           <Link
             href={navBookHref}
             onClick={handleBookClick}
