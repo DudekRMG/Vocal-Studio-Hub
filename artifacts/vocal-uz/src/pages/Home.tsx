@@ -94,10 +94,10 @@ export default function Home() {
         >
           {(
             [
-              { num: "01", title: tx.nav.extreme, desc: tx.hero.stripDescs[0], color: "#e8002d",               href: `${base}/extreme`  },
-              { num: "02", title: tx.nav.pop,     desc: tx.hero.stripDescs[1], color: "#9d4edd",               href: `${base}/pop`      },
-              { num: "03", title: tx.nav.karaoke, desc: tx.hero.stripDescs[2], color: "#c9a84c",               href: `${base}/karaoke`  },
-              { num: "04", title: tx.nav.kids,    desc: tx.hero.stripDescs[3], color: "#3b82f6",               href: `${base}/kids`     },
+              { num: "01", title: tx.nav.extreme, desc: tx.hero.stripDescs[0], color: "#e8002d", href: `${base}/extreme#hero-bottom`  },
+              { num: "02", title: tx.nav.pop,     desc: tx.hero.stripDescs[1], color: "#9d4edd", href: `${base}/pop#hero-bottom`      },
+              { num: "03", title: tx.nav.karaoke, desc: tx.hero.stripDescs[2], color: "#c9a84c", href: `${base}/karaoke#hero-bottom`  },
+              { num: "04", title: tx.nav.kids,    desc: tx.hero.stripDescs[3], color: "#3b82f6", href: `${base}/kids#hero-bottom`     },
             ] as const
           ).map((c, i) => (
             <Link

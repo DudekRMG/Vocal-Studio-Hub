@@ -1,4 +1,4 @@
-import type { CSSProperties, ReactNode } from "react";
+import { useEffect, type CSSProperties, type ReactNode } from "react";
 import { StageCanvas } from "./StageCanvas";
 import { useLang } from "@/lib/langContext";
 import { t } from "@/lib/i18n";
@@ -44,6 +44,16 @@ export function PageHero({
   const { lang } = useLang();
   const tx = t[lang];
   const btnBg = ctaBg ?? accentColor;
+
+  useEffect(() => {
+    if (window.location.hash !== "#hero-bottom") return;
+    const el = document.getElementById("hero-bottom");
+    if (!el) return;
+    const nav = document.querySelector("nav");
+    const navH = nav ? nav.offsetHeight : 0;
+    const top = el.getBoundingClientRect().top + window.scrollY - navH;
+    window.scrollTo({ top, behavior: "instant" });
+  }, []);
 
   const scrollToContent = (e: React.MouseEvent) => {
     e.preventDefault();
@@ -140,6 +150,7 @@ export function PageHero({
 
       {/* Course bottom band */}
       <div
+        id="hero-bottom"
         className="relative z-20"
         style={{
           background: bandBg,

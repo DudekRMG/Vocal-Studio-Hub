@@ -20,6 +20,7 @@ export function Nav() {
   const isKids = location === "/kids";
   const isPop = location === "/pop";
   const isKaraoke = location === "/karaoke";
+  const isExtreme = location === "/extreme";
 
   const navBookHref = isKids
     ? `${base}/kids#book-kids`
@@ -27,6 +28,8 @@ export function Nav() {
     ? `${base}/pop#book-pop`
     : isKaraoke
     ? `${base}/karaoke#book-karaoke`
+    : isExtreme
+    ? `${base}/extreme#book-extreme`
     : `${base}/#booking`;
 
   const navBookStyle: React.CSSProperties = isKids

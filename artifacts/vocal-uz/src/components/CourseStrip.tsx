@@ -51,7 +51,7 @@ export function CourseStrip({ exclude, isLight }: CourseStripProps) {
         return (
           <Link
             key={c.key}
-            href={`${base}${c.path}`}
+            href={`${base}${c.path}#hero-bottom`}
             className="px-5 pt-4 pb-5 md:pt-5 md:pb-6 no-underline group transition-all duration-300"
             style={{
               borderRight: isLast ? undefined : `1px solid ${borderColor}`,
