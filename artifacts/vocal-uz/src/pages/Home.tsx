@@ -33,14 +33,86 @@ export default function Home() {
         ogImage="/logo.png"
       />
 
-      {/* ── HERO ── */}
-      <section id="hero" className="relative flex flex-col bg-[#080808] overflow-x-hidden md:h-screen md:overflow-hidden">
+      {/* ══ HERO ══
+          Two completely independent sections — mobile and desktop.
+          No shared layout elements or cross-breakpoint class dependencies.
+          Each canvas is constrained only to its own section, preventing the
+          height-mismatch that broke wave/spotlight positions. ══ */}
 
-        {/* Stage canvas — absolute inset-0 on the section so canvas H = full h-screen on
-            desktop, matching the reference. mobileStepMult widens mobile wave bundle 20%. */}
+      {/* ── MOBILE HERO (block md:hidden) ──
+          Canvas lives inside the min-h-[100svh] wrapper so its height equals
+          exactly the stable viewport — no coupling with the strip below. ── */}
+      <section id="hero" className="flex md:hidden flex-col relative bg-[#080808] overflow-x-hidden">
+
+        <div className="relative flex flex-col min-h-[100svh]">
+          <StageCanvas className="absolute inset-0" mobileStepMult={1.2} />
+          <div
+            className="absolute inset-0 z-[1] pointer-events-none opacity-[0.035]"
+            style={{
+              backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")`,
+              backgroundSize: "120px",
+            }}
+          />
+          <div className="relative z-10 flex-1 flex flex-col items-center justify-center pointer-events-none text-center px-6 pt-[4.75rem]">
+            <div className="[transform:translateY(7svh)]">
+              <div className="font-['Playfair_Display'] italic text-[clamp(1rem,1.8vw,1.35rem)] text-[rgba(240,238,234,0.65)] mb-4 leading-snug animate-[fadeUp_0.6s_0.3s_both]">
+                {tx.hero.slogan}
+              </div>
+              <div className="text-[clamp(3.8rem,10.5vw,10rem)] leading-none tracking-[0.1em] text-[#f0eeea] uppercase animate-[fadeUp_0.7s_0.4s_both]" style={{ fontFamily: "'Bebas Neue', sans-serif" }}>
+                VOCAL<span className="text-[#e8002d]">.</span>UZ
+              </div>
+              <div className="mt-5 text-[0.7rem] font-light uppercase tracking-[0.55em] text-[rgba(240,238,234,0.45)] animate-[fadeUp_0.6s_0.55s_both]">
+                {tx.hero.motto}
+              </div>
+            </div>
+          </div>
+          <div className="relative z-10 flex flex-col items-center gap-3 pointer-events-auto animate-[fadeUp_0.5s_0.5s_both] py-6 mb-[7svh]">
+            <span className="text-[0.6rem] tracking-[0.22em] uppercase text-[rgba(240,238,234,0.35)] pointer-events-none">
+              {tx.hero.training}
+            </span>
+            <div className="flex flex-row flex-wrap items-center justify-center gap-3">
+              <a href="#booking" className="bg-[#e8002d] text-[#f0eeea] font-display text-[0.72rem] tracking-[0.16em] px-6 py-3.5 no-underline transition-all duration-200 hover:bg-[#ff1a3d] uppercase">
+                {tx.hero.ctaBook}
+              </a>
+              <a href="#about" className="border border-white/[0.18] text-[rgba(240,238,234,0.6)] font-display text-[0.72rem] tracking-[0.16em] px-6 py-3.5 no-underline transition-all duration-200 hover:border-white/40 hover:text-[#f0eeea] uppercase">
+                {tx.hero.ctaLearn}
+              </a>
+            </div>
+          </div>
+        </div>
+
+        {/* Mobile strip — 2-column grid, original pre-landing-page style */}
+        <div
+          className="relative z-20 grid grid-cols-2 border-t border-white/[0.06] min-h-[220px]"
+          style={{ background: "rgba(8,8,8,0.6)", backdropFilter: "blur(12px)", WebkitBackdropFilter: "blur(12px)" }}
+        >
+          {([
+            { num: "01", title: tx.nav.extreme, desc: tx.hero.stripDescs[0], color: "#e8002d", href: `${base}/extreme#hero-bottom` },
+            { num: "02", title: tx.nav.pop,     desc: tx.hero.stripDescs[1], color: "#9d4edd", href: `${base}/pop#hero-bottom`     },
+            { num: "03", title: tx.nav.karaoke, desc: tx.hero.stripDescs[2], color: "#c9a84c", href: `${base}/karaoke#hero-bottom` },
+            { num: "04", title: tx.nav.kids,    desc: tx.hero.stripDescs[3], color: "#3b82f6", href: `${base}/kids#hero-bottom`    },
+          ] as const).map((c, i) => (
+            <Link
+              key={c.href}
+              href={c.href}
+              className={`px-5 pt-4 pb-5 no-underline group transition-all duration-300 hover:bg-white/[0.035]${i < 3 ? " border-r border-white/[0.05]" : ""}`}
+            >
+              <div className="text-[0.54rem] tracking-[0.28em] mb-2 font-display" style={{ color: c.color }}>{c.num}</div>
+              <div className="text-[0.88rem] font-bold text-[rgba(240,238,234,0.88)] mb-2 leading-tight group-hover:text-[#f0eeea] transition-colors duration-200">{c.title}</div>
+              <div className="text-[0.75rem] text-[rgba(240,238,234,0.40)] leading-relaxed">{c.desc}</div>
+            </Link>
+          ))}
+        </div>
+
+      </section>
+
+      {/* ── DESKTOP HERO (hidden md:flex) ──
+          Canvas is absolute inset-0 on the full h-screen section.
+          flex-1 inner wrapper pushes the 4-col strip to the bottom.
+          Strip uses landing-page band style at natural content height. ── */}
+      <section className="hidden md:flex flex-col relative bg-[#080808] overflow-x-hidden h-screen overflow-hidden">
+
         <StageCanvas className="absolute inset-0" mobileStepMult={1.2} />
-
-        {/* Noise overlay — also covers the full section */}
         <div
           className="absolute inset-0 z-[1] pointer-events-none opacity-[0.035]"
           style={{
@@ -49,92 +121,58 @@ export default function Home() {
           }}
         />
 
-        {/* Wrapper: z-10 so text/CTAs sit above the canvas. On mobile min-h-[100svh]
-            keeps the text block exactly one stable viewport tall (immune to iOS chrome). */}
-        <div className="relative z-10 flex flex-col min-h-[100svh] md:min-h-0 md:flex-1">
-
-        {/* Text composition — purely centered; pt offsets for the fixed nav */}
-        <div className="relative z-10 flex-1 flex flex-col items-center justify-center pointer-events-none text-center px-6 pt-[4.75rem] md:pt-[calc(12vh_+_7rem)]">
-          {/* Mobile-only: shift sign block 7% lower via exact CSS translate (no layout side-effects) */}
-          <div className="[transform:translateY(7svh)] md:[transform:translateY(0)]">
-            <div className="font-['Playfair_Display'] italic text-[clamp(1rem,1.8vw,1.35rem)] text-[rgba(240,238,234,0.65)] mb-4 leading-snug animate-[fadeUp_0.6s_0.3s_both]">
-              {tx.hero.slogan}
+        <div className="relative z-10 flex flex-col flex-1">
+          <div className="flex-1 flex flex-col items-center justify-center pointer-events-none text-center px-6 pt-[calc(12vh_+_7rem)]">
+            <div>
+              <div className="font-['Playfair_Display'] italic text-[clamp(1rem,1.8vw,1.35rem)] text-[rgba(240,238,234,0.65)] mb-4 leading-snug animate-[fadeUp_0.6s_0.3s_both]">
+                {tx.hero.slogan}
+              </div>
+              <div className="text-[clamp(3.8rem,10.5vw,10rem)] leading-none tracking-[0.1em] text-[#f0eeea] uppercase animate-[fadeUp_0.7s_0.4s_both]" style={{ fontFamily: "'Bebas Neue', sans-serif" }}>
+                VOCAL<span className="text-[#e8002d]">.</span>UZ
+              </div>
+              <div className="mt-5 text-[0.7rem] font-light uppercase tracking-[0.55em] text-[rgba(240,238,234,0.45)] animate-[fadeUp_0.6s_0.55s_both]">
+                {tx.hero.motto}
+              </div>
             </div>
-
-            <div className="text-[clamp(3.8rem,10.5vw,10rem)] leading-none tracking-[0.1em] text-[#f0eeea] uppercase animate-[fadeUp_0.7s_0.4s_both]" style={{ fontFamily: "'Bebas Neue', sans-serif" }}>
-              VOCAL<span className="text-[#e8002d]">.</span>UZ
-            </div>
-
-            <div className="mt-5 text-[0.7rem] font-light uppercase tracking-[0.55em] text-[rgba(240,238,234,0.45)] animate-[fadeUp_0.6s_0.55s_both]">
-              {tx.hero.motto}
+          </div>
+          <div className="flex flex-col items-center gap-3 pointer-events-auto animate-[fadeUp_0.5s_0.5s_both] py-6">
+            <span className="text-[0.6rem] tracking-[0.22em] uppercase text-[rgba(240,238,234,0.35)] pointer-events-none">
+              {tx.hero.training}
+            </span>
+            <div className="flex flex-row flex-wrap items-center justify-center gap-3">
+              <a href="#booking" className="bg-[#e8002d] text-[#f0eeea] font-display text-[0.72rem] tracking-[0.16em] px-6 py-3.5 no-underline transition-all duration-200 hover:bg-[#ff1a3d] uppercase">
+                {tx.hero.ctaBook}
+              </a>
+              <a href="#about" className="border border-white/[0.18] text-[rgba(240,238,234,0.6)] font-display text-[0.72rem] tracking-[0.16em] px-6 py-3.5 no-underline transition-all duration-200 hover:border-white/40 hover:text-[#f0eeea] uppercase">
+                {tx.hero.ctaLearn}
+              </a>
             </div>
           </div>
         </div>
 
-        {/* Professional tag + CTAs — mb-[7svh] lifts block 7% off wrapper bottom on mobile */}
-        <div className="relative z-10 flex flex-col items-center gap-3 pointer-events-auto animate-[fadeUp_0.5s_0.5s_both] py-6 mb-[7svh] md:mb-0">
-          <span className="text-[0.6rem] tracking-[0.22em] uppercase text-[rgba(240,238,234,0.35)] pointer-events-none">
-            {tx.hero.training}
-          </span>
-          <div className="flex flex-row flex-wrap items-center justify-center gap-3">
-            <a
-              href="#booking"
-              className="bg-[#e8002d] text-[#f0eeea] font-display text-[0.72rem] tracking-[0.16em] px-6 py-3.5 no-underline transition-all duration-200 hover:bg-[#ff1a3d] uppercase"
-            >
-              {tx.hero.ctaBook}
-            </a>
-            <a
-              href="#about"
-              className="border border-white/[0.18] text-[rgba(240,238,234,0.6)] font-display text-[0.72rem] tracking-[0.16em] px-6 py-3.5 no-underline transition-all duration-200 hover:border-white/40 hover:text-[#f0eeea] uppercase"
-            >
-              {tx.hero.ctaLearn}
-            </a>
-          </div>
-        </div>
-
-        </div>{/* end mobile-viewport wrapper */}
-
-        {/* Course preview strip — styled to match landing-page hero-bottom band exactly.
-            Mobile: grid-cols-2 min-h-[220px] unchanged. Desktop: 4 equal columns,
-            same background/blur/border as PageHero hero-bottom, md:min-h-0 for
-            natural height matching the landing pages. */}
+        {/* Desktop strip — 4 equal columns, landing-page style */}
         <div
-          className="relative z-20 grid grid-cols-2 md:grid-cols-4 min-h-[220px] md:min-h-0"
-          style={{
-            background: "rgba(4,4,4,0.92)",
-            backdropFilter: "blur(16px)",
-            WebkitBackdropFilter: "blur(16px)",
-            borderTop: "1px solid rgba(255,255,255,0.14)",
-          }}
+          className="relative z-20 grid grid-cols-4"
+          style={{ background: "rgba(4,4,4,0.92)", backdropFilter: "blur(16px)", WebkitBackdropFilter: "blur(16px)", borderTop: "1px solid rgba(255,255,255,0.14)" }}
         >
-          {(
-            [
-              { num: "01", title: tx.nav.extreme, desc: tx.hero.stripDescs[0], color: "#e8002d", href: `${base}/extreme#hero-bottom`  },
-              { num: "02", title: tx.nav.pop,     desc: tx.hero.stripDescs[1], color: "#9d4edd", href: `${base}/pop#hero-bottom`      },
-              { num: "03", title: tx.nav.karaoke, desc: tx.hero.stripDescs[2], color: "#c9a84c", href: `${base}/karaoke#hero-bottom`  },
-              { num: "04", title: tx.nav.kids,    desc: tx.hero.stripDescs[3], color: "#3b82f6", href: `${base}/kids#hero-bottom`     },
-            ] as const
-          ).map((c, i) => (
+          {([
+            { num: "01", title: tx.nav.extreme, desc: tx.hero.stripDescs[0], color: "#e8002d", href: `${base}/extreme#hero-bottom` },
+            { num: "02", title: tx.nav.pop,     desc: tx.hero.stripDescs[1], color: "#9d4edd", href: `${base}/pop#hero-bottom`     },
+            { num: "03", title: tx.nav.karaoke, desc: tx.hero.stripDescs[2], color: "#c9a84c", href: `${base}/karaoke#hero-bottom` },
+            { num: "04", title: tx.nav.kids,    desc: tx.hero.stripDescs[3], color: "#3b82f6", href: `${base}/kids#hero-bottom`    },
+          ] as const).map((c, i) => (
             <Link
               key={c.href}
               href={c.href}
-              className={`px-5 pt-4 pb-5 md:pt-5 md:pb-6 no-underline group transition-all duration-300 hover:bg-white/[0.035]${i < 3 ? " border-r border-white/[0.14]" : ""}`}
+              className={`px-5 pt-5 pb-6 no-underline group transition-all duration-300 hover:bg-white/[0.035]${i < 3 ? " border-r border-white/[0.14]" : ""}`}
             >
-              <div
-                className="text-[0.54rem] tracking-[0.28em] mb-2 font-display"
-                style={{ color: c.color }}
-              >
-                {c.num}
-              </div>
-              <div className="text-[0.88rem] font-bold text-[rgba(240,238,234,0.88)] mb-2 leading-tight transition-colors duration-200 group-hover:text-[#f0eeea]">
-                {c.title}
-              </div>
-              <div className="text-[0.75rem] text-[rgba(240,238,234,0.40)] leading-relaxed">
-                {c.desc}
-              </div>
+              <div className="text-[0.54rem] tracking-[0.28em] mb-2 font-display" style={{ color: c.color }}>{c.num}</div>
+              <div className="text-[0.88rem] font-bold text-[rgba(240,238,234,0.88)] mb-2 leading-tight group-hover:text-[#f0eeea] transition-colors duration-200">{c.title}</div>
+              <div className="text-[0.75rem] text-[rgba(240,238,234,0.40)] leading-relaxed">{c.desc}</div>
             </Link>
           ))}
         </div>
+
       </section>
 
       {/* ── DISCIPLINES ── */}
