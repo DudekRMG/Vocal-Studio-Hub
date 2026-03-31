@@ -92,7 +92,7 @@ export default function Home() {
           {(
             [
               { num: "01", title: tx.nav.extreme, desc: tx.hero.stripDescs[0], color: "#e8002d",               href: `${base}/extreme`  },
-              { num: "02", title: tx.nav.pop,     desc: tx.hero.stripDescs[1], color: "rgba(240,238,234,0.5)", href: `${base}/pop`      },
+              { num: "02", title: tx.nav.pop,     desc: tx.hero.stripDescs[1], color: "#9d4edd",               href: `${base}/pop`      },
               { num: "03", title: tx.nav.karaoke, desc: tx.hero.stripDescs[2], color: "#c9a84c",               href: `${base}/karaoke`  },
               { num: "04", title: tx.nav.kids,    desc: tx.hero.stripDescs[3], color: "#3b82f6",               href: `${base}/kids`     },
             ] as const
@@ -169,10 +169,10 @@ export default function Home() {
           <div className="bg-[#0f0f0f] p-10 relative overflow-hidden group transition-colors duration-300 hover:bg-[#131313]">
             <div
               className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-400 pointer-events-none"
-              style={{ background: "radial-gradient(ellipse 60% 50% at 80% 20%, rgba(240,238,234,.04) 0%, transparent 70%)" }}
+              style={{ background: "radial-gradient(ellipse 60% 50% at 80% 20%, rgba(157,78,221,.09) 0%, transparent 70%)" }}
             />
-            <span className="absolute top-8 right-8 font-display text-[5rem] leading-none text-[rgba(240,238,234,0.04)]">02</span>
-            <span className="text-[0.65rem] tracking-[0.28em] uppercase text-[#555] mb-6 block">{tx.disciplines.popTag}</span>
+            <span className="absolute top-8 right-8 font-display text-[5rem] leading-none" style={{ color: "rgba(157,78,221,0.1)" }}>02</span>
+            <span className="text-[0.65rem] tracking-[0.28em] uppercase mb-6 block" style={{ color: "#9d4edd" }}>{tx.disciplines.popTag}</span>
             <h3 className="font-['Playfair_Display'] italic text-[clamp(1.8rem,3vw,2.8rem)] leading-[1] mb-6 text-[rgba(240,238,234,0.9)]">
               {tx.disciplines.popTitle}
             </h3>
@@ -182,14 +182,15 @@ export default function Home() {
             <ul className="list-none m-0 p-0 flex flex-col gap-3 mb-10">
               {tx.disciplines.popList.map((item) => (
                 <li key={item} className="text-[0.78rem] text-[rgba(240,238,234,0.45)] flex items-center gap-4">
-                  <span className="w-5 h-[1px] bg-[#555] flex-shrink-0" />
+                  <span className="w-5 h-[1px] flex-shrink-0" style={{ backgroundColor: "#9d4edd" }} />
                   {item}
                 </li>
               ))}
             </ul>
             <Link
               href={`${base}/pop`}
-              className="text-[0.72rem] tracking-[0.2em] uppercase text-[#f0eeea] no-underline inline-flex items-center gap-3 transition-all duration-200 hover:gap-5"
+              className="text-[0.72rem] tracking-[0.2em] uppercase no-underline inline-flex items-center gap-3 transition-all duration-200 hover:gap-5"
+              style={{ color: "#9d4edd" }}
             >
               {tx.disciplines.popCta}
               <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M5 12h14M12 5l7 7-7 7" /></svg>
