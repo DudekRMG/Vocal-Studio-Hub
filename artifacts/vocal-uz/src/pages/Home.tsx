@@ -252,7 +252,7 @@ export default function Home() {
               style={{ background: "radial-gradient(ellipse 50% 80% at 80% 50%, rgba(59,130,246,0.12) 0%, transparent 70%)" }}
             />
             <div
-              className="absolute top-1/2 right-8 -translate-y-1/2 font-display text-[5rem] md:text-[12rem] leading-none pointer-events-none select-none z-0"
+              className="absolute top-8 md:top-1/2 right-8 md:-translate-y-1/2 font-display text-[5rem] md:text-[12rem] leading-none pointer-events-none select-none z-0"
               style={{ color: "rgba(59,130,246,0.07)" }}
             >
               04
