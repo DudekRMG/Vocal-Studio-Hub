@@ -2,6 +2,7 @@ import { useLang } from "@/lib/langContext";
 import { t } from "@/lib/i18n";
 import { SeoHead } from "@/components/SeoHead";
 import { BookingForm } from "@/components/BookingForm";
+import { PageHero } from "@/components/PageHero";
 
 export default function PopVocals() {
   const { lang } = useLang();
@@ -170,31 +171,17 @@ export default function PopVocals() {
       />
 
       {/* ── HERO ── */}
-      <section className="min-h-[70vh] flex flex-col justify-end px-6 lg:px-12 pt-36 pb-20 bg-[#0f0f0f] relative overflow-hidden border-b border-white/[0.08]">
-        <div className="absolute inset-0 pointer-events-none" style={{ background: "radial-gradient(ellipse 70% 60% at 80% 40%, rgba(240,238,234,.04) 0%, transparent 70%)" }} />
-        <div
-          className="absolute top-1/2 -right-6 rotate-90 font-['Playfair_Display'] italic text-[22vw] text-[rgba(240,238,234,0.025)] pointer-events-none whitespace-nowrap leading-none"
-          style={{ transformOrigin: "right center" }}
-        >
-          Pop
-        </div>
-        <div className="max-w-[1100px] mx-auto w-full">
-          <span className="text-[0.68rem] tracking-[0.28em] uppercase text-[#555] block mb-5">{hero.tag}</span>
-          <h1 className="font-['Playfair_Display'] italic text-[clamp(4rem,9vw,8rem)] leading-[0.9] mb-6">
-            {hero.title}
-            <span className="block text-[#e8002d]">{hero.titleRed}</span>
-          </h1>
-          <p className="font-display text-[clamp(1.2rem,2.5vw,1.8rem)] tracking-[0.08em] text-[rgba(240,238,234,0.45)] mb-8 max-w-[500px]">{hero.sub}</p>
-          <p className="text-[0.9rem] leading-[1.9] text-[rgba(240,238,234,0.45)] max-w-[520px] mb-10">{hero.desc}</p>
-          <a
-            href="#book-pop"
-            className="inline-flex items-center gap-3 bg-[#f0eeea] text-[#080808] font-display text-[1.1rem] tracking-[0.15em] px-10 py-5 no-underline transition-all duration-200 hover:bg-white group"
-          >
-            {bookHeroLabel}
-            <svg className="transition-transform duration-200 group-hover:translate-x-1" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M5 12h14M12 5l7 7-7 7" /></svg>
-          </a>
-        </div>
-      </section>
+      <PageHero
+        accentColor="#b8b8b8"
+        heroTag={hero.tag}
+        heroTitle={<>{hero.title} <span style={{ color: "#e8002d" }}>{hero.titleRed}</span></>}
+        heroSub={hero.sub}
+        heroDesc={hero.desc}
+        ctaHref="#book-pop"
+        ctaLabel={bookHeroLabel}
+        ctaBg="#f0eeea"
+        ctaText="#080808"
+      />
 
       {/* ── WHAT IS ── */}
       <section className="py-28 px-6 lg:px-12 bg-[#080808] border-b border-white/[0.08]">

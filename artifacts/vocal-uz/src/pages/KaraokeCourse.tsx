@@ -2,6 +2,7 @@ import { useLang } from "@/lib/langContext";
 import { t } from "@/lib/i18n";
 import { SeoHead } from "@/components/SeoHead";
 import { BookingForm } from "@/components/BookingForm";
+import { PageHero } from "@/components/PageHero";
 
 const karaokeContent = {
   ru: {
@@ -271,31 +272,17 @@ export default function KaraokeCourse() {
       />
 
       {/* ── HERO ── */}
-      <section className="min-h-[70vh] flex flex-col justify-end px-6 lg:px-12 pt-36 pb-20 bg-[#080808] relative overflow-hidden border-b border-white/[0.08]">
-        <div className="absolute inset-0 pointer-events-none" style={{ background: `radial-gradient(ellipse 70% 60% at 20% 60%, ${goldDim} 0%, transparent 70%)` }} />
-        <div
-          className="absolute top-1/2 -left-6 -translate-y-1/2 -rotate-90 font-display text-[22vw] pointer-events-none whitespace-nowrap leading-none"
-          style={{ color: goldFaint, transformOrigin: "left center" }}
-        >
-          KARAOKE
-        </div>
-        <div className="max-w-[1100px] mx-auto w-full">
-          <span className="text-[0.68rem] tracking-[0.28em] uppercase block mb-5" style={{ color: gold }}>{c.heroTag}</span>
-          <h1 className="font-display text-[clamp(4rem,10vw,9rem)] leading-[0.85] tracking-[0.02em] mb-6">{c.heroTitle}</h1>
-          <p className="font-['Playfair_Display'] italic text-[clamp(1.2rem,2.5vw,1.8rem)] text-[rgba(240,238,234,0.45)] mb-8 max-w-[500px]">{c.heroSub}</p>
-          <p className="text-[0.9rem] leading-[1.9] text-[rgba(240,238,234,0.45)] max-w-[520px] mb-10">{c.heroDesc}</p>
-          <a
-            href="#book-karaoke"
-            className="inline-flex items-center gap-3 text-[#080808] font-display text-[1.1rem] tracking-[0.15em] px-10 py-5 no-underline transition-all duration-200 group"
-            style={{ backgroundColor: gold }}
-            onMouseEnter={e => (e.currentTarget.style.filter = "brightness(1.15)")}
-            onMouseLeave={e => (e.currentTarget.style.filter = "")}
-          >
-            {lang === "ru" ? "Записаться на курс" : "Enrol in Course"}
-            <svg className="transition-transform duration-200 group-hover:translate-x-1" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M5 12h14M12 5l7 7-7 7" /></svg>
-          </a>
-        </div>
-      </section>
+      <PageHero
+        accentColor="#c9a84c"
+        heroTag={c.heroTag}
+        heroTitle={c.heroTitle}
+        heroSub={c.heroSub}
+        heroDesc={c.heroDesc}
+        ctaHref="#book-karaoke"
+        ctaLabel={lang === "ru" ? "Записаться на курс" : "Enrol in Course"}
+        ctaBg="#c9a84c"
+        ctaText="#0a0a0a"
+      />
 
       {/* ── WHAT IS ── */}
       <section className="py-28 px-6 lg:px-12 bg-[#0f0f0f] border-b border-white/[0.08]">

@@ -1,6 +1,11 @@
 import { useEffect, useRef } from "react";
 
-export function StageCanvas({ className }: { className?: string }) {
+interface StageCanvasProps {
+  className?: string;
+  accentColor?: string;
+}
+
+export function StageCanvas({ className, accentColor = "#e8002d" }: StageCanvasProps) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
 
   useEffect(() => {
@@ -39,6 +44,14 @@ export function StageCanvas({ className }: { className?: string }) {
     const onVisibility = () => { hidden = document.hidden; };
     document.addEventListener("visibilitychange", onVisibility);
 
+    function hexToRgba(hex: string, alpha: number): string {
+      const c = hex.replace("#", "");
+      const r = parseInt(c.substring(0, 2), 16);
+      const g = parseInt(c.substring(2, 4), 16);
+      const b = parseInt(c.substring(4, 6), 16);
+      return `rgba(${r},${g},${b},${alpha.toFixed(3)})`;
+    }
+
     type P = { x: number; y: number; vx: number; vy: number; life: number; size: number; red: boolean };
 
     function makeParticle(init = false): P {
@@ -65,7 +78,7 @@ export function StageCanvas({ className }: { className?: string }) {
     function drawParticle(p: P) {
       const a = Math.max(0, p.life) * 0.5;
       ctx!.fillStyle = p.red
-        ? `rgba(232,0,45,${(a * 0.7).toFixed(3)})`
+        ? hexToRgba(accentColor, a * 0.7)
         : `rgba(255,255,255,${(a * 0.16).toFixed(3)})`;
       ctx!.beginPath();
       ctx!.arc(p.x, p.y, p.size, 0, Math.PI * 2);
@@ -120,7 +133,7 @@ export function StageCanvas({ className }: { className?: string }) {
 
       waves.forEach(w => {
         ctx!.save();
-        ctx!.strokeStyle = w.red ? "#e8002d" : "rgba(255,255,255,1)";
+        ctx!.strokeStyle = w.red ? accentColor : "rgba(255,255,255,1)";
         ctx!.lineWidth = w.red ? 1.3 : 0.85;
         ctx!.globalAlpha = w.alpha;
         ctx!.beginPath();
@@ -140,7 +153,7 @@ export function StageCanvas({ className }: { className?: string }) {
 
     function drawFloorWave(floorY: number) {
       ctx!.save();
-      ctx!.strokeStyle = "#e8002d";
+      ctx!.strokeStyle = accentColor;
       ctx!.lineWidth = 1.5;
       ctx!.globalAlpha = 0.22;
       ctx!.beginPath();
@@ -185,7 +198,6 @@ export function StageCanvas({ className }: { className?: string }) {
       const floorY = H * 0.64;
       const sw = Math.sin(time * 0.13);
       const pulse = 0.055 + Math.sin(time * 0.5) * 0.012;
-
       const tX = CX;
       const tY = H * 0.57;
 
@@ -224,7 +236,7 @@ export function StageCanvas({ className }: { className?: string }) {
       document.removeEventListener("visibilitychange", onVisibility);
       mq.removeEventListener("change", onMqChange);
     };
-  }, []);
+  }, [accentColor]);
 
   return (
     <canvas
