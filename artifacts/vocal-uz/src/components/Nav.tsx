@@ -113,7 +113,7 @@ export function Nav() {
       {/* Main header row */}
       <div className="flex items-center justify-between px-6 lg:px-12 py-5">
         <Link href={`${base}/`} className="flex-shrink-0">
-          <img src="/logo.png" alt="Vocal.uz" className="h-9 w-auto" />
+          <img src={isKaraoke ? "/logo_yellow.png" : "/logo.png"} alt="Vocal.uz" className="h-9 w-auto" />
         </Link>
 
         {/* Desktop nav */}
