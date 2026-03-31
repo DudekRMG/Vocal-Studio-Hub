@@ -382,6 +382,14 @@ export default function KaraokeCourse() {
           </div>
           <a
             href="#book-karaoke"
+            onClick={(e) => {
+              e.preventDefault();
+              const el = document.getElementById("book-karaoke");
+              if (!el) return;
+              const nav = document.querySelector("nav");
+              const navH = nav ? (nav as HTMLElement).offsetHeight : 0;
+              window.scrollTo({ top: el.getBoundingClientRect().top + window.scrollY - navH, behavior: "smooth" });
+            }}
             className="flex-shrink-0 bg-[#080808] text-[#f0eeea] font-display text-[1.1rem] tracking-[0.15em] px-10 py-5 no-underline transition-colors duration-200 hover:bg-[#1a1a1a] whitespace-nowrap inline-flex items-center gap-3 group"
           >
             {c.ctaBtn}
