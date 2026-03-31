@@ -131,23 +131,31 @@ export function StageCanvas({
       const mx = (mX - 0.5) * 38;
       const myAmp = 1 + (mY - 0.5) * 0.35;
 
-      // Desktop home-page canvas is ~760px (strip takes space from section);
-      // course-page canvases are ~900px+. Shift waves lower on short desktop canvases
-      // so they always land just below the VOCAL.UZ text on both layouts.
-      const autoShift = W >= 768 && H < 800 ? 0.10 : 0;
-      // On mobile: bundle is 70% thicker (wider spread) and amplitude 20% larger.
       const isMobile = W < 768;
-      const step = isMobile ? 0.017 * mobileStepMult : 0.010;
-      const aM   = isMobile ? 1.20  : 1.00;    // amplitude multiplier
       type Wave = { y: number; amp: number; freq: number; spd: number; alpha: number; red?: boolean };
-      const b = 0.62 + autoShift;
-      const waves: Wave[] = [
-        { y: H * b,              amp: 14 * aM, freq: 7.0, spd: 1.35, alpha: 0.10 },
-        { y: H * (b + step),     amp: 22 * aM, freq: 4.0, spd: 0.80, alpha: 0.09, red: true },
-        { y: H * (b + step * 2), amp: 18 * aM, freq: 6.0, spd: 1.10, alpha: 0.11 },
-        { y: H * (b + step * 3), amp: 24 * aM, freq: 3.5, spd: 0.65, alpha: 0.08 },
-        { y: H * (b + step * 4), amp: 20 * aM, freq: 5.5, spd: 0.95, alpha: 0.10, red: true },
-      ];
+      let waves: Wave[];
+      if (isMobile) {
+        // Mobile: wider spread (mobileStepMult), amplitude 20% larger, base at 62%
+        const step = 0.017 * mobileStepMult;
+        const aM = 1.20;
+        const b = 0.62;
+        waves = [
+          { y: H * b,              amp: 14 * aM, freq: 7.0, spd: 1.35, alpha: 0.10 },
+          { y: H * (b + step),     amp: 22 * aM, freq: 4.0, spd: 0.80, alpha: 0.09, red: true },
+          { y: H * (b + step * 2), amp: 18 * aM, freq: 6.0, spd: 1.10, alpha: 0.11 },
+          { y: H * (b + step * 3), amp: 24 * aM, freq: 3.5, spd: 0.65, alpha: 0.08 },
+          { y: H * (b + step * 4), amp: 20 * aM, freq: 5.5, spd: 0.95, alpha: 0.10, red: true },
+        ];
+      } else {
+        // Desktop: original positions from commit 94cca3ca
+        waves = [
+          { y: H * 0.53, amp: 14, freq: 7.0, spd: 1.35, alpha: 0.10 },
+          { y: H * 0.55, amp: 22, freq: 4.0, spd: 0.80, alpha: 0.09, red: true },
+          { y: H * 0.57, amp: 18, freq: 6.0, spd: 1.10, alpha: 0.11 },
+          { y: H * 0.59, amp: 24, freq: 3.5, spd: 0.65, alpha: 0.08 },
+          { y: H * 0.61, amp: 20, freq: 5.5, spd: 0.95, alpha: 0.10, red: true },
+        ];
+      }
 
       waves.forEach(w => {
         ctx!.save();
@@ -213,14 +221,15 @@ export function StageCanvas({
       ctx!.fillStyle = bgColor;
       ctx!.fillRect(0, 0, W, H);
 
-      const autoShift = W >= 768 && H < 800 ? 0.10 : 0;
-      const floorY = H * (0.68 + autoShift);
+      const isMobile = W < 768;
+      // Desktop: original values from commit 94cca3ca; Mobile: improved values
+      const floorY  = isMobile ? H * 0.68 : H * 0.64;
       const sw = Math.sin(time * 0.13);
       const pulse = 0.055 + Math.sin(time * 0.5) * 0.012;
       const tX = CX;
-      const tY = H * (W < 768 ? 0.67 : 0.50);  // mobile: convergence point 17% lower
+      const tY = H * (isMobile ? 0.67 : 0.57);
 
-      const spreadBase = Math.PI / 9 * 1.07 * 1.15 * 1.07 * (W < 768 ? 1.3 : 1);
+      const spreadBase = Math.PI / 9 * 1.07 * 1.15 * 1.07 * (isMobile ? 1.3 : 1);
       drawSpotlight(sw * W * 0.04, -H * 0.02, tX, tY, spreadBase, pulse);
       drawSpotlight(W + sw * W * 0.04, -H * 0.02, tX, tY, spreadBase, pulse);
 
