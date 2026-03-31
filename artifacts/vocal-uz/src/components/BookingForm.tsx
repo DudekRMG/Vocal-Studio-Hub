@@ -93,18 +93,23 @@ export function BookingForm({ variant, accentColor }: BookingFormProps = {}) {
                   className={kidsInnerInputClass}
                   style={{ borderBottom: "1px solid #ccd5e3" }}
                 />
-                <select
-                  name="goal"
-                  value={form.goal}
-                  onChange={handleChange}
-                  required
-                  className={`${kidsInnerInputClass} cursor-pointer ${form.goal ? "text-[#1a2535]" : ""}`}
-                >
-                  <option value="" disabled>{tx.goalPlaceholder}</option>
-                  {tx.goalOptions.map((opt) => (
-                    <option key={opt.value} value={opt.value}>{opt.label}</option>
-                  ))}
-                </select>
+                <div className="relative">
+                  <select
+                    name="goal"
+                    value={form.goal}
+                    onChange={handleChange}
+                    required
+                    className={`${kidsInnerInputClass} cursor-pointer appearance-none pr-10 ${form.goal ? "text-[#1a2535]" : ""}`}
+                  >
+                    <option value="" disabled>{tx.goalPlaceholder}</option>
+                    {tx.goalOptions.map((opt) => (
+                      <option key={opt.value} value={opt.value}>{opt.label}</option>
+                    ))}
+                  </select>
+                  <span className="pointer-events-none absolute inset-y-0 right-4 flex items-center text-[#7a8fa8]">
+                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><path d="M6 9l6 6 6-6"/></svg>
+                  </span>
+                </div>
                 {status === "error" && (
                   <p className="text-[#e8002d] text-[0.8rem] px-4 py-2 bg-[rgba(232,0,45,0.08)]">{tx.errorMsg}</p>
                 )}
@@ -142,18 +147,23 @@ export function BookingForm({ variant, accentColor }: BookingFormProps = {}) {
                   placeholder={tx.phonePlaceholder}
                   className={inputClass}
                 />
-                <select
-                  name="goal"
-                  value={form.goal}
-                  onChange={handleChange}
-                  required
-                  className={`${inputClass} cursor-pointer ${form.goal ? "text-[#f0eeea]" : "text-[#555]"}`}
-                >
-                  <option value="" disabled>{tx.goalPlaceholder}</option>
-                  {tx.goalOptions.map((opt) => (
-                    <option key={opt.value} value={opt.value}>{opt.label}</option>
-                  ))}
-                </select>
+                <div className="relative">
+                  <select
+                    name="goal"
+                    value={form.goal}
+                    onChange={handleChange}
+                    required
+                    className={`${inputClass} cursor-pointer appearance-none pr-10 ${form.goal ? "text-[#f0eeea]" : "text-[#555]"}`}
+                  >
+                    <option value="" disabled>{tx.goalPlaceholder}</option>
+                    {tx.goalOptions.map((opt) => (
+                      <option key={opt.value} value={opt.value}>{opt.label}</option>
+                    ))}
+                  </select>
+                  <span className="pointer-events-none absolute inset-y-0 right-4 flex items-center text-[#555]">
+                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><path d="M6 9l6 6 6-6"/></svg>
+                  </span>
+                </div>
               </div>
 
               {status === "error" && (
