@@ -45,7 +45,7 @@ export default function Home() {
         />
 
         {/* Text composition — centered in the space above CTA + strip, shifted down */}
-        <div className="relative z-10 flex-1 flex flex-col items-center justify-center pointer-events-none text-center px-6" style={{ paddingTop: "calc(12vh + 9rem)" }}>
+        <div className="relative z-10 flex-1 flex flex-col items-center justify-center pointer-events-none text-center px-6" style={{ paddingTop: "calc(12vh + 7rem)" }}>
           <div className="font-['Playfair_Display'] italic text-[clamp(1rem,1.8vw,1.35rem)] text-[rgba(240,238,234,0.65)] mb-4 leading-snug animate-[fadeUp_0.6s_0.3s_both]">
             {tx.hero.slogan}
           </div>
