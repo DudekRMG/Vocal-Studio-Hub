@@ -74,7 +74,7 @@ export function BookingForm({ variant, accentColor }: BookingFormProps = {}) {
 
           {isKids ? (
             <>
-              <div className="border border-b-0 border-[#ccd5e3] divide-y divide-[#ccd5e3]">
+              <div className="border border-b-0 border-[#ccd5e3]">
                 <input
                   name="name"
                   value={form.name}
@@ -82,6 +82,7 @@ export function BookingForm({ variant, accentColor }: BookingFormProps = {}) {
                   required
                   placeholder={tx.namePlaceholder}
                   className={kidsInnerInputClass}
+                  style={{ borderBottom: "1px solid #ccd5e3" }}
                 />
                 <input
                   name="phone"
@@ -90,6 +91,7 @@ export function BookingForm({ variant, accentColor }: BookingFormProps = {}) {
                   required
                   placeholder={tx.phonePlaceholder}
                   className={kidsInnerInputClass}
+                  style={{ borderBottom: "1px solid #ccd5e3" }}
                 />
                 <select
                   name="goal"
