@@ -128,10 +128,14 @@ body[data-lang="ru"] {
   --font-display-family: 'Oswald', sans-serif;
 }
 
-/* Reduce form input font size in Russian so Cyrillic appears the same visual size as Latin */
+/* Equalise form element font sizes across languages */
 body[data-lang="ru"] input,
 body[data-lang="ru"] select {
-  font-size: 0.76rem;
+  font-size: 0.80rem; /* same as EN base — Inter Cyrillic x-height matches Latin */
+}
+
+body[data-lang="ru"] button[type="submit"] {
+  font-size: 1.0rem; /* Oswald renders larger than Bebas Neue at equal size; trim to match */
 }
 
 @utility font-display {

@@ -45,10 +45,10 @@ export function BookingForm({ variant, accentColor }: BookingFormProps = {}) {
   const btnColor = accentColor ?? (isKids ? "#3b82f6" : "#e8002d");
 
   const inputClass = isKids
-    ? "bg-[#f4f7fc] border border-[#ccd5e3] outline-none w-full px-[1.4rem] py-[1.2rem] font-['Inter'] text-[0.85rem] font-light text-[#7a8fa8] placeholder-[#7a8fa8] transition-colors duration-200 focus:bg-[#eef1f8] focus:border-[#aab8cc]"
-    : "bg-[#141414] border-none outline-none w-full px-[1.4rem] py-[1.2rem] font-['Inter'] text-[0.85rem] font-light text-[#f0eeea] placeholder-[#555] transition-colors duration-200 focus:bg-[#1a1a1a]";
+    ? "bg-[#f4f7fc] border border-[#ccd5e3] outline-none w-full px-[1.4rem] py-[1.2rem] font-['Inter'] text-[0.80rem] font-light text-[#7a8fa8] placeholder-[#7a8fa8] transition-colors duration-200 focus:bg-[#eef1f8] focus:border-[#aab8cc]"
+    : "bg-[#141414] border-none outline-none w-full px-[1.4rem] py-[1.2rem] font-['Inter'] text-[0.80rem] font-light text-[#f0eeea] placeholder-[#555] transition-colors duration-200 focus:bg-[#1a1a1a]";
 
-  const kidsInnerInputClass = "bg-[#f4f7fc] border-none outline-none w-full px-[1.4rem] py-[1.2rem] font-['Inter'] text-[0.85rem] font-light text-[#7a8fa8] placeholder-[#7a8fa8] transition-colors duration-200 focus:bg-[#eef1f8]";
+  const kidsInnerInputClass = "bg-[#f4f7fc] border-none outline-none w-full px-[1.4rem] py-[1.2rem] font-['Inter'] text-[0.80rem] font-light text-[#7a8fa8] placeholder-[#7a8fa8] transition-colors duration-200 focus:bg-[#eef1f8]";
 
   const dividerColor = isKids ? "rgba(0,0,0,0.12)" : "rgba(255,255,255,0.08)";
   const dividerTextColor = isKids ? "rgba(0,0,0,0.3)" : "rgba(255,255,255,0.22)";
@@ -112,7 +112,7 @@ export function BookingForm({ variant, accentColor }: BookingFormProps = {}) {
               <button
                 type="submit"
                 disabled={status === "sending"}
-                className="w-full cursor-pointer font-display text-[1.1rem] tracking-[0.15em] py-[1.3rem] transition-all duration-200 hover:tracking-[0.22em] hover:opacity-90 flex items-center justify-center gap-3 disabled:opacity-60 disabled:cursor-not-allowed text-[#f0eeea]"
+                className="w-full cursor-pointer font-display text-[1.2rem] tracking-[0.15em] py-[1.3rem] transition-all duration-200 hover:tracking-[0.22em] hover:opacity-90 flex items-center justify-center gap-3 disabled:opacity-60 disabled:cursor-not-allowed text-[#f0eeea]"
                 style={{ backgroundColor: btnColor, border: `1px solid ${btnColor}` }}
               >
                 {status === "sending" ? tx.submitting : tx.submit}
@@ -163,7 +163,7 @@ export function BookingForm({ variant, accentColor }: BookingFormProps = {}) {
               <button
                 type="submit"
                 disabled={status === "sending"}
-                className="w-full border-none cursor-pointer font-display text-[1.1rem] tracking-[0.15em] py-[1.3rem] transition-all duration-200 hover:tracking-[0.22em] hover:opacity-90 flex items-center justify-center gap-3 disabled:opacity-60 disabled:cursor-not-allowed text-[#f0eeea]"
+                className="w-full border-none cursor-pointer font-display text-[1.2rem] tracking-[0.15em] py-[1.3rem] transition-all duration-200 hover:tracking-[0.22em] hover:opacity-90 flex items-center justify-center gap-3 disabled:opacity-60 disabled:cursor-not-allowed text-[#f0eeea]"
                 style={{ backgroundColor: btnColor }}
               >
                 {status === "sending" ? tx.submitting : tx.submit}
