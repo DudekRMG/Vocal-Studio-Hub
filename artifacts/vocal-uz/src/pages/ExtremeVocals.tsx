@@ -1,9 +1,11 @@
-import { Link } from "wouter";
 import { useLang } from "@/lib/langContext";
 import { t } from "@/lib/i18n";
 import { SeoHead } from "@/components/SeoHead";
 import { BookingForm } from "@/components/BookingForm";
+import { CourseStrip } from "@/components/CourseStrip";
 import { PageHero } from "@/components/PageHero";
+
+const PROMO_VIDEO_ID = "LXb3EKWsInQ";
 
 const extremeContent = {
   ru: {
@@ -293,9 +295,9 @@ export default function ExtremeVocals() {
       </section>
 
       {/* ── BOOKING ── */}
-      <section id="book-extreme" className="py-28 px-6 lg:px-12 bg-[#141414] border-t border-white/[0.08]">
-        <div className="max-w-[1100px] mx-auto grid grid-cols-1 md:grid-cols-[1fr_1.4fr] gap-20 items-start">
-          <div>
+      <section id="book-extreme" className="pt-28 pb-0 px-6 lg:px-12 bg-[#141414] border-t border-white/[0.08]">
+        <div className="max-w-[1100px] mx-auto">
+          <div className="mb-12">
             <span className="text-[0.68rem] tracking-[0.28em] uppercase text-[#e8002d] block mb-4">{t[lang].booking.eyebrow}</span>
             <h2 className="font-display text-[clamp(3rem,5vw,5rem)] leading-[0.95] tracking-[0.02em]">
               {c.bookTitle}
@@ -304,7 +306,30 @@ export default function ExtremeVocals() {
             <div className="w-10 h-[2px] bg-[#e8002d] my-8" />
             <p className="text-[0.9rem] leading-[1.9] text-[rgba(240,238,234,0.5)]">{c.bookIntro}</p>
           </div>
-          <BookingForm />
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-16">
+            <div className="relative w-full" style={{ paddingBottom: "56.25%" }}>
+              <iframe
+                className="absolute inset-0 w-full h-full"
+                src={`https://www.youtube.com/embed/${PROMO_VIDEO_ID}?rel=0&modestbranding=1`}
+                title="Vocal.uz — Studio Preview"
+                frameBorder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowFullScreen
+              />
+            </div>
+            <BookingForm />
+          </div>
+        </div>
+
+        {/* More options strip */}
+        <div className="border-t border-white/[0.06]">
+          <div className="max-w-[1100px] mx-auto py-4">
+            <p className="text-[0.62rem] tracking-[0.28em] uppercase text-[rgba(240,238,234,0.3)] px-5 pt-3 pb-1">
+              {t[lang].booking.moreOptions}
+            </p>
+          </div>
+          <CourseStrip exclude="extreme" />
         </div>
       </section>
     </>

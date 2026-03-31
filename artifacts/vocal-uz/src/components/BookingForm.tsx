@@ -11,10 +11,10 @@ export function BookingForm({ variant, accentColor }: BookingFormProps = {}) {
   const { lang } = useLang();
   const tx = t[lang].booking;
 
-  const [form, setForm] = useState({ name: "", phone: "", email: "", goal: "", message: "" });
+  const [form, setForm] = useState({ name: "", phone: "", goal: "" });
   const [status, setStatus] = useState<"idle" | "sending" | "success" | "error">("idle");
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
     setForm((prev) => ({ ...prev, [e.target.name]: e.target.value }));
     if (status !== "idle") setStatus("idle");
   };
@@ -32,7 +32,7 @@ export function BookingForm({ variant, accentColor }: BookingFormProps = {}) {
       const data = await res.json();
       if (data.success) {
         setStatus("success");
-        setForm({ name: "", phone: "", email: "", goal: "", message: "" });
+        setForm({ name: "", phone: "", goal: "" });
       } else {
         setStatus("error");
       }
@@ -57,7 +57,7 @@ export function BookingForm({ variant, accentColor }: BookingFormProps = {}) {
         </div>
       ) : (
         <>
-          <div className="grid grid-cols-2 gap-[1px] mb-[1px]">
+          <div className="flex flex-col gap-[1px] mb-[1px]">
             <input
               name="name"
               value={form.name}
@@ -74,20 +74,11 @@ export function BookingForm({ variant, accentColor }: BookingFormProps = {}) {
               placeholder={tx.phonePlaceholder}
               className={inputClass}
             />
-          </div>
-          <div className="grid grid-cols-2 gap-[1px] mb-[1px]">
-            <input
-              name="email"
-              value={form.email}
-              onChange={handleChange}
-              type="email"
-              placeholder={tx.emailPlaceholder}
-              className={inputClass}
-            />
             <select
               name="goal"
               value={form.goal}
               onChange={handleChange}
+              required
               className={`${inputClass} cursor-pointer ${form.goal ? (isKids ? "text-[#1a2535]" : "text-[#f0eeea]") : isKids ? "" : "text-[#555]"}`}
             >
               <option value="" disabled>{tx.goalPlaceholder}</option>
@@ -95,16 +86,6 @@ export function BookingForm({ variant, accentColor }: BookingFormProps = {}) {
                 <option key={opt.value} value={opt.value}>{opt.label}</option>
               ))}
             </select>
-          </div>
-          <div className="mb-[1px]">
-            <textarea
-              name="message"
-              value={form.message}
-              onChange={handleChange}
-              placeholder={tx.messagePlaceholder}
-              rows={3}
-              className={`${inputClass} resize-y min-h-[90px]`}
-            />
           </div>
 
           {status === "error" && (

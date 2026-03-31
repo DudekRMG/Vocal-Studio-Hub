@@ -3,8 +3,11 @@ import { useLang } from "@/lib/langContext";
 import { t } from "@/lib/i18n";
 import { SeoHead } from "@/components/SeoHead";
 import { BookingForm } from "@/components/BookingForm";
+import { CourseStrip } from "@/components/CourseStrip";
 import { useSanityContent } from "@/lib/useSanityContent";
 import { StageCanvas } from "@/components/StageCanvas";
+
+const PROMO_VIDEO_ID = "LXb3EKWsInQ";
 
 export default function Home() {
   const { lang } = useLang();
@@ -361,9 +364,10 @@ export default function Home() {
       </section>
 
       {/* ── BOOKING ── */}
-      <section id="booking" className="py-28 px-6 lg:px-12 bg-[#141414] border-t border-white/[0.08]">
-        <div className="max-w-[1100px] mx-auto grid grid-cols-1 md:grid-cols-[1fr_1.4fr] gap-20 items-start">
-          <div>
+      <section id="booking" className="pt-28 pb-0 px-6 lg:px-12 bg-[#141414] border-t border-white/[0.08]">
+        <div className="max-w-[1100px] mx-auto">
+          {/* Heading */}
+          <div className="mb-12">
             <span className="text-[0.68rem] tracking-[0.28em] uppercase text-[#e8002d] block mb-4">
               {tx.booking.eyebrow}
             </span>
@@ -385,7 +389,31 @@ export default function Home() {
               ))}
             </div>
           </div>
-          <BookingForm />
+
+          {/* Video + Form */}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-16">
+            <div className="relative w-full" style={{ paddingBottom: "56.25%" }}>
+              <iframe
+                className="absolute inset-0 w-full h-full"
+                src={`https://www.youtube.com/embed/${PROMO_VIDEO_ID}?rel=0&modestbranding=1`}
+                title="Vocal.uz — Studio Preview"
+                frameBorder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowFullScreen
+              />
+            </div>
+            <BookingForm />
+          </div>
+        </div>
+
+        {/* Course strip — all 4 courses */}
+        <div className="border-t border-white/[0.06]">
+          <div className="max-w-[1100px] mx-auto py-4">
+            <p className="text-[0.62rem] tracking-[0.28em] uppercase text-[rgba(240,238,234,0.3)] px-5 pt-3 pb-1">
+              {tx.booking.coursesTitle}
+            </p>
+          </div>
+          <CourseStrip />
         </div>
       </section>
     </>

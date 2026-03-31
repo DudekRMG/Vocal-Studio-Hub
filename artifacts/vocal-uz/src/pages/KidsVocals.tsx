@@ -2,7 +2,10 @@ import { useLang } from "@/lib/langContext";
 import { t } from "@/lib/i18n";
 import { SeoHead } from "@/components/SeoHead";
 import { BookingForm } from "@/components/BookingForm";
+import { CourseStrip } from "@/components/CourseStrip";
 import { PageHero } from "@/components/PageHero";
+
+const PROMO_VIDEO_ID = "LXb3EKWsInQ";
 
 const blue = "#3b82f6";
 const blueDim = "rgba(59,130,246,0.09)";
@@ -372,9 +375,9 @@ export default function KidsVocals() {
       </section>
 
       {/* ── BOOKING ── */}
-      <section id="book-kids" className="py-28 px-6 lg:px-12 border-t" style={{ backgroundColor: bgCardAlt, borderColor: "rgba(0,0,0,0.07)" }}>
-        <div className="max-w-[1100px] mx-auto grid grid-cols-1 md:grid-cols-[1fr_1.4fr] gap-20 items-start">
-          <div>
+      <section id="book-kids" className="pt-28 pb-0 px-6 lg:px-12 border-t" style={{ backgroundColor: bgCardAlt, borderColor: "rgba(0,0,0,0.07)" }}>
+        <div className="max-w-[1100px] mx-auto">
+          <div className="mb-12">
             <span className="text-[0.68rem] tracking-[0.28em] uppercase block mb-4" style={{ color: blue }}>{tx.booking.eyebrow}</span>
             <h2 className="font-display text-[clamp(3rem,5vw,5rem)] leading-[0.95] tracking-[0.02em] text-[#0f1016]">
               {c.bookTitle}
@@ -383,7 +386,30 @@ export default function KidsVocals() {
             <div className="w-10 h-[2px] my-8" style={{ backgroundColor: blue }} />
             <p className="text-[0.9rem] leading-[1.9] text-[rgba(15,16,22,0.5)]">{c.bookIntro}</p>
           </div>
-          <BookingForm variant="kids" />
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-16">
+            <div className="relative w-full" style={{ paddingBottom: "56.25%" }}>
+              <iframe
+                className="absolute inset-0 w-full h-full"
+                src={`https://www.youtube.com/embed/${PROMO_VIDEO_ID}?rel=0&modestbranding=1`}
+                title="Vocal.uz — Studio Preview"
+                frameBorder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowFullScreen
+              />
+            </div>
+            <BookingForm variant="kids" />
+          </div>
+        </div>
+
+        {/* More options strip */}
+        <div className="border-t" style={{ borderColor: "rgba(0,0,0,0.07)" }}>
+          <div className="max-w-[1100px] mx-auto py-4">
+            <p className="text-[0.62rem] tracking-[0.28em] uppercase px-5 pt-3 pb-1" style={{ color: "rgba(15,16,22,0.3)" }}>
+              {tx.booking.moreOptions}
+            </p>
+          </div>
+          <CourseStrip exclude="kids" isLight />
         </div>
       </section>
     </>

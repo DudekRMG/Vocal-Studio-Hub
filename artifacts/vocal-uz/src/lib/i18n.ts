@@ -148,6 +148,9 @@ export const t = {
       successTitle: "Заявка отправлена!",
       successMsg: "Мы свяжемся с вами в ближайшее время.",
       errorMsg: "Не удалось отправить. Попробуйте ещё раз.",
+      moreOptions: "Другие направления",
+      moreOptionsDesc: "Ищете что-то другое? Посмотрите остальные наши курсы.",
+      coursesTitle: "Наши курсы",
     },
     footer: {
       tagline: "Ваш голос — ваш инструмент",
@@ -323,6 +326,9 @@ export const t = {
       successTitle: "Inquiry sent!",
       successMsg: "We will get in touch with you shortly.",
       errorMsg: "Failed to send. Please try again.",
+      moreOptions: "More Courses",
+      moreOptionsDesc: "Looking for something different? Explore our other programmes.",
+      coursesTitle: "Our Courses",
     },
     footer: {
       tagline: "Your voice is your instrument",
