@@ -288,7 +288,7 @@ export default function PopVocals() {
 
         {/* Row 2 — 50/50 video | form */}
         <div className="pb-16 px-6 lg:px-12">
-          <div className="max-w-[1100px] mx-auto grid grid-cols-1 md:grid-cols-2 gap-6 items-start">
+          <div className="max-w-[1100px] mx-auto grid grid-cols-1 md:grid-cols-2 gap-6 items-center">
             <div className="relative w-full" style={{ paddingBottom: "56.25%" }}>
               <iframe
                 className="absolute inset-0 w-full h-full"
@@ -303,7 +303,13 @@ export default function PopVocals() {
           </div>
         </div>
 
-        {/* Row 3 — Full width course strip */}
+        {/* Row 3 — Full width course strip with heading */}
+        <div className="border-t border-white/[0.06] pt-12 pb-6 px-6 lg:px-12">
+          <div className="max-w-[1100px] mx-auto mb-6">
+            <span className="text-[0.62rem] tracking-[0.28em] uppercase block mb-3" style={{ color: "#9d4edd" }}>{tx.booking.moreOptions}</span>
+            <p className="text-[0.88rem] text-[rgba(240,238,234,0.45)] leading-relaxed">{tx.booking.moreOptionsDesc}</p>
+          </div>
+        </div>
         <CourseStrip exclude="pop" />
       </section>
     </>

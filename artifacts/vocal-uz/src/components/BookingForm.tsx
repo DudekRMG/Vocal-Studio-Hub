@@ -43,12 +43,19 @@ export function BookingForm({ variant, accentColor }: BookingFormProps = {}) {
 
   const isKids = variant === "kids";
   const btnColor = accentColor ?? (isKids ? "#3b82f6" : "#e8002d");
+
   const inputClass = isKids
     ? "bg-[#f4f7fc] border border-[#ccd5e3] outline-none w-full px-[1.4rem] py-[1.2rem] font-['DM_Sans'] text-[0.85rem] font-light text-[#7a8fa8] placeholder-[#7a8fa8] transition-colors duration-200 focus:bg-[#eef1f8] focus:border-[#aab8cc]"
     : "bg-[#141414] border-none outline-none w-full px-[1.4rem] py-[1.2rem] font-['DM_Sans'] text-[0.85rem] font-light text-[#f0eeea] placeholder-[#555] transition-colors duration-200 focus:bg-[#1a1a1a]";
 
+  const dividerColor = isKids ? "rgba(0,0,0,0.12)" : "rgba(255,255,255,0.08)";
+  const dividerTextColor = isKids ? "rgba(0,0,0,0.3)" : "rgba(255,255,255,0.22)";
+
   return (
-    <form onSubmit={handleSubmit} className={isKids ? "bg-white border border-[#d0dae8] p-10" : "bg-[#080808] border border-white/[0.08] p-10"}>
+    <form
+      onSubmit={handleSubmit}
+      className={isKids ? "bg-white border border-[#d0dae8] pt-6 px-10 pb-10" : "bg-[#080808] border border-white/[0.08] pt-6 px-10 pb-10"}
+    >
       {status === "success" ? (
         <div className="text-center py-12">
           <div className="text-5xl mb-4" style={{ color: btnColor }}>✓</div>
@@ -57,9 +64,10 @@ export function BookingForm({ variant, accentColor }: BookingFormProps = {}) {
         </div>
       ) : (
         <>
-          {/* Social proof */}
-          <p className={`text-[0.75rem] tracking-[0.04em] text-center mb-6 pb-6 ${isKids ? "text-[#5a7a9f] border-b border-[#ccd5e3]" : "text-[rgba(240,238,234,0.38)] border-b border-white/[0.07]"}`}>
-            {tx.socialProof}
+          {/* Social proof — no divider line, stars in accent color, text white/dark */}
+          <p className="text-center mb-5 tracking-[0.1em] uppercase text-[0.68rem]">
+            <span style={{ color: btnColor }}>★★★★★</span>
+            <span className={`ml-2 ${isKids ? "text-[#1a2535]" : "text-white"}`}>{tx.socialProof}</span>
           </p>
 
           <div className="flex flex-col gap-[1px] mb-[1px]">
@@ -110,7 +118,33 @@ export function BookingForm({ variant, accentColor }: BookingFormProps = {}) {
               </svg>
             )}
           </button>
-          <p className={`mt-5 text-[0.72rem] text-center tracking-[0.04em] ${isKids ? "text-[#7a8fa8]" : "text-[#555]"}`}>{tx.note}</p>
+
+          {/* Note */}
+          <p className={`mt-4 text-[0.72rem] text-center tracking-[0.04em] ${isKids ? "text-[#7a8fa8]" : "text-[#555]"}`}>{tx.note}</p>
+
+          {/* Divider */}
+          <div className="flex items-center gap-3 mt-6 mb-4">
+            <div className="flex-1 h-px" style={{ backgroundColor: dividerColor }} />
+            <span className="text-[0.6rem] tracking-[0.14em] uppercase whitespace-nowrap" style={{ color: dividerTextColor }}>
+              {tx.callDivider}
+            </span>
+            <div className="flex-1 h-px" style={{ backgroundColor: dividerColor }} />
+          </div>
+
+          {/* Call button */}
+          <a
+            href="tel:+998338622589"
+            className="w-full flex items-center justify-center gap-3 py-[1rem] px-5 border bg-transparent no-underline transition-all duration-200 hover:opacity-75"
+            style={{ borderColor: btnColor, color: isKids ? btnColor : "#f0eeea" }}
+          >
+            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" style={{ flexShrink: 0 }}>
+              <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.4 12a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.51 1.2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.73A16 16 0 0 0 15.27 16.09l.86-.86a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/>
+            </svg>
+            <span className="flex flex-col items-center leading-tight">
+              <span className="font-display text-[0.85rem] tracking-[0.1em] uppercase">+998 33 VOC·AL·UZ</span>
+              <span className="text-[0.7rem] mt-[3px]" style={{ opacity: 0.5 }}>+998 33 862-25-89</span>
+            </span>
+          </a>
         </>
       )}
     </form>

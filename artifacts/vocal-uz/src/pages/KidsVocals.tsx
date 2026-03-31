@@ -391,7 +391,7 @@ export default function KidsVocals() {
 
         {/* Row 2 — 50/50 video | form */}
         <div className="pb-16 px-6 lg:px-12">
-          <div className="max-w-[1100px] mx-auto grid grid-cols-1 md:grid-cols-2 gap-6 items-start">
+          <div className="max-w-[1100px] mx-auto grid grid-cols-1 md:grid-cols-2 gap-6 items-center">
             <div className="relative w-full" style={{ paddingBottom: "56.25%" }}>
               <iframe
                 className="absolute inset-0 w-full h-full"
@@ -406,7 +406,13 @@ export default function KidsVocals() {
           </div>
         </div>
 
-        {/* Row 3 — Full width course strip */}
+        {/* Row 3 — Full width course strip with heading */}
+        <div className="pt-12 pb-6 px-6 lg:px-12 border-t" style={{ borderColor: "rgba(0,0,0,0.07)" }}>
+          <div className="max-w-[1100px] mx-auto mb-6">
+            <span className="text-[0.62rem] tracking-[0.28em] uppercase block mb-3" style={{ color: blue }}>{tx.booking.moreOptions}</span>
+            <p className="text-[0.88rem] leading-relaxed" style={{ color: "rgba(15,16,22,0.45)" }}>{tx.booking.moreOptionsDesc}</p>
+          </div>
+        </div>
         <CourseStrip exclude="kids" isLight />
       </section>
     </>
