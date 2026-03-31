@@ -1,4 +1,5 @@
-import { Switch, Route, Router as WouterRouter } from "wouter";
+import { useEffect } from "react";
+import { Switch, Route, Router as WouterRouter, useLocation } from "wouter";
 import { Toaster } from "@/components/ui/toaster";
 import { LangProvider } from "@/lib/langContext";
 import { Nav } from "@/components/Nav";
@@ -10,16 +11,27 @@ import KaraokeCourse from "@/pages/KaraokeCourse";
 import KidsVocals from "@/pages/KidsVocals";
 import NotFound from "@/pages/not-found";
 
+function ScrollToTop() {
+  const [location] = useLocation();
+  useEffect(() => {
+    window.scrollTo({ top: 0, left: 0, behavior: "instant" });
+  }, [location]);
+  return null;
+}
+
 function Router() {
   return (
-    <Switch>
-      <Route path="/" component={Home} />
-      <Route path="/extreme" component={ExtremeVocals} />
-      <Route path="/pop" component={PopVocals} />
-      <Route path="/karaoke" component={KaraokeCourse} />
-      <Route path="/kids" component={KidsVocals} />
-      <Route component={NotFound} />
-    </Switch>
+    <>
+      <ScrollToTop />
+      <Switch>
+        <Route path="/" component={Home} />
+        <Route path="/extreme" component={ExtremeVocals} />
+        <Route path="/pop" component={PopVocals} />
+        <Route path="/karaoke" component={KaraokeCourse} />
+        <Route path="/kids" component={KidsVocals} />
+        <Route component={NotFound} />
+      </Switch>
+    </>
   );
 }
 
