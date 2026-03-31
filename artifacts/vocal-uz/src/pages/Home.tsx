@@ -95,9 +95,9 @@ export default function Home() {
 
         </div>{/* end mobile-viewport wrapper */}
 
-        {/* Course preview strip */}
+        {/* Course preview strip — min-h-[220px] on mobile aligns with landing page hero-bottom band height */}
         <div
-          className="relative z-20 grid grid-cols-2 md:grid-cols-4 border-t border-white/[0.06] md:min-h-[160px]"
+          className="relative z-20 grid grid-cols-2 md:grid-cols-4 border-t border-white/[0.06] min-h-[220px] md:min-h-[160px]"
           style={{
             background: "rgba(8,8,8,0.6)",
             backdropFilter: "blur(12px)",

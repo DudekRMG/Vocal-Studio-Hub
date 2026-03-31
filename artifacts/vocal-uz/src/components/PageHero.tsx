@@ -90,78 +90,87 @@ export function PageHero({
 
   return (
     <section
-      className="relative min-h-screen overflow-x-hidden flex flex-col"
+      className="relative overflow-x-hidden flex flex-col md:min-h-screen"
       style={{ background: bgColor, borderBottom: `1px solid ${sectionBorder}` }}
     >
+      {/* Canvas and noise cover the full section (absolute) */}
       <StageCanvas
         className="absolute inset-0"
         accentColor={accentColor}
         bgColor={bgColor}
         spotColorRgb={spotColorRgb}
       />
-
       <div className="absolute inset-0 z-[1] pointer-events-none opacity-[0.035]" style={noiseStyle} />
 
-      {/* VOCAL.UZ text block */}
-      <div
-        className="relative z-10 flex-1 flex flex-col items-center justify-center pointer-events-none text-center px-6"
-        style={{ paddingTop: "calc(12vh + 7rem)" }}
-      >
-        <div
-          className="font-['Playfair_Display'] italic text-[clamp(1rem,1.8vw,1.35rem)] mb-4 leading-snug animate-[fadeUp_0.6s_0.3s_both]"
-          style={{ color: sloganColor }}
-        >
-          {tx.hero.slogan}
+      {/* ── Mobile: exactly 100svh tall wrapper (like Home.tsx)
+             Desktop: flex-1 so it fills available space above hero-bottom ── */}
+      <div className="relative flex flex-col min-h-[100svh] md:min-h-0 md:flex-1">
+
+        {/* VOCAL.UZ text composition — centered, same mobile treatment as Home */}
+        <div className="relative z-10 flex-1 flex flex-col items-center justify-center pointer-events-none text-center px-6 pt-[4.75rem] md:pt-[calc(12vh+7rem)]">
+          {/* Mobile: shift sign block 7% lower via CSS translate (no layout side-effects) */}
+          <div className="[transform:translateY(7svh)] md:[transform:translateY(0)]">
+            <div
+              className="font-['Playfair_Display'] italic text-[clamp(1rem,1.8vw,1.35rem)] mb-4 leading-snug animate-[fadeUp_0.6s_0.3s_both]"
+              style={{ color: sloganColor }}
+            >
+              {tx.hero.slogan}
+            </div>
+
+            <div
+              className="text-[clamp(3.8rem,10.5vw,10rem)] leading-none tracking-[0.1em] uppercase animate-[fadeUp_0.7s_0.4s_both]"
+              style={{ fontFamily: "'Bebas Neue', sans-serif", color: titleColor }}
+            >
+              VOCAL<span style={{ color: accentColor }}>.</span>UZ
+            </div>
+
+            <div
+              className="mt-5 text-[0.7rem] font-light uppercase tracking-[0.55em] animate-[fadeUp_0.6s_0.55s_both]"
+              style={{ color: mottoColor }}
+            >
+              {tx.hero.motto}
+            </div>
+          </div>
         </div>
 
-        <div
-          className="text-[clamp(3.8rem,10.5vw,10rem)] leading-none tracking-[0.1em] uppercase animate-[fadeUp_0.7s_0.4s_both]"
-          style={{ fontFamily: "'Bebas Neue', sans-serif", color: titleColor }}
-        >
-          VOCAL<span style={{ color: accentColor }}>.</span>UZ
-        </div>
-
-        <div
-          className="mt-5 text-[0.7rem] font-light uppercase tracking-[0.55em] animate-[fadeUp_0.6s_0.55s_both]"
-          style={{ color: mottoColor }}
-        >
-          {tx.hero.motto}
-        </div>
-      </div>
-
-      {/* CTA band */}
-      <div className="relative z-10 flex flex-col items-center gap-3 pointer-events-auto animate-[fadeUp_0.5s_0.5s_both] py-6">
-        <span
-          className="text-[0.6rem] tracking-[0.22em] uppercase pointer-events-none"
-          style={{ color: trainingColor }}
-        >
-          {tx.hero.training}
-        </span>
-        <div className="flex flex-row flex-wrap items-center justify-center gap-3">
-          <a
-            href={ctaHref}
-            className="no-underline transition-all duration-200 hover:opacity-90 uppercase"
-            style={{ backgroundColor: btnBg, color: ctaText, fontFamily: "var(--font-display-family)", fontWeight: 700, fontSize: "0.72rem", letterSpacing: "0.16em", padding: "0.875rem 1.5rem" }}
+        {/* CTA band — mb-[7svh] lifts block 7% off wrapper bottom on mobile, matches Home */}
+        <div className="relative z-10 flex flex-col items-center gap-3 pointer-events-auto animate-[fadeUp_0.5s_0.5s_both] py-6 mb-[7svh] md:mb-0">
+          <span
+            className="text-[0.6rem] tracking-[0.22em] uppercase pointer-events-none"
+            style={{ color: trainingColor }}
           >
-            {ctaLabel}
-          </a>
-          <a
-            href="#course-content"
-            onClick={scrollToContent}
-            className="font-display text-[0.72rem] tracking-[0.16em] px-6 py-3.5 no-underline transition-all duration-200 uppercase"
-            style={{ border: `1px solid ${ghostBorder}`, color: ghostText }}
-            onMouseEnter={e => { (e.currentTarget as HTMLElement).style.color = ghostHoverText; (e.currentTarget as HTMLElement).style.borderColor = lightMode ? "rgba(15,16,22,0.4)" : "rgba(255,255,255,0.4)"; }}
-            onMouseLeave={e => { (e.currentTarget as HTMLElement).style.color = ghostText; (e.currentTarget as HTMLElement).style.borderColor = ghostBorder; }}
-          >
-            {tx.hero.ctaLearn}
-          </a>
+            {tx.hero.training}
+          </span>
+          <div className="flex flex-row flex-wrap items-center justify-center gap-3">
+            <a
+              href={ctaHref}
+              className="no-underline transition-all duration-200 hover:opacity-90 uppercase"
+              style={{ backgroundColor: btnBg, color: ctaText, fontFamily: "var(--font-display-family)", fontWeight: 700, fontSize: "0.72rem", letterSpacing: "0.16em", padding: "0.875rem 1.5rem" }}
+            >
+              {ctaLabel}
+            </a>
+            <a
+              href="#course-content"
+              onClick={scrollToContent}
+              className="font-display text-[0.72rem] tracking-[0.16em] px-6 py-3.5 no-underline transition-all duration-200 uppercase"
+              style={{ border: `1px solid ${ghostBorder}`, color: ghostText }}
+              onMouseEnter={e => { (e.currentTarget as HTMLElement).style.color = ghostHoverText; (e.currentTarget as HTMLElement).style.borderColor = lightMode ? "rgba(15,16,22,0.4)" : "rgba(255,255,255,0.4)"; }}
+              onMouseLeave={e => { (e.currentTarget as HTMLElement).style.color = ghostText; (e.currentTarget as HTMLElement).style.borderColor = ghostBorder; }}
+            >
+              {tx.hero.ctaLearn}
+            </a>
+          </div>
         </div>
-      </div>
 
-      {/* Course bottom band */}
+      </div>{/* end 100svh mobile wrapper */}
+
+      {/* ── Course bottom band ──
+          On mobile: sits naturally below the 100svh wrapper (starts just off-screen).
+          On desktop: pushed to the bottom of the min-h-screen section by the flex-1 wrapper above. */}
+      {/* min-h-[220px] on mobile matches the home course-strip height */}
       <div
         id="hero-bottom"
-        className="relative z-20"
+        className="relative z-20 min-h-[220px] md:min-h-0 flex flex-col justify-center md:block"
         style={{
           background: bandBg,
           backdropFilter: "blur(16px)",
