@@ -38,10 +38,10 @@ export const t = {
       ctaLearn: "Узнать больше",
       tagline: "Студия вокала · Ташкент",
       stripDescs: [
-        "Гроул, скрим, фрай — безопасно и технично",
-        "Постановка голоса, диапазон, чистота",
-        "12 уроков от нуля до сцены",
-        "Индивидуальная программа, 5–16 лет",
+        "Гроул, скрим, фрай — техника тяжёлого вокала без вреда для голоса. Мощь, контроль и уверенность.",
+        "Постановка голоса, расширение диапазона, чистота интонации. Пойте уверенно в любом стиле.",
+        "12 структурированных уроков от нуля до уверенного выступления. Репертуар и сценическая уверенность.",
+        "Индивидуальная программа для детей 5–16 лет. Техника, уверенность и любовь к музыке.",
       ],
     },
     disciplines: {
@@ -213,10 +213,10 @@ export const t = {
       ctaLearn: "Learn More",
       tagline: "Vocal Studio · Tashkent",
       stripDescs: [
-        "Growl, scream, fry — safe and technical",
-        "Voice placement, range, clean tone",
-        "12 lessons from zero to stage",
-        "Individual programme, ages 5–16",
+        "Growl, scream, fry — master heavy vocal techniques safely. Build raw power and control without strain.",
+        "Work on placement, range, and clean tone. Sing confidently and expressively in any style.",
+        "12 structured lessons from absolute beginner to confident stage performer with your own repertoire.",
+        "Individual programme for ages 5–16. Build vocal technique, stage confidence, and love for music.",
       ],
     },
     disciplines: {

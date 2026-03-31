@@ -125,42 +125,42 @@ export function StageCanvas({ className }: { className?: string }) {
       ctx!.restore();
     }
 
-    function drawMic(cx: number, floorY: number): { hx: number; hy: number } {
-      const poleH = Math.max(150, H * 0.55);
-      const topY = floorY - poleH;
-      const capsW = Math.max(9, poleH * 0.088);
-      const capsH = Math.max(24, poleH * 0.135);
+    function drawHangingMic(): { hx: number; hy: number } {
+      const capsW = 16;
+      const capsH = 50;
       const r = capsW / 2;
-      const hy = topY + capsH / 2;
+      const sway = Math.sin(time * 0.28) * 5;
+      const cx = CX + sway;
+      const cy = H * 0.16;
 
       ctx!.save();
 
-      ctx!.globalAlpha = 0.5;
-      ctx!.strokeStyle = "rgba(240,238,234,0.65)";
+      ctx!.globalAlpha = 0.55;
+      ctx!.strokeStyle = "rgba(240,238,234,0.75)";
       ctx!.lineWidth = 1.2;
       ctx!.beginPath();
-      ctx!.moveTo(cx, floorY);
-      ctx!.lineTo(cx, topY + capsH * 0.82);
+      ctx!.moveTo(CX + sway * 0.15, -90);
+      ctx!.quadraticCurveTo(CX + sway * 0.55, cy * 0.4, cx, cy - capsH / 2);
       ctx!.stroke();
 
-      ctx!.globalAlpha = 0.1;
+      ctx!.globalAlpha = 0.10;
       ctx!.fillStyle = "rgba(240,238,234,1)";
       ctx!.beginPath();
-      ctx!.roundRect(cx - capsW / 2, topY, capsW, capsH, r);
+      ctx!.roundRect(cx - capsW / 2, cy - capsH / 2, capsW, capsH, r);
       ctx!.fill();
 
-      ctx!.globalAlpha = 0.5;
-      ctx!.strokeStyle = "rgba(240,238,234,0.6)";
+      ctx!.globalAlpha = 0.55;
+      ctx!.strokeStyle = "rgba(240,238,234,0.7)";
       ctx!.lineWidth = 1;
       ctx!.beginPath();
-      ctx!.roundRect(cx - capsW / 2, topY, capsW, capsH, r);
+      ctx!.roundRect(cx - capsW / 2, cy - capsH / 2, capsW, capsH, r);
       ctx!.stroke();
 
-      ctx!.globalAlpha = 0.18;
-      ctx!.strokeStyle = "rgba(240,238,234,0.45)";
-      ctx!.lineWidth = 0.6;
-      for (let i = 1; i <= 3; i++) {
-        const ly = topY + capsH * (i / 4);
+      ctx!.globalAlpha = 0.20;
+      ctx!.strokeStyle = "rgba(240,238,234,0.5)";
+      ctx!.lineWidth = 0.7;
+      for (let i = 1; i <= 4; i++) {
+        const ly = cy - capsH / 2 + capsH * (i / 5);
         ctx!.beginPath();
         ctx!.moveTo(cx - r * 0.65, ly);
         ctx!.lineTo(cx + r * 0.65, ly);
@@ -168,7 +168,43 @@ export function StageCanvas({ className }: { className?: string }) {
       }
 
       ctx!.restore();
-      return { hx: cx, hy };
+      return { hx: cx, hy: cy };
+    }
+
+    function drawSoundWaves() {
+      const mx = (mX - 0.5) * 40;
+      const myAmp = 1 + (mY - 0.5) * 0.4;
+
+      type Wave = { y: number; amp: number; freq: number; spd: number; alpha: number; red?: boolean };
+      const waves: Wave[] = [
+        { y: H * 0.49, amp: 13, freq: 7.5, spd: 1.40, alpha: 0.10 },
+        { y: H * 0.52, amp: 24, freq: 4.2, spd: 0.85, alpha: 0.09, red: true },
+        { y: H * 0.54, amp: 18, freq: 6.1, spd: 1.15, alpha: 0.11 },
+        { y: H * 0.56, amp: 28, freq: 3.4, spd: 0.70, alpha: 0.08 },
+        { y: H * 0.58, amp: 16, freq: 8.3, spd: 1.65, alpha: 0.09 },
+        { y: H * 0.60, amp: 22, freq: 5.0, spd: 1.00, alpha: 0.10, red: true },
+        { y: H * 0.62, amp: 11, freq: 9.1, spd: 1.85, alpha: 0.07 },
+      ];
+
+      waves.forEach(w => {
+        ctx!.save();
+        ctx!.strokeStyle = w.red ? "#e8002d" : "rgba(255,255,255,1)";
+        ctx!.lineWidth = w.red ? 1.3 : 0.85;
+        ctx!.globalAlpha = w.alpha;
+        ctx!.beginPath();
+        for (let x = 0; x <= W; x += 2) {
+          const nx = x / W;
+          const env = Math.sin(nx * Math.PI);
+          const env2 = Math.pow(env, 1.5);
+          let y = w.y;
+          y += Math.sin(nx * w.freq + time * w.spd + mx) * w.amp * env2 * myAmp;
+          y += Math.sin(nx * w.freq * 0.5 + time * w.spd * 0.7) * w.amp * 0.3 * env2;
+          y += Math.sin(nx * w.freq * 2.2 + time * w.spd * 1.3) * w.amp * 0.12 * env2;
+          x === 0 ? ctx!.moveTo(x, y) : ctx!.lineTo(x, y);
+        }
+        ctx!.stroke();
+        ctx!.restore();
+      });
     }
 
     function drawFloorWave(floorY: number) {
@@ -221,15 +257,16 @@ export function StageCanvas({ className }: { className?: string }) {
       const pulse = 0.06 + Math.sin(time * 0.5) * 0.015;
 
       const tX = CX;
-      const tY = H * 0.38;
+      const tY = H * 0.50;
 
       drawSpotlight(sw * W * 0.04, -H * 0.02, tX, tY, Math.PI / 5.5, pulse);
       drawSpotlight(W + sw * W * 0.04, -H * 0.02, tX, tY, Math.PI / 5.5, pulse);
 
       drawFloor(floorY);
       drawFloorWave(floorY);
+      drawSoundWaves();
 
-      const { hx, hy } = drawMic(CX, floorY);
+      const { hx, hy } = drawHangingMic();
 
       const rp = 0.55 + Math.sin(time * 0.55) * 0.45;
       drawRing(hx, hy, 24 + Math.sin(time * 0.4) * 2.5, 0, "rgba(255,255,255,0.9)", 0.14 * rp);
@@ -237,19 +274,6 @@ export function StageCanvas({ className }: { className?: string }) {
       drawRing(hx, hy, 55 + Math.sin(time * 0.42 + 2) * 4, 4.2, "rgba(255,255,255,0.8)", 0.10 * rp);
 
       particles.forEach(p => { updateParticle(p); drawParticle(p); });
-
-      const la = 0.015 + Math.sin(time * 0.35) * 0.005;
-      ctx!.save();
-      ctx!.strokeStyle = `rgba(255,255,255,${la.toFixed(3)})`;
-      ctx!.lineWidth = 0.5;
-      for (let i = 0; i < 2; i++) {
-        const ly = H * 0.28 + i * H * 0.13 + Math.sin(time * 0.18 + i * 1.5) * 5;
-        ctx!.beginPath();
-        ctx!.moveTo(W * 0.08, ly);
-        ctx!.lineTo(W * 0.92, ly);
-        ctx!.stroke();
-      }
-      ctx!.restore();
     }
 
     const onMqChange = (e: MediaQueryListEvent) => {

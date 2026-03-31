@@ -44,45 +44,46 @@ export default function Home() {
           }}
         />
 
-        {/* Text block: training eyebrow → slogan → VOCAL.UZ wordmark → motto */}
+        {/* Text composition — moved lower: slogan (italic) → VOCAL.UZ → motto (bold) */}
         <div
           className="absolute z-10 left-0 right-0 top-0 flex flex-col items-center justify-start pointer-events-none text-center px-6"
-          style={{ height: "52vh", paddingTop: "17vh" }}
+          style={{ height: "60vh", paddingTop: "23vh" }}
         >
-          <span className="text-[0.62rem] tracking-[0.22em] uppercase text-[rgba(240,238,234,0.38)] mb-3 animate-[fadeUp_0.6s_0.3s_both]">
-            {tx.hero.training}
-          </span>
-
-          <div className="text-[clamp(1rem,1.8vw,1.35rem)] text-[rgba(240,238,234,0.65)] mb-4 leading-snug animate-[fadeUp_0.6s_0.4s_both]">
+          <div className="font-['Playfair_Display'] italic text-[clamp(1rem,1.8vw,1.35rem)] text-[rgba(240,238,234,0.65)] mb-4 leading-snug animate-[fadeUp_0.6s_0.3s_both]">
             {tx.hero.slogan}
           </div>
 
-          <div className="font-display text-[clamp(3.8rem,10.5vw,10rem)] leading-none tracking-[0.1em] text-[#f0eeea] animate-[fadeUp_0.7s_0.5s_both]">
+          <div className="font-display text-[clamp(3.8rem,10.5vw,10rem)] leading-none tracking-[0.1em] text-[#f0eeea] animate-[fadeUp_0.7s_0.4s_both]">
             VOCAL<span className="text-[#e8002d]">.</span>UZ
           </div>
 
-          <div className="mt-4 font-['Playfair_Display'] italic text-[clamp(1.1rem,2vw,1.5rem)] text-[rgba(240,238,234,0.7)] animate-[fadeUp_0.6s_0.65s_both]">
+          <div className="mt-4 font-bold text-[clamp(1.1rem,2vw,1.5rem)] text-[rgba(240,238,234,0.7)] tracking-[0.04em] animate-[fadeUp_0.6s_0.55s_both]">
             {tx.hero.motto}
           </div>
         </div>
 
-        {/* CTA row: sits above the floor wave at 64vh */}
+        {/* Professional tag + CTAs — below the sound waves, below floor wave */}
         <div
-          className="absolute z-10 left-0 right-0 flex flex-row flex-wrap items-center justify-center gap-3 pointer-events-auto animate-[fadeUp_0.5s_0.5s_both]"
-          style={{ top: "52vh" }}
+          className="absolute z-10 left-0 right-0 flex flex-col items-center gap-3 pointer-events-auto animate-[fadeUp_0.5s_0.5s_both]"
+          style={{ top: "67vh" }}
         >
-          <a
-            href="#booking"
-            className="bg-[#e8002d] text-[#f0eeea] font-display text-[0.72rem] tracking-[0.16em] px-6 py-3.5 no-underline transition-all duration-200 hover:bg-[#ff1a3d] uppercase"
-          >
-            {tx.hero.ctaBook}
-          </a>
-          <a
-            href="#about"
-            className="border border-white/[0.18] text-[rgba(240,238,234,0.6)] font-display text-[0.72rem] tracking-[0.16em] px-6 py-3.5 no-underline transition-all duration-200 hover:border-white/40 hover:text-[#f0eeea] uppercase"
-          >
-            {tx.hero.ctaLearn}
-          </a>
+          <span className="text-[0.6rem] tracking-[0.22em] uppercase text-[rgba(240,238,234,0.35)] pointer-events-none">
+            {tx.hero.training}
+          </span>
+          <div className="flex flex-row flex-wrap items-center justify-center gap-3">
+            <a
+              href="#booking"
+              className="bg-[#e8002d] text-[#f0eeea] font-display text-[0.72rem] tracking-[0.16em] px-6 py-3.5 no-underline transition-all duration-200 hover:bg-[#ff1a3d] uppercase"
+            >
+              {tx.hero.ctaBook}
+            </a>
+            <a
+              href="#about"
+              className="border border-white/[0.18] text-[rgba(240,238,234,0.6)] font-display text-[0.72rem] tracking-[0.16em] px-6 py-3.5 no-underline transition-all duration-200 hover:border-white/40 hover:text-[#f0eeea] uppercase"
+            >
+              {tx.hero.ctaLearn}
+            </a>
+          </div>
         </div>
 
         {/* Course preview strip */}
@@ -113,10 +114,10 @@ export default function Home() {
               >
                 {c.num}
               </div>
-              <div className="text-[0.76rem] font-medium text-[rgba(240,238,234,0.78)] mb-1 leading-tight transition-colors duration-200 group-hover:text-[#f0eeea]">
+              <div className="text-[0.88rem] font-bold text-[rgba(240,238,234,0.88)] mb-2 leading-tight transition-colors duration-200 group-hover:text-[#f0eeea]">
                 {c.title}
               </div>
-              <div className="text-[0.62rem] text-[rgba(240,238,234,0.27)] leading-relaxed mt-0.5">
+              <div className="text-[0.75rem] text-[rgba(240,238,234,0.40)] leading-relaxed">
                 {c.desc}
               </div>
             </Link>
