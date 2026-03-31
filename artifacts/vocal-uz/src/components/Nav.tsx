@@ -102,7 +102,7 @@ export function Nav() {
           <li>
             <Link
               href={`${base}/karaoke`}
-              className={`text-[0.72rem] tracking-[0.14em] uppercase no-underline transition-colors duration-200 ${isKids ? "text-[#1a2535]/50 hover:text-[#1a2535]" : location === "/karaoke" ? "text-[#c9a84c]" : "text-[#888] hover:text-[#c9a84c]"}`}
+              className={`text-[0.72rem] tracking-[0.14em] uppercase no-underline transition-colors duration-200 ${isKids ? "text-[#1a2535]/50 hover:text-[#c9a84c]" : location === "/karaoke" ? "text-[#c9a84c]" : "text-[#888] hover:text-[#c9a84c]"}`}
             >
               {tx.nav.karaoke}
             </Link>
