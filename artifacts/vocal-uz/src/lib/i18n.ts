@@ -33,6 +33,13 @@ export const t = {
       teacher: "Дария Свиридова",
       ctaBook: "Записаться на пробный урок",
       ctaLearn: "Узнать больше",
+      tagline: "Студия вокала · Ташкент",
+      stripDescs: [
+        "Гроул, скрим, фрай — безопасно и технично",
+        "Постановка голоса, диапазон, чистота",
+        "12 уроков от нуля до сцены",
+        "Индивидуальная программа, 5–16 лет",
+      ],
     },
     disciplines: {
       eyebrow: "Направления",
@@ -198,6 +205,13 @@ export const t = {
       teacher: "Dariya Sviridova",
       ctaBook: "Book a Trial Lesson",
       ctaLearn: "Learn More",
+      tagline: "Vocal Studio · Tashkent",
+      stripDescs: [
+        "Growl, scream, fry — safe and technical",
+        "Voice placement, range, clean tone",
+        "12 lessons from zero to stage",
+        "Individual programme, ages 5–16",
+      ],
     },
     disciplines: {
       eyebrow: "Disciplines",

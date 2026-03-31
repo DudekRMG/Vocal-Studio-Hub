@@ -4,6 +4,7 @@ import { t } from "@/lib/i18n";
 import { SeoHead } from "@/components/SeoHead";
 import { BookingForm } from "@/components/BookingForm";
 import { useSanityContent } from "@/lib/useSanityContent";
+import { StageCanvas } from "@/components/StageCanvas";
 
 export default function Home() {
   const { lang } = useLang();
@@ -30,10 +31,10 @@ export default function Home() {
       />
 
       {/* ── HERO ── */}
-      <section
-        id="hero"
-        className="min-h-screen grid grid-cols-1 md:grid-cols-2 relative overflow-hidden"
-      >
+      <section id="hero" className="relative h-screen overflow-hidden bg-[#080808]">
+        {/* Stage canvas animation */}
+        <StageCanvas className="absolute inset-0" />
+
         {/* Noise overlay */}
         <div
           className="fixed inset-0 z-[9999] pointer-events-none opacity-[0.03]"
@@ -43,102 +44,75 @@ export default function Home() {
           }}
         />
 
-        {/* Left — Extreme */}
-        <div className="bg-[#080808] flex flex-col justify-end px-8 lg:px-12 pt-36 pb-28 relative overflow-hidden border-r border-white/[0.08]">
-          <div
-            className="absolute inset-0 pointer-events-none"
-            style={{ background: "radial-gradient(ellipse 70% 60% at 30% 60%, rgba(232,0,45,.09) 0%, transparent 70%)" }}
-          />
-          <div
-            className="absolute top-1/2 -left-6 -translate-y-1/2 -rotate-90 font-display text-[18vw] text-[rgba(232,0,45,0.04)] pointer-events-none whitespace-nowrap leading-none"
-            style={{ transformOrigin: "left center" }}
-          >
-            EXTREME
-          </div>
-          <span className="text-[0.68rem] tracking-[0.25em] uppercase text-[#e8002d] mb-5 animate-[fadeUp_0.6s_0.5s_both]">
-            {tx.hero.tagLeft}
+        {/* Center overlay */}
+        <div
+          className="absolute inset-0 z-10 flex flex-col items-center justify-center pointer-events-none text-center px-6"
+          style={{ paddingBottom: "9vh" }}
+        >
+          <span className="text-[0.6rem] tracking-[0.45em] uppercase text-[rgba(240,238,234,0.26)] mb-8 animate-[fadeUp_0.6s_0.3s_both]">
+            {tx.hero.tagline}
           </span>
-          <h1 className="font-display text-[clamp(3.5rem,8vw,7.5rem)] leading-[0.9] tracking-[0.02em] animate-[fadeUp_0.7s_0.65s_both]">
-            {tx.hero.titleLeft1}
-            <span className="block text-[#e8002d]">{tx.hero.titleLeft2}</span>
-          </h1>
-          <p className="mt-7 text-[0.85rem] leading-[1.8] text-[rgba(240,238,234,0.45)] max-w-[320px] animate-[fadeUp_0.6s_0.9s_both]">
-            {tx.hero.descLeft}
-          </p>
-          <div className="mt-10 animate-[fadeUp_0.6s_1.1s_both]">
-            <Link
-              href={`${base}/extreme`}
-              className="inline-flex items-center gap-3 text-[0.72rem] tracking-[0.2em] uppercase text-[#e8002d] no-underline transition-all duration-200 hover:gap-5"
-            >
-              {lang === "ru" ? "Подробнее" : "Learn more"}
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M5 12h14M12 5l7 7-7 7" /></svg>
-            </Link>
-          </div>
-        </div>
 
-        {/* Right — Pop */}
-        <div className="bg-[#0f0f0f] flex flex-col justify-end px-8 lg:px-12 pt-36 pb-28 relative overflow-hidden">
-          <div
-            className="absolute inset-0 pointer-events-none"
-            style={{ background: "radial-gradient(ellipse 60% 50% at 70% 40%, rgba(240,238,234,.04) 0%, transparent 70%)" }}
-          />
-          <div
-            className="absolute top-1/2 -right-6 rotate-90 font-['Playfair_Display'] italic text-[16vw] text-[rgba(240,238,234,0.025)] pointer-events-none whitespace-nowrap leading-none"
-            style={{ transformOrigin: "right center" }}
-          >
-            Pop
+          <div className="font-display text-[clamp(3.8rem,10.5vw,10rem)] leading-none tracking-[0.1em] text-[#f0eeea] animate-[fadeUp_0.7s_0.45s_both]">
+            VOCAL<span className="text-[#e8002d]">.</span>UZ
           </div>
-          <span className="text-[0.68rem] tracking-[0.25em] uppercase text-[#555] mb-5 animate-[fadeUp_0.6s_0.8s_both]">
-            {tx.hero.tagRight}
-          </span>
-          <h2 className="font-['Playfair_Display'] italic text-[clamp(3rem,6.5vw,6.5rem)] leading-[0.95] animate-[fadeUp_0.7s_0.95s_both]">
-            {tx.hero.titleRight1}
-            <span className="block text-[rgba(240,238,234,0.45)]">{tx.hero.titleRight2}</span>
-          </h2>
-          <p className="mt-7 text-[0.85rem] leading-[1.8] text-[rgba(240,238,234,0.45)] max-w-[320px] animate-[fadeUp_0.6s_1.15s_both]">
-            {tx.hero.descRight}
-          </p>
-          <div className="mt-10 animate-[fadeUp_0.6s_1.3s_both]">
-            <Link
-              href={`${base}/pop`}
-              className="inline-flex items-center gap-3 text-[0.72rem] tracking-[0.2em] uppercase text-[#f0eeea] no-underline transition-all duration-200 hover:gap-5"
-            >
-              {lang === "ru" ? "Подробнее" : "Learn more"}
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M5 12h14M12 5l7 7-7 7" /></svg>
-            </Link>
-          </div>
-        </div>
 
-        {/* Center brand */}
-        <div className="absolute top-24 left-1/2 -translate-x-1/2 z-10 text-center animate-[fadeIn_0.8s_0.3s_both]">
-          <div className="font-display text-[clamp(1.4rem,3vw,2.4rem)] tracking-[0.25em] text-[#f0eeea] bg-[#080808] px-6 py-2 border border-white/[0.08] whitespace-nowrap">
-            {tx.hero.brand}<span className="text-[#e8002d]">{tx.hero.brandDot}</span>{tx.hero.brandUz}
-          </div>
-          <span className="block mt-0 text-[0.65rem] tracking-[0.22em] uppercase text-[#555] bg-[#080808] px-4 py-[0.35rem] border border-white/[0.08] border-t-0">
+          <div className="mt-4 font-['Playfair_Display'] italic text-[clamp(0.85rem,1.5vw,1.25rem)] text-[rgba(240,238,234,0.3)] tracking-[0.08em] animate-[fadeUp_0.6s_0.6s_both]">
             {tx.hero.teacher}
-          </span>
+          </div>
+
+          <div className="mt-11 flex flex-col sm:flex-row gap-4 pointer-events-auto animate-[fadeUp_0.6s_0.8s_both]">
+            <a
+              href="#booking"
+              className="bg-[#e8002d] text-[#f0eeea] font-display text-[0.76rem] tracking-[0.18em] px-8 py-3.5 no-underline transition-all duration-200 hover:bg-[#ff1a3d] uppercase"
+            >
+              {tx.hero.ctaBook}
+            </a>
+            <a
+              href="#about"
+              className="border border-white/[0.18] text-[rgba(240,238,234,0.6)] font-display text-[0.76rem] tracking-[0.18em] px-8 py-3.5 no-underline transition-all duration-200 hover:border-white/40 hover:text-[#f0eeea] uppercase"
+            >
+              {tx.hero.ctaLearn}
+            </a>
+          </div>
         </div>
 
-        {/* CTA strip */}
-        <div className="absolute bottom-0 left-0 right-0 z-10 grid grid-cols-2 h-16">
-          <a
-            href="#booking"
-            className="bg-[#e8002d] px-8 flex items-center justify-between no-underline transition-colors duration-200 hover:bg-[#ff1a3d] group"
-          >
-            <span className="font-display text-[1.15rem] tracking-[0.1em] text-[#f0eeea]">
-              {tx.hero.ctaBook}
-            </span>
-            <span className="text-[#f0eeea] transition-transform duration-200 group-hover:translate-x-1">→</span>
-          </a>
-          <a
-            href="#about"
-            className="bg-[#141414] border-t border-white/[0.08] px-8 flex items-center justify-between no-underline transition-colors duration-200 hover:bg-[#1a1a1a] group"
-          >
-            <span className="font-display text-[1.15rem] tracking-[0.1em] text-[#f0eeea]">
-              {tx.hero.ctaLearn}
-            </span>
-            <span className="text-[rgba(240,238,234,0.7)] transition-transform duration-200 group-hover:translate-x-1">→</span>
-          </a>
+        {/* Course preview strip */}
+        <div
+          className="absolute bottom-0 left-0 right-0 z-20 grid grid-cols-2 md:grid-cols-4 border-t border-white/[0.06]"
+          style={{
+            background: "rgba(8,8,8,0.6)",
+            backdropFilter: "blur(12px)",
+            WebkitBackdropFilter: "blur(12px)",
+          }}
+        >
+          {(
+            [
+              { num: "01", title: tx.nav.extreme, desc: tx.hero.stripDescs[0], color: "#e8002d",               href: `${base}/extreme`  },
+              { num: "02", title: tx.nav.pop,     desc: tx.hero.stripDescs[1], color: "rgba(240,238,234,0.5)", href: `${base}/pop`      },
+              { num: "03", title: tx.nav.karaoke, desc: tx.hero.stripDescs[2], color: "#c9a84c",               href: `${base}/karaoke`  },
+              { num: "04", title: tx.nav.kids,    desc: tx.hero.stripDescs[3], color: "#3b82f6",               href: `${base}/kids`     },
+            ] as const
+          ).map((c, i) => (
+            <Link
+              key={c.href}
+              href={c.href}
+              className={`px-5 py-5 no-underline group transition-all duration-300 hover:bg-white/[0.035]${i < 3 ? " border-r border-white/[0.05]" : ""}`}
+            >
+              <div
+                className="text-[0.54rem] tracking-[0.28em] mb-2 font-display"
+                style={{ color: c.color }}
+              >
+                {c.num}
+              </div>
+              <div className="text-[0.76rem] font-medium text-[rgba(240,238,234,0.78)] mb-1 leading-tight transition-colors duration-200 group-hover:text-[#f0eeea]">
+                {c.title}
+              </div>
+              <div className="text-[0.62rem] text-[rgba(240,238,234,0.27)] leading-relaxed hidden md:block">
+                {c.desc}
+              </div>
+            </Link>
+          ))}
         </div>
       </section>
 
