@@ -84,19 +84,16 @@ export function PageHero({
         }}
       >
         <div className="px-8 py-5 flex flex-col md:flex-row items-center md:items-stretch justify-between gap-4 max-w-6xl mx-auto">
-          {/* Left: tag + title + sub */}
+          {/* Left: slogan (small colored) + section name (huge) + sub */}
           <div className="flex flex-col gap-1.5 text-center md:text-left">
             <span
-              className="text-[0.58rem] tracking-[0.28em] uppercase block"
+              className="font-display text-[0.72rem] tracking-[0.22em] block"
               style={{ color: accentColor }}
             >
-              {courseTag}
-            </span>
-            <div
-              className="text-[clamp(1.8rem,4vw,3.5rem)] leading-none tracking-[0.04em] text-[#f0eeea] uppercase"
-              style={{ fontFamily: "'Bebas Neue', sans-serif" }}
-            >
               {courseTitle}
+            </span>
+            <div className="font-display text-[clamp(2rem,4.5vw,4rem)] leading-none tracking-[0.03em] text-[#f0eeea]">
+              {courseTag}
             </div>
             <div className="font-['Playfair_Display'] italic text-[0.88rem] text-[rgba(240,238,234,0.55)] mt-0.5">
               {courseSub}
