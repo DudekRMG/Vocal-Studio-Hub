@@ -5,6 +5,7 @@ interface StageCanvasProps {
   accentColor?: string;
   bgColor?: string;
   spotColorRgb?: string;
+  mobileStepMult?: number;
 }
 
 export function StageCanvas({
@@ -12,6 +13,7 @@ export function StageCanvas({
   accentColor = "#e8002d",
   bgColor = "#080808",
   spotColorRgb = "255,248,220",
+  mobileStepMult = 1,
 }: StageCanvasProps) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
 
@@ -135,7 +137,7 @@ export function StageCanvas({
       const autoShift = W >= 768 && H < 800 ? 0.10 : 0;
       // On mobile: bundle is 70% thicker (wider spread) and amplitude 20% larger.
       const isMobile = W < 768;
-      const step = isMobile ? 0.017 : 0.010;   // 0.010 * 1.7 = 0.017
+      const step = isMobile ? 0.017 * mobileStepMult : 0.010;
       const aM   = isMobile ? 1.20  : 1.00;    // amplitude multiplier
       type Wave = { y: number; amp: number; freq: number; spd: number; alpha: number; red?: boolean };
       const b = 0.62 + autoShift;
@@ -254,7 +256,7 @@ export function StageCanvas({
       document.removeEventListener("visibilitychange", onVisibility);
       mq.removeEventListener("change", onMqChange);
     };
-  }, [accentColor, bgColor, spotColorRgb]);
+  }, [accentColor, bgColor, spotColorRgb, mobileStepMult]);
 
   return (
     <canvas

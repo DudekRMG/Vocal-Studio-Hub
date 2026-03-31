@@ -41,8 +41,9 @@ export default function Home() {
             never reflowing when iOS Safari hides/shows its chrome on scroll */}
         <div className="relative flex flex-col min-h-[100svh] md:min-h-0 md:flex-1">
 
-          {/* Stage canvas — constrained to this wrapper's height */}
-          <StageCanvas className="absolute inset-0" />
+          {/* Stage canvas — constrained to this wrapper's height.
+              mobileStepMult widens the mobile wave bundle by 20% on the home page. */}
+          <StageCanvas className="absolute inset-0" mobileStepMult={1.2} />
 
           {/* Noise overlay */}
           <div

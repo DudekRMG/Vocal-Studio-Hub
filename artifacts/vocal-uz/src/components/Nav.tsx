@@ -251,7 +251,7 @@ export function Nav() {
                 <Link
                   href={link.href}
                   onClick={() => setMenuOpen(false)}
-                  className={`block px-6 py-4 text-[0.72rem] tracking-[0.16em] uppercase no-underline transition-colors duration-200 ${
+                  className={`block px-6 py-4 text-right text-[0.72rem] tracking-[0.16em] uppercase no-underline transition-colors duration-200 ${
                     link.active
                       ? isKids ? "text-[#1a2535]" : "text-[#f0eeea]"
                       : isKids ? "text-[#1a2535]/45" : "text-[#666]"
@@ -262,8 +262,8 @@ export function Nav() {
               </li>
             ))}
           </ul>
-          {/* Language switcher inside dropdown */}
-          <div className="px-6 py-4">
+          {/* Language switcher inside dropdown — right-aligned to match menu items */}
+          <div className="px-6 py-4 flex justify-end">
             <div className={`flex items-center overflow-hidden border w-fit ${isKids ? "border-[#1a2535]" : "border-white/[0.08]"}`}>
               <button
                 onClick={() => { setLang("ru"); setMenuOpen(false); }}
