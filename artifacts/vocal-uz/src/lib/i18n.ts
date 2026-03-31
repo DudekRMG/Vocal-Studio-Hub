@@ -312,7 +312,7 @@ export const t = {
         "Flexible schedule",
       ],
       socialProof: "Loved by 200+ students in Tashkent",
-      callDivider: "or call us directly",
+      callDivider: "or call us",
       dialPrefix: "DIAL",
       namePlaceholder: "Your name",
       phonePlaceholder: "Phone or Telegram",
