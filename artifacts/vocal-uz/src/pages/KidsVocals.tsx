@@ -228,7 +228,6 @@ export default function KidsVocals() {
         ctaBg="#3b82f6"
         ctaText="#ffffff"
         lightMode
-        bandBgColor="#c0cedf"
       />
 
       {/* ── ABOUT THE APPROACH ── */}

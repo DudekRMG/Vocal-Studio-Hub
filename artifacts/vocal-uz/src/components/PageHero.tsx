@@ -16,7 +16,6 @@ interface PageHeroProps {
   ctaBg?: string;
   ctaText?: string;
   lightMode?: boolean;
-  bandBgColor?: string;
 }
 
 const noiseStyle: CSSProperties = {
@@ -37,7 +36,6 @@ export function PageHero({
   ctaBg,
   ctaText = "#f0eeea",
   lightMode = false,
-  bandBgColor,
 }: PageHeroProps) {
   const { lang } = useLang();
   const tx = t[lang];
@@ -58,7 +56,7 @@ export function PageHero({
   const ghostBorder = lightMode ? "rgba(15,16,22,0.18)" : "rgba(255,255,255,0.18)";
   const ghostText = lightMode ? "rgba(15,16,22,0.6)" : "rgba(240,238,234,0.6)";
   const ghostHoverText = lightMode ? "#0f1016" : "#f0eeea";
-  const bandBg = bandBgColor ?? (lightMode ? "rgba(240,242,250,0.96)" : "rgba(4,4,4,0.92)");
+  const bandBg = lightMode ? "rgba(240,242,250,0.96)" : "rgba(4,4,4,0.92)";
   const bandBorder = lightMode ? "rgba(0,0,0,0.1)" : "rgba(255,255,255,0.14)";
   const bandTagColor = titleColor;
   const bandSubColor = lightMode ? "rgba(15,16,22,0.5)" : "rgba(240,238,234,0.5)";
