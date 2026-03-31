@@ -157,7 +157,7 @@ export const t = {
       coursesDesc: "Один педагог — четыре направления. Выберите то, что подходит именно вам.",
     },
     footer: {
-      tagline: "Ваш голос — ваш инструмент",
+      tagline: "Голос для сцены и жизни",
       phone: "+998 33 862-25-89",
       rights: "Все права защищены",
     },
@@ -339,7 +339,7 @@ export const t = {
       coursesDesc: "One teacher, four disciplines — find the one that fits you best.",
     },
     footer: {
-      tagline: "Your voice is your instrument",
+      tagline: "For the Stage and Beyond",
       phone: "+998 33 862-25-89",
       rights: "All rights reserved",
     },
