@@ -73,43 +73,45 @@ export function BookingForm({ variant, accentColor }: BookingFormProps = {}) {
           </p>
 
           {isKids ? (
-            <div className="border border-[#ccd5e3] divide-y divide-[#ccd5e3]">
-              <input
-                name="name"
-                value={form.name}
-                onChange={handleChange}
-                required
-                placeholder={tx.namePlaceholder}
-                className={kidsInnerInputClass}
-              />
-              <input
-                name="phone"
-                value={form.phone}
-                onChange={handleChange}
-                required
-                placeholder={tx.phonePlaceholder}
-                className={kidsInnerInputClass}
-              />
-              <select
-                name="goal"
-                value={form.goal}
-                onChange={handleChange}
-                required
-                className={`${kidsInnerInputClass} cursor-pointer ${form.goal ? "text-[#1a2535]" : ""}`}
-              >
-                <option value="" disabled>{tx.goalPlaceholder}</option>
-                {tx.goalOptions.map((opt) => (
-                  <option key={opt.value} value={opt.value}>{opt.label}</option>
-                ))}
-              </select>
-              {status === "error" && (
-                <p className="text-[#e8002d] text-[0.8rem] px-4 py-2 bg-[rgba(232,0,45,0.08)]">{tx.errorMsg}</p>
-              )}
+            <>
+              <div className="border border-b-0 border-[#ccd5e3] divide-y divide-[#ccd5e3]">
+                <input
+                  name="name"
+                  value={form.name}
+                  onChange={handleChange}
+                  required
+                  placeholder={tx.namePlaceholder}
+                  className={kidsInnerInputClass}
+                />
+                <input
+                  name="phone"
+                  value={form.phone}
+                  onChange={handleChange}
+                  required
+                  placeholder={tx.phonePlaceholder}
+                  className={kidsInnerInputClass}
+                />
+                <select
+                  name="goal"
+                  value={form.goal}
+                  onChange={handleChange}
+                  required
+                  className={`${kidsInnerInputClass} cursor-pointer ${form.goal ? "text-[#1a2535]" : ""}`}
+                >
+                  <option value="" disabled>{tx.goalPlaceholder}</option>
+                  {tx.goalOptions.map((opt) => (
+                    <option key={opt.value} value={opt.value}>{opt.label}</option>
+                  ))}
+                </select>
+                {status === "error" && (
+                  <p className="text-[#e8002d] text-[0.8rem] px-4 py-2 bg-[rgba(232,0,45,0.08)]">{tx.errorMsg}</p>
+                )}
+              </div>
               <button
                 type="submit"
                 disabled={status === "sending"}
-                className="w-full border-none cursor-pointer font-display text-[1.1rem] tracking-[0.15em] py-[1.3rem] transition-all duration-200 hover:tracking-[0.22em] hover:opacity-90 flex items-center justify-center gap-3 disabled:opacity-60 disabled:cursor-not-allowed text-[#f0eeea]"
-                style={{ backgroundColor: btnColor }}
+                className="w-full cursor-pointer font-display text-[1.1rem] tracking-[0.15em] py-[1.3rem] transition-all duration-200 hover:tracking-[0.22em] hover:opacity-90 flex items-center justify-center gap-3 disabled:opacity-60 disabled:cursor-not-allowed text-[#f0eeea]"
+                style={{ backgroundColor: btnColor, border: `1px solid ${btnColor}` }}
               >
                 {status === "sending" ? tx.submitting : tx.submit}
                 {status !== "sending" && (
@@ -118,7 +120,7 @@ export function BookingForm({ variant, accentColor }: BookingFormProps = {}) {
                   </svg>
                 )}
               </button>
-            </div>
+            </>
           ) : (
             <>
               <div className="flex flex-col gap-[1px] mb-[1px]">
