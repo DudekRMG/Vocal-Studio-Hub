@@ -129,15 +129,17 @@ export function StageCanvas({
       const mx = (mX - 0.5) * 38;
       const myAmp = 1 + (mY - 0.5) * 0.35;
 
-      const isMobile = W < 768;
-      const waveOffset = isMobile ? 0.30 : 0;
+      // Desktop home-page canvas is ~760px (strip takes space from section);
+      // course-page canvases are ~900px+. Shift waves lower on short desktop canvases
+      // so they always land just below the VOCAL.UZ text on both layouts.
+      const autoShift = W >= 768 && H < 800 ? 0.10 : 0;
       type Wave = { y: number; amp: number; freq: number; spd: number; alpha: number; red?: boolean };
       const waves: Wave[] = [
-        { y: H * (0.46 + waveOffset), amp: 14, freq: 7.0, spd: 1.35, alpha: 0.10 },
-        { y: H * (0.48 + waveOffset), amp: 22, freq: 4.0, spd: 0.80, alpha: 0.09, red: true },
-        { y: H * (0.50 + waveOffset), amp: 18, freq: 6.0, spd: 1.10, alpha: 0.11 },
-        { y: H * (0.52 + waveOffset), amp: 24, freq: 3.5, spd: 0.65, alpha: 0.08 },
-        { y: H * (0.54 + waveOffset), amp: 20, freq: 5.5, spd: 0.95, alpha: 0.10, red: true },
+        { y: H * (0.62 + autoShift), amp: 14, freq: 7.0, spd: 1.35, alpha: 0.10 },
+        { y: H * (0.63 + autoShift), amp: 22, freq: 4.0, spd: 0.80, alpha: 0.09, red: true },
+        { y: H * (0.64 + autoShift), amp: 18, freq: 6.0, spd: 1.10, alpha: 0.11 },
+        { y: H * (0.65 + autoShift), amp: 24, freq: 3.5, spd: 0.65, alpha: 0.08 },
+        { y: H * (0.66 + autoShift), amp: 20, freq: 5.5, spd: 0.95, alpha: 0.10, red: true },
       ];
 
       waves.forEach(w => {
@@ -204,7 +206,8 @@ export function StageCanvas({
       ctx!.fillStyle = bgColor;
       ctx!.fillRect(0, 0, W, H);
 
-      const floorY = H * 0.56;
+      const autoShift = W >= 768 && H < 800 ? 0.10 : 0;
+      const floorY = H * (0.68 + autoShift);
       const sw = Math.sin(time * 0.13);
       const pulse = 0.055 + Math.sin(time * 0.5) * 0.012;
       const tX = CX;

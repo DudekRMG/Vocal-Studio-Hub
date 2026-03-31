@@ -92,7 +92,7 @@ export default function Home() {
 
         {/* Course preview strip */}
         <div
-          className="relative z-20 grid grid-cols-2 md:grid-cols-4 border-t border-white/[0.06]"
+          className="relative z-20 grid grid-cols-2 md:grid-cols-4 border-t border-white/[0.06] md:min-h-[160px]"
           style={{
             background: "rgba(8,8,8,0.6)",
             backdropFilter: "blur(12px)",
