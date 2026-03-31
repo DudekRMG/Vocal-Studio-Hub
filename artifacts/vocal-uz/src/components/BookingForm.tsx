@@ -57,6 +57,11 @@ export function BookingForm({ variant, accentColor }: BookingFormProps = {}) {
         </div>
       ) : (
         <>
+          {/* Social proof */}
+          <p className={`text-[0.75rem] tracking-[0.04em] text-center mb-6 pb-6 ${isKids ? "text-[#5a7a9f] border-b border-[#ccd5e3]" : "text-[rgba(240,238,234,0.38)] border-b border-white/[0.07]"}`}>
+            {tx.socialProof}
+          </p>
+
           <div className="flex flex-col gap-[1px] mb-[1px]">
             <input
               name="name"

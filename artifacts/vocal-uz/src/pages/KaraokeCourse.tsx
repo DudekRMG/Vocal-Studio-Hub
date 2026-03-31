@@ -391,9 +391,10 @@ export default function KaraokeCourse() {
       </section>
 
       {/* ── BOOKING ── */}
-      <section id="book-karaoke" className="pt-28 pb-0 px-6 lg:px-12 bg-[#141414] border-t border-white/[0.08]">
-        <div className="max-w-[1100px] mx-auto">
-          <div className="mb-12">
+      <section id="book-karaoke" className="bg-[#141414] border-t border-white/[0.08]">
+        {/* Row 1 — Full width heading */}
+        <div className="pt-28 pb-12 px-6 lg:px-12">
+          <div className="max-w-[1100px] mx-auto">
             <span className="text-[0.68rem] tracking-[0.28em] uppercase block mb-4" style={{ color: gold }}>{t[lang].booking.eyebrow}</span>
             <h2 className="font-display text-[clamp(3rem,5vw,5rem)] leading-[0.95] tracking-[0.02em]">
               {c.bookTitle}
@@ -402,8 +403,11 @@ export default function KaraokeCourse() {
             <div className="w-10 h-[2px] my-8" style={{ backgroundColor: gold }} />
             <p className="text-[0.9rem] leading-[1.9] text-[rgba(240,238,234,0.5)]">{c.bookIntro}</p>
           </div>
+        </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-16">
+        {/* Row 2 — 50/50 video | form */}
+        <div className="pb-16 px-6 lg:px-12">
+          <div className="max-w-[1100px] mx-auto grid grid-cols-1 md:grid-cols-2 gap-6 items-start">
             <div className="relative w-full" style={{ paddingBottom: "56.25%" }}>
               <iframe
                 className="absolute inset-0 w-full h-full"
@@ -418,15 +422,8 @@ export default function KaraokeCourse() {
           </div>
         </div>
 
-        {/* More options strip */}
-        <div className="border-t border-white/[0.06]">
-          <div className="max-w-[1100px] mx-auto py-4">
-            <p className="text-[0.62rem] tracking-[0.28em] uppercase text-[rgba(240,238,234,0.3)] px-5 pt-3 pb-1">
-              {t[lang].booking.moreOptions}
-            </p>
-          </div>
-          <CourseStrip exclude="karaoke" />
-        </div>
+        {/* Row 3 — Full width course strip */}
+        <CourseStrip exclude="karaoke" />
       </section>
     </>
   );

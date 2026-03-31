@@ -375,9 +375,10 @@ export default function KidsVocals() {
       </section>
 
       {/* ── BOOKING ── */}
-      <section id="book-kids" className="pt-28 pb-0 px-6 lg:px-12 border-t" style={{ backgroundColor: bgCardAlt, borderColor: "rgba(0,0,0,0.07)" }}>
-        <div className="max-w-[1100px] mx-auto">
-          <div className="mb-12">
+      <section id="book-kids" className="border-t" style={{ backgroundColor: bgCardAlt, borderColor: "rgba(0,0,0,0.07)" }}>
+        {/* Row 1 — Full width heading */}
+        <div className="pt-28 pb-12 px-6 lg:px-12">
+          <div className="max-w-[1100px] mx-auto">
             <span className="text-[0.68rem] tracking-[0.28em] uppercase block mb-4" style={{ color: blue }}>{tx.booking.eyebrow}</span>
             <h2 className="font-display text-[clamp(3rem,5vw,5rem)] leading-[0.95] tracking-[0.02em] text-[#0f1016]">
               {c.bookTitle}
@@ -386,8 +387,11 @@ export default function KidsVocals() {
             <div className="w-10 h-[2px] my-8" style={{ backgroundColor: blue }} />
             <p className="text-[0.9rem] leading-[1.9] text-[rgba(15,16,22,0.5)]">{c.bookIntro}</p>
           </div>
+        </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-16">
+        {/* Row 2 — 50/50 video | form */}
+        <div className="pb-16 px-6 lg:px-12">
+          <div className="max-w-[1100px] mx-auto grid grid-cols-1 md:grid-cols-2 gap-6 items-start">
             <div className="relative w-full" style={{ paddingBottom: "56.25%" }}>
               <iframe
                 className="absolute inset-0 w-full h-full"
@@ -402,15 +406,8 @@ export default function KidsVocals() {
           </div>
         </div>
 
-        {/* More options strip */}
-        <div className="border-t" style={{ borderColor: "rgba(0,0,0,0.07)" }}>
-          <div className="max-w-[1100px] mx-auto py-4">
-            <p className="text-[0.62rem] tracking-[0.28em] uppercase px-5 pt-3 pb-1" style={{ color: "rgba(15,16,22,0.3)" }}>
-              {tx.booking.moreOptions}
-            </p>
-          </div>
-          <CourseStrip exclude="kids" isLight />
-        </div>
+        {/* Row 3 — Full width course strip */}
+        <CourseStrip exclude="kids" isLight />
       </section>
     </>
   );

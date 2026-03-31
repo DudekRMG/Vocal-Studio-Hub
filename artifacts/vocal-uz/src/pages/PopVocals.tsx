@@ -272,9 +272,10 @@ export default function PopVocals() {
       </section>
 
       {/* ── BOOKING ── */}
-      <section id="book-pop" className="pt-28 pb-0 px-6 lg:px-12 bg-[#141414] border-t border-white/[0.08]">
-        <div className="max-w-[1100px] mx-auto">
-          <div className="mb-12">
+      <section id="book-pop" className="bg-[#141414] border-t border-white/[0.08]">
+        {/* Row 1 — Full width heading */}
+        <div className="pt-28 pb-12 px-6 lg:px-12">
+          <div className="max-w-[1100px] mx-auto">
             <span className="text-[0.68rem] tracking-[0.28em] uppercase text-[#9d4edd] block mb-4">{tx.booking.eyebrow}</span>
             <h2 className="font-['Playfair_Display'] italic text-[clamp(2.5rem,4vw,4rem)] leading-[1]">
               {bookTitle}
@@ -283,8 +284,11 @@ export default function PopVocals() {
             <div className="w-10 h-[2px] bg-[#9d4edd] my-8" />
             <p className="text-[0.9rem] leading-[1.9] text-[rgba(240,238,234,0.5)]">{bookIntro}</p>
           </div>
+        </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-16">
+        {/* Row 2 — 50/50 video | form */}
+        <div className="pb-16 px-6 lg:px-12">
+          <div className="max-w-[1100px] mx-auto grid grid-cols-1 md:grid-cols-2 gap-6 items-start">
             <div className="relative w-full" style={{ paddingBottom: "56.25%" }}>
               <iframe
                 className="absolute inset-0 w-full h-full"
@@ -299,15 +303,8 @@ export default function PopVocals() {
           </div>
         </div>
 
-        {/* More options strip */}
-        <div className="border-t border-white/[0.06]">
-          <div className="max-w-[1100px] mx-auto py-4">
-            <p className="text-[0.62rem] tracking-[0.28em] uppercase text-[rgba(240,238,234,0.3)] px-5 pt-3 pb-1">
-              {tx.booking.moreOptions}
-            </p>
-          </div>
-          <CourseStrip exclude="pop" />
-        </div>
+        {/* Row 3 — Full width course strip */}
+        <CourseStrip exclude="pop" />
       </section>
     </>
   );
