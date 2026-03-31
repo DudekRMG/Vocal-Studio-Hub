@@ -173,7 +173,6 @@ export default function PopVocals() {
       {/* ── HERO ── */}
       <PageHero
         accentColor="#9d4edd"
-        spotColorRgb="157,78,221"
         courseTag={hero.tag}
         courseTitle={<>{hero.title} <span style={{ color: "#9d4edd" }}>{hero.titleRed}</span></>}
         courseSub={hero.sub}
