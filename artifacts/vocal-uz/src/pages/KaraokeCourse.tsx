@@ -282,7 +282,7 @@ export default function KaraokeCourse() {
         courseSub={c.heroSub}
         courseDesc={c.heroDesc}
         ctaHref="#book-karaoke"
-        ctaLabel={lang === "ru" ? "Записаться на курс" : "Enrol in Course"}
+        ctaLabel={lang === "ru" ? "Пробный урок" : "Enrol in Course"}
         ctaBg="#c9a84c"
         ctaText="#0a0a0a"
         mobileTrainingLabel={lang === "ru" ? "Курс экспресс-карaоке" : "Express Karaoke Course"}

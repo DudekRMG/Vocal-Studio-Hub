@@ -45,7 +45,6 @@ export function Footer() {
                 </a>
               ))}
             </div>
-            <div className="flex justify-center">
             <a
               href="tel:+998338622589"
               className="inline-flex items-center gap-2 py-[0.45rem] px-[0.9rem] border bg-transparent no-underline transition-all duration-200 hover:opacity-75"
@@ -59,7 +58,6 @@ export function Footer() {
                 <span className="text-[0.5rem] tracking-[0.06em] uppercase" style={{ opacity: 0.5 }}>{tx.dialPrefix} +998 33 862-25-89</span>
               </span>
             </a>
-            </div>
           </div>
 
           <div>
@@ -91,9 +89,6 @@ export function Footer() {
         <div className={`border-t pt-4 flex flex-col md:flex-row items-center justify-between gap-2 ${isKids ? "border-white/30" : "border-white/[0.08]"}`}>
           <p className={`text-[0.72rem] tracking-[0.06em] ${isKids ? "text-white" : "text-[#888]"}`}>
             © {new Date().getFullYear()} Vocal.uz. {tx.footer.rights}.
-          </p>
-          <p className="text-[0.65rem] text-[#555] tracking-[0.08em]">
-            vocal.uz
           </p>
         </div>
       </div>

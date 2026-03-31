@@ -207,7 +207,7 @@ export default function ExtremeVocals() {
         courseSub={c.heroSub}
         courseDesc={c.heroDesc}
         ctaHref="#book-extreme"
-        ctaLabel={lang === "ru" ? "Записаться на пробный урок" : "Book a Trial Lesson"}
+        ctaLabel={lang === "ru" ? "Пробный урок" : "Book a Trial Lesson"}
         mobileTrainingLabel={lang === "ru" ? "Курс экстремального вокала" : "Extreme Vocals Course"}
       />
 

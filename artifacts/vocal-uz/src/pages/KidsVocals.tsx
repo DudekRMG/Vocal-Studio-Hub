@@ -224,7 +224,7 @@ export default function KidsVocals() {
         courseSub={c.heroSub}
         courseDesc={c.heroDesc}
         ctaHref="#book-kids"
-        ctaLabel={lang === "ru" ? "Записаться на пробный урок" : "Book a Trial Lesson"}
+        ctaLabel={lang === "ru" ? "Пробный урок" : "Book a Trial Lesson"}
         ctaBg="#3b82f6"
         ctaText="#ffffff"
         lightMode

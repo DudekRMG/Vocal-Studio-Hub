@@ -159,7 +159,7 @@ export default function PopVocals() {
     ? "На пробном уроке мы познакомимся с вашим голосом, определим точку отсчёта и составим план работы. Урок ни к чему не обязывает."
     : "In the trial lesson we will get to know your voice, establish a starting point, and create a work plan. The lesson comes with no obligation.";
 
-  const bookHeroLabel = isRu ? "Записаться на пробный урок" : "Book a Trial Lesson";
+  const bookHeroLabel = isRu ? "Пробный урок" : "Book a Trial Lesson";
   const forWhomTitle = isRu ? "Кому подходит?" : "Who is this for?";
   const programTitle = isRu ? "Программа занятий" : "Lesson Programme";
   const faqTitle = isRu ? "Часто задаваемые вопросы" : "Frequently Asked Questions";
