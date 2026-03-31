@@ -50,7 +50,7 @@ export default function Home() {
             {tx.hero.slogan}
           </div>
 
-          <div className="font-display text-[clamp(3.8rem,10.5vw,10rem)] leading-none tracking-[0.1em] text-[#f0eeea] animate-[fadeUp_0.7s_0.4s_both]">
+          <div className="text-[clamp(3.8rem,10.5vw,10rem)] leading-none tracking-[0.1em] text-[#f0eeea] uppercase animate-[fadeUp_0.7s_0.4s_both]" style={{ fontFamily: "'Bebas Neue', sans-serif" }}>
             VOCAL<span className="text-[#e8002d]">.</span>UZ
           </div>
 
