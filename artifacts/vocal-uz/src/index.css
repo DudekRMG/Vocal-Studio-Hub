@@ -160,6 +160,11 @@ body[data-lang="ru"] button[type="submit"] {
     @apply font-sans antialiased bg-background text-foreground;
     font-weight: 300;
     overflow-x: hidden;
+    min-width: 320px;
+  }
+  select {
+    width: 100%;
+    min-width: 0;
   }
 }
 

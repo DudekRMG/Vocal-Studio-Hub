@@ -90,7 +90,7 @@ export function PageHero({
 
   return (
     <section
-      className="relative h-screen overflow-hidden flex flex-col"
+      className="relative min-h-screen overflow-x-hidden flex flex-col"
       style={{ background: bgColor, borderBottom: `1px solid ${sectionBorder}` }}
     >
       <StageCanvas

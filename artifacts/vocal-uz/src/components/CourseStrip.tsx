@@ -22,6 +22,7 @@ export function CourseStrip({ exclude, isLight }: CourseStripProps) {
   const base = import.meta.env.BASE_URL.replace(/\/$/, "");
 
   const courses = exclude ? ALL_COURSES.filter((c) => c.key !== exclude) : ALL_COURSES;
+  const count = courses.length;
 
   const titles: Record<CourseKey, string> = {
     extreme: tx.nav.extreme,
@@ -36,28 +37,31 @@ export function CourseStrip({ exclude, isLight }: CourseStripProps) {
   const descColor  = isLight ? "rgba(15,16,22,0.40)" : "rgba(240,238,234,0.40)";
   const bg         = isLight ? "#f4f7fc"              : "#0d0d0d";
 
+  const gridClass =
+    count === 4
+      ? "grid-cols-2 md:grid-cols-4"
+      : count === 3
+      ? "grid-cols-2 md:grid-cols-3"
+      : count === 2
+      ? "grid-cols-2"
+      : "grid-cols-1";
+
   return (
     <div
-      className="grid border-t"
-      style={{
-        gridTemplateColumns: `repeat(${courses.length}, 1fr)`,
-        borderColor,
-        backgroundColor: bg,
-      }}
+      className={`grid gap-[1px] border-t ${gridClass}`}
+      style={{ borderColor, backgroundColor: borderColor }}
     >
       {courses.map((c, i) => {
-        const isLast = i === courses.length - 1;
         const desc = tx.hero.stripDescs[ALL_COURSES.findIndex((a) => a.key === c.key)];
+        const isLastOf3 = count === 3 && i === 2;
         return (
           <Link
             key={c.key}
             href={`${base}${c.path}#hero-bottom`}
-            className="px-5 pt-4 pb-5 md:pt-5 md:pb-6 no-underline group transition-all duration-300"
-            style={{
-              borderRight: isLast ? undefined : `1px solid ${borderColor}`,
-            }}
+            className={`px-5 pt-4 pb-5 md:pt-5 md:pb-6 no-underline group transition-all duration-300${isLastOf3 ? " col-span-2 md:col-span-1" : ""}`}
+            style={{ backgroundColor: bg }}
             onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = hoverBg)}
-            onMouseLeave={(e) => (e.currentTarget.style.backgroundColor = "")}
+            onMouseLeave={(e) => (e.currentTarget.style.backgroundColor = bg)}
           >
             <div className="text-[0.54rem] tracking-[0.28em] mb-2 font-display" style={{ color: c.color }}>
               {c.num}

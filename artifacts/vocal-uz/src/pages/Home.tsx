@@ -34,7 +34,7 @@ export default function Home() {
       />
 
       {/* ── HERO ── */}
-      <section id="hero" className="relative h-screen overflow-hidden bg-[#080808] flex flex-col">
+      <section id="hero" className="relative min-h-screen overflow-x-hidden bg-[#080808] flex flex-col">
         {/* Stage canvas animation — fills entire section */}
         <StageCanvas className="absolute inset-0" />
 
@@ -143,29 +143,31 @@ export default function Home() {
               className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-400 pointer-events-none"
               style={{ background: "radial-gradient(ellipse 60% 50% at 20% 80%, rgba(232,0,45,.08) 0%, transparent 70%)" }}
             />
-            <span className="absolute top-8 right-8 font-display text-[5rem] leading-none text-[rgba(232,0,45,0.07)]">01</span>
-            <span className="text-[0.65rem] tracking-[0.28em] uppercase text-[#e8002d] mb-6 block">{tx.disciplines.extremeTag}</span>
-            <h3 className="font-display text-[clamp(2rem,3.5vw,3rem)] tracking-[0.03em] leading-[0.95] mb-6">
-              {tx.disciplines.extremeTitle}
-            </h3>
-            <p className="text-[0.85rem] leading-[1.9] text-[rgba(240,238,234,0.45)] mb-8">
-              {tx.disciplines.extremeBody}
-            </p>
-            <ul className="list-none m-0 p-0 flex flex-col gap-3 mb-10">
-              {tx.disciplines.extremeList.map((item) => (
-                <li key={item} className="text-[0.78rem] text-[rgba(240,238,234,0.45)] flex items-center gap-4">
-                  <span className="w-5 h-[1px] bg-[#e8002d] flex-shrink-0" />
-                  {item}
-                </li>
-              ))}
-            </ul>
-            <Link
-              href={`${base}/extreme`}
-              className="text-[0.72rem] tracking-[0.2em] uppercase text-[#e8002d] no-underline inline-flex items-center gap-3 transition-all duration-200 hover:gap-5"
-            >
-              {tx.disciplines.extremeCta}
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M5 12h14M12 5l7 7-7 7" /></svg>
-            </Link>
+            <span className="absolute top-8 right-8 font-display text-[5rem] leading-none text-[rgba(232,0,45,0.07)] z-0 pointer-events-none select-none">01</span>
+            <div className="relative z-[1]">
+              <span className="text-[0.65rem] tracking-[0.28em] uppercase text-[#e8002d] mb-6 block">{tx.disciplines.extremeTag}</span>
+              <h3 className="font-display text-[clamp(2rem,3.5vw,3rem)] tracking-[0.03em] leading-[0.95] mb-6">
+                {tx.disciplines.extremeTitle}
+              </h3>
+              <p className="text-[0.85rem] leading-[1.9] text-[rgba(240,238,234,0.45)] mb-8">
+                {tx.disciplines.extremeBody}
+              </p>
+              <ul className="list-none m-0 p-0 flex flex-col gap-3 mb-10">
+                {tx.disciplines.extremeList.map((item) => (
+                  <li key={item} className="text-[0.78rem] text-[rgba(240,238,234,0.45)] flex items-center gap-4">
+                    <span className="w-5 h-[1px] bg-[#e8002d] flex-shrink-0" />
+                    {item}
+                  </li>
+                ))}
+              </ul>
+              <Link
+                href={`${base}/extreme#hero-bottom`}
+                className="text-[0.72rem] tracking-[0.2em] uppercase text-[#e8002d] no-underline inline-flex items-center gap-3 transition-all duration-200 hover:gap-5"
+              >
+                {tx.disciplines.extremeCta}
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M5 12h14M12 5l7 7-7 7" /></svg>
+              </Link>
+            </div>
           </div>
 
           {/* Pop card */}
@@ -174,30 +176,32 @@ export default function Home() {
               className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-400 pointer-events-none"
               style={{ background: "radial-gradient(ellipse 60% 50% at 80% 20%, rgba(157,78,221,.09) 0%, transparent 70%)" }}
             />
-            <span className="absolute top-8 right-8 font-display text-[5rem] leading-none" style={{ color: "rgba(157,78,221,0.1)" }}>02</span>
-            <span className="text-[0.65rem] tracking-[0.28em] uppercase mb-6 block" style={{ color: "#9d4edd" }}>{tx.disciplines.popTag}</span>
-            <h3 className="font-['Playfair_Display'] italic text-[clamp(1.8rem,3vw,2.8rem)] leading-[1] mb-6 text-[rgba(240,238,234,0.9)]">
-              {tx.disciplines.popTitle}
-            </h3>
-            <p className="text-[0.85rem] leading-[1.9] text-[rgba(240,238,234,0.45)] mb-8">
-              {tx.disciplines.popBody}
-            </p>
-            <ul className="list-none m-0 p-0 flex flex-col gap-3 mb-10">
-              {tx.disciplines.popList.map((item) => (
-                <li key={item} className="text-[0.78rem] text-[rgba(240,238,234,0.45)] flex items-center gap-4">
-                  <span className="w-5 h-[1px] flex-shrink-0" style={{ backgroundColor: "#9d4edd" }} />
-                  {item}
-                </li>
-              ))}
-            </ul>
-            <Link
-              href={`${base}/pop`}
-              className="text-[0.72rem] tracking-[0.2em] uppercase no-underline inline-flex items-center gap-3 transition-all duration-200 hover:gap-5"
-              style={{ color: "#9d4edd" }}
-            >
-              {tx.disciplines.popCta}
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M5 12h14M12 5l7 7-7 7" /></svg>
-            </Link>
+            <span className="absolute top-8 right-8 font-display text-[5rem] leading-none z-0 pointer-events-none select-none" style={{ color: "rgba(157,78,221,0.1)" }}>02</span>
+            <div className="relative z-[1]">
+              <span className="text-[0.65rem] tracking-[0.28em] uppercase mb-6 block" style={{ color: "#9d4edd" }}>{tx.disciplines.popTag}</span>
+              <h3 className="font-['Playfair_Display'] italic text-[clamp(1.8rem,3vw,2.8rem)] leading-[1] mb-6 text-[rgba(240,238,234,0.9)]">
+                {tx.disciplines.popTitle}
+              </h3>
+              <p className="text-[0.85rem] leading-[1.9] text-[rgba(240,238,234,0.45)] mb-8">
+                {tx.disciplines.popBody}
+              </p>
+              <ul className="list-none m-0 p-0 flex flex-col gap-3 mb-10">
+                {tx.disciplines.popList.map((item) => (
+                  <li key={item} className="text-[0.78rem] text-[rgba(240,238,234,0.45)] flex items-center gap-4">
+                    <span className="w-5 h-[1px] flex-shrink-0" style={{ backgroundColor: "#9d4edd" }} />
+                    {item}
+                  </li>
+                ))}
+              </ul>
+              <Link
+                href={`${base}/pop#hero-bottom`}
+                className="text-[0.72rem] tracking-[0.2em] uppercase no-underline inline-flex items-center gap-3 transition-all duration-200 hover:gap-5"
+                style={{ color: "#9d4edd" }}
+              >
+                {tx.disciplines.popCta}
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M5 12h14M12 5l7 7-7 7" /></svg>
+              </Link>
+            </div>
           </div>
 
           {/* Karaoke card */}
@@ -206,30 +210,32 @@ export default function Home() {
               className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-400 pointer-events-none"
               style={{ background: "radial-gradient(ellipse 60% 50% at 50% 80%, rgba(201,168,76,.07) 0%, transparent 70%)" }}
             />
-            <span className="absolute top-8 right-8 font-display text-[5rem] leading-none" style={{ color: "rgba(201,168,76,0.07)" }}>03</span>
-            <span className="text-[0.65rem] tracking-[0.28em] uppercase mb-6 block" style={{ color: "#c9a84c" }}>{tx.disciplines.karaokeTag}</span>
-            <h3 className="font-display text-[clamp(2rem,3.5vw,3rem)] tracking-[0.03em] leading-[0.95] mb-6">
-              {tx.disciplines.karaokeTitle}
-            </h3>
-            <p className="text-[0.85rem] leading-[1.9] text-[rgba(240,238,234,0.45)] mb-8">
-              {tx.disciplines.karaokeBody}
-            </p>
-            <ul className="list-none m-0 p-0 flex flex-col gap-3 mb-10">
-              {tx.disciplines.karaokeList.map((item) => (
-                <li key={item} className="text-[0.78rem] text-[rgba(240,238,234,0.45)] flex items-center gap-4">
-                  <span className="w-5 h-[1px] flex-shrink-0" style={{ backgroundColor: "#c9a84c" }} />
-                  {item}
-                </li>
-              ))}
-            </ul>
-            <Link
-              href={`${base}/karaoke`}
-              className="text-[0.72rem] tracking-[0.2em] uppercase no-underline inline-flex items-center gap-3 transition-all duration-200 hover:gap-5"
-              style={{ color: "#c9a84c" }}
-            >
-              {tx.disciplines.karaokeCta}
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M5 12h14M12 5l7 7-7 7" /></svg>
-            </Link>
+            <span className="absolute top-8 right-8 font-display text-[5rem] leading-none z-0 pointer-events-none select-none" style={{ color: "rgba(201,168,76,0.07)" }}>03</span>
+            <div className="relative z-[1]">
+              <span className="text-[0.65rem] tracking-[0.28em] uppercase mb-6 block" style={{ color: "#c9a84c" }}>{tx.disciplines.karaokeTag}</span>
+              <h3 className="font-display text-[clamp(2rem,3.5vw,3rem)] tracking-[0.03em] leading-[0.95] mb-6">
+                {tx.disciplines.karaokeTitle}
+              </h3>
+              <p className="text-[0.85rem] leading-[1.9] text-[rgba(240,238,234,0.45)] mb-8">
+                {tx.disciplines.karaokeBody}
+              </p>
+              <ul className="list-none m-0 p-0 flex flex-col gap-3 mb-10">
+                {tx.disciplines.karaokeList.map((item) => (
+                  <li key={item} className="text-[0.78rem] text-[rgba(240,238,234,0.45)] flex items-center gap-4">
+                    <span className="w-5 h-[1px] flex-shrink-0" style={{ backgroundColor: "#c9a84c" }} />
+                    {item}
+                  </li>
+                ))}
+              </ul>
+              <Link
+                href={`${base}/karaoke#hero-bottom`}
+                className="text-[0.72rem] tracking-[0.2em] uppercase no-underline inline-flex items-center gap-3 transition-all duration-200 hover:gap-5"
+                style={{ color: "#c9a84c" }}
+              >
+                {tx.disciplines.karaokeCta}
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M5 12h14M12 5l7 7-7 7" /></svg>
+              </Link>
+            </div>
           </div>
         </div>
 
@@ -246,12 +252,12 @@ export default function Home() {
               style={{ background: "radial-gradient(ellipse 50% 80% at 80% 50%, rgba(59,130,246,0.12) 0%, transparent 70%)" }}
             />
             <div
-              className="absolute top-1/2 right-8 -translate-y-1/2 font-display text-[12rem] leading-none pointer-events-none"
+              className="absolute top-1/2 right-8 -translate-y-1/2 font-display text-[5rem] md:text-[12rem] leading-none pointer-events-none select-none z-0"
               style={{ color: "rgba(59,130,246,0.07)" }}
             >
               04
             </div>
-            <div className="px-10 py-12 grid grid-cols-1 md:grid-cols-[1fr_auto] gap-10 items-center relative">
+            <div className="px-10 py-12 grid grid-cols-1 md:grid-cols-[1fr_auto] gap-10 items-center relative z-[1]">
               <div>
                 <span className="text-[0.65rem] tracking-[0.28em] uppercase mb-4 block" style={{ color: "#3b82f6" }}>{tx.disciplines.kidsTag}</span>
                 <h3 className="font-display text-[clamp(2.2rem,4vw,3.5rem)] tracking-[0.03em] leading-[0.95] mb-5 text-[#f0eeea]">
@@ -270,7 +276,7 @@ export default function Home() {
                 </ul>
               </div>
               <Link
-                href={`${base}/kids`}
+                href={`${base}/kids#hero-bottom`}
                 className="flex-shrink-0 text-[0.72rem] tracking-[0.2em] uppercase no-underline inline-flex items-center gap-3 transition-all duration-200 hover:gap-5 self-start md:self-center"
                 style={{ color: "#3b82f6" }}
               >
