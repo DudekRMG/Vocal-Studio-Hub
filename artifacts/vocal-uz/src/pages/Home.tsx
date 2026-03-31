@@ -47,7 +47,7 @@ export default function Home() {
         {/* Text composition — moved lower: slogan (italic) → VOCAL.UZ → motto (bold) */}
         <div
           className="absolute z-10 left-0 right-0 top-0 flex flex-col items-center justify-start pointer-events-none text-center px-6"
-          style={{ height: "60vh", paddingTop: "23vh" }}
+          style={{ height: "66vh", paddingTop: "28vh" }}
         >
           <div className="font-['Playfair_Display'] italic text-[clamp(1rem,1.8vw,1.35rem)] text-[rgba(240,238,234,0.65)] mb-4 leading-snug animate-[fadeUp_0.6s_0.3s_both]">
             {tx.hero.slogan}
@@ -57,7 +57,7 @@ export default function Home() {
             VOCAL<span className="text-[#e8002d]">.</span>UZ
           </div>
 
-          <div className="mt-4 font-bold text-[clamp(1.1rem,2vw,1.5rem)] text-[rgba(240,238,234,0.7)] tracking-[0.04em] animate-[fadeUp_0.6s_0.55s_both]">
+          <div className="mt-5 text-[0.7rem] font-light uppercase tracking-[0.55em] text-[rgba(240,238,234,0.45)] animate-[fadeUp_0.6s_0.55s_both]">
             {tx.hero.motto}
           </div>
         </div>
@@ -65,7 +65,7 @@ export default function Home() {
         {/* Professional tag + CTAs — below the sound waves, below floor wave */}
         <div
           className="absolute z-10 left-0 right-0 flex flex-col items-center gap-3 pointer-events-auto animate-[fadeUp_0.5s_0.5s_both]"
-          style={{ top: "67vh" }}
+          style={{ top: "70vh" }}
         >
           <span className="text-[0.6rem] tracking-[0.22em] uppercase text-[rgba(240,238,234,0.35)] pointer-events-none">
             {tx.hero.training}
@@ -106,7 +106,7 @@ export default function Home() {
             <Link
               key={c.href}
               href={c.href}
-              className={`px-5 py-6 md:py-8 no-underline group transition-all duration-300 hover:bg-white/[0.035]${i < 3 ? " border-r border-white/[0.05]" : ""}`}
+              className={`px-5 pt-4 pb-5 md:pt-5 md:pb-6 no-underline group transition-all duration-300 hover:bg-white/[0.035]${i < 3 ? " border-r border-white/[0.05]" : ""}`}
             >
               <div
                 className="text-[0.54rem] tracking-[0.28em] mb-2 font-display"
