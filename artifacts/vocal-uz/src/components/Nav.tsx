@@ -33,7 +33,7 @@ export function Nav() {
     : `${base}/#booking`;
 
   const navBookStyle: React.CSSProperties = isKids
-    ? { background: "transparent", color: "#1a2535", borderColor: "#1a2535" }
+    ? { background: "#3b82f6", color: "#ffffff", borderColor: "transparent" }
     : isPop
     ? { background: "#9d4edd", color: "#ffffff", borderColor: "transparent" }
     : isKaraoke
