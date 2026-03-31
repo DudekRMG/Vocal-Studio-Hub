@@ -6,7 +6,7 @@ import { PageHero } from "@/components/PageHero";
 
 const karaokeContent = {
   ru: {
-    heroTag: "Экспресс-курс · 12 уроков",
+    heroTag: "Экспресс-курс",
     heroTitle: "Пой уже сегодня.",
     heroSub: "С нуля до первого выступления",
     heroDesc:
@@ -129,7 +129,7 @@ const karaokeContent = {
       "Напишите нам — обсудим расписание, формат и детали курса. Первое занятие — знакомство и диагностика голоса.",
   },
   en: {
-    heroTag: "Express Course · 12 Lessons",
+    heroTag: "Express Course",
     heroTitle: "Sing Today.",
     heroSub: "From zero to your first performance",
     heroDesc:
