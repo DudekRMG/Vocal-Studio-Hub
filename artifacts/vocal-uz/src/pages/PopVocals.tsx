@@ -16,8 +16,8 @@ export default function PopVocals() {
     titleRed: isRu ? "Выразительно." : "Expressive.",
     sub: isRu ? "Голос как профессиональный инструмент" : "Voice as a professional instrument",
     desc: isRu
-      ? "Поп-вокал — это фундамент певческого мастерства. Правильное дыхание, опора, резонаторы, тембр и артикуляция — всё это формирует голос, которым можно не просто петь, а говорить."
-      : "Pop vocals are the foundation of singing mastery. Correct breathing, support, resonators, timbre, and articulation — all of this shapes a voice that does not just sing, but speaks.",
+      ? "Поп-вокал — фундамент певческого мастерства. Дыхание, опора, резонаторы, тембр и артикуляция — всё это формирует голос, которым можно не просто петь, а говорить."
+      : "Pop vocals are the foundation of singing mastery. Breathing, support, resonators, timbre, and articulation — they shape a voice that does not just sing, but speaks.",
   };
 
   const what = {

@@ -134,7 +134,7 @@ export function PageHero({
           </div>
 
           {/* Right: desc + Learn More */}
-          <div className="flex flex-col items-center md:items-end justify-center gap-3 text-center md:text-right max-w-xs flex-shrink-0">
+          <div className="flex flex-col items-center md:items-end justify-center gap-3 text-center md:text-right max-w-[360px] flex-shrink-0">
             <p className="text-[0.73rem] leading-[1.75] text-[rgba(240,238,234,0.45)]">
               {courseDesc}
             </p>

@@ -10,7 +10,7 @@ const karaokeContent = {
     heroTitle: "Пой уже сегодня.",
     heroSub: "С нуля до первого выступления",
     heroDesc:
-      "Этот курс создан для тех, кто хочет петь — но не знает, с чего начать. За 12 занятий вы освоите всё необходимое: дыхание, интонацию, работу с микрофоном и уверенность на сцене.",
+      "Для тех, кто хочет петь, но не знает, с чего начать. За 12 занятий освоите всё нужное: дыхание, интонацию, работу с микрофоном и уверенность на сцене.",
     whatTitle: "Для кого этот курс?",
     whatBody:
       "Экспресс-карaoке — это не курс для «профессионалов будущего». Это курс для людей, которые хотят петь в удовольствие, уверенно держаться с микрофоном и перестать бояться зрителей.",
@@ -133,7 +133,7 @@ const karaokeContent = {
     heroTitle: "Sing Today.",
     heroSub: "From zero to your first performance",
     heroDesc:
-      "This course is built for people who want to sing but do not know where to start. In 12 lessons you will master everything you need: breathing, intonation, microphone technique, and stage confidence.",
+      "For those who want to sing but do not know where to start. In 12 lessons you master the essentials: breathing, intonation, microphone technique, and stage confidence.",
     whatTitle: "Who is this course for?",
     whatBody:
       "Express Karaoke is not a course for future professionals. It is a course for people who want to sing with pleasure, handle a microphone with confidence, and stop being afraid of an audience.",

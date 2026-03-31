@@ -20,7 +20,7 @@ const kidsContent = {
     heroTitle: "Голос начинается здесь.",
     heroSub: "Индивидуально. Безопасно. Интересно.",
     heroDesc:
-      "Каждый ребёнок уникален. Именно поэтому здесь нет шаблонных программ — только индивидуальный подход, интерес ребёнка в основе обучения и техники, безопасные для растущего голоса.",
+      "Каждый ребёнок уникален — здесь нет шаблонных программ. Только индивидуальный подход, интерес ребёнка в основе и техники, безопасные для растущего голоса.",
 
     aboutTitle: "Почему детский вокал — это особый подход?",
     aboutBody1:
@@ -110,7 +110,7 @@ const kidsContent = {
     heroTitle: "Voice Starts Here.",
     heroSub: "Individual. Safe. Engaging.",
     heroDesc:
-      "Every child is unique. That is why there are no cookie-cutter programmes here — only an individual approach, the child's interests at the centre, and techniques safe for a growing voice.",
+      "Every child is unique — no cookie-cutter programmes here. Only individual approach, the child's interests at the centre, and techniques safe for a growing voice.",
 
     aboutTitle: "Why kids' vocal training is a different discipline",
     aboutBody1:
