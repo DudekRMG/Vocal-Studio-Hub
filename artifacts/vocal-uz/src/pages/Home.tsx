@@ -361,9 +361,9 @@ export default function Home() {
                 { val: statYearsTeach, label: tx.about.stat2Label },
                 { val: statStudents, label: tx.about.stat3Label },
               ].map(({ val, label }) => (
-                <div key={label} className="bg-[#080808] py-5 text-center">
+                <div key={label} className="bg-[#080808] py-5 px-1 text-center">
                   <div className="font-display text-2xl text-[#e8002d]">{val}</div>
-                  <div className="text-[0.65rem] tracking-[0.12em] uppercase text-[#555] mt-1">{label}</div>
+                  <div className="text-[0.58rem] tracking-[0.05em] uppercase text-[#555] mt-1 whitespace-nowrap">{label}</div>
                 </div>
               ))}
             </div>
