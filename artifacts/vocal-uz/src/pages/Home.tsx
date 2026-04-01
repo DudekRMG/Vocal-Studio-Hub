@@ -72,7 +72,7 @@ export default function Home() {
             </span>
             <div className="flex flex-row flex-wrap items-center justify-center gap-3">
               <a href="#booking" className="bg-[#e8002d] text-[#f0eeea] font-display text-[0.72rem] tracking-[0.16em] px-6 py-3.5 no-underline transition-all duration-200 hover:bg-[#ff1a3d] uppercase">
-                {tx.hero.ctaBook}
+                {lang === "ru" ? "Пробный урок" : tx.hero.ctaBook}
               </a>
               <a href="#about" className="border border-white/[0.18] text-[rgba(240,238,234,0.6)] font-display text-[0.72rem] tracking-[0.16em] px-6 py-3.5 no-underline transition-all duration-200 hover:border-white/40 hover:text-[#f0eeea] uppercase">
                 {tx.hero.ctaLearn}
