@@ -15,12 +15,12 @@ export function Footer() {
     <footer className={`${isKids ? "bg-[#1e2d4a] border-t border-white/[0.1]" : "bg-[#080808] border-t border-white/[0.08]"} py-8 px-6 lg:px-12`}>
       <div className="max-w-[1100px] mx-auto">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-10 mb-6">
-          <div>
-            <img src={isKaraoke ? "/logo_yellow.png" : isPop ? "/logo_purple.png" : isKids ? "/logo_white.png" : "/logo.png"} alt="Vocal.uz" className="h-10 w-auto mb-4" />
+          <div className="text-center md:text-left">
+            <img src={isKaraoke ? "/logo_yellow.png" : isPop ? "/logo_purple.png" : isKids ? "/logo_white.png" : "/logo.png"} alt="Vocal.uz" className="h-10 w-auto mb-4 mx-auto md:mx-0" />
             <p className={`text-[0.82rem] tracking-[0.06em] ${isKids ? "text-white" : "text-[#888]"}`}>{tx.footer.tagline}</p>
           </div>
 
-          <div>
+          <div className="flex flex-col items-center md:items-start">
             <p className={`text-[0.65rem] tracking-[0.25em] uppercase mb-4 ${isKids ? "text-white" : "text-[#888]"}`}>
               {lang === "ru" ? "Контакты" : "Contact"}
             </p>
@@ -56,11 +56,11 @@ export function Footer() {
             </div>
           </div>
 
-          <div>
+          <div className="text-center md:text-left">
             <p className={`text-[0.65rem] tracking-[0.25em] uppercase mb-4 ${isKids ? "text-white" : "text-[#888]"}`}>
               {lang === "ru" ? "Навигация" : "Navigation"}
             </p>
-            <ul className="list-none m-0 p-0 flex flex-col gap-2">
+            <ul className="list-none m-0 p-0 flex flex-col gap-2 items-center md:items-start">
               {[
                 { href: "/", label: t[lang].nav.home },
                 { href: "/extreme", label: t[lang].nav.extreme },
