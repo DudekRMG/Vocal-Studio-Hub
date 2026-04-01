@@ -199,7 +199,7 @@ export default function PopVocals() {
           </div>
           <div className="grid grid-cols-2 gap-[1px] bg-white/[0.08]">
             {pillars.map((p) => (
-              <div key={p.title} className="bg-[#0f0f0f] p-8">
+              <div key={p.title} className="bg-[#0f0f0f] p-5 md:p-8">
                 <div className="text-2xl mb-4" style={{ color: "#9d4edd" }}>{p.icon}</div>
                 <h3 className="font-display text-[1.2rem] tracking-[0.08em] mb-3 text-[#f0eeea]">{p.title}</h3>
                 <p className="text-[0.8rem] leading-[1.7] text-[rgba(240,238,234,0.4)]">{p.desc}</p>
