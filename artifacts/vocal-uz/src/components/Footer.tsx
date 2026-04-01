@@ -11,11 +11,6 @@ export function Footer() {
   const isPop = location === "/pop";
   const base = import.meta.env.BASE_URL.replace(/\/$/, "");
 
-  const btnColor = isKids ? "#3b82f6" : isKaraoke ? "#c9a84c" : isPop ? "#9d4edd" : "#e8002d";
-  const callBorderColor = isKids ? "#ffffff" : btnColor;
-  const callIconColor = isKids ? "#ffffff" : btnColor;
-  const callTextColor = isKids ? "#ffffff" : "#f0eeea";
-
   return (
     <footer className={`${isKids ? "bg-[#1e2d4a] border-t border-white/[0.1]" : "bg-[#080808] border-t border-white/[0.08]"} py-8 px-6 lg:px-12`}>
       <div className="max-w-[1100px] mx-auto">
@@ -48,10 +43,9 @@ export function Footer() {
             </div>
             <a
               href="tel:+998338622589"
-              className="inline-flex items-center gap-2 py-[0.45rem] px-[0.9rem] border bg-transparent no-underline transition-all duration-200 hover:opacity-75"
-              style={{ borderColor: callBorderColor, color: callTextColor }}
+              className={`inline-flex items-center gap-2 py-[0.45rem] px-[0.9rem] border bg-transparent no-underline transition-all duration-200 ${isKids ? "border-white/30 text-white hover:border-white hover:text-white" : "border-white/[0.08] text-[#f0eeea] hover:border-white/20 hover:text-[#f0eeea]"}`}
             >
-              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke={callIconColor} strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" style={{ flexShrink: 0 }}>
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" style={{ flexShrink: 0 }}>
                 <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.4 12a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.51 1.2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.73A16 16 0 0 0 15.27 16.09l.86-.86a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/>
               </svg>
               <span className="flex flex-col items-center leading-tight">
