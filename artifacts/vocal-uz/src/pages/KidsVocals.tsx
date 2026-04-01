@@ -240,7 +240,7 @@ export default function KidsVocals() {
             <span className="text-[0.68rem] tracking-[0.28em] uppercase block mb-4" style={{ color: blue }}>
               {lang === "ru" ? "О подходе" : "The Approach"}
             </span>
-            <h2 className="font-display text-[clamp(2.5rem,4vw,4rem)] leading-[0.95] tracking-[0.02em] mb-8 text-[#0f1016]">{c.aboutTitle}</h2>
+            <h2 className="font-display text-[clamp(2.5rem,4vw,4rem)] leading-[1.1] tracking-[0.02em] mb-8 text-[#0f1016]">{c.aboutTitle}</h2>
             <div className="w-10 h-[2px] mb-8" style={{ backgroundColor: blue }} />
             <p className="text-[0.9rem] leading-[1.9] text-[rgba(15,16,22,0.5)] mb-5">{c.aboutBody1}</p>
             <p className="text-[0.9rem] leading-[1.9] text-[rgba(15,16,22,0.5)]">{c.aboutBody2}</p>
@@ -259,7 +259,7 @@ export default function KidsVocals() {
       {/* ── AGE GROUPS ── */}
       <section className="py-28 px-6 lg:px-12 border-b" style={{ backgroundColor: bgBase, borderColor: "rgba(0,0,0,0.07)" }}>
         <div className="max-w-[1100px] mx-auto">
-          <h2 className="font-display text-[clamp(2.5rem,4vw,4rem)] leading-[0.95] tracking-[0.02em] mb-16 text-[#0f1016]">{c.ageGroupsTitle}</h2>
+          <h2 className="font-display text-[clamp(2.5rem,4vw,4rem)] leading-[1.1] tracking-[0.02em] mb-16 text-[#0f1016]">{c.ageGroupsTitle}</h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-[1px]" style={{ backgroundColor: "rgba(0,0,0,0.07)" }}>
             {c.ageGroups.map((group, i) => (
               <div key={group.range} className="p-10 relative group hover:opacity-95 transition-opacity" style={{ backgroundColor: i % 2 === 0 ? bgCard : bgCardAlt }}>
@@ -286,7 +286,7 @@ export default function KidsVocals() {
       {/* ── STYLES ── */}
       <section className="py-28 px-6 lg:px-12 border-b" style={{ backgroundColor: bgCard, borderColor: "rgba(0,0,0,0.07)" }}>
         <div className="max-w-[1100px] mx-auto">
-          <h2 className="font-display text-[clamp(2.5rem,4vw,4rem)] leading-[0.95] tracking-[0.02em] mb-4 text-[#0f1016]">{c.stylesTitle}</h2>
+          <h2 className="font-display text-[clamp(2.5rem,4vw,4rem)] leading-[1.1] tracking-[0.02em] mb-4 text-[#0f1016]">{c.stylesTitle}</h2>
           <p className="text-[0.9rem] leading-[1.9] text-[rgba(15,16,22,0.4)] mb-14 max-w-[560px]">{c.stylesSub}</p>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-[1px]" style={{ backgroundColor: "rgba(0,0,0,0.07)" }}>
             {c.styles.map((style, i) => (
@@ -305,7 +305,7 @@ export default function KidsVocals() {
       {/* ── PROCESS ── */}
       <section className="py-28 px-6 lg:px-12 border-b" style={{ backgroundColor: bgCardAlt, borderColor: "rgba(0,0,0,0.07)" }}>
         <div className="max-w-[1100px] mx-auto">
-          <h2 className="font-display text-[clamp(2.5rem,4vw,4rem)] leading-[0.95] tracking-[0.02em] mb-16 text-[#0f1016]">{c.processTitle}</h2>
+          <h2 className="font-display text-[clamp(2.5rem,4vw,4rem)] leading-[1.1] tracking-[0.02em] mb-16 text-[#0f1016]">{c.processTitle}</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-[1px]" style={{ backgroundColor: "rgba(0,0,0,0.07)" }}>
             {c.processSteps.map((step) => (
               <div key={step.num} className="p-10" style={{ backgroundColor: bgCardAlt }}>
@@ -325,7 +325,7 @@ export default function KidsVocals() {
             <span className="text-[0.68rem] tracking-[0.28em] uppercase block mb-4" style={{ color: blue }}>
               {lang === "ru" ? "Безопасность" : "Safety"}
             </span>
-            <h2 className="font-display text-[clamp(2.5rem,4vw,4rem)] leading-[0.95] tracking-[0.02em] mb-8 text-[#0f1016]">{c.safetyTitle}</h2>
+            <h2 className="font-display text-[clamp(2.5rem,4vw,4rem)] leading-[1.1] tracking-[0.02em] mb-8 text-[#0f1016]">{c.safetyTitle}</h2>
             <div className="w-10 h-[2px] mb-8" style={{ backgroundColor: blue }} />
             <p className="text-[0.9rem] leading-[1.9] text-[rgba(15,16,22,0.5)] mb-5">{c.safetyBody1}</p>
             <p className="text-[0.9rem] leading-[1.9] text-[rgba(15,16,22,0.5)]">{c.safetyBody2}</p>
@@ -346,11 +346,11 @@ export default function KidsVocals() {
       {/* ── FAQ ── */}
       <section className="py-28 px-6 lg:px-12 border-b" style={{ backgroundColor: bgCard, borderColor: "rgba(0,0,0,0.07)" }}>
         <div className="max-w-[800px] mx-auto">
-          <h2 className="font-display text-[clamp(2.5rem,4vw,4rem)] leading-[0.95] tracking-[0.02em] mb-16 text-[#0f1016]">{c.faqTitle}</h2>
+          <h2 className="font-display text-[clamp(2.5rem,4vw,4rem)] leading-[1.1] tracking-[0.02em] mb-16 text-[#0f1016]">{c.faqTitle}</h2>
           <div className="flex flex-col gap-[1px]" style={{ backgroundColor: "rgba(0,0,0,0.07)" }}>
             {c.faqs.map((faq) => (
               <div key={faq.q} className="px-10 py-8" style={{ backgroundColor: bgCard }}>
-                <h3 className="font-display text-[1.15rem] tracking-[0.05em] text-[#0f1016] mb-3">{faq.q}</h3>
+                <h3 className="font-display text-[1.15rem] tracking-[0.05em] leading-[1.3] text-[#0f1016] mb-3">{faq.q}</h3>
                 <p className="text-[0.88rem] leading-[1.8] text-[rgba(15,16,22,0.5)]">{faq.a}</p>
               </div>
             ))}
@@ -363,7 +363,7 @@ export default function KidsVocals() {
         <div className="absolute inset-0 opacity-[0.06] pointer-events-none" style={{ backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")`, backgroundSize: "120px" }} />
         <div className="max-w-[1100px] mx-auto flex flex-col md:flex-row items-center justify-between gap-8">
           <div>
-            <h2 className="font-display text-[clamp(2rem,4vw,3.5rem)] leading-[0.95] text-[#f0eeea]">{c.ctaBanner}</h2>
+            <h2 className="font-display text-[clamp(2rem,4vw,3.5rem)] leading-[1.1] text-[#f0eeea]">{c.ctaBanner}</h2>
             <p className="text-[0.9rem] text-[rgba(240,238,234,0.6)] mt-3">{c.ctaBannerSub}</p>
           </div>
           <a
@@ -393,7 +393,7 @@ export default function KidsVocals() {
         <div className="pt-28 pb-12 px-6 lg:px-12">
           <div className="max-w-[1100px] mx-auto">
             <span className="text-[0.68rem] tracking-[0.28em] uppercase block mb-4" style={{ color: blue }}>{tx.booking.eyebrow}</span>
-            <h2 className="font-display text-[clamp(3rem,5vw,5rem)] leading-[0.95] tracking-[0.02em] text-[#0f1016]">
+            <h2 className="font-display text-[clamp(3rem,5vw,5rem)] leading-[1.1] tracking-[0.02em] text-[#0f1016]">
               {c.bookTitle}
               <em className="font-['Playfair_Display'] not-italic italic text-[0.7em] text-[rgba(15,16,22,0.45)] block mt-1">{c.bookTitleEm}</em>
             </h2>

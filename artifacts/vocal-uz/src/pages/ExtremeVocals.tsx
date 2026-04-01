@@ -218,7 +218,7 @@ export default function ExtremeVocals() {
             <span className="text-[0.68rem] tracking-[0.28em] uppercase text-[#e8002d] block mb-4">
               {lang === "ru" ? "О направлении" : "About"}
             </span>
-            <h2 className="font-display text-[clamp(2.5rem,4vw,4rem)] leading-[0.95] tracking-[0.02em] mb-8">{c.whatTitle}</h2>
+            <h2 className="font-display text-[clamp(2.5rem,4vw,4rem)] leading-[1.1] tracking-[0.02em] mb-8">{c.whatTitle}</h2>
             <div className="w-10 h-[2px] bg-[#e8002d] mb-8" />
             <p className="text-[0.9rem] leading-[1.9] text-[rgba(240,238,234,0.5)] mb-5">{c.whatBody}</p>
             <p className="text-[0.9rem] leading-[1.9] text-[rgba(240,238,234,0.5)]">{c.whatBody2}</p>
@@ -237,7 +237,7 @@ export default function ExtremeVocals() {
       {/* ── TECHNIQUES ── */}
       <section className="py-28 px-6 lg:px-12 bg-[#080808] border-b border-white/[0.08]">
         <div className="max-w-[1100px] mx-auto">
-          <h2 className="font-display text-[clamp(2.5rem,4vw,4rem)] leading-[0.95] tracking-[0.02em] mb-16">{c.techniquesTitle}</h2>
+          <h2 className="font-display text-[clamp(2.5rem,4vw,4rem)] leading-[1.1] tracking-[0.02em] mb-16">{c.techniquesTitle}</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-[1px] bg-white/[0.08]">
             {c.techniques.map((tech, i) => (
               <div key={tech.name} className="bg-[#080808] p-10 relative group hover:bg-[#0d0a0a] transition-colors duration-300">
@@ -253,7 +253,7 @@ export default function ExtremeVocals() {
       {/* ── PROCESS ── */}
       <section className="py-28 px-6 lg:px-12 bg-[#141414] border-b border-white/[0.08]">
         <div className="max-w-[1100px] mx-auto">
-          <h2 className="font-display text-[clamp(2.5rem,4vw,4rem)] leading-[0.95] tracking-[0.02em] mb-16">{c.processTitle}</h2>
+          <h2 className="font-display text-[clamp(2.5rem,4vw,4rem)] leading-[1.1] tracking-[0.02em] mb-16">{c.processTitle}</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-[1px] bg-white/[0.08]">
             {c.processSteps.map((step) => (
               <div key={step.num} className="bg-[#141414] p-10">
@@ -269,11 +269,11 @@ export default function ExtremeVocals() {
       {/* ── FAQ ── */}
       <section className="py-28 px-6 lg:px-12 bg-[#0f0f0f] border-b border-white/[0.08]">
         <div className="max-w-[800px] mx-auto">
-          <h2 className="font-display text-[clamp(2.5rem,4vw,4rem)] leading-[0.95] tracking-[0.02em] mb-16">{c.faqTitle}</h2>
+          <h2 className="font-display text-[clamp(2.5rem,4vw,4rem)] leading-[1.1] tracking-[0.02em] mb-16">{c.faqTitle}</h2>
           <div className="flex flex-col gap-[1px] bg-white/[0.08]">
             {c.faqs.map((faq) => (
               <div key={faq.q} className="bg-[#0f0f0f] px-10 py-8">
-                <h3 className="font-display text-[1.15rem] tracking-[0.05em] text-[#f0eeea] mb-3">{faq.q}</h3>
+                <h3 className="font-display text-[1.15rem] tracking-[0.05em] leading-[1.3] text-[#f0eeea] mb-3">{faq.q}</h3>
                 <p className="text-[0.88rem] leading-[1.8] text-[rgba(240,238,234,0.5)]">{faq.a}</p>
               </div>
             ))}
@@ -285,7 +285,7 @@ export default function ExtremeVocals() {
       <section className="py-20 px-6 lg:px-12 bg-[#e8002d] relative overflow-hidden">
         <div className="max-w-[1100px] mx-auto flex flex-col md:flex-row items-center justify-between gap-8">
           <div>
-            <h2 className="font-display text-[clamp(2rem,4vw,3.5rem)] leading-[0.95] text-[#f0eeea]">{c.ctaBanner}</h2>
+            <h2 className="font-display text-[clamp(2rem,4vw,3.5rem)] leading-[1.1] text-[#f0eeea]">{c.ctaBanner}</h2>
             <p className="text-[0.9rem] text-[rgba(240,238,234,0.75)] mt-3">{c.ctaBannerSub}</p>
           </div>
           <a href="#book-extreme" className="flex-shrink-0 bg-[#f0eeea] text-[#080808] font-display text-[1.1rem] tracking-[0.15em] px-10 py-5 no-underline hover:bg-white whitespace-nowrap inline-flex items-center gap-3 group transition-colors duration-200">
@@ -301,9 +301,9 @@ export default function ExtremeVocals() {
         <div className="pt-28 pb-12 px-6 lg:px-12">
           <div className="max-w-[1100px] mx-auto">
             <span className="text-[0.68rem] tracking-[0.28em] uppercase text-[#e8002d] block mb-4">{t[lang].booking.eyebrow}</span>
-            <h2 className="font-display text-[clamp(3rem,5vw,5rem)] leading-[0.95] tracking-[0.02em]">
+            <h2 className="font-display text-[clamp(3rem,5vw,5rem)] leading-[1.1] tracking-[0.02em]">
               {c.bookTitle}
-              <em className="font-['Playfair_Display'] not-italic italic text-[0.7em] text-[rgba(240,238,234,0.45)] block mt-1">{c.bookTitleEm}</em>
+              <em className="font-['Playfair_Display'] not-italic italic text-[rgba(240,238,234,0.45)] block mt-1" style={{ fontSize: lang === "ru" ? "0.52em" : "0.7em" }}>{c.bookTitleEm}</em>
             </h2>
             <div className="w-10 h-[2px] bg-[#e8002d] my-8" />
             <p className="text-[0.9rem] leading-[1.9] text-[rgba(240,238,234,0.5)]">{c.bookIntro}</p>

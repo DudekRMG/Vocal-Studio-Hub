@@ -192,7 +192,7 @@ export default function PopVocals() {
         <div className="max-w-[1100px] mx-auto grid grid-cols-1 md:grid-cols-2 gap-20 items-center">
           <div>
             <span className="text-[0.68rem] tracking-[0.28em] uppercase text-[#9d4edd] block mb-4">{what.eyebrow}</span>
-            <h2 className="font-['Playfair_Display'] italic text-[clamp(2.2rem,4vw,3.5rem)] leading-[1.05] mb-8">{what.title}</h2>
+            <h2 className="font-['Playfair_Display'] italic text-[clamp(2.2rem,4vw,3.5rem)] leading-[1.2] mb-8">{what.title}</h2>
             <div className="w-10 h-[2px] bg-[#9d4edd] mb-8" />
             <p className="text-[0.9rem] leading-[1.9] text-[rgba(240,238,234,0.5)] mb-5">{what.body1}</p>
             <p className="text-[0.9rem] leading-[1.9] text-[rgba(240,238,234,0.5)]">{what.body2}</p>
@@ -212,7 +212,7 @@ export default function PopVocals() {
       {/* ── FOR WHOM ── */}
       <section className="py-28 px-6 lg:px-12 bg-[#141414] border-b border-white/[0.08]">
         <div className="max-w-[1100px] mx-auto">
-          <h2 className="font-['Playfair_Display'] italic text-[clamp(2.5rem,4vw,4rem)] leading-[1] mb-16">{forWhomTitle}</h2>
+          <h2 className="font-['Playfair_Display'] italic text-[clamp(2.5rem,4vw,4rem)] leading-[1.2] mb-16">{forWhomTitle}</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-[1px] bg-white/[0.08]">
             {forWhom.map((item) => (
               <div key={item.title} className="bg-[#141414] p-10">
@@ -227,7 +227,7 @@ export default function PopVocals() {
       {/* ── PROGRAMME ── */}
       <section className="py-28 px-6 lg:px-12 bg-[#0f0f0f] border-b border-white/[0.08]">
         <div className="max-w-[1100px] mx-auto">
-          <h2 className="font-['Playfair_Display'] italic text-[clamp(2.5rem,4vw,4rem)] leading-[1] mb-16">{programTitle}</h2>
+          <h2 className="font-['Playfair_Display'] italic text-[clamp(2.5rem,4vw,4rem)] leading-[1.2] mb-16">{programTitle}</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-[1px] bg-white/[0.08]">
             {programSteps.map((step) => (
               <div key={step.num} className="bg-[#0f0f0f] p-10">
@@ -243,11 +243,11 @@ export default function PopVocals() {
       {/* ── FAQ ── */}
       <section className="py-28 px-6 lg:px-12 bg-[#080808] border-b border-white/[0.08]">
         <div className="max-w-[800px] mx-auto">
-          <h2 className="font-['Playfair_Display'] italic text-[clamp(2.5rem,4vw,4rem)] leading-[1] mb-16">{faqTitle}</h2>
+          <h2 className="font-['Playfair_Display'] italic text-[clamp(2.5rem,4vw,4rem)] leading-[1.2] mb-16">{faqTitle}</h2>
           <div className="flex flex-col gap-[1px] bg-white/[0.08]">
             {faqs.map((faq) => (
               <div key={faq.q} className="bg-[#080808] px-10 py-8">
-                <h3 className="font-['Playfair_Display'] italic text-[1.1rem] text-[#f0eeea] mb-3">{faq.q}</h3>
+                <h3 className="font-['Playfair_Display'] italic text-[1.1rem] leading-[1.5] text-[#f0eeea] mb-3">{faq.q}</h3>
                 <p className="text-[0.88rem] leading-[1.8] text-[rgba(240,238,234,0.5)]">{faq.a}</p>
               </div>
             ))}
@@ -259,7 +259,7 @@ export default function PopVocals() {
       <section className="py-20 px-6 lg:px-12 relative overflow-hidden" style={{ backgroundColor: "#9d4edd" }}>
         <div className="max-w-[1100px] mx-auto flex flex-col md:flex-row items-center justify-between gap-8">
           <div>
-            <h2 className="font-['Playfair_Display'] italic text-[clamp(2rem,4vw,3.5rem)] leading-[1] text-white">{ctaBannerText}</h2>
+            <h2 className="font-['Playfair_Display'] italic text-[clamp(2rem,4vw,3.5rem)] leading-[1.2] text-white">{ctaBannerText}</h2>
             <p className="text-[0.9rem] text-[rgba(255,255,255,0.75)] mt-3">{ctaBannerSub}</p>
           </div>
           <a
@@ -286,7 +286,7 @@ export default function PopVocals() {
         <div className="pt-28 pb-12 px-6 lg:px-12">
           <div className="max-w-[1100px] mx-auto">
             <span className="text-[0.68rem] tracking-[0.28em] uppercase text-[#9d4edd] block mb-4">{tx.booking.eyebrow}</span>
-            <h2 className="font-['Playfair_Display'] italic text-[clamp(2.5rem,4vw,4rem)] leading-[1]">
+            <h2 className="font-['Playfair_Display'] italic text-[clamp(2.5rem,4vw,4rem)] leading-[1.2]">
               {bookTitle}
               <em className="not-italic text-[0.7em] text-[rgba(240,238,234,0.45)] block mt-1 italic">{bookTitleEm}</em>
             </h2>

@@ -181,7 +181,7 @@ export default function Home() {
           <span className="text-[0.68rem] tracking-[0.28em] uppercase text-[#e8002d] block mb-4">
             {tx.disciplines.eyebrow}
           </span>
-          <h2 className="font-display text-[clamp(3rem,5vw,5rem)] leading-[0.95] tracking-[0.02em]">
+          <h2 className="font-display text-[clamp(3rem,5vw,5rem)] leading-[1.1] tracking-[0.02em]">
             {tx.disciplines.title}
             <em className="font-['Playfair_Display'] not-italic italic text-[0.7em] text-[rgba(240,238,234,0.45)] block mt-1">
               {tx.disciplines.titleEm}
@@ -199,7 +199,7 @@ export default function Home() {
             <span className="absolute top-8 right-8 font-display text-[5rem] leading-none text-[rgba(232,0,45,0.07)] z-0 pointer-events-none select-none">01</span>
             <div className="relative z-[1]">
               <span className="text-[0.65rem] tracking-[0.28em] uppercase text-[#e8002d] mb-6 block">{tx.disciplines.extremeTag}</span>
-              <h3 className="font-display text-[clamp(2rem,3.5vw,3rem)] tracking-[0.03em] leading-[0.95] mb-6">
+              <h3 className="font-display text-[clamp(2rem,3.5vw,3rem)] tracking-[0.03em] leading-[1.1] mb-6">
                 {tx.disciplines.extremeTitle}
               </h3>
               <p className="text-[0.85rem] leading-[1.9] text-[rgba(240,238,234,0.45)] mb-8">
@@ -266,7 +266,7 @@ export default function Home() {
             <span className="absolute top-8 right-8 font-display text-[5rem] leading-none z-0 pointer-events-none select-none" style={{ color: "rgba(201,168,76,0.07)" }}>03</span>
             <div className="relative z-[1]">
               <span className="text-[0.65rem] tracking-[0.28em] uppercase mb-6 block" style={{ color: "#c9a84c" }}>{tx.disciplines.karaokeTag}</span>
-              <h3 className="font-display text-[clamp(2rem,3.5vw,3rem)] tracking-[0.03em] leading-[0.95] mb-6">
+              <h3 className="font-display text-[clamp(2rem,3.5vw,3rem)] tracking-[0.03em] leading-[1.1] mb-6">
                 {tx.disciplines.karaokeTitle}
               </h3>
               <p className="text-[0.85rem] leading-[1.9] text-[rgba(240,238,234,0.45)] mb-8">
@@ -313,7 +313,7 @@ export default function Home() {
             <div className="px-10 py-12 grid grid-cols-1 md:grid-cols-[1fr_auto] gap-10 items-center relative z-[1]">
               <div>
                 <span className="text-[0.65rem] tracking-[0.28em] uppercase mb-4 block" style={{ color: "#3b82f6" }}>{tx.disciplines.kidsTag}</span>
-                <h3 className="font-display text-[clamp(2.2rem,4vw,3.5rem)] tracking-[0.03em] leading-[0.95] mb-5 text-[#f0eeea]">
+                <h3 className="font-display text-[clamp(2.2rem,4vw,3.5rem)] tracking-[0.03em] leading-[1.1] mb-5 text-[#f0eeea]">
                   {tx.disciplines.kidsTitle}
                 </h3>
                 <p className="text-[0.88rem] leading-[1.9] text-[rgba(240,238,234,0.45)] max-w-[620px] mb-8">
@@ -374,7 +374,7 @@ export default function Home() {
             <span className="text-[0.68rem] tracking-[0.28em] uppercase text-[#e8002d] block mb-4">
               {tx.about.eyebrow}
             </span>
-            <h2 className="font-display text-[clamp(3rem,5vw,5rem)] leading-[0.95] tracking-[0.02em]">
+            <h2 className="font-display text-[clamp(3rem,5vw,5rem)] leading-[1.1] tracking-[0.02em]">
               {tx.about.title}
               <em className="font-['Playfair_Display'] not-italic italic text-[0.7em] text-[rgba(240,238,234,0.45)] block mt-1">
                 {tx.about.titleEm}
@@ -403,7 +403,7 @@ export default function Home() {
         <div className="absolute inset-0 opacity-[0.07] pointer-events-none" style={{ backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")`, backgroundSize: "120px" }} />
         <div className="max-w-[1100px] mx-auto flex flex-col md:flex-row items-center justify-between gap-8">
           <div>
-            <h2 className="font-display text-[clamp(2rem,4vw,3.5rem)] leading-[0.95] tracking-[0.02em] text-[#f0eeea]">
+            <h2 className="font-display text-[clamp(2rem,4vw,3.5rem)] leading-[1.1] tracking-[0.02em] text-[#f0eeea]">
               {lang === "ru" ? "Ваш голос ждёт своего потенциала" : "Your voice is waiting for its potential"}
             </h2>
             <p className="text-[0.9rem] text-[rgba(240,238,234,0.75)] mt-3">
@@ -430,7 +430,7 @@ export default function Home() {
             <span className="text-[0.68rem] tracking-[0.28em] uppercase text-[#e8002d] block mb-4">
               {tx.booking.eyebrow}
             </span>
-            <h2 className="font-display text-[clamp(3rem,5vw,5rem)] leading-[0.95] tracking-[0.02em]">
+            <h2 className="font-display text-[clamp(3rem,5vw,5rem)] leading-[1.1] tracking-[0.02em]">
               {tx.booking.title}
               <em className="font-['Playfair_Display'] not-italic italic text-[0.7em] text-[rgba(240,238,234,0.45)] block mt-1">
                 {tx.booking.titleEm}

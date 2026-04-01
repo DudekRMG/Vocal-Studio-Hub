@@ -295,7 +295,7 @@ export default function KaraokeCourse() {
             <span className="text-[0.68rem] tracking-[0.28em] uppercase block mb-4" style={{ color: gold }}>
               {lang === "ru" ? "О курсе" : "About"}
             </span>
-            <h2 className="font-display text-[clamp(2.5rem,4vw,4rem)] leading-[0.95] tracking-[0.02em] mb-8">{c.whatTitle}</h2>
+            <h2 className="font-display text-[clamp(2.5rem,4vw,4rem)] leading-[1.1] tracking-[0.02em] mb-8">{c.whatTitle}</h2>
             <div className="w-10 h-[2px] mb-8" style={{ backgroundColor: gold }} />
             <p className="text-[0.9rem] leading-[1.9] text-[rgba(240,238,234,0.5)] mb-5">{c.whatBody}</p>
             <p className="text-[0.9rem] leading-[1.9] text-[rgba(240,238,234,0.5)]">{c.whatBody2}</p>
@@ -321,7 +321,7 @@ export default function KaraokeCourse() {
       {/* ── FOR WHOM ── */}
       <section className="py-28 px-6 lg:px-12 bg-[#080808] border-b border-white/[0.08]">
         <div className="max-w-[1100px] mx-auto">
-          <h2 className="font-display text-[clamp(2.5rem,4vw,4rem)] leading-[0.95] tracking-[0.02em] mb-16">{c.forWhomTitle}</h2>
+          <h2 className="font-display text-[clamp(2.5rem,4vw,4rem)] leading-[1.1] tracking-[0.02em] mb-16">{c.forWhomTitle}</h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-[1px] bg-white/[0.08]">
             {c.forWhom.map((item) => (
               <div key={item.title} className="bg-[#080808] p-10 group hover:bg-[#0d0c09] transition-colors duration-300">
@@ -337,7 +337,7 @@ export default function KaraokeCourse() {
       {/* ── CURRICULUM ── */}
       <section className="py-28 px-6 lg:px-12 bg-[#0f0f0f] border-b border-white/[0.08]">
         <div className="max-w-[1100px] mx-auto">
-          <h2 className="font-display text-[clamp(2.5rem,4vw,4rem)] leading-[0.95] tracking-[0.02em] mb-16">{c.curriculumTitle}</h2>
+          <h2 className="font-display text-[clamp(2.5rem,4vw,4rem)] leading-[1.1] tracking-[0.02em] mb-16">{c.curriculumTitle}</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-[1px] bg-white/[0.08]">
             {c.curriculum.map((lesson) => (
               <div key={lesson.num} className="bg-[#0f0f0f] p-8 relative group hover:bg-[#131109] transition-colors duration-300">
@@ -361,11 +361,11 @@ export default function KaraokeCourse() {
       {/* ── FAQ ── */}
       <section className="py-28 px-6 lg:px-12 bg-[#141414] border-b border-white/[0.08]">
         <div className="max-w-[800px] mx-auto">
-          <h2 className="font-display text-[clamp(2.5rem,4vw,4rem)] leading-[0.95] tracking-[0.02em] mb-16">{c.faqTitle}</h2>
+          <h2 className="font-display text-[clamp(2.5rem,4vw,4rem)] leading-[1.1] tracking-[0.02em] mb-16">{c.faqTitle}</h2>
           <div className="flex flex-col gap-[1px] bg-white/[0.08]">
             {c.faqs.map((faq) => (
               <div key={faq.q} className="bg-[#141414] px-10 py-8">
-                <h3 className="font-display text-[1.15rem] tracking-[0.05em] text-[#f0eeea] mb-3">{faq.q}</h3>
+                <h3 className="font-display text-[1.15rem] tracking-[0.05em] leading-[1.3] text-[#f0eeea] mb-3">{faq.q}</h3>
                 <p className="text-[0.88rem] leading-[1.8] text-[rgba(240,238,234,0.5)]">{faq.a}</p>
               </div>
             ))}
@@ -378,7 +378,7 @@ export default function KaraokeCourse() {
         <div className="absolute inset-0 opacity-[0.06] pointer-events-none" style={{ backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")`, backgroundSize: "120px" }} />
         <div className="max-w-[1100px] mx-auto flex flex-col md:flex-row items-center justify-between gap-8">
           <div>
-            <h2 className="font-display text-[clamp(2rem,4vw,3.5rem)] leading-[0.95] text-[#080808]">{c.ctaBanner}</h2>
+            <h2 className="font-display text-[clamp(2rem,4vw,3.5rem)] leading-[1.1] text-[#080808]">{c.ctaBanner}</h2>
             <p className="text-[0.9rem] text-[rgba(8,8,8,0.65)] mt-3">{c.ctaBannerSub}</p>
           </div>
           <a
@@ -405,7 +405,7 @@ export default function KaraokeCourse() {
         <div className="pt-28 pb-12 px-6 lg:px-12">
           <div className="max-w-[1100px] mx-auto">
             <span className="text-[0.68rem] tracking-[0.28em] uppercase block mb-4" style={{ color: gold }}>{t[lang].booking.eyebrow}</span>
-            <h2 className="font-display text-[clamp(3rem,5vw,5rem)] leading-[0.95] tracking-[0.02em]">
+            <h2 className="font-display text-[clamp(3rem,5vw,5rem)] leading-[1.1] tracking-[0.02em]">
               {c.bookTitle}
               <em className="font-['Playfair_Display'] not-italic italic text-[0.7em] text-[rgba(240,238,234,0.45)] block mt-1">{c.bookTitleEm}</em>
             </h2>
