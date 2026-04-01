@@ -66,8 +66,15 @@ export function BookingForm({ variant, accentColor }: BookingFormProps = {}) {
         </div>
       ) : (
         <>
-          {/* Social proof — no divider line, stars in accent color, text white/dark */}
-          <p className="text-center mb-5 tracking-[0.1em] uppercase text-[0.68rem]">
+          {/* Social proof — mobile: city name removed */}
+          <p className="md:hidden text-center mb-5 tracking-[0.1em] uppercase text-[0.68rem]">
+            <span style={{ color: btnColor }}>★★★★★</span>
+            <span className={`ml-2 ${isKids ? "text-[#1a2535]" : "text-white"}`}>
+              {lang === "ru" ? "Более 200 учеников" : "Loved by 200+ students"}
+            </span>
+          </p>
+          {/* Social proof — desktop: full text */}
+          <p className="hidden md:block text-center mb-5 tracking-[0.1em] uppercase text-[0.68rem]">
             <span style={{ color: btnColor }}>★★★★★</span>
             <span className={`ml-2 ${isKids ? "text-[#1a2535]" : "text-white"}`}>{tx.socialProof}</span>
           </p>
