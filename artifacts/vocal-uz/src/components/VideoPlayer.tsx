@@ -1,21 +1,6 @@
 import { useRef, useState, useEffect, useCallback } from "react";
 
-type Phase = "idle" | "autoplaying" | "playing" | "paused" | "ended";
-
-function useIsMobile(): boolean {
-  const [mobile, setMobile] = useState(() =>
-    typeof window !== "undefined"
-      ? window.matchMedia("(hover: none) and (pointer: coarse)").matches
-      : false
-  );
-  useEffect(() => {
-    const mq = window.matchMedia("(hover: none) and (pointer: coarse)");
-    const handler = (e: MediaQueryListEvent) => setMobile(e.matches);
-    mq.addEventListener("change", handler);
-    return () => mq.removeEventListener("change", handler);
-  }, []);
-  return mobile;
-}
+type Phase = "idle" | "autoplaying" | "playing" | "paused" | "ended" | "blocked";
 
 interface VideoPlayerProps {
   src: string;
@@ -24,19 +9,13 @@ interface VideoPlayerProps {
 export function VideoPlayer({ src }: VideoPlayerProps) {
   const containerRef = useRef<HTMLDivElement | null>(null);
   const videoRef = useRef<HTMLVideoElement | null>(null);
-  const isMobile = useIsMobile();
 
   const [phase, setPhase] = useState<Phase>("idle");
   const [muted, setMuted] = useState(true);
 
   const phaseRef = useRef<Phase>("idle");
   const mutedRef = useRef(true);
-  const isMobileRef = useRef(isMobile);
   const scrollPausedPhaseRef = useRef<"autoplaying" | "playing" | null>(null);
-
-  useEffect(() => { isMobileRef.current = isMobile; }, [isMobile]);
-  useEffect(() => { phaseRef.current = phase; }, [phase]);
-  useEffect(() => { mutedRef.current = muted; }, [muted]);
 
   const setPhaseSync = useCallback((p: Phase) => {
     phaseRef.current = p;
@@ -50,6 +29,17 @@ export function VideoPlayer({ src }: VideoPlayerProps) {
 
   useEffect(() => {
     const video = videoRef.current;
+    if (!video) return;
+    const onEnded = () => {
+      scrollPausedPhaseRef.current = null;
+      setPhaseSync("ended");
+    };
+    video.addEventListener("ended", onEnded);
+    return () => video.removeEventListener("ended", onEnded);
+  }, [setPhaseSync]);
+
+  useEffect(() => {
+    const video = videoRef.current;
     const container = containerRef.current;
     if (!video || !container) return;
 
@@ -59,12 +49,15 @@ export function VideoPlayer({ src }: VideoPlayerProps) {
         const p = phaseRef.current;
 
         if (entry.isIntersecting) {
-          if (p === "idle" && !isMobileRef.current) {
+          if (p === "idle") {
             video.muted = true;
             setMutedSync(true);
-            video.play().catch(() => {});
-            setPhaseSync("autoplaying");
+            video
+              .play()
+              .then(() => setPhaseSync("autoplaying"))
+              .catch(() => setPhaseSync("blocked"));
           } else if (scrollPausedPhaseRef.current !== null) {
+            video.muted = mutedRef.current;
             video.play().catch(() => {});
             setPhaseSync(scrollPausedPhaseRef.current);
             scrollPausedPhaseRef.current = null;
@@ -85,17 +78,6 @@ export function VideoPlayer({ src }: VideoPlayerProps) {
     return () => observer.disconnect();
   }, [setPhaseSync, setMutedSync]);
 
-  useEffect(() => {
-    const video = videoRef.current;
-    if (!video) return;
-    const onEnded = () => {
-      scrollPausedPhaseRef.current = null;
-      setPhaseSync("ended");
-    };
-    video.addEventListener("ended", onEnded);
-    return () => video.removeEventListener("ended", onEnded);
-  }, [setPhaseSync]);
-
   const handleFrameClick = useCallback(() => {
     const video = videoRef.current;
     if (!video) return;
@@ -104,6 +86,8 @@ export function VideoPlayer({ src }: VideoPlayerProps) {
     if (p === "autoplaying") {
       video.muted = false;
       setMutedSync(false);
+      video.currentTime = 0;
+      video.play().catch(() => {});
       setPhaseSync("playing");
     } else if (p === "playing") {
       video.pause();
@@ -128,31 +112,32 @@ export function VideoPlayer({ src }: VideoPlayerProps) {
     e.stopPropagation();
     const video = videoRef.current;
     if (!video) return;
-    video.muted = mutedRef.current;
+    video.muted = false;
+    setMutedSync(false);
     video.currentTime = 0;
     video.play().catch(() => {});
     setPhaseSync("playing");
-  }, [setPhaseSync]);
+  }, [setPhaseSync, setMutedSync]);
 
-  const handleMobilePlay = useCallback((e: React.MouseEvent) => {
+  const handleBlockedPlay = useCallback((e: React.MouseEvent) => {
     e.stopPropagation();
     const video = videoRef.current;
     if (!video) return;
     video.muted = false;
     setMutedSync(false);
-    video.play().catch(() => {});
-    setPhaseSync("playing");
+    video
+      .play()
+      .then(() => setPhaseSync("playing"))
+      .catch(() => {});
   }, [setPhaseSync, setMutedSync]);
 
-  const showMuteBtn = phase === "autoplaying" || phase === "playing" || phase === "paused";
-  const showReplay = phase === "ended";
-  const showMobilePlay = isMobile && phase === "idle";
+  const isInteractive = phase === "autoplaying" || phase === "playing" || phase === "paused";
 
   return (
     <div
       ref={containerRef}
       className="relative w-full overflow-hidden bg-black"
-      style={{ paddingBottom: "56.25%", cursor: phase === "idle" ? "default" : "pointer" }}
+      style={{ paddingBottom: "56.25%", cursor: isInteractive ? "pointer" : "default" }}
       onClick={handleFrameClick}
     >
       <video
@@ -165,10 +150,11 @@ export function VideoPlayer({ src }: VideoPlayerProps) {
         onContextMenu={(e) => e.preventDefault()}
       />
 
-      {showMobilePlay && (
+      {phase === "blocked" && (
         <div
           className="absolute inset-0 flex items-center justify-center bg-black/50 z-20"
-          onClick={handleMobilePlay}
+          onClick={handleBlockedPlay}
+          style={{ cursor: "pointer" }}
         >
           <div
             className="w-16 h-16 rounded-full flex items-center justify-center"
@@ -185,7 +171,7 @@ export function VideoPlayer({ src }: VideoPlayerProps) {
         </div>
       )}
 
-      {showReplay && (
+      {phase === "ended" && (
         <div
           className="absolute inset-0 flex items-center justify-center bg-black/50 z-20"
           onClick={(e) => e.stopPropagation()}
@@ -200,7 +186,16 @@ export function VideoPlayer({ src }: VideoPlayerProps) {
               backdropFilter: "blur(8px)",
             }}
           >
-            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+            <svg
+              width="22"
+              height="22"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="white"
+              strokeWidth="2.2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            >
               <polyline points="1 4 1 10 7 10" />
               <path d="M3.51 15a9 9 0 1 0 .49-3.31" />
             </svg>
@@ -208,7 +203,7 @@ export function VideoPlayer({ src }: VideoPlayerProps) {
         </div>
       )}
 
-      {showMuteBtn && (
+      {isInteractive && (
         <button
           onClick={handleMuteToggle}
           aria-label={muted ? "Unmute" : "Mute"}
