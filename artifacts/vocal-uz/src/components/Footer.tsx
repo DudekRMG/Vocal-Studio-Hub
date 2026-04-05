@@ -25,6 +25,18 @@ export function Footer() {
               {lang === "ru" ? "Контакты" : "Contact"}
             </p>
             <div className="inline-flex flex-col gap-3">
+            <a
+              href="tel:+998338622589"
+              className={`inline-flex items-center gap-2 py-[0.45rem] px-[0.9rem] border bg-transparent no-underline transition-all duration-200 ${isKids ? "border-white/30 text-white hover:border-white hover:text-white" : "border-white/[0.08] text-[#f0eeea] hover:border-white/20 hover:text-[#f0eeea]"}`}
+            >
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" style={{ flexShrink: 0 }}>
+                <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.4 12a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.51 1.2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.73A16 16 0 0 0 15.27 16.09l.86-.86a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/>
+              </svg>
+              <span className="flex flex-col items-center leading-tight">
+                <span className="font-display text-[0.8rem] tracking-[0.1em] uppercase">+998-33-VOCAL-UZ</span>
+                <span className="text-[0.5rem] tracking-[0.06em] uppercase" style={{ opacity: 0.5 }}>{tx.dialPrefix} +998 33 862-25-89</span>
+              </span>
+            </a>
             <div className="flex justify-between">
               {[
                 { label: "Telegram", path: "M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z" },
@@ -41,18 +53,6 @@ export function Footer() {
                 </a>
               ))}
             </div>
-            <a
-              href="tel:+998338622589"
-              className={`inline-flex items-center gap-2 py-[0.45rem] px-[0.9rem] border bg-transparent no-underline transition-all duration-200 ${isKids ? "border-white/30 text-white hover:border-white hover:text-white" : "border-white/[0.08] text-[#f0eeea] hover:border-white/20 hover:text-[#f0eeea]"}`}
-            >
-              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" style={{ flexShrink: 0 }}>
-                <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.4 12a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.51 1.2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.73A16 16 0 0 0 15.27 16.09l.86-.86a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/>
-              </svg>
-              <span className="flex flex-col items-center leading-tight">
-                <span className="font-display text-[0.8rem] tracking-[0.1em] uppercase">+998-33-VOCAL-UZ</span>
-                <span className="text-[0.5rem] tracking-[0.06em] uppercase" style={{ opacity: 0.5 }}>{tx.dialPrefix} +998 33 862-25-89</span>
-              </span>
-            </a>
             </div>
           </div>
 
