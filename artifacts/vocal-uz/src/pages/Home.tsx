@@ -6,6 +6,7 @@ import { BookingForm } from "@/components/BookingForm";
 import { CourseStrip } from "@/components/CourseStrip";
 import { useSanityContent } from "@/lib/useSanityContent";
 import { StageCanvas } from "@/components/StageCanvas";
+import { TestimonialsSection } from "@/components/TestimonialsSection";
 
 const PROMO_VIDEO_ID = "LXb3EKWsInQ";
 
@@ -421,6 +422,8 @@ export default function Home() {
           </a>
         </div>
       </section>
+
+      <TestimonialsSection accentColor="#e8002d" />
 
       {/* ── BOOKING ── */}
       <section id="booking" className="bg-[#141414] border-t border-white/[0.08]">

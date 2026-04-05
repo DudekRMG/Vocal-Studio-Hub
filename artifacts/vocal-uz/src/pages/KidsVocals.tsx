@@ -4,6 +4,7 @@ import { SeoHead } from "@/components/SeoHead";
 import { BookingForm } from "@/components/BookingForm";
 import { CourseStrip } from "@/components/CourseStrip";
 import { PageHero } from "@/components/PageHero";
+import { TestimonialsSection } from "@/components/TestimonialsSection";
 
 const PROMO_VIDEO_ID = "LXb3EKWsInQ";
 
@@ -386,6 +387,8 @@ export default function KidsVocals() {
           </a>
         </div>
       </section>
+
+      <TestimonialsSection accentColor="#3b82f6" variant="kids" />
 
       {/* ── BOOKING ── */}
       <section id="book-kids" className="border-t" style={{ backgroundColor: bgCardAlt, borderColor: "rgba(0,0,0,0.07)" }}>

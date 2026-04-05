@@ -4,6 +4,7 @@ import { SeoHead } from "@/components/SeoHead";
 import { BookingForm } from "@/components/BookingForm";
 import { CourseStrip } from "@/components/CourseStrip";
 import { PageHero } from "@/components/PageHero";
+import { TestimonialsSection } from "@/components/TestimonialsSection";
 
 const PROMO_VIDEO_ID = "LXb3EKWsInQ";
 
@@ -294,6 +295,8 @@ export default function ExtremeVocals() {
           </a>
         </div>
       </section>
+
+      <TestimonialsSection accentColor="#e8002d" />
 
       {/* ── BOOKING ── */}
       <section id="book-extreme" className="bg-[#141414] border-t border-white/[0.08]">
