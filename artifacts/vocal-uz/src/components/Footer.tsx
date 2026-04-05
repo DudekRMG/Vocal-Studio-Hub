@@ -12,7 +12,7 @@ export function Footer() {
   const base = import.meta.env.BASE_URL.replace(/\/$/, "");
 
   return (
-    <footer className={`${isKids ? "bg-[#1e2d4a] border-t border-white/[0.1]" : "bg-[#080808] border-t border-white/[0.08]"} py-8 px-6 lg:px-12`}>
+    <footer className={`${isKids ? "bg-[#3b82f6] border-t border-white/[0.1]" : "bg-[#080808] border-t border-white/[0.08]"} py-8 px-6 lg:px-12`}>
       <div className="max-w-[1100px] mx-auto">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-10 mb-6">
           <div className="text-center md:text-left">
