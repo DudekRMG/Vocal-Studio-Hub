@@ -2,6 +2,19 @@ import { useLang } from "@/lib/langContext";
 import { t } from "@/lib/i18n";
 import { AudioPlayer } from "./AudioPlayer";
 
+interface TestimonialItem {
+  featured: boolean;
+  name: string;
+  initials: string;
+  avatarColor: string;
+  durationLabel: string;
+  quote: string;
+  beforeLabel: string;
+  afterLabel: string;
+  beforeSrc: string;
+  afterSrc: string;
+}
+
 interface Props {
   accentColor: string;
   variant?: "kids";
@@ -21,8 +34,9 @@ export function TestimonialsSection({ accentColor, variant }: Props) {
   const textMuted = isKids ? "rgba(15,16,22,0.5)" : "rgba(240,238,234,0.5)";
   const textQuote = isKids ? "rgba(15,16,22,0.72)" : "rgba(240,238,234,0.72)";
 
-  const featured = tx.items.find((i: any) => i.featured);
-  const gridItems = tx.items.filter((i: any) => !i.featured);
+  const items = tx.items as TestimonialItem[];
+  const featured = items.find((i) => i.featured);
+  const gridItems = items.filter((i) => !i.featured);
 
   return (
     <section
@@ -118,7 +132,7 @@ export function TestimonialsSection({ accentColor, variant }: Props) {
           className="grid grid-cols-1 md:grid-cols-2 gap-[1px]"
           style={{ backgroundColor: dividerColor }}
         >
-          {gridItems.map((item: any) => (
+          {gridItems.map((item) => (
             <div
               key={item.name}
               className="p-8 flex flex-col gap-5"

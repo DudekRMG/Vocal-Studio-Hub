@@ -156,10 +156,12 @@ export function AudioPlayer({ src, label, variant, accentColor, isKids = false }
       </div>
 
       <span
-        className="text-[0.65rem] flex-shrink-0 tabular-nums"
+        className="text-[0.65rem] flex-shrink-0 tabular-nums whitespace-nowrap"
         style={{ color: timeColor }}
       >
-        {isEmpty || duration === 0 ? "--:--" : formatTime(current)}
+        {isEmpty || duration === 0
+          ? "--:-- / --:--"
+          : `${formatTime(current)} / ${formatTime(duration)}`}
       </span>
     </div>
   );
