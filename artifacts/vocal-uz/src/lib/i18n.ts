@@ -158,7 +158,7 @@ export const t = {
     },
     testimonials: {
       eyebrow: "Результаты учеников",
-      heading: "«Слышите разницу?»",
+      heading: "Услышьте разницу",
       subheading: "Реальные ученики, реальный прогресс.",
       items: [
         {
@@ -180,8 +180,8 @@ export const t = {
           avatarColor: "#4ead87",
           durationLabel: "6 месяцев",
           quote: "Мой диапазон расширился почти на октаву. До сих пор не верю.",
-          beforeLabel: "До",
-          afterLabel: "После",
+          beforeLabel: "До — месяц 1",
+          afterLabel: "После — месяц 6",
           beforeSrc: "",
           afterSrc: "",
         },
@@ -192,8 +192,8 @@ export const t = {
           avatarColor: "#e09070",
           durationLabel: "4 месяца",
           quote: "Полный новичок. Педагог сделала всё простым и по-настоящему интересным.",
-          beforeLabel: "До",
-          afterLabel: "После",
+          beforeLabel: "До — месяц 1",
+          afterLabel: "После — месяц 4",
           beforeSrc: "",
           afterSrc: "",
         },
@@ -383,7 +383,7 @@ export const t = {
     },
     testimonials: {
       eyebrow: "Student Results",
-      heading: "\"Hear the difference\"",
+      heading: "Hear the Difference",
       subheading: "Real students. Real progress.",
       items: [
         {
@@ -405,8 +405,8 @@ export const t = {
           avatarColor: "#4ead87",
           durationLabel: "6 months",
           quote: "My range expanded by nearly an octave. Still can't believe it.",
-          beforeLabel: "Before",
-          afterLabel: "After",
+          beforeLabel: "Before — month 1",
+          afterLabel: "After — month 6",
           beforeSrc: "",
           afterSrc: "",
         },
@@ -417,8 +417,8 @@ export const t = {
           avatarColor: "#e09070",
           durationLabel: "4 months",
           quote: "Total beginner. The teacher made it feel easy and actually fun.",
-          beforeLabel: "Before",
-          afterLabel: "After",
+          beforeLabel: "Before — month 1",
+          afterLabel: "After — month 4",
           beforeSrc: "",
           afterSrc: "",
         },
