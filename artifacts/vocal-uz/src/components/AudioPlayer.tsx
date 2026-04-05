@@ -1,4 +1,5 @@
-import { useRef, useState, useEffect, useCallback } from "react";
+import { useRef, useState, useEffect, useCallback, useId } from "react";
+import { notifyAudioPlay, subscribeAudioPlay } from "@/lib/audioManager";
 
 interface AudioPlayerProps {
   src: string;
@@ -16,6 +17,7 @@ function formatTime(secs: number): string {
 }
 
 export function AudioPlayer({ src, label, variant, accentColor, isKids = false }: AudioPlayerProps) {
+  const id = useId();
   const audioRef = useRef<HTMLAudioElement | null>(null);
   const [playing, setPlaying] = useState(false);
   const [progress, setProgress] = useState(0);
@@ -26,36 +28,36 @@ export function AudioPlayer({ src, label, variant, accentColor, isKids = false }
   const isBefore = variant === "before";
 
   const bgColor = isBefore
-    ? (isKids ? "#dde0f0" : "#141414")
-    : (isKids ? `${accentColor}1a` : `${accentColor}18`);
+    ? (isKids ? "#ffffff" : "#1c1c1c")
+    : (isKids ? `${accentColor}30` : `${accentColor}18`);
 
   const borderColor = isBefore
-    ? (isKids ? "rgba(0,0,0,0.09)" : "rgba(255,255,255,0.07)")
+    ? (isKids ? "rgba(0,0,0,0.14)" : "rgba(255,255,255,0.13)")
     : `${accentColor}55`;
 
   const btnBg = isBefore
-    ? (isKids ? "#bcc0d8" : "#2a2a2a")
+    ? (isKids ? "#9aa0c0" : "#424242")
     : accentColor;
 
   const btnIconColor = isBefore
-    ? (isKids ? "#6a7090" : "#666")
+    ? (isKids ? "#2e3460" : "#c0c0c0")
     : "#fff";
 
   const trackBg = isBefore
-    ? (isKids ? "rgba(0,0,0,0.1)" : "rgba(255,255,255,0.08)")
-    : (isKids ? "rgba(0,0,0,0.1)" : "rgba(255,255,255,0.1)");
+    ? (isKids ? "rgba(0,0,0,0.14)" : "rgba(255,255,255,0.13)")
+    : (isKids ? "rgba(0,0,0,0.13)" : "rgba(255,255,255,0.1)");
 
   const fillColor = isBefore
-    ? (isKids ? "#9da2c0" : "#3a3a3a")
+    ? (isKids ? "#7a81a8" : "#606060")
     : accentColor;
 
   const labelColor = isBefore
-    ? (isKids ? "rgba(15,16,22,0.45)" : "rgba(240,238,234,0.4)")
+    ? (isKids ? "rgba(15,16,22,0.6)" : "rgba(240,238,234,0.62)")
     : (isKids ? "rgba(15,16,22,0.65)" : "rgba(240,238,234,0.65)");
 
   const timeColor = isBefore
-    ? (isKids ? "rgba(15,16,22,0.3)" : "rgba(240,238,234,0.28)")
-    : (isKids ? "rgba(15,16,22,0.45)" : "rgba(240,238,234,0.45)");
+    ? (isKids ? "rgba(15,16,22,0.42)" : "rgba(240,238,234,0.45)")
+    : (isKids ? "rgba(15,16,22,0.48)" : "rgba(240,238,234,0.45)");
 
   useEffect(() => {
     if (!src) return;
@@ -88,6 +90,16 @@ export function AudioPlayer({ src, label, variant, accentColor, isKids = false }
     };
   }, [src]);
 
+  useEffect(() => {
+    return subscribeAudioPlay(id, () => {
+      const audio = audioRef.current;
+      if (audio && !audio.paused) {
+        audio.pause();
+        setPlaying(false);
+      }
+    });
+  }, [id]);
+
   const togglePlay = useCallback(() => {
     const audio = audioRef.current;
     if (!audio || isEmpty) return;
@@ -95,9 +107,10 @@ export function AudioPlayer({ src, label, variant, accentColor, isKids = false }
       audio.pause();
       setPlaying(false);
     } else {
+      notifyAudioPlay(id);
       audio.play().then(() => setPlaying(true)).catch(() => {});
     }
-  }, [playing, isEmpty]);
+  }, [playing, isEmpty, id]);
 
   const handleScrub = useCallback((e: React.MouseEvent<HTMLDivElement>) => {
     const audio = audioRef.current;

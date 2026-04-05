@@ -5,8 +5,10 @@ import { BookingForm } from "@/components/BookingForm";
 import { CourseStrip } from "@/components/CourseStrip";
 import { PageHero } from "@/components/PageHero";
 import { TestimonialsSection } from "@/components/TestimonialsSection";
+import { VideoPlayer } from "@/components/VideoPlayer";
 
-const PROMO_VIDEO_ID = "LXb3EKWsInQ";
+const base = import.meta.env.BASE_URL.replace(/\/$/, "");
+const PROMO_VIDEO_SRC = `${base}/video/sample.mov`;
 
 const karaokeContent = {
   ru: {
@@ -420,16 +422,7 @@ export default function KaraokeCourse() {
         {/* Row 2 — 50/50 video | form */}
         <div className="pb-16 px-6 lg:px-12">
           <div className="max-w-[1100px] mx-auto grid grid-cols-1 md:grid-cols-2 gap-6 items-center">
-            <div className="relative w-full" style={{ paddingBottom: "56.25%" }}>
-              <iframe
-                className="absolute inset-0 w-full h-full"
-                src={`https://www.youtube.com/embed/${PROMO_VIDEO_ID}?rel=0&modestbranding=1`}
-                title="Vocal.uz — Studio Preview"
-                frameBorder="0"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                allowFullScreen
-              />
-            </div>
+            <VideoPlayer src={PROMO_VIDEO_SRC} />
             <BookingForm accentColor="#c9a84c" />
           </div>
         </div>
