@@ -72,7 +72,7 @@ export function Footer() {
                   <Link
                     href={`${base}${href}`}
                     onClick={() => window.scrollTo(0, 0)}
-                    className="text-[0.82rem] text-[#888] no-underline hover:text-[#f0eeea] transition-colors duration-200"
+                    className={`text-[0.82rem] no-underline transition-colors duration-200 ${isKids ? "text-[#f0eeea] hover:text-white" : "text-[#888] hover:text-[#f0eeea]"}`}
                   >
                     {label}
                   </Link>

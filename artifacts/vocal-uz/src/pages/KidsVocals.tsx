@@ -364,7 +364,7 @@ export default function KidsVocals() {
         <div className="max-w-[1100px] mx-auto flex flex-col md:flex-row items-center justify-between gap-8">
           <div>
             <h2 className="font-display text-[clamp(2rem,4vw,3.5rem)] leading-[1.1] text-[#f0eeea]">{c.ctaBanner}</h2>
-            <p className="text-[0.9rem] text-[rgba(240,238,234,0.6)] mt-3">{c.ctaBannerSub}</p>
+            <p className="text-[0.9rem] text-[#f0eeea] mt-3">{c.ctaBannerSub}</p>
           </div>
           <a
             href="#book-kids"
@@ -377,9 +377,9 @@ export default function KidsVocals() {
               window.scrollTo({ top: el.getBoundingClientRect().top + window.scrollY - navH, behavior: "smooth" });
             }}
             className="flex-shrink-0 font-display text-[1.1rem] tracking-[0.15em] px-10 py-5 no-underline transition-all duration-200 whitespace-nowrap inline-flex items-center gap-3 group text-[#0f1016]"
-            style={{ backgroundColor: "#d4e0f8" }}
-            onMouseEnter={e => (e.currentTarget.style.backgroundColor = "#e0eaff")}
-            onMouseLeave={e => (e.currentTarget.style.backgroundColor = "#d4e0f8")}
+            style={{ backgroundColor: "#ffffff" }}
+            onMouseEnter={e => (e.currentTarget.style.backgroundColor = "#f0f0f0")}
+            onMouseLeave={e => (e.currentTarget.style.backgroundColor = "#ffffff")}
           >
             {c.ctaBtn}
             <svg className="transition-transform duration-200 group-hover:translate-x-1" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M5 12h14M12 5l7 7-7 7" /></svg>
