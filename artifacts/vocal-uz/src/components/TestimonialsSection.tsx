@@ -34,7 +34,16 @@ export function TestimonialsSection({ accentColor, variant }: Props) {
   const textMuted = isKids ? "rgba(15,16,22,0.5)" : "rgba(240,238,234,0.5)";
   const textQuote = isKids ? "rgba(15,16,22,0.72)" : "rgba(240,238,234,0.72)";
 
-  const items = tx.items as TestimonialItem[];
+  const base = import.meta.env.BASE_URL.replace(/\/$/, "");
+  const sampleBefore = `${base}/audio/sample-before.mp3`;
+  const sampleAfter = `${base}/audio/sample-after.mp3`;
+
+  const rawItems = tx.items as TestimonialItem[];
+  const items: TestimonialItem[] = rawItems.map((item) => ({
+    ...item,
+    beforeSrc: item.beforeSrc || sampleBefore,
+    afterSrc: item.afterSrc || sampleAfter,
+  }));
   const featured = items.find((i) => i.featured);
   const gridItems = items.filter((i) => !i.featured);
 
