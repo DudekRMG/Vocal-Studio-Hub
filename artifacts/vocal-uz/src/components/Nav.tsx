@@ -117,7 +117,7 @@ export function Nav() {
         </Link>
 
         {/* Desktop nav */}
-        <div className="hidden min-[1200px]:flex items-center gap-8">
+        <div className="hidden md:flex items-center gap-8">
           <ul className="flex gap-8 list-none m-0 p-0 items-center">
             <li>
               <Link
@@ -195,7 +195,7 @@ export function Nav() {
         </div>
 
         {/* Mobile right controls */}
-        <div className="flex min-[1200px]:hidden items-center gap-2">
+        <div className="flex md:hidden items-center gap-2">
           <Link
             href={navBookHref}
             onClick={handleBookClick}
@@ -238,7 +238,7 @@ export function Nav() {
 
       {/* Mobile dropdown menu */}
       <div
-        className={`min-[1200px]:hidden overflow-hidden transition-all duration-300 ${menuOpen ? "max-h-[400px] opacity-100" : "max-h-0 opacity-0"}`}
+        className={`md:hidden overflow-hidden transition-all duration-300 ${menuOpen ? "max-h-[400px] opacity-100" : "max-h-0 opacity-0"}`}
         style={{ borderTop: menuOpen ? `1px solid ${isKids ? "rgba(26,37,53,0.1)" : "rgba(255,255,255,0.06)"}` : "none" }}
       >
         <div className={isKids ? "bg-white" : "bg-[rgba(8,8,8,0.97)] backdrop-blur-[8px]"}>
