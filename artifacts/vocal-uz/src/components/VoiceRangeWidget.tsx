@@ -94,6 +94,18 @@ export function VoiceRangeWidget({
     };
   }, []);
 
+  useEffect(() => {
+    const isAnyRecording = lowRecordState === "recording" || highRecordState === "recording";
+    if (!isAnyRecording) return;
+    const stop = () => { if (isRecordingRef.current) finishRecordingRef.current(); };
+    document.addEventListener("mouseup", stop);
+    document.addEventListener("touchend", stop);
+    return () => {
+      document.removeEventListener("mouseup", stop);
+      document.removeEventListener("touchend", stop);
+    };
+  }, [lowRecordState, highRecordState]);
+
   function releaseAudio() {
     cancelAnimationFrame(rafRef.current);
     isRecordingRef.current = false;
@@ -417,7 +429,7 @@ export function VoiceRangeWidget({
           onTouchEnd={(e) => handleTouchEnd(e)}
           onTouchCancel={(e) => handleTouchEnd(e)}
         >
-          🎤
+          🎙️
         </button>
       </div>
     );
@@ -629,24 +641,15 @@ export function VoiceRangeWidget({
             color: "rgba(240,238,234,0.65)",
             fontSize: "0.88rem",
             lineHeight: 1.65,
-            margin: "0 0 16px",
+            margin: "0 0 24px",
           }}>
             {voiceTypeData.desc}
           </p>
-          {lowNote && highNote && (
-            <p style={{
-              color: "rgba(240,238,234,0.35)",
-              fontSize: "0.78rem",
-              marginBottom: 4,
-            }}>
-              {lowNote} → {highNote} &nbsp;·&nbsp; {tx.rangeLabel} {rangeOctavesDisplay} {tx.rangeOctaves}
-            </p>
-          )}
           <p style={{
-            color: "rgba(240,238,234,0.3)",
-            fontSize: "0.73rem",
-            lineHeight: 1.6,
-            margin: "16px 0 28px",
+            color: "rgba(240,238,234,0.4)",
+            fontSize: "0.78rem",
+            lineHeight: 1.65,
+            margin: "0 0 28px",
             fontStyle: "italic",
           }}>
             {tx.disclaimer}
@@ -761,7 +764,7 @@ export function VoiceRangeWidget({
     if (step === "mic-error")  return tx.stepMicTitle;
     if (step === "low")        return tx.stepLowTitle;
     if (step === "high")       return tx.stepHighTitle;
-    if (step === "results")    return tx.resultsTitle;
+    if (step === "results")    return "";
     if (step === "form")       return tx.formTitle;
     if (step === "success")    return "✓";
     return "";
@@ -776,7 +779,7 @@ export function VoiceRangeWidget({
         style={{
           fontSize: "0.72rem",
           letterSpacing: "0.16em",
-          padding: "0.6rem 1.5rem",
+          padding: "0.875rem 1.5rem",
           border: `1px solid ${tBorder}`,
           color: tColor,
           background: "transparent",
@@ -819,7 +822,7 @@ export function VoiceRangeWidget({
               margin: "auto",
               background: "#111111",
               border: "1px solid rgba(255,255,255,0.1)",
-              padding: "32px 28px 28px",
+              padding: "18px 28px 28px",
               boxSizing: "border-box",
             }}
           >
@@ -850,7 +853,7 @@ export function VoiceRangeWidget({
             </button>
 
             {/* Step title */}
-            {step !== "success" && (
+            {step !== "success" && getTitle() !== "" && (
               <p style={{
                 color: "rgba(240,238,234,0.35)",
                 fontSize: "0.65rem",
