@@ -254,7 +254,7 @@ export default function KidsVocals() {
           </RevealSection>
           <div className="grid grid-cols-2 gap-[1px]" style={{ backgroundColor: "rgba(0,0,0,0.07)" }}>
             {c.aboutFeatures.map((item, i) => (
-              <RevealSection key={item} delay={i * 0.08}>
+              <RevealSection key={item} delay={i * 0.05}>
               <div className="p-6 flex items-center h-full" style={{ backgroundColor: bgCardAlt }}>
                 <span className="w-3 h-[1px] mr-4 flex-shrink-0" style={{ backgroundColor: blue }} />
                 <span className="text-[0.82rem] text-[rgba(15,16,22,0.6)]">{item}</span>
@@ -273,7 +273,7 @@ export default function KidsVocals() {
           </RevealSection>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-[1px]" style={{ backgroundColor: "rgba(0,0,0,0.07)" }}>
             {c.ageGroups.map((group, i) => (
-              <RevealSection key={group.range} delay={i * 0.08}>
+              <RevealSection key={group.range} delay={i * 0.05}>
               <div className="p-10 relative group hover:opacity-95 transition-opacity h-full" style={{ backgroundColor: i % 2 === 0 ? bgCard : bgCardAlt }}>
                 <div className="font-display text-[4rem] leading-none absolute top-4 right-6 pointer-events-none" style={{ color: "rgba(59,130,246,0.12)" }}>
                   {String(i + 1).padStart(2, "0")}
@@ -305,7 +305,7 @@ export default function KidsVocals() {
           </RevealSection>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-[1px]" style={{ backgroundColor: "rgba(0,0,0,0.07)" }}>
             {c.styles.map((style, i) => (
-              <RevealSection key={style.name} delay={i * 0.08}>
+              <RevealSection key={style.name} delay={i * 0.05}>
               <div className="p-10 relative group hover:brightness-110 transition-all duration-300 h-full" style={{ backgroundColor: bgCard }}>
                 <span className="font-display text-[5rem] leading-none absolute top-4 right-6 pointer-events-none" style={{ color: "rgba(59,130,246,0.10)" }}>
                   {String(i + 1).padStart(2, "0")}
@@ -327,7 +327,7 @@ export default function KidsVocals() {
           </RevealSection>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-[1px]" style={{ backgroundColor: "rgba(0,0,0,0.07)" }}>
             {c.processSteps.map((step, i) => (
-              <RevealSection key={step.num} delay={i * 0.08}>
+              <RevealSection key={step.num} delay={i * 0.05}>
               <div className="p-10 h-full" style={{ backgroundColor: bgCardAlt }}>
                 <div className="font-display text-[3.5rem] leading-none mb-6" style={{ color: "rgba(59,130,246,0.30)" }}>{step.num}</div>
                 <h3 className="font-display text-[1.15rem] tracking-[0.08em] mb-4 text-[#0f1016]">{step.title}</h3>
@@ -374,7 +374,7 @@ export default function KidsVocals() {
           </RevealSection>
           <div className="flex flex-col gap-[1px]" style={{ backgroundColor: "rgba(0,0,0,0.07)" }}>
             {c.faqs.map((faq, i) => (
-              <RevealSection key={faq.q} delay={i * 0.08}>
+              <RevealSection key={faq.q} delay={i * 0.05}>
               <div className="px-10 py-8" style={{ backgroundColor: bgCard }}>
                 <h3 className="font-display text-[1.15rem] tracking-[0.05em] leading-[1.3] text-[#0f1016] mb-3">{faq.q}</h3>
                 <p className="text-[0.88rem] leading-[1.8] text-[rgba(15,16,22,0.5)]">{faq.a}</p>

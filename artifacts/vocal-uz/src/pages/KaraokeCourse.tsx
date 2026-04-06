@@ -316,7 +316,7 @@ export default function KaraokeCourse() {
               lang === "ru" ? "Быстрый результат" : "Fast results",
               lang === "ru" ? "Индивидуально" : "Individual approach",
             ].map((item, i) => (
-              <RevealSection key={item} delay={i * 0.08}>
+              <RevealSection key={item} delay={i * 0.05}>
               <div className="bg-[#141414] p-6 flex items-center h-full">
                 <span className="w-3 h-[1px] mr-4 flex-shrink-0" style={{ backgroundColor: gold }} />
                 <span className="text-[0.82rem] text-[rgba(240,238,234,0.6)]">{item}</span>
@@ -335,7 +335,7 @@ export default function KaraokeCourse() {
           </RevealSection>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-[1px] bg-white/[0.08]">
             {c.forWhom.map((item, i) => (
-              <RevealSection key={item.title} delay={i * 0.08}>
+              <RevealSection key={item.title} delay={i * 0.05}>
               <div className="bg-[#080808] p-10 group hover:bg-[#0d0c09] transition-colors duration-300 h-full">
                 <div className="text-3xl mb-6">{item.icon}</div>
                 <h3 className="font-display text-[1.4rem] tracking-[0.05em] mb-4" style={{ color: gold }}>{item.title}</h3>
@@ -355,7 +355,7 @@ export default function KaraokeCourse() {
           </RevealSection>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-[1px] bg-white/[0.08]">
             {c.curriculum.map((lesson, i) => (
-              <RevealSection key={lesson.num} delay={i * 0.06}>
+              <RevealSection key={lesson.num} delay={i * 0.04}>
               <div className="bg-[#0f0f0f] p-8 relative group hover:bg-[#131109] transition-colors duration-300 h-full">
                 <div
                   className="font-display text-[4rem] leading-none absolute top-4 right-6 pointer-events-none"
@@ -383,7 +383,7 @@ export default function KaraokeCourse() {
           </RevealSection>
           <div className="flex flex-col gap-[1px] bg-white/[0.08]">
             {c.faqs.map((faq, i) => (
-              <RevealSection key={faq.q} delay={i * 0.08}>
+              <RevealSection key={faq.q} delay={i * 0.05}>
               <div className="bg-[#141414] px-10 py-8">
                 <h3 className="font-display text-[1.15rem] tracking-[0.05em] leading-[1.3] text-[#f0eeea] mb-3">{faq.q}</h3>
                 <p className="text-[0.88rem] leading-[1.8] text-[rgba(240,238,234,0.5)]">{faq.a}</p>

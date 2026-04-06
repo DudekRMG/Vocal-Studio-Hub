@@ -17,7 +17,7 @@ export function RevealSection({ children, delay = 0, className = "" }: RevealSec
   return (
     <div
       ref={ref}
-      className={visible ? `animate-[fadeUp_0.7s_both] ${className}` : className}
+      className={visible ? `animate-[fadeUp_0.4s_ease-out_both] ${className}` : className}
       style={
         visible
           ? delay > 0

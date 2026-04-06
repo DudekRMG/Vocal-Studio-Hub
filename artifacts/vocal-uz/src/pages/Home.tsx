@@ -227,7 +227,7 @@ export default function Home() {
           </RevealSection>
 
           {/* Pop card */}
-          <RevealSection delay={0.08}>
+          <RevealSection delay={0.05}>
           <div className="bg-[#0f0f0f] p-10 relative overflow-hidden group transition-colors duration-300 hover:bg-[#131313] h-full flex flex-col">
             <div
               className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-400 pointer-events-none"
@@ -263,7 +263,7 @@ export default function Home() {
           </RevealSection>
 
           {/* Karaoke card */}
-          <RevealSection delay={0.16}>
+          <RevealSection delay={0.1}>
           <div className="bg-[#0c0b08] p-10 relative overflow-hidden group transition-colors duration-300 hover:bg-[#100e09] h-full flex flex-col">
             <div
               className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-400 pointer-events-none"
@@ -300,7 +300,7 @@ export default function Home() {
         </div>
 
         {/* Kids — full-width featured card */}
-        <RevealSection delay={0.08} className="max-w-[1100px] mx-auto mt-[1px]">
+        <RevealSection delay={0.05} className="max-w-[1100px] mx-auto mt-[1px]">
           <div
             className="relative overflow-hidden group transition-colors duration-300"
             style={{ backgroundColor: "#152444" }}

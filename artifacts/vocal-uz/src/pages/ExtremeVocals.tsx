@@ -232,7 +232,7 @@ export default function ExtremeVocals() {
           </RevealSection>
           <div className="grid grid-cols-2 gap-[1px] bg-white/[0.08]">
             {["Growl", "Scream", "Fry", "Piggy", lang === "ru" ? "Безопасная техника" : "Safe technique", lang === "ru" ? "Индивидуальный подход" : "Individual approach"].map((item, i) => (
-              <RevealSection key={item} delay={i * 0.08}>
+              <RevealSection key={item} delay={i * 0.05}>
               <div className="bg-[#141414] p-6 flex items-center h-full">
                 <span className="w-3 h-[1px] bg-[#e8002d] mr-4 flex-shrink-0" />
                 <span className="text-[0.82rem] text-[rgba(240,238,234,0.6)]">{item}</span>
@@ -251,7 +251,7 @@ export default function ExtremeVocals() {
           </RevealSection>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-[1px] bg-white/[0.08]">
             {c.techniques.map((tech, i) => (
-              <RevealSection key={tech.name} delay={i * 0.08}>
+              <RevealSection key={tech.name} delay={i * 0.05}>
               <div className="bg-[#080808] p-10 relative group hover:bg-[#0d0a0a] transition-colors duration-300 h-full">
                 <span className="font-display text-[5rem] leading-none text-[rgba(232,0,45,0.06)] absolute top-4 right-6">{String(i + 1).padStart(2, "0")}</span>
                 <h3 className="font-display text-[1.8rem] tracking-[0.05em] mb-4 text-[#e8002d]">{tech.name}</h3>
@@ -271,7 +271,7 @@ export default function ExtremeVocals() {
           </RevealSection>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-[1px] bg-white/[0.08]">
             {c.processSteps.map((step, i) => (
-              <RevealSection key={step.num} delay={i * 0.08}>
+              <RevealSection key={step.num} delay={i * 0.05}>
               <div className="bg-[#141414] p-10 h-full">
                 <div className="font-display text-[3.5rem] leading-none text-[rgba(232,0,45,0.2)] mb-6">{step.num}</div>
                 <h3 className="font-display text-[1.2rem] tracking-[0.08em] mb-4 text-[#f0eeea]">{step.title}</h3>
@@ -291,7 +291,7 @@ export default function ExtremeVocals() {
           </RevealSection>
           <div className="flex flex-col gap-[1px] bg-white/[0.08]">
             {c.faqs.map((faq, i) => (
-              <RevealSection key={faq.q} delay={i * 0.08}>
+              <RevealSection key={faq.q} delay={i * 0.05}>
               <div className="bg-[#0f0f0f] px-10 py-8">
                 <h3 className="font-display text-[1.15rem] tracking-[0.05em] leading-[1.3] text-[#f0eeea] mb-3">{faq.q}</h3>
                 <p className="text-[0.88rem] leading-[1.8] text-[rgba(240,238,234,0.5)]">{faq.a}</p>

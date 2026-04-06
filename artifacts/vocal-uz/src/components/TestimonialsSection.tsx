@@ -91,7 +91,7 @@ export function TestimonialsSection({ accentColor, variant }: Props) {
 
         {/* ── Featured card ── */}
         {featured && (
-          <RevealSection delay={0.08}>
+          <RevealSection delay={0.05}>
             <div
               className="testimonials-featured mb-[1px] p-8 md:p-10"
               style={{
@@ -160,7 +160,7 @@ export function TestimonialsSection({ accentColor, variant }: Props) {
           style={{ backgroundColor: dividerColor }}
         >
           {gridItems.map((item, i) => (
-            <RevealSection key={item.name} delay={(i + 1) * 0.1}>
+            <RevealSection key={item.name} delay={(i + 1) * 0.05}>
               <div
                 className="p-8 flex flex-col gap-5 h-full"
                 style={{ backgroundColor: cardBg }}
