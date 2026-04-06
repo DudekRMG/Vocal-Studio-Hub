@@ -336,7 +336,7 @@ export default function PopVocals() {
         <div className="pb-16 px-6 lg:px-12">
           <div className="max-w-[1100px] mx-auto grid grid-cols-1 md:grid-cols-2 gap-6 items-center">
             <VideoPlayer src={PROMO_VIDEO_SRC} />
-            <BookingForm accentColor="#9d4edd" />
+            <BookingForm accentColor="#9d4edd" hideDisciplineSelect fixedGoal="pop" />
           </div>
         </div>
 

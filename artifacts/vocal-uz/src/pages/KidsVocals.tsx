@@ -450,7 +450,7 @@ export default function KidsVocals() {
         <div className="pb-16 px-6 lg:px-12">
           <div className="max-w-[1100px] mx-auto grid grid-cols-1 md:grid-cols-2 gap-6 items-center">
             <VideoPlayer src={PROMO_VIDEO_SRC} />
-            <BookingForm variant="kids" />
+            <BookingForm variant="kids" hideDisciplineSelect fixedGoal="kids" />
           </div>
         </div>
 

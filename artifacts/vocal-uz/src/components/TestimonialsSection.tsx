@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { useLang } from "@/lib/langContext";
 import { t } from "@/lib/i18n";
 import { AudioPlayer } from "./AudioPlayer";
@@ -47,6 +48,11 @@ export function TestimonialsSection({ accentColor, variant }: Props) {
   }));
   const featured = items.find((i) => i.featured);
   const gridItems = items.filter((i) => !i.featured);
+
+  /* Per-item trigger counters: incrementing fires the "after" player */
+  const [afterTriggers, setAfterTriggers] = useState<Record<string, number>>({});
+  const triggerAfter = (name: string) =>
+    setAfterTriggers((prev) => ({ ...prev, [name]: (prev[name] ?? 0) + 1 }));
 
   return (
     <section
@@ -140,6 +146,7 @@ export function TestimonialsSection({ accentColor, variant }: Props) {
                     variant="before"
                     accentColor={accentColor}
                     isKids={isKids}
+                    onEnded={() => triggerAfter(featured.name)}
                   />
                   <AudioPlayer
                     src={featured.afterSrc}
@@ -147,6 +154,7 @@ export function TestimonialsSection({ accentColor, variant }: Props) {
                     variant="after"
                     accentColor={accentColor}
                     isKids={isKids}
+                    playTrigger={afterTriggers[featured.name] ?? 0}
                   />
                 </div>
               </div>
@@ -205,6 +213,7 @@ export function TestimonialsSection({ accentColor, variant }: Props) {
                     variant="before"
                     accentColor={accentColor}
                     isKids={isKids}
+                    onEnded={() => triggerAfter(item.name)}
                   />
                   <AudioPlayer
                     src={item.afterSrc}
@@ -212,6 +221,7 @@ export function TestimonialsSection({ accentColor, variant }: Props) {
                     variant="after"
                     accentColor={accentColor}
                     isKids={isKids}
+                    playTrigger={afterTriggers[item.name] ?? 0}
                   />
                 </div>
               </div>

@@ -456,7 +456,7 @@ export default function KaraokeCourse() {
         <div className="pb-16 px-6 lg:px-12">
           <div className="max-w-[1100px] mx-auto grid grid-cols-1 md:grid-cols-2 gap-6 items-center">
             <VideoPlayer src={PROMO_VIDEO_SRC} />
-            <BookingForm accentColor="#c9a84c" />
+            <BookingForm accentColor="#c9a84c" hideDisciplineSelect fixedGoal="karaoke" />
           </div>
         </div>
 

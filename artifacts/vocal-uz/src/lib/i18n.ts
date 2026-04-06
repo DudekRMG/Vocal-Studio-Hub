@@ -133,7 +133,7 @@ export const t = {
       callDivider: "или позвоните нам",
       dialPrefix: "НАБРАТЬ",
       namePlaceholder: "Ваше имя",
-      phonePlaceholder: "Телефон или Telegram",
+      phonePlaceholder: "Номер телефона",
       emailPlaceholder: "Email (необязательно)",
       goalPlaceholder: "Выберите направление",
       goalOptions: [
@@ -422,7 +422,7 @@ export const t = {
       callDivider: "or call us",
       dialPrefix: "DIAL",
       namePlaceholder: "Your name",
-      phonePlaceholder: "Phone or Telegram",
+      phonePlaceholder: "Phone number",
       emailPlaceholder: "Email (optional)",
       goalPlaceholder: "Choose a discipline",
       goalOptions: [

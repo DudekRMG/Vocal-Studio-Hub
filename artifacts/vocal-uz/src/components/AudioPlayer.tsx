@@ -7,6 +7,8 @@ interface AudioPlayerProps {
   variant: "before" | "after";
   accentColor: string;
   isKids?: boolean;
+  onEnded?: () => void;
+  playTrigger?: number;
 }
 
 function formatTime(secs: number): string {
@@ -16,7 +18,7 @@ function formatTime(secs: number): string {
   return `${m}:${s.toString().padStart(2, "0")}`;
 }
 
-export function AudioPlayer({ src, label, variant, accentColor, isKids = false }: AudioPlayerProps) {
+export function AudioPlayer({ src, label, variant, accentColor, isKids = false, onEnded, playTrigger }: AudioPlayerProps) {
   const id = useId();
   const audioRef = useRef<HTMLAudioElement | null>(null);
   const [playing, setPlaying] = useState(false);
@@ -59,6 +61,9 @@ export function AudioPlayer({ src, label, variant, accentColor, isKids = false }
     ? (isKids ? "rgba(15,16,22,0.42)" : "rgba(240,238,234,0.45)")
     : (isKids ? "rgba(15,16,22,0.62)" : "rgba(240,238,234,0.68)");
 
+  const onEndedRef = useRef(onEnded);
+  onEndedRef.current = onEnded;
+
   useEffect(() => {
     if (!src) return;
     const audio = new Audio(src);
@@ -70,22 +75,23 @@ export function AudioPlayer({ src, label, variant, accentColor, isKids = false }
       if (audio.duration) setProgress(audio.currentTime / audio.duration);
     };
     const onLoaded = () => setDuration(audio.duration || 0);
-    const onEnded = () => {
+    const handleEnded = () => {
       setPlaying(false);
       setProgress(0);
       setCurrent(0);
       audio.currentTime = 0;
+      onEndedRef.current?.();
     };
 
     audio.addEventListener("timeupdate", onTimeUpdate);
     audio.addEventListener("loadedmetadata", onLoaded);
-    audio.addEventListener("ended", onEnded);
+    audio.addEventListener("ended", handleEnded);
 
     return () => {
       audio.pause();
       audio.removeEventListener("timeupdate", onTimeUpdate);
       audio.removeEventListener("loadedmetadata", onLoaded);
-      audio.removeEventListener("ended", onEnded);
+      audio.removeEventListener("ended", handleEnded);
       audioRef.current = null;
     };
   }, [src]);
@@ -99,6 +105,18 @@ export function AudioPlayer({ src, label, variant, accentColor, isKids = false }
       }
     });
   }, [id]);
+
+  const prevTriggerRef = useRef<number>(0);
+  useEffect(() => {
+    if (!playTrigger || playTrigger === prevTriggerRef.current) return;
+    prevTriggerRef.current = playTrigger;
+    const audio = audioRef.current;
+    if (audio) {
+      notifyAudioPlay(id);
+      audio.currentTime = 0;
+      audio.play().then(() => setPlaying(true)).catch(() => {});
+    }
+  }, [playTrigger, id]);
 
   const togglePlay = useCallback(() => {
     const audio = audioRef.current;

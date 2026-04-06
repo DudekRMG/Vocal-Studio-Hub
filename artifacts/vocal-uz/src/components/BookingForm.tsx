@@ -5,22 +5,113 @@ import { t } from "@/lib/i18n";
 interface BookingFormProps {
   variant?: "kids";
   accentColor?: string;
+  hideDisciplineSelect?: boolean;
+  fixedGoal?: string;
 }
 
-export function BookingForm({ variant, accentColor }: BookingFormProps = {}) {
+function formatPhone(digits: string): string {
+  if (!digits) return "";
+
+  if (digits.startsWith("998")) {
+    const rest = digits.slice(3);
+    let r = "+998";
+    if (rest.length > 0) r += " (" + rest.slice(0, Math.min(2, rest.length));
+    if (rest.length >= 2) r += ")";
+    if (rest.length > 2) r += " " + rest.slice(2, Math.min(5, rest.length));
+    if (rest.length > 5) r += "-" + rest.slice(5, Math.min(7, rest.length));
+    if (rest.length > 7) r += "-" + rest.slice(7, Math.min(9, rest.length));
+    return r;
+  }
+
+  if (digits.startsWith("380")) {
+    const rest = digits.slice(3);
+    let r = "+380";
+    if (rest.length > 0) r += " (" + rest.slice(0, Math.min(2, rest.length));
+    if (rest.length >= 2) r += ")";
+    if (rest.length > 2) r += " " + rest.slice(2, Math.min(5, rest.length));
+    if (rest.length > 5) r += "-" + rest.slice(5, Math.min(7, rest.length));
+    if (rest.length > 7) r += "-" + rest.slice(7, Math.min(9, rest.length));
+    return r;
+  }
+
+  if (digits.startsWith("7")) {
+    const rest = digits.slice(1);
+    let r = "+7";
+    if (rest.length > 0) r += " (" + rest.slice(0, Math.min(3, rest.length));
+    if (rest.length >= 3) r += ")";
+    if (rest.length > 3) r += " " + rest.slice(3, Math.min(6, rest.length));
+    if (rest.length > 6) r += "-" + rest.slice(6, Math.min(8, rest.length));
+    if (rest.length > 8) r += "-" + rest.slice(8, Math.min(10, rest.length));
+    return r;
+  }
+
+  if (digits.startsWith("1")) {
+    const rest = digits.slice(1);
+    let r = "+1";
+    if (rest.length > 0) r += " (" + rest.slice(0, Math.min(3, rest.length));
+    if (rest.length >= 3) r += ")";
+    if (rest.length > 3) r += " " + rest.slice(3, Math.min(6, rest.length));
+    if (rest.length > 6) r += "-" + rest.slice(6, Math.min(10, rest.length));
+    return r;
+  }
+
+  const ccLen = Math.min(3, digits.length);
+  let r = "+" + digits.slice(0, ccLen);
+  let rem = digits.slice(ccLen);
+  while (rem.length > 0) {
+    r += " " + rem.slice(0, 3);
+    rem = rem.slice(3);
+  }
+  return r;
+}
+
+export function BookingForm({ variant, accentColor, hideDisciplineSelect, fixedGoal }: BookingFormProps = {}) {
   const { lang } = useLang();
   const tx = t[lang].booking;
 
-  const [form, setForm] = useState({ name: "", phone: "", goal: "" });
+  const [form, setForm] = useState({ name: "", phone: "", goal: fixedGoal ?? "" });
   const [status, setStatus] = useState<"idle" | "sending" | "success" | "error">("idle");
+  const [phoneError, setPhoneError] = useState("");
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
     setForm((prev) => ({ ...prev, [e.target.name]: e.target.value }));
     if (status !== "idle") setStatus("idle");
   };
 
+  const handlePhoneChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const digits = e.target.value.replace(/\D/g, "").slice(0, 15);
+    setForm((prev) => ({ ...prev, phone: digits ? formatPhone(digits) : "" }));
+    if (phoneError) setPhoneError("");
+    if (status !== "idle") setStatus("idle");
+  };
+
+  const handlePhoneKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    const ctrl = e.ctrlKey || e.metaKey;
+    if (ctrl) return;
+    const allowed = ["Backspace", "Delete", "ArrowLeft", "ArrowRight", "Tab", "Home", "End", "Enter"];
+    if (allowed.includes(e.key)) return;
+    if (/^\d$/.test(e.key)) return;
+    e.preventDefault();
+  };
+
+  const handlePhonePaste = (e: React.ClipboardEvent<HTMLInputElement>) => {
+    e.preventDefault();
+    const text = e.clipboardData.getData("text");
+    const filtered = text.replace(/[^\d()\-\s]/g, "");
+    const digits = filtered.replace(/\D/g, "").slice(0, 15);
+    setForm((prev) => ({ ...prev, phone: digits ? formatPhone(digits) : "" }));
+    if (phoneError) setPhoneError("");
+    if (status !== "idle") setStatus("idle");
+  };
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    const digits = form.phone.replace(/\D/g, "");
+    if (digits.length < 7) {
+      setPhoneError(lang === "ru" ? "Введите корректный номер телефона" : "Please enter a valid phone number");
+      return;
+    }
+    setPhoneError("");
     setStatus("sending");
     try {
       const base = import.meta.env.BASE_URL.replace(/\/$/, "");
@@ -32,7 +123,7 @@ export function BookingForm({ variant, accentColor }: BookingFormProps = {}) {
       const data = await res.json();
       if (data.success) {
         setStatus("success");
-        setForm({ name: "", phone: "", goal: "" });
+        setForm({ name: "", phone: "", goal: fixedGoal ?? "" });
       } else {
         setStatus("error");
       }
@@ -52,6 +143,10 @@ export function BookingForm({ variant, accentColor }: BookingFormProps = {}) {
 
   const dividerColor = isKids ? "rgba(0,0,0,0.12)" : "rgba(255,255,255,0.08)";
   const dividerTextColor = isKids ? "rgba(0,0,0,0.3)" : "rgba(255,255,255,0.22)";
+
+  const phoneErrorStyle = isKids
+    ? "text-[#e8002d] text-[0.75rem] px-[1.4rem] pb-2 -mt-1 bg-transparent"
+    : "text-[#e8002d] text-[0.75rem] px-[1.4rem] pb-2 -mt-[1px] bg-transparent";
 
   return (
     <form
@@ -92,35 +187,41 @@ export function BookingForm({ variant, accentColor }: BookingFormProps = {}) {
                   style={{ borderBottom: "1px solid #ccd5e3" }}
                 />
                 <input
+                  type="tel"
                   name="phone"
                   value={form.phone}
-                  onChange={handleChange}
+                  onChange={handlePhoneChange}
+                  onKeyDown={handlePhoneKeyDown}
+                  onPaste={handlePhonePaste}
                   required
                   placeholder={tx.phonePlaceholder}
                   className={kidsInnerInputClass}
                   style={{ borderBottom: "1px solid #ccd5e3" }}
                 />
-                <div className="relative">
-                  <select
-                    name="goal"
-                    value={form.goal}
-                    onChange={handleChange}
-                    required
-                    className={`${kidsInnerInputClass} cursor-pointer appearance-none pr-10 ${form.goal ? "text-[#1a2535]" : ""}`}
-                  >
-                    <option value="" disabled>{tx.goalPlaceholder}</option>
-                    {tx.goalOptions.map((opt) => (
-                      <option key={opt.value} value={opt.value}>{opt.label}</option>
-                    ))}
-                  </select>
-                  <span className="pointer-events-none absolute inset-y-0 right-4 flex items-center text-[#7a8fa8]">
-                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><path d="M6 9l6 6 6-6"/></svg>
-                  </span>
-                </div>
+                {!hideDisciplineSelect && (
+                  <div className="relative">
+                    <select
+                      name="goal"
+                      value={form.goal}
+                      onChange={handleChange}
+                      required
+                      className={`${kidsInnerInputClass} cursor-pointer appearance-none pr-10 ${form.goal ? "text-[#1a2535]" : ""}`}
+                    >
+                      <option value="" disabled>{tx.goalPlaceholder}</option>
+                      {tx.goalOptions.map((opt) => (
+                        <option key={opt.value} value={opt.value}>{opt.label}</option>
+                      ))}
+                    </select>
+                    <span className="pointer-events-none absolute inset-y-0 right-4 flex items-center text-[#7a8fa8]">
+                      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><path d="M6 9l6 6 6-6"/></svg>
+                    </span>
+                  </div>
+                )}
                 {status === "error" && (
                   <p className="text-[#e8002d] text-[0.8rem] px-4 py-2 bg-[rgba(232,0,45,0.08)]">{tx.errorMsg}</p>
                 )}
               </div>
+              {phoneError && <p className={phoneErrorStyle}>{phoneError}</p>}
               <button
                 type="submit"
                 disabled={status === "sending"}
@@ -147,31 +248,38 @@ export function BookingForm({ variant, accentColor }: BookingFormProps = {}) {
                   className={inputClass}
                 />
                 <input
+                  type="tel"
                   name="phone"
                   value={form.phone}
-                  onChange={handleChange}
+                  onChange={handlePhoneChange}
+                  onKeyDown={handlePhoneKeyDown}
+                  onPaste={handlePhonePaste}
                   required
                   placeholder={tx.phonePlaceholder}
                   className={inputClass}
                 />
-                <div className="relative">
-                  <select
-                    name="goal"
-                    value={form.goal}
-                    onChange={handleChange}
-                    required
-                    className={`${inputClass} cursor-pointer appearance-none pr-10 ${form.goal ? "text-[#f0eeea]" : "text-[#555]"}`}
-                  >
-                    <option value="" disabled>{tx.goalPlaceholder}</option>
-                    {tx.goalOptions.map((opt) => (
-                      <option key={opt.value} value={opt.value}>{opt.label}</option>
-                    ))}
-                  </select>
-                  <span className="pointer-events-none absolute inset-y-0 right-4 flex items-center text-[#555]">
-                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><path d="M6 9l6 6 6-6"/></svg>
-                  </span>
-                </div>
+                {!hideDisciplineSelect && (
+                  <div className="relative">
+                    <select
+                      name="goal"
+                      value={form.goal}
+                      onChange={handleChange}
+                      required
+                      className={`${inputClass} cursor-pointer appearance-none pr-10 ${form.goal ? "text-[#f0eeea]" : "text-[#555]"}`}
+                    >
+                      <option value="" disabled>{tx.goalPlaceholder}</option>
+                      {tx.goalOptions.map((opt) => (
+                        <option key={opt.value} value={opt.value}>{opt.label}</option>
+                      ))}
+                    </select>
+                    <span className="pointer-events-none absolute inset-y-0 right-4 flex items-center text-[#555]">
+                      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><path d="M6 9l6 6 6-6"/></svg>
+                    </span>
+                  </div>
+                )}
               </div>
+
+              {phoneError && <p className={phoneErrorStyle}>{phoneError}</p>}
 
               {status === "error" && (
                 <p className="text-[#e8002d] text-[0.8rem] px-4 py-2 mb-[1px] bg-[rgba(232,0,45,0.08)]">{tx.errorMsg}</p>
