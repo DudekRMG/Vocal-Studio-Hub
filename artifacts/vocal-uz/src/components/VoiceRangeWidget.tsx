@@ -232,6 +232,7 @@ export function VoiceRangeWidget({
       setTessituraNote(frequencyToNote(medianHz));
       setTessituraError("");
       setTessituraRecordState("done");
+      releaseAudio();
       return;
     }
 

@@ -550,7 +550,7 @@ export const t = {
       validationRetry: "Record Again",
       stepTessituraTitle: "Your Natural Pitch",
       holdInstructionTessitura: "Hold the button and hum casually — as if you're singing to yourself while doing something else. Don't aim for any particular pitch, just let your voice settle where it feels natural.",
-      tessituraDetectedLabel: "Natural centre detected",
+      tessituraDetectedLabel: "Natural center detected",
       tessituraAutoFinish: "Keep humming — recording finishes automatically",
       stepSexTitle: "Your Biological Sex",
       sexOptionMale: "Male",
