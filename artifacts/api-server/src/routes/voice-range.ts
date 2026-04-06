@@ -17,6 +17,19 @@ router.post("/voice-range", async (req, res) => {
     lang,
   } = req.body;
 
+  if (
+    typeof name !== "string" || name.trim() === "" ||
+    typeof contact !== "string" || contact.trim() === "" ||
+    typeof lowestNote !== "string" ||
+    typeof highestNote !== "string" ||
+    typeof lowestHz !== "number" ||
+    typeof highestHz !== "number" ||
+    typeof voiceType !== "string"
+  ) {
+    res.status(400).json({ success: false, error: "Missing or invalid fields" });
+    return;
+  }
+
   const botToken = process.env.TELEGRAM_BOT_TOKEN;
   const chatId = process.env.TELEGRAM_CHAT_ID;
 
@@ -31,8 +44,8 @@ router.post("/voice-range", async (req, res) => {
     typeof rangeOctaves === "number" ? rangeOctaves.toFixed(1) : String(rangeOctaves ?? "—");
 
   const text = isRu
-    ? `🎵 *Тип голоса — vocal.uz*\n\n👤 *Имя:* ${name}\n📞 *Контакт:* ${contact}\n\n🎤 *Тип голоса:* ${voiceType}\n🔻 *Нижняя нота:* ${lowestNote} (${lowestHz} Гц)\n🔺 *Верхняя нота:* ${highestNote} (${highestHz} Гц)\n📏 *Диапазон:* ${octaves} октав\n\n🌐 *Страница:* ${page}\n🕐 *Время:* ${timestamp}`
-    : `🎵 *Voice Range Result — vocal.uz*\n\n👤 *Name:* ${name}\n📞 *Contact:* ${contact}\n\n🎤 *Voice Type:* ${voiceType}\n🔻 *Lowest Note:* ${lowestNote} (${lowestHz} Hz)\n🔺 *Highest Note:* ${highestNote} (${highestHz} Hz)\n📏 *Range:* ${octaves} octaves\n\n🌐 *Page:* ${page}\n🕐 *Time:* ${timestamp}`;
+    ? `🎵 Тип голоса — vocal.uz\n\n👤 Имя: ${name}\n📞 Контакт: ${contact}\n\n🎤 Тип голоса: ${voiceType}\n🔻 Нижняя нота: ${lowestNote} (${lowestHz} Гц)\n🔺 Верхняя нота: ${highestNote} (${highestHz} Гц)\n📏 Диапазон: ${octaves} октав\n\n🌐 Страница: ${page}\n🕐 Время: ${timestamp}`
+    : `🎵 Voice Range Result — vocal.uz\n\n👤 Name: ${name}\n📞 Contact: ${contact}\n\n🎤 Voice Type: ${voiceType}\n🔻 Lowest Note: ${lowestNote} (${lowestHz} Hz)\n🔺 Highest Note: ${highestNote} (${highestHz} Hz)\n📏 Range: ${octaves} octaves\n\n🌐 Page: ${page}\n🕐 Time: ${timestamp}`;
 
   try {
     const response = await fetch(
@@ -43,7 +56,6 @@ router.post("/voice-range", async (req, res) => {
         body: JSON.stringify({
           chat_id: chatId,
           text,
-          parse_mode: "Markdown",
         }),
       }
     );
