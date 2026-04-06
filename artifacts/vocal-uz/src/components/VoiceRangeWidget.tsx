@@ -1375,7 +1375,7 @@ export function VoiceRangeWidget({
                 display: "inline-block",
                 width: 2,
                 height: h,
-                background: accentColor,
+                background: tColor,
                 opacity: 0.45,
                 borderRadius: 999,
                 transformOrigin: "center center",
