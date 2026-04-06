@@ -30,6 +30,7 @@ interface VoiceRangeWidgetProps {
   triggerColor?: string;
   triggerHoverBorder?: string;
   triggerHoverColor?: string;
+  triggerSize?: "sm" | "lg";
 }
 
 export function VoiceRangeWidget({
@@ -40,6 +41,7 @@ export function VoiceRangeWidget({
   triggerColor,
   triggerHoverBorder,
   triggerHoverColor,
+  triggerSize = "sm",
 }: VoiceRangeWidgetProps) {
   const { lang } = useLang();
   const tx = t[lang].voiceWidget;
@@ -1292,7 +1294,21 @@ export function VoiceRangeWidget({
       <button
         className="font-display uppercase"
         onClick={open}
-        style={{
+        style={triggerSize === "lg" ? {
+          fontSize: "1.1rem",
+          letterSpacing: "0.15em",
+          padding: "calc(1.25rem - 1px) calc(2.5rem - 1px)",
+          border: `1px solid ${tBorder}`,
+          color: tColor,
+          background: "transparent",
+          cursor: "pointer",
+          whiteSpace: "nowrap",
+          width: "100%",
+          display: "inline-flex",
+          alignItems: "center",
+          justifyContent: "center",
+          transition: "color 0.2s, border-color 0.2s",
+        } : {
           fontSize: "0.72rem",
           letterSpacing: "0.16em",
           padding: "calc(0.875rem - 1px) calc(1.5rem - 1px)",

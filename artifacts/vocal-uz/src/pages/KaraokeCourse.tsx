@@ -6,6 +6,7 @@ import { CourseStrip } from "@/components/CourseStrip";
 import { PageHero } from "@/components/PageHero";
 import { TestimonialsSection } from "@/components/TestimonialsSection";
 import { VideoPlayer } from "@/components/VideoPlayer";
+import { VoiceRangeWidget } from "@/components/VoiceRangeWidget";
 
 const base = import.meta.env.BASE_URL.replace(/\/$/, "");
 const PROMO_VIDEO_SRC = `${base}/video/sample.mov`;
@@ -384,21 +385,32 @@ export default function KaraokeCourse() {
             <h2 className="font-display text-[clamp(2rem,4vw,3.5rem)] leading-[1.1] text-[#080808]">{c.ctaBanner}</h2>
             <p className="text-[0.9rem] text-[rgba(8,8,8,0.65)] mt-3">{c.ctaBannerSub}</p>
           </div>
-          <a
-            href="#book-karaoke"
-            onClick={(e) => {
-              e.preventDefault();
-              const el = document.getElementById("book-karaoke");
-              if (!el) return;
-              const nav = document.querySelector("nav");
-              const navH = nav ? (nav as HTMLElement).offsetHeight : 0;
-              window.scrollTo({ top: el.getBoundingClientRect().top + window.scrollY - navH, behavior: "smooth" });
-            }}
-            className="flex-shrink-0 bg-[#080808] text-[#f0eeea] font-display text-[1.1rem] tracking-[0.15em] px-10 py-5 no-underline transition-colors duration-200 hover:bg-[#1a1a1a] whitespace-nowrap inline-flex items-center gap-3 group"
-          >
-            {c.ctaBtn}
-            <svg className="transition-transform duration-200 group-hover:translate-x-1" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M5 12h14M12 5l7 7-7 7" /></svg>
-          </a>
+          <div className="flex-shrink-0 flex flex-col gap-3 w-full md:w-auto">
+            <VoiceRangeWidget
+              accentColor="#c9a84c"
+              pageName={c.heroTag}
+              triggerSize="lg"
+              triggerBorder="rgba(8,8,8,0.55)"
+              triggerColor="#080808"
+              triggerHoverBorder="#080808"
+              triggerHoverColor="#080808"
+            />
+            <a
+              href="#book-karaoke"
+              onClick={(e) => {
+                e.preventDefault();
+                const el = document.getElementById("book-karaoke");
+                if (!el) return;
+                const nav = document.querySelector("nav");
+                const navH = nav ? (nav as HTMLElement).offsetHeight : 0;
+                window.scrollTo({ top: el.getBoundingClientRect().top + window.scrollY - navH, behavior: "smooth" });
+              }}
+              className="bg-[#080808] text-[#f0eeea] font-display text-[1.1rem] tracking-[0.15em] px-10 py-5 no-underline transition-colors duration-200 hover:bg-[#1a1a1a] whitespace-nowrap inline-flex items-center justify-center gap-3 group"
+            >
+              {c.ctaBtn}
+              <svg className="transition-transform duration-200 group-hover:translate-x-1" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M5 12h14M12 5l7 7-7 7" /></svg>
+            </a>
+          </div>
         </div>
       </section>
 
