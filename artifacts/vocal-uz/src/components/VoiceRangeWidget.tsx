@@ -14,6 +14,7 @@ import {
 } from "@/lib/pitchDetection";
 
 const MAX_DURATION = 5000;
+const TESSITURA_DURATION = 8000;
 const SAMPLE_INTERVAL = 50;
 const CIRC = 276; // 2π × 44 ≈ 276.46
 
@@ -109,7 +110,9 @@ export function VoiceRangeWidget({
   useEffect(() => {
     const isAnyRecording = lowRecordState === "recording" || highRecordState === "recording" || tessituraRecordState === "recording";
     if (!isAnyRecording) return;
-    const stop = () => { if (isRecordingRef.current) finishRecordingRef.current(); };
+    const stop = () => {
+      if (isRecordingRef.current && recordingForRef.current !== "tessitura") finishRecordingRef.current();
+    };
     document.addEventListener("mouseup", stop);
     document.addEventListener("touchend", stop);
     return () => {
@@ -197,8 +200,10 @@ export function VoiceRangeWidget({
     // Tessitura branch: save the full sample distribution; no min/max trimming.
     // The median across all samples is computed later by computeTessitura().
     if (which === "tessitura") {
-      tessituralPitchSamplesRef.current = samples;
-      setTessituraNote(frequencyToNote(samples[Math.floor(samples.length / 2)]));
+      const TRIM_HEAD = Math.floor(1500 / SAMPLE_INTERVAL);
+      const trimmed = samples.length > TRIM_HEAD ? samples.slice(TRIM_HEAD) : samples;
+      tessituralPitchSamplesRef.current = trimmed;
+      setTessituraNote(frequencyToNote(trimmed[Math.floor(trimmed.length / 2)]));
       setTessituraError("");
       setTessituraRecordState("done");
       return;
@@ -267,7 +272,8 @@ export function VoiceRangeWidget({
     const loop = () => {
       if (!isRecordingRef.current) return;
       const elapsed = performance.now() - recordStartRef.current;
-      setRecordProgress(Math.min(elapsed / MAX_DURATION, 1));
+      const activeDuration = recordingForRef.current === "tessitura" ? TESSITURA_DURATION : MAX_DURATION;
+      setRecordProgress(Math.min(elapsed / activeDuration, 1));
 
       const analyser = analyserRef.current;
       const buf      = bufferRef.current;
@@ -284,7 +290,7 @@ export function VoiceRangeWidget({
           }
         }
       }
-      if (elapsed >= MAX_DURATION) {
+      if (elapsed >= activeDuration) {
         finishRecordingRef.current();
         return;
       }
@@ -322,7 +328,7 @@ export function VoiceRangeWidget({
   }
 
   function handleHoldEnd() {
-    if (isRecordingRef.current) finishRecordingRef.current();
+    if (isRecordingRef.current && recordingForRef.current !== "tessitura") finishRecordingRef.current();
   }
 
   function handleTouchStart(which: "low" | "high" | "tessitura", e: React.TouchEvent) {
@@ -334,7 +340,7 @@ export function VoiceRangeWidget({
   function handleTouchEnd(e: React.TouchEvent) {
     e.preventDefault();
     touchActiveRef.current = false;
-    if (isRecordingRef.current) finishRecordingRef.current();
+    if (isRecordingRef.current && recordingForRef.current !== "tessitura") finishRecordingRef.current();
   }
 
   function resetLow() {
@@ -788,10 +794,25 @@ export function VoiceRangeWidget({
           {tessituraRecordState !== "done" && (
             <>
               <HoldButton which="tessitura" />
-              {tessituraRecordState === "recording" && currentPitch && (
-                <div style={{ marginTop: 14, fontSize: "0.72rem", letterSpacing: "0.18em", color: accentColor }}>
-                  {currentPitch}
-                </div>
+              {tessituraRecordState === "recording" && (
+                <>
+                  {currentPitch && (
+                    <div style={{ marginTop: 14, fontSize: "0.72rem", letterSpacing: "0.18em", color: accentColor }}>
+                      {currentPitch}
+                    </div>
+                  )}
+                  <div style={{
+                    marginTop: 10,
+                    fontSize: "0.65rem",
+                    letterSpacing: "0.14em",
+                    color: "rgba(240,238,234,0.4)",
+                    maxWidth: 240,
+                    margin: "10px auto 0",
+                    lineHeight: 1.6,
+                  }}>
+                    {tx.tessituraAutoFinish}
+                  </div>
+                </>
               )}
               {tessituraError === "no-pitch" && (
                 <p style={{ marginTop: 14, color: "#e88", fontSize: "0.72rem", letterSpacing: "0.14em" }}>
