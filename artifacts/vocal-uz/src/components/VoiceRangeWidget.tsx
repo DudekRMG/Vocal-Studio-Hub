@@ -32,6 +32,7 @@ interface VoiceRangeWidgetProps {
   triggerHoverBorder?: string;
   triggerHoverColor?: string;
   triggerSize?: "sm" | "lg";
+  triggerLabel?: string;
 }
 
 export function VoiceRangeWidget({
@@ -43,6 +44,7 @@ export function VoiceRangeWidget({
   triggerHoverBorder,
   triggerHoverColor,
   triggerSize = "sm",
+  triggerLabel,
 }: VoiceRangeWidgetProps) {
   const { lang } = useLang();
   const tx = t[lang].voiceWidget;
@@ -876,7 +878,12 @@ export function VoiceRangeWidget({
                   onMouseEnter={(e) => { (e.currentTarget as HTMLButtonElement).style.opacity = "0.85"; }}
                   onMouseLeave={(e) => { (e.currentTarget as HTMLButtonElement).style.opacity = "1"; }}
                 >
-                  {tx.confirm}
+                  {tx.confirmMobile && tx.confirmMobile !== tx.confirm ? (
+                    <>
+                      <span className="md:hidden">{tx.confirmMobile}</span>
+                      <span className="hidden md:inline">{tx.confirm}</span>
+                    </>
+                  ) : tx.confirm}
                 </button>
               </div>
             </div>
@@ -1340,7 +1347,7 @@ export function VoiceRangeWidget({
           (e.currentTarget as HTMLButtonElement).style.borderColor = tBorder;
         }}
       >
-        {tx.trigger}
+        {triggerLabel ?? tx.trigger}
       </button>
 
       {step !== "closed" && createPortal(

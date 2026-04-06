@@ -212,6 +212,7 @@ export function PageHero({
                 accentColor={accentColor}
                 pageName={courseTag}
                 lightMode={lightMode}
+                triggerLabel={lang === "ru" ? "ОПРЕДЕЛИТЬ ГОЛОС" : undefined}
               />
             </div>
           </div>

@@ -79,7 +79,7 @@ export default function Home() {
               <a href="#booking" className="bg-[#e8002d] text-[#f0eeea] font-display text-[0.72rem] tracking-[0.16em] px-6 py-3.5 no-underline transition-all duration-200 hover:bg-[#ff1a3d] uppercase">
                 {lang === "ru" ? "Пробный урок" : tx.hero.ctaBook}
               </a>
-              <VoiceRangeWidget accentColor="#e8002d" pageName={lang === "ru" ? "Главная" : "Home"} />
+              <VoiceRangeWidget accentColor="#e8002d" pageName={lang === "ru" ? "Главная" : "Home"} triggerLabel={lang === "ru" ? "ОПРЕДЕЛИТЬ ГОЛОС" : undefined} />
             </div>
           </div>
         </div>
