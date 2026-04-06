@@ -779,7 +779,7 @@ export function VoiceRangeWidget({
         style={{
           fontSize: "0.72rem",
           letterSpacing: "0.16em",
-          padding: "0.875rem 1.5rem",
+          padding: "calc(0.875rem - 1px) calc(1.5rem - 1px)",
           border: `1px solid ${tBorder}`,
           color: tColor,
           background: "transparent",
