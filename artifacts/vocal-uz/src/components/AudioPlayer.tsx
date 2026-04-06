@@ -112,14 +112,56 @@ export function AudioPlayer({ src, label, variant, accentColor, isKids = false }
     }
   }, [playing, isEmpty, id]);
 
-  const handleScrub = useCallback((e: React.MouseEvent<HTMLDivElement>) => {
+  const isDraggingRef = useRef(false);
+  const trackRef = useRef<HTMLDivElement>(null);
+
+  const seekToClientX = useCallback((clientX: number) => {
     const audio = audioRef.current;
-    if (!audio || isEmpty || !audio.duration) return;
-    const rect = e.currentTarget.getBoundingClientRect();
-    const ratio = Math.max(0, Math.min(1, (e.clientX - rect.left) / rect.width));
+    const track = trackRef.current;
+    if (!audio || !track || isEmpty || !audio.duration) return;
+    const rect = track.getBoundingClientRect();
+    const ratio = Math.max(0, Math.min(1, (clientX - rect.left) / rect.width));
     audio.currentTime = ratio * audio.duration;
     setProgress(ratio);
   }, [isEmpty]);
+
+  const handlePointerDown = useCallback((e: React.MouseEvent<HTMLDivElement>) => {
+    if (isEmpty) return;
+    isDraggingRef.current = true;
+    seekToClientX(e.clientX);
+  }, [isEmpty, seekToClientX]);
+
+  const handleTouchStart = useCallback((e: React.TouchEvent<HTMLDivElement>) => {
+    if (isEmpty) return;
+    isDraggingRef.current = true;
+    seekToClientX(e.touches[0].clientX);
+  }, [isEmpty, seekToClientX]);
+
+  useEffect(() => {
+    const onMouseMove = (e: MouseEvent) => {
+      if (!isDraggingRef.current) return;
+      seekToClientX(e.clientX);
+    };
+    const onMouseUp = () => { isDraggingRef.current = false; };
+    const onTouchMove = (e: TouchEvent) => {
+      if (!isDraggingRef.current) return;
+      e.preventDefault();
+      seekToClientX(e.touches[0].clientX);
+    };
+    const onTouchEnd = () => { isDraggingRef.current = false; };
+
+    window.addEventListener("mousemove", onMouseMove);
+    window.addEventListener("mouseup", onMouseUp);
+    window.addEventListener("touchmove", onTouchMove, { passive: false });
+    window.addEventListener("touchend", onTouchEnd);
+
+    return () => {
+      window.removeEventListener("mousemove", onMouseMove);
+      window.removeEventListener("mouseup", onMouseUp);
+      window.removeEventListener("touchmove", onTouchMove);
+      window.removeEventListener("touchend", onTouchEnd);
+    };
+  }, [seekToClientX]);
 
   return (
     <div
@@ -171,9 +213,11 @@ export function AudioPlayer({ src, label, variant, accentColor, isKids = false }
 
       {/* mobile: order-4 + w-full → own row at bottom; desktop: order-3 + flex-1 → inline */}
       <div
+        ref={trackRef}
         className="order-4 md:order-3 w-full md:flex-1 md:w-auto h-[5px] md:h-[3px] relative cursor-pointer"
         style={{ backgroundColor: trackBg }}
-        onClick={handleScrub}
+        onMouseDown={handlePointerDown}
+        onTouchStart={handleTouchStart}
       >
         <div
           className="absolute inset-y-0 left-0"
