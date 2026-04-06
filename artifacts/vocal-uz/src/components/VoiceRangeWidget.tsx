@@ -197,13 +197,20 @@ export function VoiceRangeWidget({
       return;
     }
 
-    // Tessitura branch: save the full sample distribution; no min/max trimming.
-    // The median across all samples is computed later by computeTessitura().
+    // Tessitura branch: discard first 1.5 s (settling phase), then compute the
+    // statistical median of the remaining samples for the display note.
+    // trimmed samples are stored and fed exclusively to computeTessitura().
     if (which === "tessitura") {
-      const TRIM_HEAD = Math.floor(1500 / SAMPLE_INTERVAL);
+      // Discard first 1.5 s ("settling" phase), then take the statistical median.
+      const TRIM_HEAD = Math.floor(1500 / SAMPLE_INTERVAL); // 30 samples
       const trimmed = samples.length > TRIM_HEAD ? samples.slice(TRIM_HEAD) : samples;
+      const sortedTrimmed = [...trimmed].sort((a, b) => a - b);
+      const mid = Math.floor(sortedTrimmed.length / 2);
+      const medianHz = sortedTrimmed.length % 2 === 0
+        ? (sortedTrimmed[mid - 1] + sortedTrimmed[mid]) / 2
+        : sortedTrimmed[mid];
       tessituralPitchSamplesRef.current = trimmed;
-      setTessituraNote(frequencyToNote(trimmed[Math.floor(trimmed.length / 2)]));
+      setTessituraNote(frequencyToNote(medianHz));
       setTessituraError("");
       setTessituraRecordState("done");
       return;
