@@ -9,6 +9,7 @@ import { StageCanvas } from "@/components/StageCanvas";
 import { TestimonialsSection } from "@/components/TestimonialsSection";
 import { VideoPlayer } from "@/components/VideoPlayer";
 import { VoiceRangeWidget } from "@/components/VoiceRangeWidget";
+import { RevealSection } from "@/components/RevealSection";
 
 const base = import.meta.env.BASE_URL.replace(/\/$/, "");
 const PROMO_VIDEO_SRC = `${base}/video/sample.mov`;
@@ -177,7 +178,7 @@ export default function Home() {
 
       {/* ── DISCIPLINES ── */}
       <section id="disciplines" className="py-28 px-6 lg:px-12 bg-[#080808] border-t border-white/[0.08]">
-        <div className="max-w-[1100px] mx-auto mb-16">
+        <RevealSection className="max-w-[1100px] mx-auto mb-16">
           <span className="text-[0.68rem] tracking-[0.28em] uppercase text-[#e8002d] block mb-4">
             {tx.disciplines.eyebrow}
           </span>
@@ -187,10 +188,11 @@ export default function Home() {
               {tx.disciplines.titleEm}
             </em>
           </h2>
-        </div>
+        </RevealSection>
 
         <div className="max-w-[1100px] mx-auto grid grid-cols-1 md:grid-cols-3 gap-[1px] bg-white/[0.08]">
           {/* Extreme card */}
+          <RevealSection delay={0}>
           <div className="bg-[#080808] p-10 relative overflow-hidden group transition-colors duration-300 hover:bg-[#0d0a0a]">
             <div
               className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-400 pointer-events-none"
@@ -222,8 +224,10 @@ export default function Home() {
               </Link>
             </div>
           </div>
+          </RevealSection>
 
           {/* Pop card */}
+          <RevealSection delay={0.08}>
           <div className="bg-[#0f0f0f] p-10 relative overflow-hidden group transition-colors duration-300 hover:bg-[#131313]">
             <div
               className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-400 pointer-events-none"
@@ -256,8 +260,10 @@ export default function Home() {
               </Link>
             </div>
           </div>
+          </RevealSection>
 
           {/* Karaoke card */}
+          <RevealSection delay={0.16}>
           <div className="bg-[#0c0b08] p-10 relative overflow-hidden group transition-colors duration-300 hover:bg-[#100e09]">
             <div
               className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-400 pointer-events-none"
@@ -290,10 +296,11 @@ export default function Home() {
               </Link>
             </div>
           </div>
+          </RevealSection>
         </div>
 
         {/* Kids — full-width featured card */}
-        <div className="max-w-[1100px] mx-auto mt-[1px]">
+        <RevealSection delay={0.08} className="max-w-[1100px] mx-auto mt-[1px]">
           <div
             className="relative overflow-hidden group transition-colors duration-300"
             style={{ backgroundColor: "#152444" }}
@@ -338,10 +345,11 @@ export default function Home() {
               </Link>
             </div>
           </div>
-        </div>
+        </RevealSection>
       </section>
 
       {/* ── ABOUT / TEACHER ── */}
+      <RevealSection>
       <section id="about" className="py-28 px-6 lg:px-12 bg-[#0f0f0f] border-t border-white/[0.08]">
         <div className="max-w-[1100px] mx-auto grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
           {/* Photo */}
@@ -397,8 +405,10 @@ export default function Home() {
           </div>
         </div>
       </section>
+      </RevealSection>
 
       {/* ── CTA BANNER ── */}
+      <RevealSection>
       <section className="py-20 px-6 lg:px-12 bg-[#e8002d] relative overflow-hidden">
         <div className="absolute inset-0 opacity-[0.07] pointer-events-none" style={{ backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")`, backgroundSize: "120px" }} />
         <div className="max-w-[1100px] mx-auto flex flex-col md:flex-row items-center justify-between gap-8">
@@ -432,10 +442,14 @@ export default function Home() {
           </div>
         </div>
       </section>
+      </RevealSection>
 
-      <TestimonialsSection accentColor="#e8002d" />
+      <RevealSection>
+        <TestimonialsSection accentColor="#e8002d" />
+      </RevealSection>
 
       {/* ── BOOKING ── */}
+      <RevealSection>
       <section id="booking" className="bg-[#141414] border-t border-white/[0.08]">
         {/* Row 1 — Full width heading */}
         <div className="pt-28 pb-12 px-6 lg:px-12">
@@ -472,6 +486,7 @@ export default function Home() {
         </div>
         <CourseStrip />
       </section>
+      </RevealSection>
     </>
   );
 }

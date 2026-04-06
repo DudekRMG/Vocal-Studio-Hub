@@ -7,6 +7,7 @@ import { PageHero } from "@/components/PageHero";
 import { TestimonialsSection } from "@/components/TestimonialsSection";
 import { VideoPlayer } from "@/components/VideoPlayer";
 import { VoiceRangeWidget } from "@/components/VoiceRangeWidget";
+import { RevealSection } from "@/components/RevealSection";
 
 const base = import.meta.env.BASE_URL.replace(/\/$/, "");
 const PROMO_VIDEO_SRC = `${base}/video/sample.mov`;
@@ -293,6 +294,7 @@ export default function KaraokeCourse() {
       />
 
       {/* ── WHAT IS ── */}
+      <RevealSection>
       <section id="course-content" className="py-28 px-6 lg:px-12 bg-[#0f0f0f] border-b border-white/[0.08]">
         <div className="max-w-[1100px] mx-auto grid grid-cols-1 md:grid-cols-2 gap-20 items-center">
           <div>
@@ -321,18 +323,23 @@ export default function KaraokeCourse() {
           </div>
         </div>
       </section>
+      </RevealSection>
 
       {/* ── FOR WHOM ── */}
       <section className="py-28 px-6 lg:px-12 bg-[#080808] border-b border-white/[0.08]">
         <div className="max-w-[1100px] mx-auto">
-          <h2 className="font-display text-[clamp(2.5rem,4vw,4rem)] leading-[1.1] tracking-[0.02em] mb-16">{c.forWhomTitle}</h2>
+          <RevealSection>
+            <h2 className="font-display text-[clamp(2.5rem,4vw,4rem)] leading-[1.1] tracking-[0.02em] mb-16">{c.forWhomTitle}</h2>
+          </RevealSection>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-[1px] bg-white/[0.08]">
-            {c.forWhom.map((item) => (
-              <div key={item.title} className="bg-[#080808] p-10 group hover:bg-[#0d0c09] transition-colors duration-300">
+            {c.forWhom.map((item, i) => (
+              <RevealSection key={item.title} delay={i * 0.08}>
+              <div className="bg-[#080808] p-10 group hover:bg-[#0d0c09] transition-colors duration-300">
                 <div className="text-3xl mb-6">{item.icon}</div>
                 <h3 className="font-display text-[1.4rem] tracking-[0.05em] mb-4" style={{ color: gold }}>{item.title}</h3>
                 <p className="text-[0.85rem] leading-[1.8] text-[rgba(240,238,234,0.45)]">{item.desc}</p>
               </div>
+              </RevealSection>
             ))}
           </div>
         </div>
@@ -341,10 +348,13 @@ export default function KaraokeCourse() {
       {/* ── CURRICULUM ── */}
       <section className="py-28 px-6 lg:px-12 bg-[#0f0f0f] border-b border-white/[0.08]">
         <div className="max-w-[1100px] mx-auto">
-          <h2 className="font-display text-[clamp(2.5rem,4vw,4rem)] leading-[1.1] tracking-[0.02em] mb-16">{c.curriculumTitle}</h2>
+          <RevealSection>
+            <h2 className="font-display text-[clamp(2.5rem,4vw,4rem)] leading-[1.1] tracking-[0.02em] mb-16">{c.curriculumTitle}</h2>
+          </RevealSection>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-[1px] bg-white/[0.08]">
-            {c.curriculum.map((lesson) => (
-              <div key={lesson.num} className="bg-[#0f0f0f] p-8 relative group hover:bg-[#131109] transition-colors duration-300">
+            {c.curriculum.map((lesson, i) => (
+              <RevealSection key={lesson.num} delay={i * 0.06}>
+              <div className="bg-[#0f0f0f] p-8 relative group hover:bg-[#131109] transition-colors duration-300">
                 <div
                   className="font-display text-[4rem] leading-none absolute top-4 right-6 pointer-events-none"
                   style={{ color: goldFaint }}
@@ -357,6 +367,7 @@ export default function KaraokeCourse() {
                 <h3 className="font-display text-[1.25rem] tracking-[0.04em] mb-3 text-[#f0eeea]">{lesson.title}</h3>
                 <p className="text-[0.82rem] leading-[1.8] text-[rgba(240,238,234,0.45)]">{lesson.desc}</p>
               </div>
+              </RevealSection>
             ))}
           </div>
         </div>
@@ -365,19 +376,24 @@ export default function KaraokeCourse() {
       {/* ── FAQ ── */}
       <section className="py-28 px-6 lg:px-12 bg-[#141414] border-b border-white/[0.08]">
         <div className="max-w-[800px] mx-auto">
-          <h2 className="font-display text-[clamp(2.5rem,4vw,4rem)] leading-[1.1] tracking-[0.02em] mb-16">{c.faqTitle}</h2>
+          <RevealSection>
+            <h2 className="font-display text-[clamp(2.5rem,4vw,4rem)] leading-[1.1] tracking-[0.02em] mb-16">{c.faqTitle}</h2>
+          </RevealSection>
           <div className="flex flex-col gap-[1px] bg-white/[0.08]">
-            {c.faqs.map((faq) => (
-              <div key={faq.q} className="bg-[#141414] px-10 py-8">
+            {c.faqs.map((faq, i) => (
+              <RevealSection key={faq.q} delay={i * 0.08}>
+              <div className="bg-[#141414] px-10 py-8">
                 <h3 className="font-display text-[1.15rem] tracking-[0.05em] leading-[1.3] text-[#f0eeea] mb-3">{faq.q}</h3>
                 <p className="text-[0.88rem] leading-[1.8] text-[rgba(240,238,234,0.5)]">{faq.a}</p>
               </div>
+              </RevealSection>
             ))}
           </div>
         </div>
       </section>
 
       {/* ── CTA BANNER ── */}
+      <RevealSection>
       <section className="py-20 px-6 lg:px-12 relative overflow-hidden" style={{ backgroundColor: gold }}>
         <div className="absolute inset-0 opacity-[0.06] pointer-events-none" style={{ backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")`, backgroundSize: "120px" }} />
         <div className="max-w-[1100px] mx-auto flex flex-col md:flex-row items-center justify-between gap-8">
@@ -414,9 +430,14 @@ export default function KaraokeCourse() {
         </div>
       </section>
 
-      <TestimonialsSection accentColor="#c9a84c" />
+      </RevealSection>
+
+      <RevealSection>
+        <TestimonialsSection accentColor="#c9a84c" />
+      </RevealSection>
 
       {/* ── BOOKING ── */}
+      <RevealSection>
       <section id="book-karaoke" className="bg-[#141414] border-t border-white/[0.08]">
         {/* Row 1 — Full width heading */}
         <div className="pt-28 pb-12 px-6 lg:px-12">
@@ -448,6 +469,7 @@ export default function KaraokeCourse() {
         </div>
         <CourseStrip exclude="karaoke" />
       </section>
+      </RevealSection>
     </>
   );
 }

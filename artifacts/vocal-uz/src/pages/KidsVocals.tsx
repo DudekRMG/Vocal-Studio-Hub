@@ -7,6 +7,7 @@ import { PageHero } from "@/components/PageHero";
 import { TestimonialsSection } from "@/components/TestimonialsSection";
 import { VideoPlayer } from "@/components/VideoPlayer";
 import { VoiceRangeWidget } from "@/components/VoiceRangeWidget";
+import { RevealSection } from "@/components/RevealSection";
 
 const base = import.meta.env.BASE_URL.replace(/\/$/, "");
 const PROMO_VIDEO_SRC = `${base}/video/sample.mov`;
@@ -238,6 +239,7 @@ export default function KidsVocals() {
       />
 
       {/* ── ABOUT THE APPROACH ── */}
+      <RevealSection>
       <section id="course-content" className="py-28 px-6 lg:px-12 border-b" style={{ backgroundColor: bgCard, borderColor: "rgba(0,0,0,0.07)" }}>
         <div className="max-w-[1100px] mx-auto grid grid-cols-1 md:grid-cols-2 gap-20 items-start">
           <div>
@@ -259,14 +261,18 @@ export default function KidsVocals() {
           </div>
         </div>
       </section>
+      </RevealSection>
 
       {/* ── AGE GROUPS ── */}
       <section className="py-28 px-6 lg:px-12 border-b" style={{ backgroundColor: bgBase, borderColor: "rgba(0,0,0,0.07)" }}>
         <div className="max-w-[1100px] mx-auto">
-          <h2 className="font-display text-[clamp(2.5rem,4vw,4rem)] leading-[1.1] tracking-[0.02em] mb-16 text-[#0f1016]">{c.ageGroupsTitle}</h2>
+          <RevealSection>
+            <h2 className="font-display text-[clamp(2.5rem,4vw,4rem)] leading-[1.1] tracking-[0.02em] mb-16 text-[#0f1016]">{c.ageGroupsTitle}</h2>
+          </RevealSection>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-[1px]" style={{ backgroundColor: "rgba(0,0,0,0.07)" }}>
             {c.ageGroups.map((group, i) => (
-              <div key={group.range} className="p-10 relative group hover:opacity-95 transition-opacity" style={{ backgroundColor: i % 2 === 0 ? bgCard : bgCardAlt }}>
+              <RevealSection key={group.range} delay={i * 0.08}>
+              <div className="p-10 relative group hover:opacity-95 transition-opacity" style={{ backgroundColor: i % 2 === 0 ? bgCard : bgCardAlt }}>
                 <div className="font-display text-[4rem] leading-none absolute top-4 right-6 pointer-events-none" style={{ color: "rgba(59,130,246,0.12)" }}>
                   {String(i + 1).padStart(2, "0")}
                 </div>
@@ -282,6 +288,7 @@ export default function KidsVocals() {
                   ))}
                 </ul>
               </div>
+              </RevealSection>
             ))}
           </div>
         </div>
@@ -290,17 +297,21 @@ export default function KidsVocals() {
       {/* ── STYLES ── */}
       <section className="py-28 px-6 lg:px-12 border-b" style={{ backgroundColor: bgCard, borderColor: "rgba(0,0,0,0.07)" }}>
         <div className="max-w-[1100px] mx-auto">
-          <h2 className="font-display text-[clamp(2.5rem,4vw,4rem)] leading-[1.1] tracking-[0.02em] mb-4 text-[#0f1016]">{c.stylesTitle}</h2>
-          <p className="text-[0.9rem] leading-[1.9] text-[rgba(15,16,22,0.4)] mb-14 max-w-[560px]">{c.stylesSub}</p>
+          <RevealSection>
+            <h2 className="font-display text-[clamp(2.5rem,4vw,4rem)] leading-[1.1] tracking-[0.02em] mb-4 text-[#0f1016]">{c.stylesTitle}</h2>
+            <p className="text-[0.9rem] leading-[1.9] text-[rgba(15,16,22,0.4)] mb-14 max-w-[560px]">{c.stylesSub}</p>
+          </RevealSection>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-[1px]" style={{ backgroundColor: "rgba(0,0,0,0.07)" }}>
             {c.styles.map((style, i) => (
-              <div key={style.name} className="p-10 relative group hover:brightness-110 transition-all duration-300" style={{ backgroundColor: bgCard }}>
+              <RevealSection key={style.name} delay={i * 0.08}>
+              <div className="p-10 relative group hover:brightness-110 transition-all duration-300" style={{ backgroundColor: bgCard }}>
                 <span className="font-display text-[5rem] leading-none absolute top-4 right-6 pointer-events-none" style={{ color: "rgba(59,130,246,0.10)" }}>
                   {String(i + 1).padStart(2, "0")}
                 </span>
                 <h3 className="font-display text-[1.5rem] tracking-[0.05em] mb-4" style={{ color: blue }}>{style.name}</h3>
                 <p className="text-[0.85rem] leading-[1.8] text-[rgba(15,16,22,0.45)]">{style.desc}</p>
               </div>
+              </RevealSection>
             ))}
           </div>
         </div>
@@ -309,20 +320,25 @@ export default function KidsVocals() {
       {/* ── PROCESS ── */}
       <section className="py-28 px-6 lg:px-12 border-b" style={{ backgroundColor: bgCardAlt, borderColor: "rgba(0,0,0,0.07)" }}>
         <div className="max-w-[1100px] mx-auto">
-          <h2 className="font-display text-[clamp(2.5rem,4vw,4rem)] leading-[1.1] tracking-[0.02em] mb-16 text-[#0f1016]">{c.processTitle}</h2>
+          <RevealSection>
+            <h2 className="font-display text-[clamp(2.5rem,4vw,4rem)] leading-[1.1] tracking-[0.02em] mb-16 text-[#0f1016]">{c.processTitle}</h2>
+          </RevealSection>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-[1px]" style={{ backgroundColor: "rgba(0,0,0,0.07)" }}>
-            {c.processSteps.map((step) => (
-              <div key={step.num} className="p-10" style={{ backgroundColor: bgCardAlt }}>
+            {c.processSteps.map((step, i) => (
+              <RevealSection key={step.num} delay={i * 0.08}>
+              <div className="p-10" style={{ backgroundColor: bgCardAlt }}>
                 <div className="font-display text-[3.5rem] leading-none mb-6" style={{ color: "rgba(59,130,246,0.30)" }}>{step.num}</div>
                 <h3 className="font-display text-[1.15rem] tracking-[0.08em] mb-4 text-[#0f1016]">{step.title}</h3>
                 <p className="text-[0.82rem] leading-[1.8] text-[rgba(15,16,22,0.45)]">{step.desc}</p>
               </div>
+              </RevealSection>
             ))}
           </div>
         </div>
       </section>
 
       {/* ── SAFETY ── */}
+      <RevealSection>
       <section className="py-28 px-6 lg:px-12 border-b" style={{ backgroundColor: bgBase, borderColor: "rgba(0,0,0,0.07)" }}>
         <div className="max-w-[1100px] mx-auto grid grid-cols-1 md:grid-cols-2 gap-20 items-start">
           <div>
@@ -346,23 +362,29 @@ export default function KidsVocals() {
           </div>
         </div>
       </section>
+      </RevealSection>
 
       {/* ── FAQ ── */}
       <section className="py-28 px-6 lg:px-12 border-b" style={{ backgroundColor: bgCard, borderColor: "rgba(0,0,0,0.07)" }}>
         <div className="max-w-[800px] mx-auto">
-          <h2 className="font-display text-[clamp(2.5rem,4vw,4rem)] leading-[1.1] tracking-[0.02em] mb-16 text-[#0f1016]">{c.faqTitle}</h2>
+          <RevealSection>
+            <h2 className="font-display text-[clamp(2.5rem,4vw,4rem)] leading-[1.1] tracking-[0.02em] mb-16 text-[#0f1016]">{c.faqTitle}</h2>
+          </RevealSection>
           <div className="flex flex-col gap-[1px]" style={{ backgroundColor: "rgba(0,0,0,0.07)" }}>
-            {c.faqs.map((faq) => (
-              <div key={faq.q} className="px-10 py-8" style={{ backgroundColor: bgCard }}>
+            {c.faqs.map((faq, i) => (
+              <RevealSection key={faq.q} delay={i * 0.08}>
+              <div className="px-10 py-8" style={{ backgroundColor: bgCard }}>
                 <h3 className="font-display text-[1.15rem] tracking-[0.05em] leading-[1.3] text-[#0f1016] mb-3">{faq.q}</h3>
                 <p className="text-[0.88rem] leading-[1.8] text-[rgba(15,16,22,0.5)]">{faq.a}</p>
               </div>
+              </RevealSection>
             ))}
           </div>
         </div>
       </section>
 
       {/* ── CTA BANNER ── */}
+      <RevealSection>
       <section className="py-20 px-6 lg:px-12 relative overflow-hidden" style={{ backgroundColor: "#3b82f6" }}>
         <div className="absolute inset-0 opacity-[0.06] pointer-events-none" style={{ backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")`, backgroundSize: "120px" }} />
         <div className="max-w-[1100px] mx-auto flex flex-col md:flex-row items-center justify-between gap-8">
@@ -402,9 +424,14 @@ export default function KidsVocals() {
         </div>
       </section>
 
-      <TestimonialsSection accentColor="#3b82f6" variant="kids" />
+      </RevealSection>
+
+      <RevealSection>
+        <TestimonialsSection accentColor="#3b82f6" variant="kids" />
+      </RevealSection>
 
       {/* ── BOOKING ── */}
+      <RevealSection>
       <section id="book-kids" className="border-t" style={{ backgroundColor: bgCardAlt, borderColor: "rgba(0,0,0,0.07)" }}>
         {/* Row 1 — Full width heading */}
         <div className="pt-28 pb-12 px-6 lg:px-12">
@@ -436,6 +463,7 @@ export default function KidsVocals() {
         </div>
         <CourseStrip exclude="kids" isLight />
       </section>
+      </RevealSection>
     </>
   );
 }

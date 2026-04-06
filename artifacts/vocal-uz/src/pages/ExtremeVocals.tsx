@@ -7,6 +7,7 @@ import { PageHero } from "@/components/PageHero";
 import { TestimonialsSection } from "@/components/TestimonialsSection";
 import { VideoPlayer } from "@/components/VideoPlayer";
 import { VoiceRangeWidget } from "@/components/VoiceRangeWidget";
+import { RevealSection } from "@/components/RevealSection";
 
 const base = import.meta.env.BASE_URL.replace(/\/$/, "");
 const PROMO_VIDEO_SRC = `${base}/video/sample.mov`;
@@ -216,6 +217,7 @@ export default function ExtremeVocals() {
       />
 
       {/* ── WHAT IS ── */}
+      <RevealSection>
       <section id="course-content" className="py-28 px-6 lg:px-12 bg-[#0f0f0f] border-b border-white/[0.08]">
         <div className="max-w-[1100px] mx-auto grid grid-cols-1 md:grid-cols-2 gap-20 items-center">
           <div>
@@ -237,18 +239,23 @@ export default function ExtremeVocals() {
           </div>
         </div>
       </section>
+      </RevealSection>
 
       {/* ── TECHNIQUES ── */}
       <section className="py-28 px-6 lg:px-12 bg-[#080808] border-b border-white/[0.08]">
         <div className="max-w-[1100px] mx-auto">
-          <h2 className="font-display text-[clamp(2.5rem,4vw,4rem)] leading-[1.1] tracking-[0.02em] mb-16">{c.techniquesTitle}</h2>
+          <RevealSection>
+            <h2 className="font-display text-[clamp(2.5rem,4vw,4rem)] leading-[1.1] tracking-[0.02em] mb-16">{c.techniquesTitle}</h2>
+          </RevealSection>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-[1px] bg-white/[0.08]">
             {c.techniques.map((tech, i) => (
-              <div key={tech.name} className="bg-[#080808] p-10 relative group hover:bg-[#0d0a0a] transition-colors duration-300">
+              <RevealSection key={tech.name} delay={i * 0.08}>
+              <div className="bg-[#080808] p-10 relative group hover:bg-[#0d0a0a] transition-colors duration-300">
                 <span className="font-display text-[5rem] leading-none text-[rgba(232,0,45,0.06)] absolute top-4 right-6">{String(i + 1).padStart(2, "0")}</span>
                 <h3 className="font-display text-[1.8rem] tracking-[0.05em] mb-4 text-[#e8002d]">{tech.name}</h3>
                 <p className="text-[0.85rem] leading-[1.8] text-[rgba(240,238,234,0.45)]">{tech.desc}</p>
               </div>
+              </RevealSection>
             ))}
           </div>
         </div>
@@ -257,14 +264,18 @@ export default function ExtremeVocals() {
       {/* ── PROCESS ── */}
       <section className="py-28 px-6 lg:px-12 bg-[#141414] border-b border-white/[0.08]">
         <div className="max-w-[1100px] mx-auto">
-          <h2 className="font-display text-[clamp(2.5rem,4vw,4rem)] leading-[1.1] tracking-[0.02em] mb-16">{c.processTitle}</h2>
+          <RevealSection>
+            <h2 className="font-display text-[clamp(2.5rem,4vw,4rem)] leading-[1.1] tracking-[0.02em] mb-16">{c.processTitle}</h2>
+          </RevealSection>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-[1px] bg-white/[0.08]">
-            {c.processSteps.map((step) => (
-              <div key={step.num} className="bg-[#141414] p-10">
+            {c.processSteps.map((step, i) => (
+              <RevealSection key={step.num} delay={i * 0.08}>
+              <div className="bg-[#141414] p-10">
                 <div className="font-display text-[3.5rem] leading-none text-[rgba(232,0,45,0.2)] mb-6">{step.num}</div>
                 <h3 className="font-display text-[1.2rem] tracking-[0.08em] mb-4 text-[#f0eeea]">{step.title}</h3>
                 <p className="text-[0.82rem] leading-[1.8] text-[rgba(240,238,234,0.45)]">{step.desc}</p>
               </div>
+              </RevealSection>
             ))}
           </div>
         </div>
@@ -273,19 +284,24 @@ export default function ExtremeVocals() {
       {/* ── FAQ ── */}
       <section className="py-28 px-6 lg:px-12 bg-[#0f0f0f] border-b border-white/[0.08]">
         <div className="max-w-[800px] mx-auto">
-          <h2 className="font-display text-[clamp(2.5rem,4vw,4rem)] leading-[1.1] tracking-[0.02em] mb-16">{c.faqTitle}</h2>
+          <RevealSection>
+            <h2 className="font-display text-[clamp(2.5rem,4vw,4rem)] leading-[1.1] tracking-[0.02em] mb-16">{c.faqTitle}</h2>
+          </RevealSection>
           <div className="flex flex-col gap-[1px] bg-white/[0.08]">
-            {c.faqs.map((faq) => (
-              <div key={faq.q} className="bg-[#0f0f0f] px-10 py-8">
+            {c.faqs.map((faq, i) => (
+              <RevealSection key={faq.q} delay={i * 0.08}>
+              <div className="bg-[#0f0f0f] px-10 py-8">
                 <h3 className="font-display text-[1.15rem] tracking-[0.05em] leading-[1.3] text-[#f0eeea] mb-3">{faq.q}</h3>
                 <p className="text-[0.88rem] leading-[1.8] text-[rgba(240,238,234,0.5)]">{faq.a}</p>
               </div>
+              </RevealSection>
             ))}
           </div>
         </div>
       </section>
 
       {/* ── CTA BANNER ── */}
+      <RevealSection>
       <section className="py-20 px-6 lg:px-12 bg-[#e8002d] relative overflow-hidden">
         <div className="max-w-[1100px] mx-auto flex flex-col md:flex-row items-center justify-between gap-8">
           <div>
@@ -309,10 +325,14 @@ export default function ExtremeVocals() {
           </div>
         </div>
       </section>
+      </RevealSection>
 
-      <TestimonialsSection accentColor="#e8002d" />
+      <RevealSection>
+        <TestimonialsSection accentColor="#e8002d" />
+      </RevealSection>
 
       {/* ── BOOKING ── */}
+      <RevealSection>
       <section id="book-extreme" className="bg-[#141414] border-t border-white/[0.08]">
         {/* Row 1 — Full width heading */}
         <div className="pt-28 pb-12 px-6 lg:px-12">
@@ -344,6 +364,7 @@ export default function ExtremeVocals() {
         </div>
         <CourseStrip exclude="extreme" />
       </section>
+      </RevealSection>
     </>
   );
 }

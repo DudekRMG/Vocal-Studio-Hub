@@ -7,6 +7,7 @@ import { PageHero } from "@/components/PageHero";
 import { TestimonialsSection } from "@/components/TestimonialsSection";
 import { VideoPlayer } from "@/components/VideoPlayer";
 import { VoiceRangeWidget } from "@/components/VoiceRangeWidget";
+import { RevealSection } from "@/components/RevealSection";
 
 const base = import.meta.env.BASE_URL.replace(/\/$/, "");
 const PROMO_VIDEO_SRC = `${base}/video/sample.mov`;
@@ -192,6 +193,7 @@ export default function PopVocals() {
       />
 
       {/* ── WHAT IS ── */}
+      <RevealSection>
       <section id="course-content" className="py-28 px-6 lg:px-12 bg-[#080808] border-b border-white/[0.08]">
         <div className="max-w-[1100px] mx-auto grid grid-cols-1 md:grid-cols-2 gap-20 items-center">
           <div>
@@ -212,17 +214,22 @@ export default function PopVocals() {
           </div>
         </div>
       </section>
+      </RevealSection>
 
       {/* ── FOR WHOM ── */}
       <section className="py-28 px-6 lg:px-12 bg-[#141414] border-b border-white/[0.08]">
         <div className="max-w-[1100px] mx-auto">
-          <h2 className="font-['Playfair_Display'] italic text-[clamp(2.5rem,4vw,4rem)] leading-[1.2] mb-16">{forWhomTitle}</h2>
+          <RevealSection>
+            <h2 className="font-['Playfair_Display'] italic text-[clamp(2.5rem,4vw,4rem)] leading-[1.2] mb-16">{forWhomTitle}</h2>
+          </RevealSection>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-[1px] bg-white/[0.08]">
-            {forWhom.map((item) => (
-              <div key={item.title} className="bg-[#141414] p-10">
+            {forWhom.map((item, i) => (
+              <RevealSection key={item.title} delay={i * 0.08}>
+              <div className="bg-[#141414] p-10">
                 <h3 className="font-display text-[1.4rem] tracking-[0.08em] mb-4" style={{ color: "#9d4edd" }}>{item.title}</h3>
                 <p className="text-[0.85rem] leading-[1.8] text-[rgba(240,238,234,0.45)]">{item.desc}</p>
               </div>
+              </RevealSection>
             ))}
           </div>
         </div>
@@ -231,14 +238,18 @@ export default function PopVocals() {
       {/* ── PROGRAMME ── */}
       <section className="py-28 px-6 lg:px-12 bg-[#0f0f0f] border-b border-white/[0.08]">
         <div className="max-w-[1100px] mx-auto">
-          <h2 className="font-['Playfair_Display'] italic text-[clamp(2.5rem,4vw,4rem)] leading-[1.2] mb-16">{programTitle}</h2>
+          <RevealSection>
+            <h2 className="font-['Playfair_Display'] italic text-[clamp(2.5rem,4vw,4rem)] leading-[1.2] mb-16">{programTitle}</h2>
+          </RevealSection>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-[1px] bg-white/[0.08]">
-            {programSteps.map((step) => (
-              <div key={step.num} className="bg-[#0f0f0f] p-10">
+            {programSteps.map((step, i) => (
+              <RevealSection key={step.num} delay={i * 0.08}>
+              <div className="bg-[#0f0f0f] p-10">
                 <div className="font-display text-[3.5rem] leading-none mb-6" style={{ color: "rgba(157,78,221,0.3)" }}>{step.num}</div>
                 <h3 className="font-display text-[1.2rem] tracking-[0.08em] mb-4 text-[#f0eeea]">{step.title}</h3>
                 <p className="text-[0.82rem] leading-[1.8] text-[rgba(240,238,234,0.45)]">{step.desc}</p>
               </div>
+              </RevealSection>
             ))}
           </div>
         </div>
@@ -247,19 +258,24 @@ export default function PopVocals() {
       {/* ── FAQ ── */}
       <section className="py-28 px-6 lg:px-12 bg-[#080808] border-b border-white/[0.08]">
         <div className="max-w-[800px] mx-auto">
-          <h2 className="font-['Playfair_Display'] italic text-[clamp(2.5rem,4vw,4rem)] leading-[1.2] mb-16">{faqTitle}</h2>
+          <RevealSection>
+            <h2 className="font-['Playfair_Display'] italic text-[clamp(2.5rem,4vw,4rem)] leading-[1.2] mb-16">{faqTitle}</h2>
+          </RevealSection>
           <div className="flex flex-col gap-[1px] bg-white/[0.08]">
-            {faqs.map((faq) => (
-              <div key={faq.q} className="bg-[#080808] px-10 py-8">
+            {faqs.map((faq, i) => (
+              <RevealSection key={faq.q} delay={i * 0.08}>
+              <div className="bg-[#080808] px-10 py-8">
                 <h3 className="font-['Playfair_Display'] italic text-[1.1rem] leading-[1.5] text-[#f0eeea] mb-3">{faq.q}</h3>
                 <p className="text-[0.88rem] leading-[1.8] text-[rgba(240,238,234,0.5)]">{faq.a}</p>
               </div>
+              </RevealSection>
             ))}
           </div>
         </div>
       </section>
 
       {/* ── CTA BANNER ── */}
+      <RevealSection>
       <section className="py-20 px-6 lg:px-12 relative overflow-hidden" style={{ backgroundColor: "#9d4edd" }}>
         <div className="max-w-[1100px] mx-auto flex flex-col md:flex-row items-center justify-between gap-8">
           <div>
@@ -294,10 +310,14 @@ export default function PopVocals() {
           </div>
         </div>
       </section>
+      </RevealSection>
 
-      <TestimonialsSection accentColor="#9d4edd" />
+      <RevealSection>
+        <TestimonialsSection accentColor="#9d4edd" />
+      </RevealSection>
 
       {/* ── BOOKING ── */}
+      <RevealSection>
       <section id="book-pop" className="bg-[#141414] border-t border-white/[0.08]">
         {/* Row 1 — Full width heading */}
         <div className="pt-28 pb-12 px-6 lg:px-12">
@@ -329,6 +349,7 @@ export default function PopVocals() {
         </div>
         <CourseStrip exclude="pop" />
       </section>
+      </RevealSection>
     </>
   );
 }
