@@ -1,0 +1,101 @@
+Build an interactive voice range checker widget. It appears in the hero section of every page (home and all course landing pages). The existing "Learn More" button in each hero should be repurposed to open/trigger this widget.
+
+---
+
+## OVERVIEW
+
+The widget walks the user through singing their lowest and highest notes into the microphone, detects the pitches using the Web Audio API, identifies their approximate voice type, then collects their name and phone number to send a full analysis via Telegram bot.
+
+---
+
+## STEP-BY-STEP FLOW
+
+### Step 1 — Microphone permission
+- On widget open, request microphone access via getUserMedia.
+- If denied, show a clear inline error explaining that the mic is required and how to enable it in browser settings. Do not proceed until access is granted.
+
+### Step 2 — Record lowest note
+- Display instruction: "Hold the button and sing your LOWEST comfortable note."
+- The user must hold a button to record. Recording only happens while the button is held.
+- While held: show a countdown progress circle around the button that decreases over 5 seconds maximum.
+- Recording stops when the user releases the button OR when 5 seconds elapse, whichever comes first.
+- Use Web Audio API (AnalyserNode) to detect pitch in real time during recording. Log the dominant frequency throughout the held duration and take the median or mode as the detected note to reduce noise spikes.
+- After release: display the detected note (e.g. "E2 detected").
+- Show two options: "Re-record" (repeats this step) and "Confirm & continue".
+- Do not proceed until the user confirms.
+
+### Step 3 — Record highest note
+- Same UI and behavior as Step 2, but instruction reads: "Now hold the button and sing your HIGHEST comfortable note."
+- After confirmation, display the detected note.
+- Same re-record / confirm options.
+
+### Step 4 — Results
+- Calculate and display:
+  - Lowest note detected (e.g. E2)
+  - Highest note detected (e.g. A4)
+  - Vocal range in octaves (e.g. 2.3 octaves), calculated from the interval between lowest and highest
+  - Approximate voice type based on the range:
+    - Bass: lowest note C2–E2
+    - Baritone: lowest note F2–A2
+    - Tenor: lowest note B2–D3
+    - Countertenor: unusually high male range
+    - Contralto: lowest note E3–G3
+    - Mezzo-soprano: lowest note A3–C4
+    - Soprano: lowest note D4 and above
+  - A short one-line description of what that voice type means
+- Display a disclaimer: "This is an approximate result based on a short sample. A teacher can give you a full assessment."
+
+### Step 5 — Lead capture form
+- Below the results, show a short form:
+  - Name (text input)
+  - Phone number or Telegram username (text input)
+- CTA button: "GET FULL ANALYSIS ON TELEGRAM"
+- Below the button: "We'll send your full vocal range report and a special offer."
+
+### Step 6 — Telegram submission
+- On submit, send a message to the configured Telegram bot containing:
+  - User's name
+  - User's phone / Telegram
+  - Detected lowest note and its frequency in Hz
+  - Detected highest note and its frequency in Hz
+  - Vocal range in octaves
+  - Approximate voice type
+  - Page the widget was submitted from (home / which course page)
+  - Timestamp
+- Use the Telegram Bot API sendMessage endpoint with the bot token and chat ID stored in environment variables (TELEGRAM_BOT_TOKEN, TELEGRAM_CHAT_ID).
+- On success: show a confirmation message — "We'll be in touch soon!"
+- On failure: show an inline error and allow resubmission without losing the form data.
+
+---
+
+## PITCH DETECTION REQUIREMENTS
+- Use Web Audio API: AudioContext, AnalyserNode, and an autocorrelation or YIN algorithm for pitch detection. Do not use a frequency bin peak approach alone — it is too inaccurate for voice.
+- Sample the pitch continuously while the button is held. Discard readings below 60 Hz and above 1200 Hz as out-of-range noise.
+- Map detected frequency to the nearest musical note using standard tuning (A4 = 440 Hz).
+- Take the median of all valid readings during the held duration as the final detected pitch.
+
+---
+
+## UI & DESIGN REQUIREMENTS
+- Match the site's existing dark brutalist aesthetic: black background, red accent color, white uppercase typography. No rounded pill styles, no soft colors.
+- The widget should be compact enough to sit within the hero area without taking over the full page. It can expand as the user progresses through steps.
+- The countdown progress circle around the record button should be rendered in the site's red accent color.
+- Clearly indicate recording state visually (e.g. pulsing ring or active color on the button while held).
+- All step transitions should be smooth but not slow — no delays over 200ms.
+- The widget must work on both desktop and mobile.
+
+---
+
+## PLACEMENT
+- Home page: replace the "Learn More" hero button with a "CHECK YOUR VOICE TYPE" button that opens/triggers the widget inline or as an overlay.
+- Every course landing page hero: same replacement of the "Learn More" button.
+- The widget state resets each time it is opened.
+
+---
+
+## ERROR STATES TO HANDLE
+- Microphone denied: show instructions to enable, block progression.
+- No pitch detected during recording (silence or noise only): prompt the user to try again, do not show a false note.
+- Highest note detected lower than or equal to lowest note: flag as invalid, ask the user to re-record the highest note.
+- Telegram send failure: show retry option, do not lose form data.
+- Browser does not support Web Audio API: show a fallback message explaining the feature requires a modern browser.
