@@ -1354,30 +1354,31 @@ export function VoiceRangeWidget({
           aria-hidden="true"
           style={{
             position: "absolute",
-            bottom: 5,
+            bottom: 4,
             left: "50%",
             transform: "translateX(-50%)",
             display: "flex",
-            gap: 2.5,
-            alignItems: "flex-end",
-            height: 6,
+            gap: 2,
+            alignItems: "center",
+            height: 8,
             pointerEvents: "none",
           }}
         >
           {([
-            [0.82, 0.00], [1.15, 0.09], [0.70, 0.18], [1.30, 0.27],
-            [0.95, 0.36], [1.20, 0.13], [0.76, 0.40], [1.05, 0.22],
-          ] as [number, number][]).map(([dur, delay], i) => (
+            [2, 0.82, 0.00], [3, 1.10, 0.08], [5, 0.70, 0.16], [7, 1.25, 0.04],
+            [8, 0.90, 0.20], [8, 1.15, 0.12], [7, 0.75, 0.28], [5, 1.30, 0.36],
+            [3, 0.85, 0.44], [2, 1.05, 0.24], [4, 0.78, 0.32], [6, 1.20, 0.40],
+          ] as [number, number, number][]).map(([h, dur, delay], i) => (
             <span
               key={i}
               style={{
                 display: "inline-block",
                 width: 2,
-                height: 6,
+                height: h,
                 background: accentColor,
                 opacity: 0.45,
-                borderRadius: 1,
-                transformOrigin: "bottom center",
+                borderRadius: 999,
+                transformOrigin: "center center",
                 animation: `vrWaveBar ${dur}s ${delay}s ease-in-out infinite`,
               }}
             />
