@@ -681,6 +681,15 @@ export function VoiceRangeWidget({
           >
             {tx.continueBtn}
           </button>
+          <p style={{
+            color: "rgba(240,238,234,0.35)",
+            fontSize: "0.72rem",
+            lineHeight: 1.6,
+            margin: "20px 0 0",
+            fontStyle: "italic",
+          }}>
+            {tx.disclaimerFooter}
+          </p>
         </div>
       );
     }
