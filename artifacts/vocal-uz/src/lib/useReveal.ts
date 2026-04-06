@@ -24,5 +24,5 @@ export function useReveal(threshold = 0.12) {
     return () => observer.disconnect();
   }, []); // intentionally empty — runs once on mount
 
-  return { ref, visible };
+  return { ref, visible, reduced };
 }

@@ -7,14 +7,10 @@ interface RevealSectionProps {
   className?: string;
 }
 
-const prefersReducedMotion =
-  typeof window !== "undefined" &&
-  window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-
 export function RevealSection({ children, delay = 0, className = "" }: RevealSectionProps) {
-  const { ref, visible } = useReveal();
+  const { ref, visible, reduced } = useReveal();
 
-  if (prefersReducedMotion) {
+  if (reduced) {
     return <div className={className}>{children}</div>;
   }
 
