@@ -57,6 +57,8 @@ export function TestimonialsSection({ accentColor, variant }: Props) {
           .testimonials-featured {
             background-color: ${cardBg} !important;
             border: none !important;
+            border-bottom: 1px solid ${dividerColor} !important;
+            margin-bottom: 0 !important;
           }
           .testimonials-featured .featured-duration {
             color: ${textMuted} !important;
