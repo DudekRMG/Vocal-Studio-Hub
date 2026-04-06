@@ -36,7 +36,7 @@ export function AudioPlayer({ src, label, variant, accentColor, isKids = false }
     : `${accentColor}88`;
 
   const btnBg = isBefore
-    ? (isKids ? "#3b82f6" : "#424242")
+    ? (isKids ? "#8896b8" : "#424242")
     : accentColor;
 
   const btnIconColor = isBefore
