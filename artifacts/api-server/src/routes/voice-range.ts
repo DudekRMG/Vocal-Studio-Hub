@@ -24,6 +24,7 @@ router.post("/voice-range", async (req, res) => {
     confidenceLevel,
     runnerUp,
     validationWarnings,
+    sex,
     page,
     timestamp,
     lang,
@@ -59,6 +60,12 @@ router.post("/voice-range", async (req, res) => {
   const runner  = typeof runnerUp === "string" ? runnerUp : "—";
   const warnings: string[] = Array.isArray(validationWarnings) ? validationWarnings : [];
 
+  const sexLabel = (() => {
+    if (sex === "male")   return isRu ? "Мужской" : "Male";
+    if (sex === "female") return isRu ? "Женский" : "Female";
+    return "—";
+  })();
+
   const confidenceLabel = (() => {
     if (!isRu) {
       if (conf === "high")   return "high";
@@ -77,6 +84,7 @@ router.post("/voice-range", async (req, res) => {
       `🎵 Тип голоса — vocal.uz\n\n` +
       `👤 Имя: ${name}\n` +
       `📞 Контакт: ${contact}\n\n` +
+      `🚻 Пол: ${sexLabel}\n\n` +
       `🔻 Нижняя нота: ${lowestNote} (${lowestHz} Гц)\n` +
       `🔺 Верхняя нота: ${highestNote} (${highestHz} Гц)\n` +
       `🎯 Тесситура: ${tess}\n` +
@@ -98,6 +106,7 @@ router.post("/voice-range", async (req, res) => {
       `🎵 Voice Range Result — vocal.uz\n\n` +
       `👤 Name: ${name}\n` +
       `📞 Contact: ${contact}\n\n` +
+      `🚻 Sex: ${sexLabel}\n\n` +
       `🔻 Lowest Note: ${lowestNote} (${lowestHz} Hz)\n` +
       `🔺 Highest Note: ${highestNote} (${highestHz} Hz)\n` +
       `🎯 Tessitura: ${tess}\n` +

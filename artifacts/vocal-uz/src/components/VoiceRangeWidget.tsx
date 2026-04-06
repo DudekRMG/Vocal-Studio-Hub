@@ -18,7 +18,7 @@ const TESSITURA_DURATION = 8000;
 const SAMPLE_INTERVAL = 50;
 const CIRC = 276; // 2π × 44 ≈ 276.46
 
-type Step = "closed" | "mic-check" | "mic-error" | "low" | "high" | "tessitura" | "results" | "form" | "success";
+type Step = "closed" | "mic-check" | "mic-error" | "low" | "high" | "tessitura" | "sex" | "results" | "form" | "success";
 type RecordState = "idle" | "recording" | "done";
 type MicError = "" | "denied" | "unsupported" | "general";
 
@@ -68,6 +68,8 @@ export function VoiceRangeWidget({
 
   const [recordProgress, setRecordProgress] = useState(0);
   const [currentPitch,   setCurrentPitch]   = useState<string | null>(null);
+
+  const [biologicalSex, setBiologicalSex] = useState<"male" | "female" | null>(null);
 
   const [name,         setName]        = useState("");
   const [contact,      setContact]     = useState("");
@@ -327,6 +329,7 @@ export function VoiceRangeWidget({
     highPitchSamplesRef.current     = [];
     tessituralPitchSamplesRef.current = [];
     setRecordProgress(0); setCurrentPitch(null);
+    setBiologicalSex(null);
     setName(""); setContact(""); setSubmitStatus("idle");
   }
 
@@ -399,6 +402,7 @@ export function VoiceRangeWidget({
     tessituralPitchSamplesRef.current = [];
     setRecordProgress(0);
     setCurrentPitch(null);
+    setBiologicalSex(null);
     setStep("low");
   }
 
@@ -425,7 +429,7 @@ export function VoiceRangeWidget({
       ? computeTessitura(tessituraSourceSamples)
       : (stableLowMidi + stableHighMidi) / 2;
     const span          = stableHighMidi - stableLowMidi;
-    const classification = classifyVoice(stableLowMidi, tessituraMidi, span);
+    const classification = classifyVoice(stableLowMidi, tessituraMidi, span, biologicalSex ?? undefined);
 
     const voiceTypeName = tx.voiceTypes[classification.primary].name;
     const runnerUpName  = tx.voiceTypes[classification.runnerUp].name;
@@ -454,6 +458,7 @@ export function VoiceRangeWidget({
           confidenceLevel:    classification.confidence,
           runnerUp:           runnerUpName,
           validationWarnings,
+          sex:                biologicalSex ?? undefined,
           page:               pageName,
           timestamp:          new Date().toLocaleString(lang === "ru" ? "ru-RU" : "en-US"),
           lang,
@@ -490,6 +495,7 @@ export function VoiceRangeWidget({
           ? computeTessitura(renderTessituraSource)
           : (stableLowMidi + stableHighMidi) / 2,
         stableHighMidi - stableLowMidi,
+        biologicalSex ?? undefined,
       )
     : null;
 
@@ -642,7 +648,7 @@ export function VoiceRangeWidget({
       return (
         <div style={{ animation: "vrFadeIn 0.2s both" }}>
           <div style={{ display: "flex", gap: 6, marginBottom: 20, justifyContent: "center" }}>
-            {[0, 1, 2].map((i) => (
+            {[0, 1, 2, 3].map((i) => (
               <div key={i} style={{
                 width: 24, height: 3,
                 background: (isLow ? i === 0 : i === 1) ? accentColor : "rgba(255,255,255,0.18)",
@@ -777,7 +783,7 @@ export function VoiceRangeWidget({
       return (
         <div style={{ textAlign: "center", animation: "vrFadeIn 0.25s both" }}>
           <div style={{ display: "flex", gap: 6, marginBottom: 20, justifyContent: "center" }}>
-            {[0, 1, 2].map((i) => (
+            {[0, 1, 2, 3].map((i) => (
               <div key={i} style={{
                 width: 24, height: 3,
                 background: i === 2 ? accentColor : "rgba(255,255,255,0.18)",
@@ -859,7 +865,7 @@ export function VoiceRangeWidget({
                   {tx.reRecord}
                 </button>
                 <button
-                  onClick={() => setStep("results")}
+                  onClick={() => setStep("sex")}
                   style={{
                     background: accentColor,
                     color: "#fff",
@@ -877,6 +883,57 @@ export function VoiceRangeWidget({
               </div>
             </>
           )}
+        </div>
+      );
+    }
+
+    if (step === "sex") {
+      return (
+        <div style={{ textAlign: "center", animation: "vrFadeIn 0.25s both" }}>
+          <div style={{ display: "flex", gap: 6, marginBottom: 20, justifyContent: "center" }}>
+            {[0, 1, 2, 3].map((i) => (
+              <div key={i} style={{
+                width: 24, height: 3,
+                background: i === 3 ? accentColor : "rgba(255,255,255,0.18)",
+                borderRadius: 2,
+                transition: "background 0.3s",
+              }} />
+            ))}
+          </div>
+          <div style={{ display: "flex", gap: 14, justifyContent: "center", marginTop: 8 }}>
+            {(["male", "female"] as const).map((option) => (
+              <button
+                key={option}
+                onClick={() => { setBiologicalSex(option); setStep("results"); }}
+                style={{
+                  flex: 1,
+                  maxWidth: 160,
+                  padding: "1.1rem 0.5rem",
+                  background: "transparent",
+                  border: `1px solid rgba(255,255,255,0.22)`,
+                  color: "rgba(240,238,234,0.75)",
+                  fontSize: "0.9rem",
+                  fontFamily: "var(--font-display-family)",
+                  letterSpacing: "0.1em",
+                  textTransform: "uppercase",
+                  cursor: "pointer",
+                  transition: "border-color 0.2s, color 0.2s, background 0.2s",
+                }}
+                onMouseEnter={(e) => {
+                  const btn = e.currentTarget as HTMLButtonElement;
+                  btn.style.borderColor = accentColor;
+                  btn.style.color = accentColor;
+                }}
+                onMouseLeave={(e) => {
+                  const btn = e.currentTarget as HTMLButtonElement;
+                  btn.style.borderColor = "rgba(255,255,255,0.22)";
+                  btn.style.color = "rgba(240,238,234,0.75)";
+                }}
+              >
+                {option === "male" ? tx.sexOptionMale : tx.sexOptionFemale}
+              </button>
+            ))}
+          </div>
         </div>
       );
     }
@@ -1099,6 +1156,7 @@ export function VoiceRangeWidget({
     if (step === "low")        return tx.stepLowTitle;
     if (step === "high")       return tx.stepHighTitle;
     if (step === "tessitura")  return tx.stepTessituraTitle;
+    if (step === "sex")        return tx.stepSexTitle;
     if (step === "results")    return "";
     if (step === "form")       return tx.formTitle;
     if (step === "success")    return "✓";

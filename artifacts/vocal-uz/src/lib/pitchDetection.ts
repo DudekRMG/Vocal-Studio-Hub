@@ -62,6 +62,9 @@ const VOICE_PROFILES: VoiceProfile[] = [
   { key: "soprano",   lowRange: { min: 50, max: 58 }, tessituraRange: { min: 57, max: 67 }, spanRange: { min: 20, max: 32 } },
 ];
 
+const MALE_KEYS:   VoiceTypeKey[] = ["bass", "baritone", "tenor"];
+const FEMALE_KEYS: VoiceTypeKey[] = ["contralto", "mezzo", "soprano"];
+
 /**
  * Multi-signal voice type classifier.
  *
@@ -73,14 +76,23 @@ const VOICE_PROFILES: VoiceProfile[] = [
  * Partial credit is awarded for near-misses within 2 semitones (low note)
  * or 3 semitones (tessitura).
  *
+ * When `sex` is provided, only the three profiles for that sex are scored,
+ * eliminating all cross-sex confusion pairs.
+ *
  * Returns the best-fit voice type key, a confidence level, and the runner-up.
  */
 export function classifyVoice(
   stableLowMidi: number,
   tessituraMidi: number,
   spanSemitones: number,
+  sex?: "male" | "female",
 ): VoiceClassification {
-  const scored = VOICE_PROFILES.map((profile) => {
+  const allowedKeys = sex === "male" ? MALE_KEYS : sex === "female" ? FEMALE_KEYS : null;
+  const profiles = allowedKeys
+    ? VOICE_PROFILES.filter((p) => allowedKeys.includes(p.key))
+    : VOICE_PROFILES;
+
+  const scored = profiles.map((profile) => {
     let score = 0;
     let matchedSignals = 0;
 
