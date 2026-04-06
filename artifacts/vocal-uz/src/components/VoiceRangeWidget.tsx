@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from "react";
+import { createPortal } from "react-dom";
 import { useLang } from "@/lib/langContext";
 import { t } from "@/lib/i18n";
 import {
@@ -795,8 +796,7 @@ export function VoiceRangeWidget({
         {tx.trigger}
       </button>
 
-      {/* ── Modal overlay ── */}
-      {step !== "closed" && (
+      {step !== "closed" && createPortal(
         <div
           style={{
             position: "fixed", inset: 0, zIndex: 10000,
@@ -866,7 +866,8 @@ export function VoiceRangeWidget({
             {/* Content */}
             {renderContent()}
           </div>
-        </div>
+        </div>,
+        document.body
       )}
     </>
   );
