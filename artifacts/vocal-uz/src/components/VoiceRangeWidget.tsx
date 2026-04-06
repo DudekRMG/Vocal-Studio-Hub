@@ -359,23 +359,28 @@ export function VoiceRangeWidget({
 
     const stableLowMidi  = lowHz  ? frequencyToMidi(lowHz)  : 60;
     const stableHighMidi = highHz ? frequencyToMidi(highHz) : 72;
-    const allSamples     = [...lowPitchSamplesRef.current, ...highPitchSamplesRef.current];
-    const tessituraMidi  = computeTessitura(allSamples);
-    const span           = stableHighMidi - stableLowMidi;
-    const classification = (lowHz && highHz)
-      ? classifyVoice(stableLowMidi, tessituraMidi, span)
-      : { primary: "soprano" as const, confidence: "low" as const, runnerUp: "mezzo" as const };
+
+    const submitValidation   = validateSession(stableLowMidi, stableHighMidi);
+    const validationWarnings = submitValidation.valid ? [] : submitValidation.errorKeys;
+
+    if (!submitValidation.valid) {
+      setStep("results");
+      setSubmitStatus("idle");
+      return;
+    }
+
+    const allSamples    = [...lowPitchSamplesRef.current, ...highPitchSamplesRef.current];
+    const tessituraMidi = computeTessitura(allSamples);
+    const span          = stableHighMidi - stableLowMidi;
+    const classification = classifyVoice(stableLowMidi, tessituraMidi, span);
 
     const voiceTypeName = tx.voiceTypes[classification.primary].name;
     const runnerUpName  = tx.voiceTypes[classification.runnerUp].name;
     const rangeOctaves  = (lowHz && highHz)
       ? parseFloat((Math.log2(highHz / lowHz)).toFixed(2))
       : 0;
-    const tessHz      = 440 * Math.pow(2, (tessituraMidi - 69) / 12);
-    const tessNote    = frequencyToNote(tessHz);
-
-    const submitValidation  = validateSession(stableLowMidi, stableHighMidi);
-    const validationWarnings = submitValidation.valid ? [] : submitValidation.errorKeys;
+    const tessHz  = 440 * Math.pow(2, (tessituraMidi - 69) / 12);
+    const tessNote = frequencyToNote(tessHz);
 
     try {
       const base = import.meta.env.BASE_URL.replace(/\/$/, "");
