@@ -140,10 +140,6 @@ export function PageHero({
             accentColor={accentColor}
             pageName={courseTag}
             lightMode={lightMode}
-            triggerBorder={bandGhostBorder}
-            triggerColor={bandGhostText}
-            triggerHoverBorder={lightMode ? "rgba(15,16,22,0.45)" : "rgba(255,255,255,0.45)"}
-            triggerHoverColor={lightMode ? "#0f1016" : "#f0eeea"}
           />
         </div>
       </div>
@@ -236,10 +232,6 @@ export function PageHero({
                 accentColor={accentColor}
                 pageName={courseTag}
                 lightMode={lightMode}
-                triggerBorder={bandGhostBorder}
-                triggerColor={bandGhostText}
-                triggerHoverBorder={lightMode ? "rgba(15,16,22,0.45)" : "rgba(255,255,255,0.45)"}
-                triggerHoverColor={lightMode ? "#0f1016" : "#f0eeea"}
               />
             </div>
           </div>

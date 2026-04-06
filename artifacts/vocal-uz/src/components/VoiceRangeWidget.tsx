@@ -37,13 +37,11 @@ export function VoiceRangeWidget({
   const { lang } = useLang();
   const tx = t[lang].voiceWidget;
 
-  // ── trigger button styles — default is accent-colored outlined style ───────
   const tBorder      = triggerBorder      ?? accentColor;
   const tColor       = triggerColor       ?? accentColor;
   const tHoverBorder = triggerHoverBorder ?? accentColor;
   const tHoverColor  = triggerHoverColor  ?? (lightMode ? "#0f1016" : "#f0eeea");
 
-  // ── state ─────────────────────────────────────────────────────────────────
   const [step, setStep]               = useState<Step>("closed");
   const [micError, setMicError]       = useState<MicError>("");
 
@@ -64,7 +62,6 @@ export function VoiceRangeWidget({
   const [contact,      setContact]     = useState("");
   const [submitStatus, setSubmitStatus] = useState<"idle" | "sending" | "error">("idle");
 
-  // ── refs ──────────────────────────────────────────────────────────────────
   const audioCtxRef     = useRef<AudioContext | null>(null);
   const streamRef       = useRef<MediaStream | null>(null);
   const analyserRef     = useRef<AnalyserNode | null>(null);
@@ -79,7 +76,6 @@ export function VoiceRangeWidget({
   const lowHzRef        = useRef<number | null>(null);
   const sessionRef      = useRef(0);
 
-  // ── body scroll lock ──────────────────────────────────────────────────────
   useEffect(() => {
     if (step !== "closed") {
       document.body.style.overflow = "hidden";
@@ -89,7 +85,6 @@ export function VoiceRangeWidget({
     return () => { document.body.style.overflow = ""; };
   }, [step]);
 
-  // ── cleanup on unmount ────────────────────────────────────────────────────
   useEffect(() => {
     return () => {
       cancelAnimationFrame(rafRef.current);
@@ -98,7 +93,6 @@ export function VoiceRangeWidget({
     };
   }, []);
 
-  // ── audio helpers ─────────────────────────────────────────────────────────
   function releaseAudio() {
     cancelAnimationFrame(rafRef.current);
     isRecordingRef.current = false;
@@ -150,7 +144,6 @@ export function VoiceRangeWidget({
     }
   }
 
-  // ── finishRecording (stored in ref so RAF loop always has latest version) ─
   const finishRecordingRef = useRef<() => void>(() => {});
   finishRecordingRef.current = function finishRecording() {
     cancelAnimationFrame(rafRef.current);
@@ -197,7 +190,6 @@ export function VoiceRangeWidget({
     }
   };
 
-  // ── startRecording ────────────────────────────────────────────────────────
   function startRecording(which: "low" | "high") {
     if (isRecordingRef.current) return;
     recordingForRef.current = which;
@@ -245,7 +237,6 @@ export function VoiceRangeWidget({
     rafRef.current = requestAnimationFrame(loop);
   }
 
-  // ── open / close ──────────────────────────────────────────────────────────
   function open() {
     sessionRef.current += 1;
     const sessionId = sessionRef.current;
@@ -266,7 +257,6 @@ export function VoiceRangeWidget({
     setName(""); setContact(""); setSubmitStatus("idle");
   }
 
-  // ── hold-button events ────────────────────────────────────────────────────
   function handleHoldStart(which: "low" | "high") {
     startRecording(which);
   }
@@ -287,7 +277,6 @@ export function VoiceRangeWidget({
     if (isRecordingRef.current) finishRecordingRef.current();
   }
 
-  // ── re-record ─────────────────────────────────────────────────────────────
   function resetLow() {
     cancelAnimationFrame(rafRef.current);
     isRecordingRef.current = false;
@@ -311,7 +300,6 @@ export function VoiceRangeWidget({
     setCurrentPitch(null);
   }
 
-  // ── form submit ───────────────────────────────────────────────────────────
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
     setSubmitStatus("sending");
@@ -350,14 +338,12 @@ export function VoiceRangeWidget({
     }
   }
 
-  // ── computed for results step ─────────────────────────────────────────────
   const voiceTypeKey  = lowHz ? getVoiceTypeKey(lowHz) : "soprano";
   const voiceTypeData = tx.voiceTypes[voiceTypeKey];
   const rangeOctavesDisplay = (lowHz && highHz)
     ? Math.log2(highHz / lowHz).toFixed(1)
     : "—";
 
-  // ── shared styles ─────────────────────────────────────────────────────────
   const inputStyle: React.CSSProperties = {
     width: "100%",
     background: "rgba(255,255,255,0.06)",
@@ -370,13 +356,11 @@ export function VoiceRangeWidget({
     boxSizing: "border-box",
   };
 
-  // ── HoldButton sub-component (inlined) ───────────────────────────────────
   function HoldButton({ which }: { which: "low" | "high" }) {
     const rs = which === "low" ? lowRecordState : highRecordState;
     const isRecording = rs === "recording";
     return (
       <div style={{ position: "relative", width: 100, height: 100, margin: "0 auto" }}>
-        {/* Pulsing rings (recording state only) */}
         {isRecording && (
           <>
             <div style={{
@@ -393,11 +377,8 @@ export function VoiceRangeWidget({
             }} />
           </>
         )}
-        {/* SVG countdown ring */}
         <svg width={100} height={100} style={{ position: "absolute", inset: 0, pointerEvents: "none" }}>
-          {/* track ring */}
           <circle cx={50} cy={50} r={44} fill="none" stroke="rgba(255,255,255,0.08)" strokeWidth={3} />
-          {/* countdown arc */}
           {isRecording && (
             <circle
               cx={50} cy={50} r={44}
@@ -412,7 +393,6 @@ export function VoiceRangeWidget({
             />
           )}
         </svg>
-        {/* Hold button */}
         <button
           style={{
             position: "absolute", top: 6, left: 6, width: 88, height: 88,
@@ -442,9 +422,7 @@ export function VoiceRangeWidget({
     );
   }
 
-  // ── modal content per step ────────────────────────────────────────────────
   function renderContent() {
-    // ── mic-check ──
     if (step === "mic-check") {
       return (
         <div style={{ textAlign: "center", padding: "16px 0 8px" }}>
@@ -456,7 +434,6 @@ export function VoiceRangeWidget({
       );
     }
 
-    // ── mic-error ──
     if (step === "mic-error") {
       const msg =
         micError === "denied"      ? tx.micDenied      :
@@ -485,7 +462,6 @@ export function VoiceRangeWidget({
       );
     }
 
-    // ── low / high recording steps ──
     if (step === "low" || step === "high") {
       const isLow = step === "low";
       const rs    = isLow ? lowRecordState : highRecordState;
@@ -494,7 +470,6 @@ export function VoiceRangeWidget({
 
       return (
         <div style={{ animation: "vrFadeIn 0.2s both" }}>
-          {/* Step indicator */}
           <div style={{ display: "flex", gap: 6, marginBottom: 20, justifyContent: "center" }}>
             {[0, 1].map((i) => (
               <div key={i} style={{
@@ -516,8 +491,7 @@ export function VoiceRangeWidget({
             {isLow ? tx.holdInstructionLow : tx.holdInstructionHigh}
           </p>
 
-          {/* Hold button */}
-          {rs !== "done" && (
+            {rs !== "done" && (
             <>
               <HoldButton which={isLow ? "low" : "high"} />
               <p style={{
@@ -628,7 +602,6 @@ export function VoiceRangeWidget({
       );
     }
 
-    // ── results ──
     if (step === "results") {
       return (
         <div style={{ textAlign: "center", animation: "vrFadeIn 0.25s both" }}>
@@ -700,7 +673,6 @@ export function VoiceRangeWidget({
       );
     }
 
-    // ── form ──
     if (step === "form") {
       return (
         <div style={{ animation: "vrFadeIn 0.25s both" }}>
@@ -760,7 +732,6 @@ export function VoiceRangeWidget({
       );
     }
 
-    // ── success ──
     if (step === "success") {
       return (
         <div style={{ textAlign: "center", padding: "8px 0", animation: "vrFadeIn 0.25s both" }}>
@@ -784,7 +755,6 @@ export function VoiceRangeWidget({
     return null;
   }
 
-  // ── step title ────────────────────────────────────────────────────────────
   function getTitle(): string {
     if (step === "mic-check")  return tx.stepMicTitle;
     if (step === "mic-error")  return tx.stepMicTitle;
@@ -796,7 +766,6 @@ export function VoiceRangeWidget({
     return "";
   }
 
-  // ── render ────────────────────────────────────────────────────────────────
   return (
     <>
       {/* ── Trigger button ── */}
