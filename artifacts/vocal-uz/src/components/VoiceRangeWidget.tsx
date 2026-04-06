@@ -440,18 +440,28 @@ export function VoiceRangeWidget({
       return (
         <div style={{ textAlign: "center", padding: "16px 0 8px" }}>
           <div style={{ marginBottom: 16, display: "flex", justifyContent: "center" }}>
-            <svg width="48" height="56" viewBox="0 0 48 56" fill="none" xmlns="http://www.w3.org/2000/svg">
-              {/* Capsule head — large circle with grill lines */}
-              <circle cx="24" cy="16" r="13" stroke="rgba(240,238,234,0.7)" strokeWidth="1.8" fill="none"/>
-              <line x1="24" y1="3" x2="24" y2="29" stroke="rgba(240,238,234,0.25)" strokeWidth="1.2"/>
-              <line x1="11" y1="10" x2="37" y2="22" stroke="rgba(240,238,234,0.25)" strokeWidth="1.2"/>
-              <line x1="11" y1="22" x2="37" y2="10" stroke="rgba(240,238,234,0.25)" strokeWidth="1.2"/>
-              {/* Handle body */}
-              <rect x="20" y="29" width="8" height="16" rx="2" stroke="rgba(240,238,234,0.7)" strokeWidth="1.8" fill="none"/>
-              {/* Stand */}
-              <line x1="24" y1="45" x2="24" y2="52" stroke="rgba(240,238,234,0.7)" strokeWidth="1.8" strokeLinecap="round"/>
+            <svg width="48" height="58" viewBox="0 0 48 58" fill="none" xmlns="http://www.w3.org/2000/svg">
+              {/* Ribbon capsule — tall narrow rectangle */}
+              <rect x="17" y="3" width="14" height="28" rx="2" stroke="rgba(240,238,234,0.7)" strokeWidth="1.8" fill="none"/>
+              {/* Horizontal slats inside capsule */}
+              <line x1="19" y1="9"  x2="29" y2="9"  stroke="rgba(240,238,234,0.3)" strokeWidth="1.2" strokeLinecap="round"/>
+              <line x1="19" y1="13" x2="29" y2="13" stroke="rgba(240,238,234,0.3)" strokeWidth="1.2" strokeLinecap="round"/>
+              <line x1="19" y1="17" x2="29" y2="17" stroke="rgba(240,238,234,0.3)" strokeWidth="1.2" strokeLinecap="round"/>
+              <line x1="19" y1="21" x2="29" y2="21" stroke="rgba(240,238,234,0.3)" strokeWidth="1.2" strokeLinecap="round"/>
+              <line x1="19" y1="25" x2="29" y2="25" stroke="rgba(240,238,234,0.3)" strokeWidth="1.2" strokeLinecap="round"/>
+              {/* Side brackets */}
+              <line x1="10" y1="10" x2="17" y2="10" stroke="rgba(240,238,234,0.6)" strokeWidth="1.6" strokeLinecap="round"/>
+              <line x1="10" y1="10" x2="10" y2="24" stroke="rgba(240,238,234,0.6)" strokeWidth="1.6" strokeLinecap="round"/>
+              <line x1="10" y1="24" x2="17" y2="24" stroke="rgba(240,238,234,0.6)" strokeWidth="1.6" strokeLinecap="round"/>
+              <line x1="31" y1="10" x2="38" y2="10" stroke="rgba(240,238,234,0.6)" strokeWidth="1.6" strokeLinecap="round"/>
+              <line x1="38" y1="10" x2="38" y2="24" stroke="rgba(240,238,234,0.6)" strokeWidth="1.6" strokeLinecap="round"/>
+              <line x1="31" y1="24" x2="38" y2="24" stroke="rgba(240,238,234,0.6)" strokeWidth="1.6" strokeLinecap="round"/>
+              {/* Short handle */}
+              <rect x="21" y="31" width="6" height="12" rx="1.5" stroke="rgba(240,238,234,0.7)" strokeWidth="1.6" fill="none"/>
+              {/* Stand rod */}
+              <line x1="24" y1="43" x2="24" y2="51" stroke="rgba(240,238,234,0.7)" strokeWidth="1.8" strokeLinecap="round"/>
               {/* Base */}
-              <line x1="16" y1="52" x2="32" y2="52" stroke="rgba(240,238,234,0.7)" strokeWidth="1.8" strokeLinecap="round"/>
+              <line x1="15" y1="51" x2="33" y2="51" stroke="rgba(240,238,234,0.7)" strokeWidth="2" strokeLinecap="round"/>
             </svg>
           </div>
           <p style={{ color: "rgba(240,238,234,0.6)", fontSize: "0.88rem", lineHeight: 1.6, margin: 0 }}>
