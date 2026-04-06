@@ -378,20 +378,35 @@ export function VoiceRangeWidget({
             }} />
           </>
         )}
+        <svg width={100} height={100} style={{ position: "absolute", inset: 0, pointerEvents: "none" }}>
+          <circle cx={50} cy={50} r={44} fill="none" stroke={accentColor} strokeWidth={2} opacity={0.25} />
+          {isRecording && (
+            <circle
+              cx={50} cy={50} r={44}
+              fill="none"
+              stroke={accentColor}
+              strokeWidth={3}
+              strokeDasharray={CIRC}
+              strokeDashoffset={CIRC * recordProgress}
+              strokeLinecap="round"
+              transform="rotate(-90 50 50)"
+              style={{ transition: "stroke-dashoffset 0.05s linear" }}
+            />
+          )}
+        </svg>
         <button
           style={{
             position: "absolute", top: 6, left: 6, width: 88, height: 88,
             borderRadius: "50%",
             border: `2px solid ${accentColor}`,
-            background: isRecording ? accentColor : "transparent",
-            color: isRecording ? "#fff" : accentColor,
+            background: "transparent",
+            color: accentColor,
             fontSize: "1.6rem",
             cursor: "pointer",
             display: "flex", alignItems: "center", justifyContent: "center",
             userSelect: "none",
             WebkitUserSelect: "none",
             touchAction: "none",
-            transition: "background 0.15s, color 0.15s",
             zIndex: 1,
           }}
           onMouseDown={() => !touchActiveRef.current && handleHoldStart(which)}
@@ -403,22 +418,6 @@ export function VoiceRangeWidget({
         >
           🎤
         </button>
-        <svg width={100} height={100} style={{ position: "absolute", inset: 0, pointerEvents: "none", zIndex: 2 }}>
-          <circle cx={50} cy={50} r={44} fill="none" stroke="rgba(255,255,255,0.15)" strokeWidth={3} />
-          {isRecording && (
-            <circle
-              cx={50} cy={50} r={44}
-              fill="none"
-              stroke="rgba(255,255,255,0.9)"
-              strokeWidth={3}
-              strokeDasharray={CIRC}
-              strokeDashoffset={CIRC * recordProgress}
-              strokeLinecap="round"
-              transform="rotate(-90 50 50)"
-              style={{ transition: "stroke-dashoffset 0.05s linear" }}
-            />
-          )}
-        </svg>
       </div>
     );
   }
