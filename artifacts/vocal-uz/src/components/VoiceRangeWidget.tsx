@@ -1327,6 +1327,7 @@ export function VoiceRangeWidget({
           alignItems: "center",
           justifyContent: "center",
           transition: "color 0.2s, border-color 0.2s",
+          position: "relative",
         } : {
           fontSize: "0.72rem",
           letterSpacing: "0.16em",
@@ -1337,6 +1338,7 @@ export function VoiceRangeWidget({
           cursor: "pointer",
           whiteSpace: "nowrap",
           transition: "color 0.2s, border-color 0.2s",
+          position: "relative",
         }}
         onMouseEnter={(e) => {
           (e.currentTarget as HTMLButtonElement).style.color = tHoverColor;
@@ -1348,6 +1350,39 @@ export function VoiceRangeWidget({
         }}
       >
         {triggerLabel ?? tx.trigger}
+        <span
+          aria-hidden="true"
+          style={{
+            position: "absolute",
+            bottom: 5,
+            left: "50%",
+            transform: "translateX(-50%)",
+            display: "flex",
+            gap: 2.5,
+            alignItems: "flex-end",
+            height: 6,
+            pointerEvents: "none",
+          }}
+        >
+          {([
+            [0.82, 0.00], [1.15, 0.09], [0.70, 0.18], [1.30, 0.27],
+            [0.95, 0.36], [1.20, 0.13], [0.76, 0.40], [1.05, 0.22],
+          ] as [number, number][]).map(([dur, delay], i) => (
+            <span
+              key={i}
+              style={{
+                display: "inline-block",
+                width: 2,
+                height: 6,
+                background: accentColor,
+                opacity: 0.45,
+                borderRadius: 1,
+                transformOrigin: "bottom center",
+                animation: `vrWaveBar ${dur}s ${delay}s ease-in-out infinite`,
+              }}
+            />
+          ))}
+        </span>
       </button>
 
       {step !== "closed" && createPortal(

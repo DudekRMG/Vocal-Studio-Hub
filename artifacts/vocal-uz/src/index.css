@@ -189,6 +189,10 @@ body[data-lang="ru"] button[type="submit"] {
   from { opacity: 0; transform: translateY(8px); }
   to   { opacity: 1; transform: translateY(0); }
 }
+@keyframes vrWaveBar {
+  0%, 100% { transform: scaleY(0.18); }
+  50%      { transform: scaleY(1); }
+}
 
 /* Film grain overlay */
 body::after {
