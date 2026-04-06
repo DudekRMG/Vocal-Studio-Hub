@@ -1,5 +1,11 @@
 const NOTE_NAMES = ["C", "C#", "D", "D#", "E", "F", "F#", "G", "G#", "A", "A#", "B"] as const;
 
+const RU_NOTE_NAMES: Record<string, string> = {
+  "C": "До", "C#": "До♯", "D": "Ре", "D#": "Ре♯",
+  "E": "Ми", "F": "Фа", "F#": "Фа♯", "G": "Соль",
+  "G#": "Соль♯", "A": "Ля", "A#": "Ля♯", "B": "Си",
+};
+
 /**
  * Maps a frequency (Hz) to the nearest musical note name using A4 = 440 Hz.
  * e.g. 82.41 → "E2", 440 → "A4"
@@ -10,6 +16,18 @@ export function frequencyToNote(hz: number): string {
   const octave = Math.floor(midi / 12) - 1;
   const noteIndex = ((midi % 12) + 12) % 12;
   return `${NOTE_NAMES[noteIndex]}${octave}`;
+}
+
+/**
+ * Converts an English note name (e.g. "C#4") to its Russian solfège equivalent
+ * (e.g. "До♯4"). Returns the original note name if no mapping is found.
+ */
+export function noteToRussian(note: string): string {
+  const match = note.match(/^([A-G]#?)(-?\d+)$/);
+  if (!match) return note;
+  const [, letter, octave] = match;
+  const ru = RU_NOTE_NAMES[letter];
+  return ru ? `${ru}${octave}` : note;
 }
 
 /**

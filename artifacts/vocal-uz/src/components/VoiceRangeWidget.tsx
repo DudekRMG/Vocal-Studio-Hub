@@ -9,6 +9,7 @@ import {
   computeTessitura,
   classifyVoice,
   validateSession,
+  noteToRussian,
   type VoiceClassification,
   type SessionValidation,
 } from "@/lib/pitchDetection";
@@ -50,6 +51,12 @@ export function VoiceRangeWidget({
   const tColor       = triggerColor       ?? accentColor;
   const tHoverBorder = triggerHoverBorder ?? accentColor;
   const tHoverColor  = triggerHoverColor  ?? (lightMode ? "#0f1016" : "#f0eeea");
+
+  function displayNote(note: string | null): string {
+    if (!note) return "—";
+    if (lang !== "ru") return note;
+    return `${note} (${noteToRussian(note)})`;
+  }
 
   const [step, setStep]               = useState<Step>("closed");
   const [micError, setMicError]       = useState<MicError>("");
@@ -472,9 +479,9 @@ export function VoiceRangeWidget({
 
   <div class="section">${isRu ? "Диапазон" : "Vocal Range"}</div>
   <table>
-    ${row(isRu ? "Нижняя нота" : "Lowest note", `${lowNote || "—"} (${lowHz ?? "—"} ${isRu ? "Гц" : "Hz"})`)}
-    ${row(isRu ? "Верхняя нота" : "Highest note", `${highNote || "—"} (${highHz ?? "—"} ${isRu ? "Гц" : "Hz"})`)}
-    ${row(isRu ? "Тесситура" : "Tessitura", tessNote2)}
+    ${row(isRu ? "Нижняя нота" : "Lowest note", `${lowNote ? (isRu ? `${lowNote} (${noteToRussian(lowNote)})` : lowNote) : "—"} — ${lowHz ?? "—"} ${isRu ? "Гц" : "Hz"}`)}
+    ${row(isRu ? "Верхняя нота" : "Highest note", `${highNote ? (isRu ? `${highNote} (${noteToRussian(highNote)})` : highNote) : "—"} — ${highHz ?? "—"} ${isRu ? "Гц" : "Hz"}`)}
+    ${row(isRu ? "Тесситура" : "Tessitura", isRu ? `${tessNote2} (${noteToRussian(tessNote2)})` : tessNote2)}
     ${row(isRu ? "Диапазон" : "Range", `${octStr} ${isRu ? "окт." : "oct."} / ${span2} ${isRu ? "полутонов" : "semitones"}`)}
   </table>
 
@@ -541,14 +548,14 @@ export function VoiceRangeWidget({
         body: JSON.stringify({
           name,
           contact,
-          lowestNote:         lowNote,
+          lowestNote:         lowNote && lang === "ru" ? `${lowNote} (${noteToRussian(lowNote)})` : lowNote,
           lowestHz:           lowHz,
-          highestNote:        highNote,
+          highestNote:        highNote && lang === "ru" ? `${highNote} (${noteToRussian(highNote)})` : highNote,
           highestHz:          highHz,
           rangeOctaves,
           rangeSpan:          span,
           voiceType:          voiceTypeName,
-          tessitura:          tessNote,
+          tessitura:          lang === "ru" ? `${tessNote} (${noteToRussian(tessNote)})` : tessNote,
           confidenceLevel:    classification.confidence,
           runnerUp:           runnerUpName,
           validationWarnings,
@@ -773,7 +780,7 @@ export function VoiceRangeWidget({
                 textTransform: "uppercase",
                 marginTop: 12,
               }}>
-                {rs === "recording" ? (currentPitch ?? tx.recording) : tx.holdLabel}
+                {rs === "recording" ? (currentPitch ? displayNote(currentPitch) : tx.recording) : tx.holdLabel}
               </p>
             </>
           )}
@@ -811,12 +818,17 @@ export function VoiceRangeWidget({
                 letterSpacing: "0.05em",
                 color: accentColor,
                 lineHeight: 1,
-                marginBottom: 4,
+                marginBottom: lang === "ru" ? 2 : 4,
               }}>
                 {note}
               </div>
+              {lang === "ru" && note && (
+                <div style={{ color: accentColor, fontSize: "1.3rem", fontFamily: "var(--font-display-family)", letterSpacing: "0.04em", marginBottom: 4, opacity: 0.8 }}>
+                  {noteToRussian(note)}
+                </div>
+              )}
               <p style={{ color: "rgba(240,238,234,0.4)", fontSize: "0.72rem", margin: "0 0 24px" }}>
-                {tx.detectedNote} {note}
+                {tx.detectedNote} {displayNote(note)}
               </p>
               <div style={{ display: "flex", gap: 10, justifyContent: "center", flexWrap: "wrap" }}>
                 <button
@@ -905,7 +917,7 @@ export function VoiceRangeWidget({
                 <>
                   {currentPitch && (
                     <div style={{ marginTop: 14, fontSize: "0.72rem", letterSpacing: "0.18em", color: accentColor }}>
-                      {currentPitch}
+                      {displayNote(currentPitch)}
                     </div>
                   )}
                   <div style={{
