@@ -85,22 +85,22 @@ export function TestimonialsSection({ accentColor, variant }: Props) {
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
               {/* Left: avatar + quote */}
               <div>
-                <div className="flex items-center gap-4 mb-6">
+                <div className="flex items-center gap-3 md:gap-4 mb-4 md:mb-6">
                   <div
-                    className="w-12 h-12 rounded-full flex items-center justify-center flex-shrink-0 font-display text-[0.9rem] text-white"
+                    className="w-10 h-10 md:w-12 md:h-12 rounded-full flex items-center justify-center flex-shrink-0 font-display text-[0.8rem] md:text-[0.9rem] text-white"
                     style={{ backgroundColor: featured.avatarColor }}
                   >
                     {featured.initials}
                   </div>
                   <div>
                     <div
-                      className="font-semibold text-[0.95rem] leading-none mb-1"
+                      className="font-semibold text-[0.88rem] md:text-[0.95rem] leading-none mb-1"
                       style={{ color: textPrimary }}
                     >
                       {featured.name}
                     </div>
                     <div
-                      className="text-[0.72rem] tracking-[0.06em]"
+                      className="text-[0.7rem] md:text-[0.72rem] md:tracking-[0.06em]"
                       style={{ color: accentColor }}
                     >
                       {featured.durationLabel}
@@ -108,7 +108,7 @@ export function TestimonialsSection({ accentColor, variant }: Props) {
                   </div>
                 </div>
                 <p
-                  className="font-['Playfair_Display'] italic text-[1.05rem] leading-[1.7]"
+                  className="font-['Playfair_Display'] italic text-[0.9rem] md:text-[1.05rem] leading-[1.7]"
                   style={{ color: textQuote }}
                 >
                   {featured.quote}
@@ -116,7 +116,7 @@ export function TestimonialsSection({ accentColor, variant }: Props) {
               </div>
 
               {/* Right: audio players */}
-              <div className="flex flex-col gap-3">
+              <div className="flex flex-col gap-2 md:gap-3">
                 <AudioPlayer
                   src={featured.beforeSrc}
                   label={featured.beforeLabel}
