@@ -157,14 +157,13 @@ export function StageCanvas({
         ];
       }
 
-      const waveStep = Math.max(3, Math.ceil(W / 200));
       waves.forEach(w => {
         ctx!.save();
         ctx!.strokeStyle = w.red ? accentColor : `rgba(${spotColorRgb},1)`;
         ctx!.lineWidth = w.red ? 1.3 : 0.85;
         ctx!.globalAlpha = w.alpha;
         ctx!.beginPath();
-        for (let x = 0; x <= W; x += waveStep) {
+        for (let x = 0; x <= W; x += 3) {
           const nx = x / W;
           const env2 = Math.pow(Math.sin(nx * Math.PI), 1.5);
           let y = w.y;
@@ -185,8 +184,7 @@ export function StageCanvas({
       ctx!.globalAlpha = 0.22;
       ctx!.beginPath();
       const mx = (mX - 0.5) * 45;
-      const floorStep = Math.max(3, Math.ceil(W / 200));
-      for (let x = 0; x <= W; x += floorStep) {
+      for (let x = 0; x <= W; x += 3) {
         const nx = x / W;
         const env = Math.sin(nx * Math.PI);
         const y =
@@ -253,7 +251,6 @@ export function StageCanvas({
     function loop(ts: number) {
       rafId = requestAnimationFrame(loop);
       if (hidden) return;
-      if (document.body.dataset.widgetOpen) return;
       if (ts - lastTs < TARGET_MS - 2) return;
       lastTs = ts;
       draw();
