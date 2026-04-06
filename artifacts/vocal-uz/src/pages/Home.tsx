@@ -193,13 +193,13 @@ export default function Home() {
         <div className="max-w-[1100px] mx-auto grid grid-cols-1 md:grid-cols-3 gap-[1px] bg-white/[0.08]">
           {/* Extreme card */}
           <RevealSection delay={0}>
-          <div className="bg-[#080808] p-10 relative overflow-hidden group transition-colors duration-300 hover:bg-[#0d0a0a]">
+          <div className="bg-[#080808] p-10 relative overflow-hidden group transition-colors duration-300 hover:bg-[#0d0a0a] h-full flex flex-col">
             <div
               className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-400 pointer-events-none"
               style={{ background: "radial-gradient(ellipse 60% 50% at 20% 80%, rgba(232,0,45,.08) 0%, transparent 70%)" }}
             />
             <span className="absolute top-8 right-8 font-display text-[5rem] leading-none text-[rgba(232,0,45,0.07)] z-0 pointer-events-none select-none">01</span>
-            <div className="relative z-[1]">
+            <div className="relative z-[1] flex flex-col flex-1">
               <span className="text-[0.65rem] tracking-[0.28em] uppercase text-[#e8002d] mb-6 block">{tx.disciplines.extremeTag}</span>
               <h3 className="font-display text-[clamp(2rem,3.5vw,3rem)] tracking-[0.03em] leading-[1.1] mb-6">
                 {tx.disciplines.extremeTitle}
@@ -217,7 +217,7 @@ export default function Home() {
               </ul>
               <Link
                 href={`${base}/extreme#hero-bottom`}
-                className="group text-[0.72rem] tracking-[0.2em] uppercase text-[#e8002d] no-underline inline-flex items-center gap-3"
+                className="group text-[0.72rem] tracking-[0.2em] uppercase text-[#e8002d] no-underline inline-flex items-center gap-3 mt-auto"
               >
                 {tx.disciplines.extremeCta}
                 <svg className="transition-transform duration-200 group-hover:translate-x-1" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M5 12h14M12 5l7 7-7 7" /></svg>
@@ -228,13 +228,13 @@ export default function Home() {
 
           {/* Pop card */}
           <RevealSection delay={0.08}>
-          <div className="bg-[#0f0f0f] p-10 relative overflow-hidden group transition-colors duration-300 hover:bg-[#131313]">
+          <div className="bg-[#0f0f0f] p-10 relative overflow-hidden group transition-colors duration-300 hover:bg-[#131313] h-full flex flex-col">
             <div
               className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-400 pointer-events-none"
               style={{ background: "radial-gradient(ellipse 60% 50% at 80% 20%, rgba(157,78,221,.09) 0%, transparent 70%)" }}
             />
             <span className="absolute top-8 right-8 font-display text-[5rem] leading-none z-0 pointer-events-none select-none" style={{ color: "rgba(157,78,221,0.1)" }}>02</span>
-            <div className="relative z-[1]">
+            <div className="relative z-[1] flex flex-col flex-1">
               <span className="text-[0.65rem] tracking-[0.28em] uppercase mb-6 block" style={{ color: "#9d4edd" }}>{tx.disciplines.popTag}</span>
               <h3 className="font-['Playfair_Display'] italic text-[clamp(1.8rem,3vw,2.8rem)] leading-[1] mb-6 text-[rgba(240,238,234,0.9)]">
                 {tx.disciplines.popTitle}
@@ -252,7 +252,7 @@ export default function Home() {
               </ul>
               <Link
                 href={`${base}/pop#hero-bottom`}
-                className="group text-[0.72rem] tracking-[0.2em] uppercase no-underline inline-flex items-center gap-3"
+                className="group text-[0.72rem] tracking-[0.2em] uppercase no-underline inline-flex items-center gap-3 mt-auto"
                 style={{ color: "#9d4edd" }}
               >
                 {tx.disciplines.popCta}
@@ -264,13 +264,13 @@ export default function Home() {
 
           {/* Karaoke card */}
           <RevealSection delay={0.16}>
-          <div className="bg-[#0c0b08] p-10 relative overflow-hidden group transition-colors duration-300 hover:bg-[#100e09]">
+          <div className="bg-[#0c0b08] p-10 relative overflow-hidden group transition-colors duration-300 hover:bg-[#100e09] h-full flex flex-col">
             <div
               className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-400 pointer-events-none"
               style={{ background: "radial-gradient(ellipse 60% 50% at 50% 80%, rgba(201,168,76,.07) 0%, transparent 70%)" }}
             />
             <span className="absolute top-8 right-8 font-display text-[5rem] leading-none z-0 pointer-events-none select-none" style={{ color: "rgba(201,168,76,0.07)" }}>03</span>
-            <div className="relative z-[1]">
+            <div className="relative z-[1] flex flex-col flex-1">
               <span className="text-[0.65rem] tracking-[0.28em] uppercase mb-6 block" style={{ color: "#c9a84c" }}>{tx.disciplines.karaokeTag}</span>
               <h3 className="font-display text-[clamp(2rem,3.5vw,3rem)] tracking-[0.03em] leading-[1.1] mb-6">
                 {tx.disciplines.karaokeTitle}
@@ -288,7 +288,7 @@ export default function Home() {
               </ul>
               <Link
                 href={`${base}/karaoke#hero-bottom`}
-                className="group text-[0.72rem] tracking-[0.2em] uppercase no-underline inline-flex items-center gap-3"
+                className="group text-[0.72rem] tracking-[0.2em] uppercase no-underline inline-flex items-center gap-3 mt-auto"
                 style={{ color: "#c9a84c" }}
               >
                 {tx.disciplines.karaokeCta}
