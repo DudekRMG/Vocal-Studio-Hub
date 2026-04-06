@@ -239,9 +239,9 @@ export default function KidsVocals() {
       />
 
       {/* ── ABOUT THE APPROACH ── */}
-      <RevealSection>
       <section id="course-content" className="py-28 px-6 lg:px-12 border-b" style={{ backgroundColor: bgCard, borderColor: "rgba(0,0,0,0.07)" }}>
         <div className="max-w-[1100px] mx-auto grid grid-cols-1 md:grid-cols-2 gap-20 items-start">
+          <RevealSection>
           <div>
             <span className="text-[0.68rem] tracking-[0.28em] uppercase block mb-4" style={{ color: blue }}>
               {lang === "ru" ? "О подходе" : "The Approach"}
@@ -251,17 +251,19 @@ export default function KidsVocals() {
             <p className="text-[0.9rem] leading-[1.9] text-[rgba(15,16,22,0.5)] mb-5">{c.aboutBody1}</p>
             <p className="text-[0.9rem] leading-[1.9] text-[rgba(15,16,22,0.5)]">{c.aboutBody2}</p>
           </div>
+          </RevealSection>
           <div className="grid grid-cols-2 gap-[1px]" style={{ backgroundColor: "rgba(0,0,0,0.07)" }}>
-            {c.aboutFeatures.map((item) => (
-              <div key={item} className="p-6 flex items-center" style={{ backgroundColor: bgCardAlt }}>
+            {c.aboutFeatures.map((item, i) => (
+              <RevealSection key={item} delay={i * 0.08}>
+              <div className="p-6 flex items-center h-full" style={{ backgroundColor: bgCardAlt }}>
                 <span className="w-3 h-[1px] mr-4 flex-shrink-0" style={{ backgroundColor: blue }} />
                 <span className="text-[0.82rem] text-[rgba(15,16,22,0.6)]">{item}</span>
               </div>
+              </RevealSection>
             ))}
           </div>
         </div>
       </section>
-      </RevealSection>
 
       {/* ── AGE GROUPS ── */}
       <section className="py-28 px-6 lg:px-12 border-b" style={{ backgroundColor: bgBase, borderColor: "rgba(0,0,0,0.07)" }}>

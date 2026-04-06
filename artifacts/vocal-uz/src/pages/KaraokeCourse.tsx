@@ -294,9 +294,9 @@ export default function KaraokeCourse() {
       />
 
       {/* ── WHAT IS ── */}
-      <RevealSection>
       <section id="course-content" className="py-28 px-6 lg:px-12 bg-[#0f0f0f] border-b border-white/[0.08]">
         <div className="max-w-[1100px] mx-auto grid grid-cols-1 md:grid-cols-2 gap-20 items-center">
+          <RevealSection>
           <div>
             <span className="text-[0.68rem] tracking-[0.28em] uppercase block mb-4" style={{ color: gold }}>
               {lang === "ru" ? "О курсе" : "About"}
@@ -306,6 +306,7 @@ export default function KaraokeCourse() {
             <p className="text-[0.9rem] leading-[1.9] text-[rgba(240,238,234,0.5)] mb-5">{c.whatBody}</p>
             <p className="text-[0.9rem] leading-[1.9] text-[rgba(240,238,234,0.5)]">{c.whatBody2}</p>
           </div>
+          </RevealSection>
           <div className="grid grid-cols-2 gap-[1px] bg-white/[0.08]">
             {[
               lang === "ru" ? "12 уроков" : "12 lessons",
@@ -314,16 +315,17 @@ export default function KaraokeCourse() {
               lang === "ru" ? "Онлайн / Офлайн" : "Online / Offline",
               lang === "ru" ? "Быстрый результат" : "Fast results",
               lang === "ru" ? "Индивидуально" : "Individual approach",
-            ].map((item) => (
-              <div key={item} className="bg-[#141414] p-6 flex items-center">
+            ].map((item, i) => (
+              <RevealSection key={item} delay={i * 0.08}>
+              <div className="bg-[#141414] p-6 flex items-center h-full">
                 <span className="w-3 h-[1px] mr-4 flex-shrink-0" style={{ backgroundColor: gold }} />
                 <span className="text-[0.82rem] text-[rgba(240,238,234,0.6)]">{item}</span>
               </div>
+              </RevealSection>
             ))}
           </div>
         </div>
       </section>
-      </RevealSection>
 
       {/* ── FOR WHOM ── */}
       <section className="py-28 px-6 lg:px-12 bg-[#080808] border-b border-white/[0.08]">

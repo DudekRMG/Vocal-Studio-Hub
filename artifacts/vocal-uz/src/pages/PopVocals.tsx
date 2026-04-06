@@ -193,9 +193,9 @@ export default function PopVocals() {
       />
 
       {/* ── WHAT IS ── */}
-      <RevealSection>
       <section id="course-content" className="py-28 px-6 lg:px-12 bg-[#080808] border-b border-white/[0.08]">
         <div className="max-w-[1100px] mx-auto grid grid-cols-1 md:grid-cols-2 gap-20 items-center">
+          <RevealSection>
           <div>
             <span className="text-[0.68rem] tracking-[0.28em] uppercase text-[#9d4edd] block mb-4">{what.eyebrow}</span>
             <h2 className="font-['Playfair_Display'] italic text-[clamp(2.2rem,4vw,3.5rem)] leading-[1.2] mb-8">{what.title}</h2>
@@ -203,18 +203,20 @@ export default function PopVocals() {
             <p className="text-[0.9rem] leading-[1.9] text-[rgba(240,238,234,0.5)] mb-5">{what.body1}</p>
             <p className="text-[0.9rem] leading-[1.9] text-[rgba(240,238,234,0.5)]">{what.body2}</p>
           </div>
+          </RevealSection>
           <div className="grid grid-cols-2 gap-[1px] bg-white/[0.08]">
-            {pillars.map((p) => (
-              <div key={p.title} className="bg-[#0f0f0f] p-5 md:p-8">
+            {pillars.map((p, i) => (
+              <RevealSection key={p.title} delay={i * 0.08}>
+              <div className="bg-[#0f0f0f] p-5 md:p-8 h-full">
                 <div className="text-2xl mb-4" style={{ color: "#9d4edd" }}>{p.icon}</div>
                 <h3 className="font-display text-[1.2rem] tracking-[0.08em] mb-3 text-[#f0eeea]">{p.title}</h3>
                 <p className="text-[0.8rem] leading-[1.7] text-[rgba(240,238,234,0.4)]">{p.desc}</p>
               </div>
+              </RevealSection>
             ))}
           </div>
         </div>
       </section>
-      </RevealSection>
 
       {/* ── FOR WHOM ── */}
       <section className="py-28 px-6 lg:px-12 bg-[#141414] border-b border-white/[0.08]">

@@ -217,9 +217,9 @@ export default function ExtremeVocals() {
       />
 
       {/* ── WHAT IS ── */}
-      <RevealSection>
       <section id="course-content" className="py-28 px-6 lg:px-12 bg-[#0f0f0f] border-b border-white/[0.08]">
         <div className="max-w-[1100px] mx-auto grid grid-cols-1 md:grid-cols-2 gap-20 items-center">
+          <RevealSection>
           <div>
             <span className="text-[0.68rem] tracking-[0.28em] uppercase text-[#e8002d] block mb-4">
               {lang === "ru" ? "О направлении" : "About"}
@@ -229,17 +229,19 @@ export default function ExtremeVocals() {
             <p className="text-[0.9rem] leading-[1.9] text-[rgba(240,238,234,0.5)] mb-5">{c.whatBody}</p>
             <p className="text-[0.9rem] leading-[1.9] text-[rgba(240,238,234,0.5)]">{c.whatBody2}</p>
           </div>
+          </RevealSection>
           <div className="grid grid-cols-2 gap-[1px] bg-white/[0.08]">
-            {["Growl", "Scream", "Fry", "Piggy", lang === "ru" ? "Безопасная техника" : "Safe technique", lang === "ru" ? "Индивидуальный подход" : "Individual approach"].map((item) => (
-              <div key={item} className="bg-[#141414] p-6 flex items-center">
+            {["Growl", "Scream", "Fry", "Piggy", lang === "ru" ? "Безопасная техника" : "Safe technique", lang === "ru" ? "Индивидуальный подход" : "Individual approach"].map((item, i) => (
+              <RevealSection key={item} delay={i * 0.08}>
+              <div className="bg-[#141414] p-6 flex items-center h-full">
                 <span className="w-3 h-[1px] bg-[#e8002d] mr-4 flex-shrink-0" />
                 <span className="text-[0.82rem] text-[rgba(240,238,234,0.6)]">{item}</span>
               </div>
+              </RevealSection>
             ))}
           </div>
         </div>
       </section>
-      </RevealSection>
 
       {/* ── TECHNIQUES ── */}
       <section className="py-28 px-6 lg:px-12 bg-[#080808] border-b border-white/[0.08]">
