@@ -161,7 +161,7 @@ export function AudioPlayer({ src, label, variant, accentColor, isKids = false }
 
       {/* mobile: order-3 (stays on row 1 after label); desktop: order-4 (after track) */}
       <span
-        className="order-3 md:order-4 ml-auto md:ml-0 text-[0.65rem] flex-shrink-0 tabular-nums whitespace-nowrap"
+        className="order-3 md:order-4 text-[0.65rem] flex-shrink-0 tabular-nums whitespace-nowrap"
         style={{ color: timeColor }}
       >
         {isEmpty || duration === 0
