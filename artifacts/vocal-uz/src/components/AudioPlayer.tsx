@@ -123,7 +123,7 @@ export function AudioPlayer({ src, label, variant, accentColor, isKids = false }
 
   return (
     <div
-      className="flex items-center gap-3 px-4 py-[0.65rem] select-none"
+      className="flex flex-wrap md:flex-nowrap items-center gap-x-3 gap-y-2 md:gap-y-0 px-4 py-3 md:py-[0.65rem] select-none"
       style={{
         backgroundColor: bgColor,
         border: `1px solid ${borderColor}`,
@@ -131,11 +131,12 @@ export function AudioPlayer({ src, label, variant, accentColor, isKids = false }
         cursor: isEmpty ? "default" : "auto",
       }}
     >
+      {/* order-1 on mobile and desktop */}
       <button
         onClick={togglePlay}
         disabled={isEmpty}
         aria-label={playing ? "Pause" : "Play"}
-        className="w-7 h-7 rounded-full flex items-center justify-center flex-shrink-0 border-none transition-opacity duration-150 hover:opacity-85 disabled:cursor-not-allowed"
+        className="order-1 w-7 h-7 rounded-full flex items-center justify-center flex-shrink-0 border-none transition-opacity duration-150 hover:opacity-85 disabled:cursor-not-allowed"
         style={{ backgroundColor: btnBg, cursor: isEmpty ? "not-allowed" : "pointer" }}
       >
         {playing ? (
@@ -150,15 +151,27 @@ export function AudioPlayer({ src, label, variant, accentColor, isKids = false }
         )}
       </button>
 
+      {/* order-2 always */}
       <span
-        className="text-[0.7rem] tracking-[0.03em] flex-shrink-0 whitespace-nowrap"
+        className="order-2 text-[0.7rem] tracking-[0.03em] flex-shrink-0 whitespace-nowrap"
         style={{ color: labelColor, minWidth: "7rem" }}
       >
         {label}
       </span>
 
+      {/* mobile: order-3 (stays on row 1 after label); desktop: order-4 (after track) */}
+      <span
+        className="order-3 md:order-4 text-[0.65rem] flex-shrink-0 tabular-nums whitespace-nowrap"
+        style={{ color: timeColor }}
+      >
+        {isEmpty || duration === 0
+          ? "--:-- / --:--"
+          : `${formatTime(current)} / ${formatTime(duration)}`}
+      </span>
+
+      {/* mobile: order-4 + w-full → own row at bottom; desktop: order-3 + flex-1 → inline */}
       <div
-        className="flex-1 h-[3px] relative cursor-pointer"
+        className="order-4 md:order-3 w-full md:flex-1 md:w-auto h-[5px] md:h-[3px] relative cursor-pointer"
         style={{ backgroundColor: trackBg }}
         onClick={handleScrub}
       >
@@ -167,15 +180,6 @@ export function AudioPlayer({ src, label, variant, accentColor, isKids = false }
           style={{ width: `${progress * 100}%`, backgroundColor: fillColor }}
         />
       </div>
-
-      <span
-        className="text-[0.65rem] flex-shrink-0 tabular-nums whitespace-nowrap"
-        style={{ color: timeColor }}
-      >
-        {isEmpty || duration === 0
-          ? "--:-- / --:--"
-          : `${formatTime(current)} / ${formatTime(duration)}`}
-      </span>
     </div>
   );
 }
