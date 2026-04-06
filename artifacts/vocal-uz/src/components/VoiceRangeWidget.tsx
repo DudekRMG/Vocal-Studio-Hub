@@ -1307,6 +1307,8 @@ export function VoiceRangeWidget({
     return "";
   }
 
+  const wvS = triggerSize === "lg" ? 1.5 : 1;
+
   return (
     <>
       {/* ── Trigger button ── */}
@@ -1354,13 +1356,13 @@ export function VoiceRangeWidget({
           aria-hidden="true"
           style={{
             position: "absolute",
-            bottom: 4,
+            bottom: Math.round(4 * wvS),
             left: "50%",
             transform: "translateX(-50%)",
             display: "flex",
-            gap: 2,
+            gap: Math.round(2 * wvS),
             alignItems: "center",
-            height: 8,
+            height: Math.round(8 * wvS),
             pointerEvents: "none",
           }}
         >
@@ -1373,8 +1375,8 @@ export function VoiceRangeWidget({
               key={i}
               style={{
                 display: "inline-block",
-                width: 2,
-                height: h,
+                width: Math.round(2 * wvS),
+                height: Math.round(h * wvS),
                 background: tColor,
                 opacity: 0.45,
                 borderRadius: 999,
