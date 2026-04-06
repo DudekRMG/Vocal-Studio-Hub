@@ -412,13 +412,23 @@ export default function Home() {
                 : "Book a trial lesson and start transforming your voice today."}
             </p>
           </div>
-          <a
-            href="#booking"
-            className="flex-shrink-0 bg-[#f0eeea] text-[#080808] font-display text-[1.1rem] tracking-[0.15em] px-10 py-5 no-underline transition-all duration-200 hover:bg-white whitespace-nowrap inline-flex items-center gap-3 group"
-          >
-            {lang === "ru" ? "Записаться сейчас" : "Book Now"}
-            <svg className="transition-transform duration-200 group-hover:translate-x-1" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M5 12h14M12 5l7 7-7 7" /></svg>
-          </a>
+          <div className="flex flex-col items-center gap-3 flex-shrink-0">
+            <VoiceRangeWidget
+              accentColor="#e8002d"
+              pageName={lang === "ru" ? "Главная" : "Home"}
+              triggerBorder="rgba(255,255,255,0.5)"
+              triggerColor="rgba(255,255,255,0.9)"
+              triggerHoverBorder="rgba(255,255,255,0.9)"
+              triggerHoverColor="#ffffff"
+            />
+            <a
+              href="#booking"
+              className="bg-[#f0eeea] text-[#080808] font-display text-[1.1rem] tracking-[0.15em] px-10 py-5 no-underline transition-all duration-200 hover:bg-white whitespace-nowrap inline-flex items-center gap-3 group"
+            >
+              {lang === "ru" ? "Записаться сейчас" : "Book Now"}
+              <svg className="transition-transform duration-200 group-hover:translate-x-1" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M5 12h14M12 5l7 7-7 7" /></svg>
+            </a>
+          </div>
         </div>
       </section>
 
@@ -426,6 +436,15 @@ export default function Home() {
 
       {/* ── BOOKING ── */}
       <section id="booking" className="bg-[#141414] border-t border-white/[0.08]">
+        {/* Widget strip */}
+        <div className="px-6 lg:px-12 pt-10 pb-4 border-b border-white/[0.05]">
+          <div className="max-w-[1100px] mx-auto flex flex-col sm:flex-row items-center sm:items-center gap-4">
+            <span className="text-[0.65rem] tracking-[0.22em] uppercase text-[rgba(240,238,234,0.3)] shrink-0">
+              {lang === "ru" ? "Узнайте свой тип голоса:" : "Check your voice type first:"}
+            </span>
+            <VoiceRangeWidget accentColor="#e8002d" pageName={lang === "ru" ? "Главная" : "Home"} />
+          </div>
+        </div>
         {/* Row 1 — Full width heading */}
         <div className="pt-28 pb-12 px-6 lg:px-12">
           <div className="max-w-[1100px] mx-auto">
