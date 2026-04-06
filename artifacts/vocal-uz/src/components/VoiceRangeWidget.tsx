@@ -991,7 +991,12 @@ export function VoiceRangeWidget({
                     textTransform: "uppercase",
                   }}
                 >
-                  {tx.confirm}
+                  {tx.confirmMobile && tx.confirmMobile !== tx.confirm ? (
+                    <>
+                      <span className="md:hidden">{tx.confirmMobile}</span>
+                      <span className="hidden md:inline">{tx.confirm}</span>
+                    </>
+                  ) : tx.confirm}
                 </button>
               </div>
             </>
