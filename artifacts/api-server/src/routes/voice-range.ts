@@ -2,6 +2,13 @@ import { Router, type IRouter } from "express";
 
 const router: IRouter = Router();
 
+const WARNING_LABELS: Record<string, { ru: string; en: string }> = {
+  narrow:   { ru: "Диапазон слишком узкий (< 8 полутонов)", en: "Range too narrow (< 8 semitones)" },
+  wide:     { ru: "Диапазон слишком широкий (> 40 полутонов)", en: "Range too wide (> 40 semitones)" },
+  reversed: { ru: "Нижняя нота выше верхней", en: "Low note is above high note" },
+  tooLow:   { ru: "Нижняя нота ниже C2 — возможна ошибка записи", en: "Low note below C2 — possible recording error" },
+};
+
 router.post("/voice-range", async (req, res) => {
   const {
     name,
@@ -16,6 +23,7 @@ router.post("/voice-range", async (req, res) => {
     tessitura,
     confidenceLevel,
     runnerUp,
+    validationWarnings,
     page,
     timestamp,
     lang,
@@ -49,6 +57,7 @@ router.post("/voice-range", async (req, res) => {
   const tess    = typeof tessitura === "string" ? tessitura : "—";
   const conf    = typeof confidenceLevel === "string" ? confidenceLevel : "—";
   const runner  = typeof runnerUp === "string" ? runnerUp : "—";
+  const warnings: string[] = Array.isArray(validationWarnings) ? validationWarnings : [];
 
   const confidenceLabel = (() => {
     if (!isRu) {
@@ -76,6 +85,13 @@ router.post("/voice-range", async (req, res) => {
     if (conf !== "high") {
       text += `   Ближайший вариант: ${runner} — рекомендована ручная проверка\n`;
     }
+    if (warnings.length > 0) {
+      text += `\n⚠️ Предупреждения:\n`;
+      for (const key of warnings) {
+        const label = WARNING_LABELS[key]?.ru ?? key;
+        text += `   • ${label}\n`;
+      }
+    }
     text += `\n🌐 Страница: ${page}\n🕐 Время: ${timestamp}`;
   } else {
     text =
@@ -89,6 +105,13 @@ router.post("/voice-range", async (req, res) => {
       `🎤 Voice Type: ${voiceType} (confidence: ${confidenceLabel})\n`;
     if (conf !== "high") {
       text += `   Runner-up: ${runner} — manual check recommended\n`;
+    }
+    if (warnings.length > 0) {
+      text += `\n⚠️ Validation warnings:\n`;
+      for (const key of warnings) {
+        const label = WARNING_LABELS[key]?.en ?? key;
+        text += `   • ${label}\n`;
+      }
     }
     text += `\n🌐 Page: ${page}\n🕐 Time: ${timestamp}`;
   }

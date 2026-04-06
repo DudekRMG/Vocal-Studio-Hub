@@ -374,6 +374,9 @@ export function VoiceRangeWidget({
     const tessHz      = 440 * Math.pow(2, (tessituraMidi - 69) / 12);
     const tessNote    = frequencyToNote(tessHz);
 
+    const submitValidation  = validateSession(stableLowMidi, stableHighMidi);
+    const validationWarnings = submitValidation.valid ? [] : submitValidation.errorKeys;
+
     try {
       const base = import.meta.env.BASE_URL.replace(/\/$/, "");
       const res = await fetch(`${base}/api/voice-range`, {
@@ -382,18 +385,19 @@ export function VoiceRangeWidget({
         body: JSON.stringify({
           name,
           contact,
-          lowestNote:       lowNote,
-          lowestHz:         lowHz,
-          highestNote:      highNote,
-          highestHz:        highHz,
+          lowestNote:         lowNote,
+          lowestHz:           lowHz,
+          highestNote:        highNote,
+          highestHz:          highHz,
           rangeOctaves,
-          rangeSpan:        span,
-          voiceType:        voiceTypeName,
-          tessitura:        tessNote,
-          confidenceLevel:  classification.confidence,
-          runnerUp:         runnerUpName,
-          page:             pageName,
-          timestamp:        new Date().toLocaleString(lang === "ru" ? "ru-RU" : "en-US"),
+          rangeSpan:          span,
+          voiceType:          voiceTypeName,
+          tessitura:          tessNote,
+          confidenceLevel:    classification.confidence,
+          runnerUp:           runnerUpName,
+          validationWarnings,
+          page:               pageName,
+          timestamp:          new Date().toLocaleString(lang === "ru" ? "ru-RU" : "en-US"),
           lang,
         }),
       });
