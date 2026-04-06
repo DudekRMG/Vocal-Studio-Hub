@@ -8,6 +8,7 @@ import { useSanityContent } from "@/lib/useSanityContent";
 import { StageCanvas } from "@/components/StageCanvas";
 import { TestimonialsSection } from "@/components/TestimonialsSection";
 import { VideoPlayer } from "@/components/VideoPlayer";
+import { VoiceRangeWidget } from "@/components/VoiceRangeWidget";
 
 const base = import.meta.env.BASE_URL.replace(/\/$/, "");
 const PROMO_VIDEO_SRC = `${base}/video/sample.mov`;
@@ -77,9 +78,7 @@ export default function Home() {
               <a href="#booking" className="bg-[#e8002d] text-[#f0eeea] font-display text-[0.72rem] tracking-[0.16em] px-6 py-3.5 no-underline transition-all duration-200 hover:bg-[#ff1a3d] uppercase">
                 {lang === "ru" ? "Пробный урок" : tx.hero.ctaBook}
               </a>
-              <a href="#about" className="border border-white/[0.18] text-[rgba(240,238,234,0.6)] font-display text-[0.72rem] tracking-[0.16em] px-6 py-3.5 no-underline transition-all duration-200 hover:border-white/40 hover:text-[#f0eeea] uppercase">
-                {tx.hero.ctaLearn}
-              </a>
+              <VoiceRangeWidget accentColor="#e8002d" pageName={lang === "ru" ? "Главная" : "Home"} />
             </div>
           </div>
         </div>
@@ -146,9 +145,7 @@ export default function Home() {
               <a href="#booking" className="bg-[#e8002d] text-[#f0eeea] font-display text-[0.72rem] tracking-[0.16em] px-6 py-3.5 no-underline transition-all duration-200 hover:bg-[#ff1a3d] uppercase">
                 {tx.hero.ctaBook}
               </a>
-              <a href="#about" className="border border-white/[0.18] text-[rgba(240,238,234,0.6)] font-display text-[0.72rem] tracking-[0.16em] px-6 py-3.5 no-underline transition-all duration-200 hover:border-white/40 hover:text-[#f0eeea] uppercase">
-                {tx.hero.ctaLearn}
-              </a>
+              <VoiceRangeWidget accentColor="#e8002d" pageName={lang === "ru" ? "Главная" : "Home"} />
             </div>
           </div>
         </div>

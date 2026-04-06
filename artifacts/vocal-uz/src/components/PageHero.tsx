@@ -2,6 +2,7 @@ import { useEffect, type CSSProperties, type ReactNode } from "react";
 import { StageCanvas } from "./StageCanvas";
 import { useLang } from "@/lib/langContext";
 import { t } from "@/lib/i18n";
+import { VoiceRangeWidget } from "./VoiceRangeWidget";
 
 interface PageHeroProps {
   accentColor?: string;
@@ -135,25 +136,15 @@ export function PageHero({
           <p className="text-[0.73rem] leading-[1.75]" style={{ color: bandDescColor }}>
             {courseDesc}
           </p>
-          <a
-            href="#hero-bottom"
-            onClick={scrollToHeroBottom}
-            className="inline-flex items-center gap-2 no-underline transition-all duration-200 uppercase"
-            style={{ fontFamily: "var(--font-display-family)", fontWeight: 700, fontSize: "0.78rem", letterSpacing: "0.14em", padding: "0.6rem 1.4rem", border: `1px solid ${bandGhostBorder}`, color: bandGhostText }}
-            onMouseEnter={e => {
-              (e.currentTarget as HTMLElement).style.color = lightMode ? "#0f1016" : "#f0eeea";
-              (e.currentTarget as HTMLElement).style.borderColor = lightMode ? "rgba(15,16,22,0.45)" : "rgba(255,255,255,0.45)";
-            }}
-            onMouseLeave={e => {
-              (e.currentTarget as HTMLElement).style.color = bandGhostText;
-              (e.currentTarget as HTMLElement).style.borderColor = bandGhostBorder;
-            }}
-          >
-            {tx.hero.ctaLearn}
-            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
-              <path d="M5 12h14M12 5l7 7-7 7" />
-            </svg>
-          </a>
+          <VoiceRangeWidget
+            accentColor={accentColor}
+            pageName={courseTag}
+            lightMode={lightMode}
+            triggerBorder={bandGhostBorder}
+            triggerColor={bandGhostText}
+            triggerHoverBorder={lightMode ? "rgba(15,16,22,0.45)" : "rgba(255,255,255,0.45)"}
+            triggerHoverColor={lightMode ? "#0f1016" : "#f0eeea"}
+          />
         </div>
       </div>
     </div>
@@ -207,22 +198,11 @@ export function PageHero({
               >
                 {ctaLabel}
               </a>
-              <a
-                href="#course-content"
-                onClick={scrollToContent}
-                className="font-display text-[0.72rem] tracking-[0.16em] px-6 py-3.5 no-underline transition-all duration-200 uppercase"
-                style={{ border: `1px solid ${ghostBorder}`, color: ghostText }}
-                onMouseEnter={e => {
-                  (e.currentTarget as HTMLElement).style.color = ghostHoverText;
-                  (e.currentTarget as HTMLElement).style.borderColor = ghostHoverBorder;
-                }}
-                onMouseLeave={e => {
-                  (e.currentTarget as HTMLElement).style.color = ghostText;
-                  (e.currentTarget as HTMLElement).style.borderColor = ghostBorder;
-                }}
-              >
-                {tx.hero.ctaLearn}
-              </a>
+              <VoiceRangeWidget
+                accentColor={accentColor}
+                pageName={courseTag}
+                lightMode={lightMode}
+              />
             </div>
           </div>
         </div>
@@ -252,25 +232,15 @@ export function PageHero({
             </div>
             <div className="flex flex-col items-center gap-3 max-w-[360px]">
               <p className="text-[0.73rem] leading-[1.75]" style={{ color: bandDescColor }}>{courseDesc}</p>
-              <a
-                href="#hero-bottom"
-                onClick={scrollToHeroBottom}
-                className="inline-flex items-center gap-2 no-underline transition-all duration-200 uppercase"
-                style={{ fontFamily: "var(--font-display-family)", fontWeight: 700, fontSize: "0.78rem", letterSpacing: "0.14em", padding: "0.6rem 1.4rem", border: `1px solid ${bandGhostBorder}`, color: bandGhostText }}
-                onMouseEnter={e => {
-                  (e.currentTarget as HTMLElement).style.color = lightMode ? "#0f1016" : "#f0eeea";
-                  (e.currentTarget as HTMLElement).style.borderColor = lightMode ? "rgba(15,16,22,0.45)" : "rgba(255,255,255,0.45)";
-                }}
-                onMouseLeave={e => {
-                  (e.currentTarget as HTMLElement).style.color = bandGhostText;
-                  (e.currentTarget as HTMLElement).style.borderColor = bandGhostBorder;
-                }}
-              >
-                {tx.hero.ctaLearn}
-                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
-                  <path d="M5 12h14M12 5l7 7-7 7" />
-                </svg>
-              </a>
+              <VoiceRangeWidget
+                accentColor={accentColor}
+                pageName={courseTag}
+                lightMode={lightMode}
+                triggerBorder={bandGhostBorder}
+                triggerColor={bandGhostText}
+                triggerHoverBorder={lightMode ? "rgba(15,16,22,0.45)" : "rgba(255,255,255,0.45)"}
+                triggerHoverColor={lightMode ? "#0f1016" : "#f0eeea"}
+              />
             </div>
           </div>
         </div>
@@ -320,22 +290,11 @@ export function PageHero({
               >
                 {ctaLabel}
               </a>
-              <a
-                href="#course-content"
-                onClick={scrollToContent}
-                className="font-display text-[0.72rem] tracking-[0.16em] px-6 py-3.5 no-underline transition-all duration-200 uppercase"
-                style={{ border: `1px solid ${ghostBorder}`, color: ghostText }}
-                onMouseEnter={e => {
-                  (e.currentTarget as HTMLElement).style.color = ghostHoverText;
-                  (e.currentTarget as HTMLElement).style.borderColor = ghostHoverBorder;
-                }}
-                onMouseLeave={e => {
-                  (e.currentTarget as HTMLElement).style.color = ghostText;
-                  (e.currentTarget as HTMLElement).style.borderColor = ghostBorder;
-                }}
-              >
-                {tx.hero.ctaLearn}
-              </a>
+              <VoiceRangeWidget
+                accentColor={accentColor}
+                pageName={courseTag}
+                lightMode={lightMode}
+              />
             </div>
           </div>
         </div>
