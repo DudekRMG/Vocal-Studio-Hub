@@ -6,8 +6,7 @@ import { CourseStrip } from "@/components/CourseStrip";
 import { PageHero } from "@/components/PageHero";
 import { TestimonialsSection } from "@/components/TestimonialsSection";
 import { VideoPlayer } from "@/components/VideoPlayer";
-import { VoiceWidgetProvider } from "@/lib/voiceWidgetContext";
-import { VoiceWidgetTrigger } from "@/components/VoiceWidgetTrigger";
+import { VoiceRangeWidget } from "@/components/VoiceRangeWidget";
 
 const base = import.meta.env.BASE_URL.replace(/\/$/, "");
 const PROMO_VIDEO_SRC = `${base}/video/sample.mov`;
@@ -196,7 +195,7 @@ export default function ExtremeVocals() {
   const base = import.meta.env.BASE_URL.replace(/\/$/, "");
 
   return (
-    <VoiceWidgetProvider accentColor="#e8002d" pageName={c.heroTag}>
+    <>
       <SeoHead
         title={tx.seo.extreme.title}
         description={tx.seo.extreme.description}
@@ -294,8 +293,10 @@ export default function ExtremeVocals() {
             <p className="text-[0.9rem] text-[rgba(240,238,234,0.75)] mt-3">{c.ctaBannerSub}</p>
           </div>
           <div className="flex-shrink-0 flex flex-col gap-3 w-full md:w-auto">
-            <VoiceWidgetTrigger
-              size="lg"
+            <VoiceRangeWidget
+              accentColor="#e8002d"
+              pageName={c.heroTag}
+              triggerSize="lg"
               triggerBorder="rgba(240,238,234,0.6)"
               triggerColor="#f0eeea"
               triggerHoverBorder="#f0eeea"
@@ -343,6 +344,6 @@ export default function ExtremeVocals() {
         </div>
         <CourseStrip exclude="extreme" />
       </section>
-    </VoiceWidgetProvider>
+    </>
   );
 }
