@@ -78,20 +78,59 @@ export function BookingForm({ variant, accentColor, hideDisciplineSelect, fixedG
     if (status !== "idle") setStatus("idle");
   };
 
-  const handlePhoneChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const digits = e.target.value.replace(/\D/g, "").slice(0, 15);
-    setForm((prev) => ({ ...prev, phone: digits ? formatPhone(digits) : "" }));
-    if (phoneError) setPhoneError("");
-    if (status !== "idle") setStatus("idle");
+  const handlePhoneKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.ctrlKey || e.metaKey) return;
+
+    if (e.key === "Backspace") {
+      e.preventDefault();
+      const cur = form.phone.replace(/\D/g, "");
+      const next = cur.slice(0, -1);
+      setForm((prev) => ({ ...prev, phone: next ? formatPhone(next) : "" }));
+      if (phoneError) setPhoneError("");
+      if (status !== "idle") setStatus("idle");
+      return;
+    }
+
+    if (e.key === "Delete") {
+      e.preventDefault();
+      return;
+    }
+
+    if (["ArrowLeft", "ArrowRight", "Tab", "Home", "End", "Enter"].includes(e.key)) return;
+
+    if (/^\d$/.test(e.key)) {
+      e.preventDefault();
+      const cur = form.phone.replace(/\D/g, "");
+      if (cur.length >= 15) return;
+      const next = cur + e.key;
+      setForm((prev) => ({ ...prev, phone: formatPhone(next) }));
+      if (phoneError) setPhoneError("");
+      if (status !== "idle") setStatus("idle");
+      return;
+    }
+
+    e.preventDefault();
   };
 
-  const handlePhoneKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
-    const ctrl = e.ctrlKey || e.metaKey;
-    if (ctrl) return;
-    const allowed = ["Backspace", "Delete", "ArrowLeft", "ArrowRight", "Tab", "Home", "End", "Enter"];
-    if (allowed.includes(e.key)) return;
-    if (/^\d$/.test(e.key)) return;
-    e.preventDefault();
+  const handlePhoneChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    // Handles mobile virtual keyboards where onKeyDown may not fire
+    const newValue = e.target.value;
+    const newDigits = newValue.replace(/\D/g, "").slice(0, 15);
+    const oldDigits = form.phone.replace(/\D/g, "");
+
+    let finalDigits: string;
+    if (newDigits.length < oldDigits.length) {
+      finalDigits = newDigits;
+    } else if (newDigits.length === oldDigits.length && newValue !== form.phone) {
+      // A formatting character was deleted — remove the last digit
+      finalDigits = oldDigits.slice(0, -1);
+    } else {
+      finalDigits = newDigits;
+    }
+
+    setForm((prev) => ({ ...prev, phone: finalDigits ? formatPhone(finalDigits) : "" }));
+    if (phoneError) setPhoneError("");
+    if (status !== "idle") setStatus("idle");
   };
 
   const handlePhonePaste = (e: React.ClipboardEvent<HTMLInputElement>) => {
