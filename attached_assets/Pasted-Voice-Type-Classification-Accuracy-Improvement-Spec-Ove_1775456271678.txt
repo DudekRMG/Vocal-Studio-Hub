@@ -1,0 +1,244 @@
+Voice Type Classification — Accuracy Improvement Spec
+Overview
+The current system uses only the lowest detected note for classification. This spec upgrades it to a multi-signal classifier using tessitura (pitch distribution centroid), range cross-validation, and a confidence scoring system that flags ambiguous results instead of forcing a hard match.
+
+Change 1: Replace "Minimum Detected" with "Stable Low Estimate"
+Problem
+The current low-note recording takes the single lowest frequency detected. One anomalous frame (creak, noise burst, sub-harmonic) can drag the result down by a full octave.
+Implementation
+During the low-note recording session, collect all confirmed pitch readings into an array (you likely already do this — expose it if not).
+js// Instead of:
+lowestNote = Math.min(...allReadings);
+
+// Do this:
+function getStableLow(readings) {
+  if (readings.length === 0) return null;
+  const sorted = [...readings].sort((a, b) => a - b);
+  
+  // Discard bottom 10% as outliers (sub-harmonics, noise)
+  const trimStart = Math.floor(sorted.length * 0.10);
+  const trimmed = sorted.slice(trimStart);
+  
+  // Return the new minimum of the trimmed array
+  return trimmed[0];
+}
+Do the same for the high note — discard the top 10% to remove falsetto squeaks or noise spikes.
+jsfunction getStableHigh(readings) {
+  const sorted = [...readings].sort((a, b) => a - b);
+  const trimEnd = Math.floor(sorted.length * 0.90);
+  const trimmed = sorted.slice(0, trimEnd);
+  return trimmed[trimmed.length - 1];
+}
+
+Change 2: Compute Tessitura from the Low Recording Session
+Problem
+The low-note session collects multiple seconds of audio. The user sings down to their floor, but their voice spends most of that session in their natural comfortable range. The distribution of all pitch readings during that session is a proxy for tessitura.
+Implementation
+After the low-note recording ends, compute a weighted centroid of all pitch readings:
+jsfunction computeTessitura(readings) {
+  if (readings.length === 0) return null;
+
+  // Convert to MIDI for linear math
+  const midiReadings = readings.map(freqToMidi);
+
+  // Simple median — more robust than mean for skewed distributions
+  const sorted = [...midiReadings].sort((a, b) => a - b);
+  const mid = Math.floor(sorted.length / 2);
+  const median = sorted.length % 2 !== 0
+    ? sorted[mid]
+    : (sorted[mid - 1] + sorted[mid]) / 2;
+
+  return median; // MIDI note number, fractional ok
+}
+
+function freqToMidi(freq) {
+  return 69 + 12 * Math.log2(freq / 440);
+}
+This gives you a tessitura MIDI value — the pitch the voice naturally gravitates to during the low-range exploration.
+
+Change 3: Redesign the Classification Table
+Replace the current single-boundary table with a structure that contains three independent signals per voice type: the stable low note, the typical tessitura, and the expected full range span.
+jsconst VOICE_PROFILES = [
+  {
+    type: "Bass",
+    description: "...",
+    // MIDI note numbers
+    lowRange:       { min: 0,  max: 40 },   // E2 = 40
+    tessituraRange: { min: 36, max: 45 },   // C2–A2
+    spanRange:      { min: 14, max: 26 },   // semitones
+  },
+  {
+    type: "Baritone",
+    description: "...",
+    lowRange:       { min: 38, max: 45 },   // D2–A2
+    tessituraRange: { min: 43, max: 52 },   // G2–E3
+    spanRange:      { min: 16, max: 28 },
+  },
+  {
+    type: "Tenor",
+    description: "...",
+    lowRange:       { min: 43, max: 50 },   // G2–D3
+    tessituraRange: { min: 48, max: 57 },   // C3–A3
+    spanRange:      { min: 18, max: 30 },
+  },
+  {
+    type: "Contralto",
+    description: "...",
+    lowRange:       { min: 40, max: 48 },   // E2–C3
+    tessituraRange: { min: 45, max: 55 },   // A2–G3
+    spanRange:      { min: 16, max: 28 },
+  },
+  {
+    type: "Mezzo-soprano",
+    description: "...",
+    lowRange:       { min: 45, max: 53 },   // A2–F3
+    tessituraRange: { min: 52, max: 62 },   // E3–D4
+    spanRange:      { min: 18, max: 30 },
+  },
+  {
+    type: "Soprano",
+    description: "...",
+    lowRange:       { min: 50, max: 58 },   // D3–Bb3
+    tessituraRange: { min: 57, max: 67 },   // A3–G4
+    spanRange:      { min: 20, max: 32 },
+  },
+];
+
+Note on MIDI values: Middle C = C4 = MIDI 60. Adjust boundary values by ±1–2 semitones during testing on real recordings — these are literature-standard starting points.
+
+
+Change 4: Implement Weighted Scoring Classifier
+Replace the hard if/else range match with a scoring function that awards points per signal and picks the best-fitting profile.
+jsfunction classifyVoice(stableLowMidi, tessituraMidi, spanSemitones) {
+  const scores = VOICE_PROFILES.map(profile => {
+    let score = 0;
+    let matchedSignals = 0;
+
+    // Signal 1: Low note (weight: 40%)
+    if (stableLowMidi >= profile.lowRange.min && 
+        stableLowMidi <= profile.lowRange.max) {
+      score += 40;
+      matchedSignals++;
+    } else {
+      // Partial credit for near-misses (within 2 semitones)
+      const distLow = Math.min(
+        Math.abs(stableLowMidi - profile.lowRange.min),
+        Math.abs(stableLowMidi - profile.lowRange.max)
+      );
+      if (distLow <= 2) score += 40 * (1 - distLow / 4);
+    }
+
+    // Signal 2: Tessitura (weight: 45% — most diagnostic)
+    if (tessituraMidi >= profile.tessituraRange.min && 
+        tessituraMidi <= profile.tessituraRange.max) {
+      score += 45;
+      matchedSignals++;
+    } else {
+      const distTess = Math.min(
+        Math.abs(tessituraMidi - profile.tessituraRange.min),
+        Math.abs(tessituraMidi - profile.tessituraRange.max)
+      );
+      if (distTess <= 3) score += 45 * (1 - distTess / 6);
+    }
+
+    // Signal 3: Range span (weight: 15%)
+    if (spanSemitones >= profile.spanRange.min && 
+        spanSemitones <= profile.spanRange.max) {
+      score += 15;
+      matchedSignals++;
+    }
+
+    return { type: profile.type, description: profile.description, score, matchedSignals };
+  });
+
+  // Sort by score descending
+  scores.sort((a, b) => b.score - a.score);
+
+  const best = scores[0];
+  const runnerUp = scores[1];
+  const scoreDelta = best.score - runnerUp.score;
+
+  return {
+    primary: best.type,
+    description: best.description,
+    confidence: computeConfidence(best.score, scoreDelta, best.matchedSignals),
+    runnerUp: runnerUp.type,
+    scores, // full array, useful for debugging
+  };
+}
+
+function computeConfidence(topScore, delta, matchedSignals) {
+  if (topScore >= 80 && delta >= 20 && matchedSignals === 3) return "high";
+  if (topScore >= 55 && delta >= 10) return "medium";
+  return "low";
+}
+
+Change 5: Range Cross-Validation (Sanity Check)
+Before classifying, run a quick sanity check. If the detected range is biologically implausible, reject the session and prompt the user to retry.
+jsfunction validateSession(stableLowMidi, stableHighMidi) {
+  const span = stableHighMidi - stableLowMidi;
+  const errors = [];
+
+  if (span < 8) {
+    errors.push("Range too narrow — less than 8 semitones detected. Try again and sustain each note longer.");
+  }
+  if (span > 40) {
+    errors.push("Range unusually wide — possible recording error. Check microphone.");
+  }
+  if (stableLowMidi > stableHighMidi) {
+    errors.push("Low note detected higher than high note — sessions may have been reversed.");
+  }
+  // Cross-check: low note of a claimed soprano shouldn't be below C2
+  if (stableLowMidi < 36) {
+    errors.push("Extremely low note detected — possible sub-harmonic or mic noise. Results may be unreliable.");
+  }
+
+  return { valid: errors.length === 0, errors };
+}
+Call this before classifyVoice() and surface the error messages to the user if invalid.
+
+Change 6: Update the Telegram Message
+The teacher's message should include all signals, not just the final label, so they can judge quality of the reading.
+jsfunction buildTeacherMessage({ 
+  stableLow, stableHigh, span, 
+  tessitura, result, validation 
+}) {
+  const lowName  = midiToNoteName(stableLow);
+  const highName = midiToNoteName(stableHigh);
+  const tessName = midiToNoteName(Math.round(tessitura));
+
+  let msg = `🎙 Voice Assessment\n`;
+  msg += `Low note: ${lowName} | High note: ${highName}\n`;
+  msg += `Range: ${span} semitones (${(span/12).toFixed(1)} octaves)\n`;
+  msg += `Tessitura center: ${tessName}\n`;
+  msg += `\n`;
+  msg += `Classification: ${result.primary} (${result.confidence} confidence)\n`;
+  if (result.confidence !== "high") {
+    msg += `Runner-up: ${result.runnerUp} — manual check recommended\n`;
+  }
+  if (!validation.valid) {
+    msg += `\n⚠️ Validation warnings:\n`;
+    validation.errors.forEach(e => msg += `• ${e}\n`);
+  }
+
+  return msg;
+}
+
+Change 7: UI Confidence Indicator
+The user-facing UI currently only shows the voice type label. Add a confidence signal without exposing the raw data:
+
+High confidence → show label normally: "Baritone"
+Medium confidence → show with soft caveat: "Likely Baritone"
+Low confidence → show with explicit prompt: "Possibly Baritone — your teacher will confirm"
+
+This is a one-line change to the label rendering — just prepend the qualifier based on result.confidence.
+
+Implementation Order
+Do these in sequence — each one builds on the previous:
+
+Change 1 — stable low/high estimates (15 min, low risk, immediate improvement)
+Change 5 — session validation (30 min, prevents garbage-in classification)
+Change 2 — tessitura computation (30 min, requires exposing full readings array)
+Change 3 + 4 — new profile table + scoring classifier (1–2 hrs, replaces core logic)
+Change 6 — updated Telegram message (15 min)
+Change 7 — UI confidence label (10 min)
