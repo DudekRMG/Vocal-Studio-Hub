@@ -316,7 +316,7 @@ export function VoiceRangeWidget({
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
     setSubmitStatus("sending");
-    const voiceTypeKey = lowHz ? getVoiceTypeKey(lowHz) : "soprano";
+    const voiceTypeKey = lowHz ? getVoiceTypeKey(lowHz, highHz) : "soprano";
     const voiceTypeName = tx.voiceTypes[voiceTypeKey].name;
     const rangeOctaves = (lowHz && highHz)
       ? parseFloat((Math.log2(highHz / lowHz)).toFixed(2))
@@ -351,7 +351,7 @@ export function VoiceRangeWidget({
     }
   }
 
-  const voiceTypeKey  = lowHz ? getVoiceTypeKey(lowHz) : "soprano";
+  const voiceTypeKey  = lowHz ? getVoiceTypeKey(lowHz, highHz) : "soprano";
   const voiceTypeData = tx.voiceTypes[voiceTypeKey];
   const rangeOctavesDisplay = (lowHz && highHz)
     ? Math.log2(highHz / lowHz).toFixed(1)
