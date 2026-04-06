@@ -102,6 +102,7 @@ export function VoiceRangeWidget({
   const recordStartRef  = useRef(0);
   const lastSampleRef   = useRef(0);
   const rafRef          = useRef(0);
+  const lastProgressRef = useRef(-1);
   const touchActiveRef  = useRef(false);
   const lowHzRef              = useRef<number | null>(null);
   const lowPitchSamplesRef    = useRef<number[]>([]);
@@ -282,6 +283,7 @@ export function VoiceRangeWidget({
     pitchSamplesRef.current = [];
     recordStartRef.current  = performance.now();
     lastSampleRef.current   = 0;
+    lastProgressRef.current = -1;
 
     if (which === "low") {
       setLowRecordState("recording");
@@ -300,7 +302,11 @@ export function VoiceRangeWidget({
       if (!isRecordingRef.current) return;
       const elapsed = performance.now() - recordStartRef.current;
       const activeDuration = recordingForRef.current === "tessitura" ? TESSITURA_DURATION : MAX_DURATION;
-      setRecordProgress(Math.min(elapsed / activeDuration, 1));
+      const nextProgress = Math.min(elapsed / activeDuration, 1);
+      if (nextProgress - lastProgressRef.current >= 0.005 || nextProgress >= 1) {
+        lastProgressRef.current = nextProgress;
+        setRecordProgress(nextProgress);
+      }
 
       const analyser = analyserRef.current;
       const buf      = bufferRef.current;
@@ -327,6 +333,7 @@ export function VoiceRangeWidget({
   }
 
   function open() {
+    document.body.dataset.widgetOpen = "1";
     sessionRef.current += 1;
     const sessionId = sessionRef.current;
     setStep("mic-check");
@@ -335,6 +342,7 @@ export function VoiceRangeWidget({
   }
 
   function close() {
+    delete document.body.dataset.widgetOpen;
     sessionRef.current += 1;
     releaseAudio();
     setStep("closed");
