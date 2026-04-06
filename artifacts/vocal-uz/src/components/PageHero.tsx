@@ -138,7 +138,7 @@ export function PageHero({
           <a
             href="#hero-bottom"
             onClick={scrollToHeroBottom}
-            className="inline-flex items-center gap-2 no-underline transition-all duration-200 uppercase"
+            className="group inline-flex items-center gap-2 no-underline transition-all duration-200 uppercase"
             style={{
               fontFamily: "var(--font-display-family)",
               fontWeight: 700,
@@ -150,7 +150,7 @@ export function PageHero({
             }}
           >
             Learn More
-            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
+            <svg className="transition-transform duration-200 group-hover:translate-x-0.5" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
               <path d="M5 12h14M12 5l7 7-7 7" />
             </svg>
           </a>
@@ -210,7 +210,7 @@ export function PageHero({
               <a
                 href="#hero-bottom"
                 onClick={scrollToHeroBottom}
-                className="inline-flex items-center gap-2 no-underline transition-all duration-200 uppercase"
+                className="group inline-flex items-center gap-2 no-underline transition-all duration-200 uppercase"
                 style={{
                   fontFamily: "var(--font-display-family)",
                   fontWeight: 700,
@@ -222,7 +222,7 @@ export function PageHero({
                 }}
               >
                 Learn More
-                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
+                <svg className="transition-transform duration-200 group-hover:translate-x-0.5" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
                   <path d="M5 12h14M12 5l7 7-7 7" />
                 </svg>
               </a>
@@ -258,7 +258,7 @@ export function PageHero({
               <a
                 href="#hero-bottom"
                 onClick={scrollToHeroBottom}
-                className="inline-flex items-center gap-2 no-underline transition-all duration-200 uppercase"
+                className="group inline-flex items-center gap-2 no-underline transition-all duration-200 uppercase"
                 style={{
                   fontFamily: "var(--font-display-family)",
                   fontWeight: 700,
@@ -270,7 +270,7 @@ export function PageHero({
                 }}
               >
                 Learn More
-                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
+                <svg className="transition-transform duration-200 group-hover:translate-x-0.5" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
                   <path d="M5 12h14M12 5l7 7-7 7" />
                 </svg>
               </a>
@@ -326,7 +326,7 @@ export function PageHero({
               <a
                 href="#hero-bottom"
                 onClick={scrollToHeroBottom}
-                className="inline-flex items-center gap-2 no-underline transition-all duration-200 uppercase"
+                className="group inline-flex items-center gap-2 no-underline transition-all duration-200 uppercase"
                 style={{
                   fontFamily: "var(--font-display-family)",
                   fontWeight: 700,
@@ -338,7 +338,7 @@ export function PageHero({
                 }}
               >
                 Learn More
-                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
+                <svg className="transition-transform duration-200 group-hover:translate-x-0.5" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
                   <path d="M5 12h14M12 5l7 7-7 7" />
                 </svg>
               </a>
