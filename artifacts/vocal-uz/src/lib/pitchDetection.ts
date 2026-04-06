@@ -49,7 +49,7 @@ export function getVoiceTypeKey(
  * @param sampleRate  AudioContext sample rate (e.g. 44100)
  * @returns frequency in Hz, or -1 if no confident pitch was detected
  */
-export function autocorrelate(buffer: Float32Array, sampleRate: number): number {
+export function autocorrelate(buffer: Float32Array<ArrayBufferLike>, sampleRate: number): number {
   const SIZE = buffer.length;
 
   // Reject silence

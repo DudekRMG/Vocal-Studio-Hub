@@ -68,7 +68,7 @@ export function VoiceRangeWidget({
   const audioCtxRef     = useRef<AudioContext | null>(null);
   const streamRef       = useRef<MediaStream | null>(null);
   const analyserRef     = useRef<AnalyserNode | null>(null);
-  const bufferRef       = useRef<Float32Array | null>(null);
+  const bufferRef       = useRef<Float32Array<ArrayBuffer> | null>(null);
   const isRecordingRef  = useRef(false);
   const recordingForRef = useRef<"low" | "high">("low");
   const pitchSamplesRef = useRef<number[]>([]);
@@ -110,9 +110,12 @@ export function VoiceRangeWidget({
   }
 
   async function requestMic() {
-    const AC =
-      (window as any).AudioContext ||
-      (window as any).webkitAudioContext;
+    interface ExtendedWindow extends Window {
+      AudioContext: typeof AudioContext;
+      webkitAudioContext: typeof AudioContext;
+    }
+    const w = window as Partial<ExtendedWindow>;
+    const AC = w.AudioContext ?? w.webkitAudioContext;
     if (!AC || !navigator?.mediaDevices?.getUserMedia) {
       setMicError("unsupported");
       setStep("mic-error");
@@ -121,7 +124,7 @@ export function VoiceRangeWidget({
     try {
       const stream = await navigator.mediaDevices.getUserMedia({ audio: true, video: false });
       streamRef.current = stream;
-      const ctx = new AC() as AudioContext;
+      const ctx = new AC();
       audioCtxRef.current = ctx;
       const analyser = ctx.createAnalyser();
       analyser.fftSize = 2048;
@@ -129,9 +132,9 @@ export function VoiceRangeWidget({
       bufferRef.current = new Float32Array(analyser.fftSize);
       ctx.createMediaStreamSource(stream).connect(analyser);
       setStep("low");
-    } catch (err: any) {
-      const name = err?.name ?? "";
-      if (name === "NotAllowedError" || name === "PermissionDeniedError") {
+    } catch (err: unknown) {
+      const errName = err instanceof Error ? err.name : "";
+      if (errName === "NotAllowedError" || errName === "PermissionDeniedError") {
         setMicError("denied");
       } else {
         setMicError("general");
