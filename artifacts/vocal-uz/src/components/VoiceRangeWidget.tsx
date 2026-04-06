@@ -800,12 +800,14 @@ export function VoiceRangeWidget({
         <div
           style={{
             position: "fixed", inset: 0, zIndex: 10000,
-            display: "flex", alignItems: "center", justifyContent: "center",
+            overflowY: "auto",
             background: "rgba(0,0,0,0.82)",
             backdropFilter: "blur(10px)",
             WebkitBackdropFilter: "blur(10px)",
             padding: 16,
             animation: "vrFadeIn 0.15s both",
+            display: "flex",
+            alignItems: "flex-start",
           }}
           onClick={(e) => { if (e.target === e.currentTarget) close(); }}
         >
@@ -814,8 +816,7 @@ export function VoiceRangeWidget({
               position: "relative",
               width: "100%",
               maxWidth: 440,
-              maxHeight: "calc(100vh - 32px)",
-              overflowY: "auto",
+              margin: "auto",
               background: "#111111",
               border: "1px solid rgba(255,255,255,0.1)",
               padding: "32px 28px 28px",
