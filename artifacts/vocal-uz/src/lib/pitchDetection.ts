@@ -49,14 +49,14 @@ export function getVoiceTypeKey(
  * @param sampleRate  AudioContext sample rate (e.g. 44100)
  * @returns frequency in Hz, or -1 if no confident pitch was detected
  */
-export function autocorrelate(buffer: Float32Array<ArrayBufferLike>, sampleRate: number): number {
+export function autocorrelate(buffer: Float32Array<ArrayBufferLike>, sampleRate: number): number | null {
   const SIZE = buffer.length;
 
   // Reject silence
   let rms = 0;
   for (let i = 0; i < SIZE; i++) rms += buffer[i] * buffer[i];
   rms = Math.sqrt(rms / SIZE);
-  if (rms < 0.01) return -1;
+  if (rms < 0.01) return null;
 
   // Trim leading / trailing near-silence to reduce autocorrelation noise
   let r1 = 0, r2 = SIZE - 1;
@@ -82,7 +82,7 @@ export function autocorrelate(buffer: Float32Array<ArrayBufferLike>, sampleRate:
   // Walk past the initial positive region (find first zero crossing)
   let d = 0;
   while (d < N && c[d] > 0) d++;
-  if (d === N) return -1;
+  if (d === N) return null;
 
   // Find maximum correlation after the crossing
   let maxVal = -Infinity, maxLag = -1;
@@ -90,19 +90,19 @@ export function autocorrelate(buffer: Float32Array<ArrayBufferLike>, sampleRate:
     if (c[i] > maxVal) { maxVal = c[i]; maxLag = i; }
   }
 
-  if (maxLag <= 0 || maxLag >= N - 1) return -1;
+  if (maxLag <= 0 || maxLag >= N - 1) return null;
 
   // Parabolic interpolation for sub-sample lag precision
   const x1 = c[maxLag - 1], x2 = c[maxLag], x3 = c[maxLag + 1];
   const a = (x1 + x3 - 2 * x2) / 2;
   const b = (x3 - x1) / 2;
   const refinedLag = a !== 0 ? maxLag - b / (2 * a) : maxLag;
-  if (refinedLag <= 0) return -1;
+  if (refinedLag <= 0) return null;
 
   const freq = sampleRate / refinedLag;
 
   // Discard out-of-range frequencies (human singing voice: 60–1200 Hz)
-  if (freq < 60 || freq > 1200) return -1;
+  if (freq < 60 || freq > 1200) return null;
 
   return freq;
 }

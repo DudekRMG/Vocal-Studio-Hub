@@ -37,11 +37,11 @@ export function VoiceRangeWidget({
   const { lang } = useLang();
   const tx = t[lang].voiceWidget;
 
-  // ── trigger button styles (defaults computed from lightMode) ──────────────
-  const tBorder      = triggerBorder      ?? (lightMode ? "rgba(15,16,22,0.18)"  : "rgba(255,255,255,0.18)");
-  const tColor       = triggerColor       ?? (lightMode ? "rgba(15,16,22,0.6)"   : "rgba(240,238,234,0.6)");
-  const tHoverBorder = triggerHoverBorder ?? (lightMode ? "rgba(15,16,22,0.4)"   : "rgba(255,255,255,0.4)");
-  const tHoverColor  = triggerHoverColor  ?? (lightMode ? "#0f1016"              : "#f0eeea");
+  // ── trigger button styles — default is accent-colored outlined style ───────
+  const tBorder      = triggerBorder      ?? accentColor;
+  const tColor       = triggerColor       ?? accentColor;
+  const tHoverBorder = triggerHoverBorder ?? accentColor;
+  const tHoverColor  = triggerHoverColor  ?? (lightMode ? "#0f1016" : "#f0eeea");
 
   // ── state ─────────────────────────────────────────────────────────────────
   const [step, setStep]               = useState<Step>("closed");
@@ -77,6 +77,7 @@ export function VoiceRangeWidget({
   const rafRef          = useRef(0);
   const touchActiveRef  = useRef(false);
   const lowHzRef        = useRef<number | null>(null);
+  const sessionRef      = useRef(0);
 
   // ── body scroll lock ──────────────────────────────────────────────────────
   useEffect(() => {
@@ -109,7 +110,7 @@ export function VoiceRangeWidget({
     bufferRef.current = null;
   }
 
-  async function requestMic() {
+  async function requestMic(sessionId: number) {
     interface ExtendedWindow extends Window {
       AudioContext: typeof AudioContext;
       webkitAudioContext: typeof AudioContext;
@@ -117,12 +118,17 @@ export function VoiceRangeWidget({
     const w = window as Partial<ExtendedWindow>;
     const AC = w.AudioContext ?? w.webkitAudioContext;
     if (!AC || !navigator?.mediaDevices?.getUserMedia) {
+      if (sessionRef.current !== sessionId) return;
       setMicError("unsupported");
       setStep("mic-error");
       return;
     }
     try {
       const stream = await navigator.mediaDevices.getUserMedia({ audio: true, video: false });
+      if (sessionRef.current !== sessionId) {
+        stream.getTracks().forEach((t) => t.stop());
+        return;
+      }
       streamRef.current = stream;
       const ctx = new AC();
       audioCtxRef.current = ctx;
@@ -133,6 +139,7 @@ export function VoiceRangeWidget({
       ctx.createMediaStreamSource(stream).connect(analyser);
       setStep("low");
     } catch (err: unknown) {
+      if (sessionRef.current !== sessionId) return;
       const errName = err instanceof Error ? err.name : "";
       if (errName === "NotAllowedError" || errName === "PermissionDeniedError") {
         setMicError("denied");
@@ -223,7 +230,7 @@ export function VoiceRangeWidget({
           lastSampleRef.current = now;
           analyser.getFloatTimeDomainData(buf);
           const freq = autocorrelate(buf, ctx.sampleRate);
-          if (freq > 0) {
+          if (freq !== null) {
             pitchSamplesRef.current.push(freq);
             setCurrentPitch(frequencyToNote(freq));
           }
@@ -240,12 +247,15 @@ export function VoiceRangeWidget({
 
   // ── open / close ──────────────────────────────────────────────────────────
   function open() {
+    sessionRef.current += 1;
+    const sessionId = sessionRef.current;
     setStep("mic-check");
     setMicError("");
-    requestMic();
+    requestMic(sessionId);
   }
 
   function close() {
+    sessionRef.current += 1;
     releaseAudio();
     setStep("closed");
     setMicError("");
@@ -460,7 +470,7 @@ export function VoiceRangeWidget({
           </p>
           {micError !== "unsupported" && (
             <button
-              onClick={() => { setStep("mic-check"); setMicError(""); requestMic(); }}
+              onClick={() => { sessionRef.current += 1; const sid = sessionRef.current; setStep("mic-check"); setMicError(""); requestMic(sid); }}
               style={{
                 background: accentColor, color: "#fff", border: "none",
                 padding: "0.6rem 1.4rem", cursor: "pointer", fontSize: "0.8rem",
