@@ -94,6 +94,8 @@ export function VideoPlayer({ src }: VideoPlayerProps) {
       scrollPausedPhaseRef.current = null;
       setPhaseSync("paused");
     } else if (p === "paused") {
+      video.muted = false;
+      setMutedSync(false);
       video.play().catch(() => {});
       setPhaseSync("playing");
     }
@@ -164,8 +166,8 @@ export function VideoPlayer({ src }: VideoPlayerProps) {
               backdropFilter: "blur(8px)",
             }}
           >
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="white" style={{ marginLeft: 3 }}>
-              <polygon points="5,3 21,12 5,21" />
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="white">
+              <path d="M8 5L20 12L8 19Z" />
             </svg>
           </div>
         </div>
@@ -186,18 +188,8 @@ export function VideoPlayer({ src }: VideoPlayerProps) {
               backdropFilter: "blur(8px)",
             }}
           >
-            <svg
-              width="22"
-              height="22"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="white"
-              strokeWidth="2.2"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            >
-              <polyline points="1 4 1 10 7 10" />
-              <path d="M3.51 15a9 9 0 1 0 .49-3.31" />
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="white">
+              <path d="M12 5V1L7 6l5 5V7c3.31 0 6 2.69 6 6s-2.69 6-6 6-6-2.69-6-6H4c0 4.42 3.58 8 8 8s8-3.58 8-8-3.58-8-8-8z" />
             </svg>
           </button>
         </div>
