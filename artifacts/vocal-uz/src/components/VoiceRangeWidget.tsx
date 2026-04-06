@@ -5,7 +5,12 @@ import { t } from "@/lib/i18n";
 import {
   autocorrelate,
   frequencyToNote,
-  getVoiceTypeKey,
+  frequencyToMidi,
+  computeTessitura,
+  classifyVoice,
+  validateSession,
+  type VoiceClassification,
+  type SessionValidation,
 } from "@/lib/pitchDetection";
 
 const MAX_DURATION = 5000;
@@ -74,8 +79,10 @@ export function VoiceRangeWidget({
   const lastSampleRef   = useRef(0);
   const rafRef          = useRef(0);
   const touchActiveRef  = useRef(false);
-  const lowHzRef        = useRef<number | null>(null);
-  const sessionRef      = useRef(0);
+  const lowHzRef           = useRef<number | null>(null);
+  const lowPitchSamplesRef  = useRef<number[]>([]);
+  const highPitchSamplesRef = useRef<number[]>([]);
+  const sessionRef          = useRef(0);
 
   useEffect(() => {
     if (step !== "closed") {
@@ -180,21 +187,36 @@ export function VoiceRangeWidget({
     }
 
     const sorted = [...samples].sort((a, b) => a - b);
-    const median = sorted[Math.floor(sorted.length / 2)];
-    const note   = frequencyToNote(median);
-    const hz     = Math.round(median);
+
+    let stable: number;
+    if (which === "low") {
+      // Discard bottom 10% (sub-harmonics / noise spikes), take the minimum of what's left
+      const trimStart = Math.max(1, Math.floor(sorted.length * 0.10));
+      const trimmed = sorted.slice(trimStart);
+      stable = trimmed.length > 0 ? trimmed[0] : sorted[0];
+    } else {
+      // Discard top 10% (falsetto squeaks / noise spikes), take the maximum of what's left
+      const trimEnd = Math.floor(sorted.length * 0.90);
+      const trimmed = sorted.slice(0, trimEnd);
+      stable = trimmed.length > 0 ? trimmed[trimmed.length - 1] : sorted[sorted.length - 1];
+    }
+
+    const note = frequencyToNote(stable);
+    const hz   = Math.round(stable);
 
     if (which === "low") {
+      lowPitchSamplesRef.current = samples;
       lowHzRef.current = hz;
       setLowNote(note);
       setLowHz(hz);
       setLowError("");
       setLowRecordState("done");
     } else {
-      if (lowHzRef.current !== null && median <= lowHzRef.current) {
+      if (lowHzRef.current !== null && stable <= lowHzRef.current) {
         setHighRecordState("idle");
         setHighError("invalid-range");
       } else {
+        highPitchSamplesRef.current = samples;
         setHighNote(note);
         setHighHz(hz);
         setHighError("");
@@ -266,6 +288,8 @@ export function VoiceRangeWidget({
     setLowRecordState("idle");  setLowNote(null);  setLowHz(null);  setLowError("");
     setHighRecordState("idle"); setHighNote(null); setHighHz(null); setHighError("");
     lowHzRef.current = null;
+    lowPitchSamplesRef.current  = [];
+    highPitchSamplesRef.current = [];
     setRecordProgress(0); setCurrentPitch(null);
     setName(""); setContact(""); setSubmitStatus("idle");
   }
@@ -298,6 +322,8 @@ export function VoiceRangeWidget({
     setLowHz(null);
     setLowError("");
     lowHzRef.current = null;
+    lowPitchSamplesRef.current  = [];
+    highPitchSamplesRef.current = [];
     setRecordProgress(0);
     setCurrentPitch(null);
   }
@@ -309,18 +335,45 @@ export function VoiceRangeWidget({
     setHighNote(null);
     setHighHz(null);
     setHighError("");
+    highPitchSamplesRef.current = [];
     setRecordProgress(0);
     setCurrentPitch(null);
+  }
+
+  function resetAll() {
+    cancelAnimationFrame(rafRef.current);
+    isRecordingRef.current = false;
+    setLowRecordState("idle");  setLowNote(null);  setLowHz(null);  setLowError("");
+    setHighRecordState("idle"); setHighNote(null); setHighHz(null); setHighError("");
+    lowHzRef.current = null;
+    lowPitchSamplesRef.current  = [];
+    highPitchSamplesRef.current = [];
+    setRecordProgress(0);
+    setCurrentPitch(null);
+    setStep("low");
   }
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
     setSubmitStatus("sending");
-    const voiceTypeKey = lowHz ? getVoiceTypeKey(lowHz, highHz) : "soprano";
-    const voiceTypeName = tx.voiceTypes[voiceTypeKey].name;
-    const rangeOctaves = (lowHz && highHz)
+
+    const stableLowMidi  = lowHz  ? frequencyToMidi(lowHz)  : 60;
+    const stableHighMidi = highHz ? frequencyToMidi(highHz) : 72;
+    const allSamples     = [...lowPitchSamplesRef.current, ...highPitchSamplesRef.current];
+    const tessituraMidi  = computeTessitura(allSamples);
+    const span           = stableHighMidi - stableLowMidi;
+    const classification = (lowHz && highHz)
+      ? classifyVoice(stableLowMidi, tessituraMidi, span)
+      : { primary: "soprano" as const, confidence: "low" as const, runnerUp: "mezzo" as const };
+
+    const voiceTypeName = tx.voiceTypes[classification.primary].name;
+    const runnerUpName  = tx.voiceTypes[classification.runnerUp].name;
+    const rangeOctaves  = (lowHz && highHz)
       ? parseFloat((Math.log2(highHz / lowHz)).toFixed(2))
       : 0;
+    const tessHz      = 440 * Math.pow(2, (tessituraMidi - 69) / 12);
+    const tessNote    = frequencyToNote(tessHz);
+
     try {
       const base = import.meta.env.BASE_URL.replace(/\/$/, "");
       const res = await fetch(`${base}/api/voice-range`, {
@@ -329,14 +382,18 @@ export function VoiceRangeWidget({
         body: JSON.stringify({
           name,
           contact,
-          lowestNote:  lowNote,
-          lowestHz:    lowHz,
-          highestNote: highNote,
-          highestHz:   highHz,
+          lowestNote:       lowNote,
+          lowestHz:         lowHz,
+          highestNote:      highNote,
+          highestHz:        highHz,
           rangeOctaves,
-          voiceType:   voiceTypeName,
-          page:        pageName,
-          timestamp:   new Date().toLocaleString(lang === "ru" ? "ru-RU" : "en-US"),
+          rangeSpan:        span,
+          voiceType:        voiceTypeName,
+          tessitura:        tessNote,
+          confidenceLevel:  classification.confidence,
+          runnerUp:         runnerUpName,
+          page:             pageName,
+          timestamp:        new Date().toLocaleString(lang === "ru" ? "ru-RU" : "en-US"),
           lang,
         }),
       });
@@ -351,8 +408,33 @@ export function VoiceRangeWidget({
     }
   }
 
-  const voiceTypeKey  = lowHz ? getVoiceTypeKey(lowHz, highHz) : "soprano";
+  const stableLowMidi  = lowHz  ? frequencyToMidi(lowHz)  : null;
+  const stableHighMidi = highHz ? frequencyToMidi(highHz) : null;
+
+  const validation: SessionValidation | null = (stableLowMidi !== null && stableHighMidi !== null)
+    ? validateSession(stableLowMidi, stableHighMidi)
+    : null;
+
+  const classification: VoiceClassification | null = (
+    validation?.valid && stableLowMidi !== null && stableHighMidi !== null
+  )
+    ? classifyVoice(
+        stableLowMidi,
+        computeTessitura([...lowPitchSamplesRef.current, ...highPitchSamplesRef.current]),
+        stableHighMidi - stableLowMidi,
+      )
+    : null;
+
+  const voiceTypeKey  = classification?.primary ?? "soprano";
   const voiceTypeData = tx.voiceTypes[voiceTypeKey];
+
+  const confidenceQualifier = (() => {
+    if (!classification) return "";
+    if (classification.confidence === "medium") return `${tx.qualifierMedium} `;
+    if (classification.confidence === "low")    return `${tx.qualifierLow} `;
+    return "";
+  })();
+
   const rangeOctavesDisplay = (lowHz && highHz)
     ? Math.log2(highHz / lowHz).toFixed(1)
     : "—";
@@ -624,6 +706,54 @@ export function VoiceRangeWidget({
     }
 
     if (step === "results") {
+      if (validation && !validation.valid) {
+        return (
+          <div style={{ textAlign: "center", animation: "vrFadeIn 0.25s both" }}>
+            <div style={{ fontSize: "2rem", marginBottom: 14 }}>⚠️</div>
+            <p style={{
+              color: "rgba(240,238,234,0.5)",
+              fontSize: "0.68rem",
+              letterSpacing: "0.22em",
+              textTransform: "uppercase",
+              marginBottom: 16,
+            }}>
+              {tx.validationTitle}
+            </p>
+            <div style={{ display: "flex", flexDirection: "column", gap: 10, marginBottom: 28 }}>
+              {validation.errorKeys.map((key) => (
+                <p key={key} style={{
+                  color: "rgba(240,238,234,0.65)",
+                  fontSize: "0.84rem",
+                  lineHeight: 1.6,
+                  margin: 0,
+                }}>
+                  {tx.validationErrors[key]}
+                </p>
+              ))}
+            </div>
+            <button
+              onClick={resetAll}
+              style={{
+                background: accentColor,
+                color: "#fff",
+                border: "none",
+                padding: "0.7rem 2rem",
+                cursor: "pointer",
+                fontSize: "0.78rem",
+                fontFamily: "var(--font-display-family)",
+                letterSpacing: "0.14em",
+                textTransform: "uppercase",
+                transition: "opacity 0.2s",
+              }}
+              onMouseEnter={(e) => { (e.currentTarget as HTMLButtonElement).style.opacity = "0.85"; }}
+              onMouseLeave={(e) => { (e.currentTarget as HTMLButtonElement).style.opacity = "1"; }}
+            >
+              {tx.validationRetry}
+            </button>
+          </div>
+        );
+      }
+
       return (
         <div style={{ textAlign: "center", animation: "vrFadeIn 0.25s both" }}>
           <p style={{
@@ -641,10 +771,21 @@ export function VoiceRangeWidget({
             letterSpacing: "0.04em",
             color: accentColor,
             lineHeight: 1,
-            marginBottom: 12,
+            marginBottom: 8,
           }}>
-            {voiceTypeData.name}
+            {confidenceQualifier}{voiceTypeData.name}
           </div>
+          {classification && classification.confidence === "low" && (
+            <p style={{
+              color: "rgba(240,238,234,0.45)",
+              fontSize: "0.75rem",
+              lineHeight: 1.5,
+              margin: "0 0 12px",
+              fontStyle: "italic",
+            }}>
+              {tx.qualifierLowFootnote}
+            </p>
+          )}
           <p style={{
             color: "rgba(240,238,234,0.65)",
             fontSize: "0.88rem",
