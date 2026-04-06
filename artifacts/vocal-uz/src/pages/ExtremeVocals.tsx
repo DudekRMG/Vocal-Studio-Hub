@@ -329,9 +329,7 @@ export default function ExtremeVocals() {
       </section>
       </RevealSection>
 
-      <RevealSection>
-        <TestimonialsSection accentColor="#e8002d" />
-      </RevealSection>
+      <TestimonialsSection accentColor="#e8002d" />
 
       {/* ── BOOKING ── */}
       <RevealSection>

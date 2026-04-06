@@ -314,9 +314,7 @@ export default function PopVocals() {
       </section>
       </RevealSection>
 
-      <RevealSection>
-        <TestimonialsSection accentColor="#9d4edd" />
-      </RevealSection>
+      <TestimonialsSection accentColor="#9d4edd" />
 
       {/* ── BOOKING ── */}
       <RevealSection>

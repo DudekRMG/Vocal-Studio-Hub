@@ -434,9 +434,7 @@ export default function KaraokeCourse() {
 
       </RevealSection>
 
-      <RevealSection>
-        <TestimonialsSection accentColor="#c9a84c" />
-      </RevealSection>
+      <TestimonialsSection accentColor="#c9a84c" />
 
       {/* ── BOOKING ── */}
       <RevealSection>

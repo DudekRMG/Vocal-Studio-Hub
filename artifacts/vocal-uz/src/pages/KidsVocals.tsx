@@ -428,9 +428,7 @@ export default function KidsVocals() {
 
       </RevealSection>
 
-      <RevealSection>
-        <TestimonialsSection accentColor="#3b82f6" variant="kids" />
-      </RevealSection>
+      <TestimonialsSection accentColor="#3b82f6" variant="kids" />
 
       {/* ── BOOKING ── */}
       <RevealSection>
