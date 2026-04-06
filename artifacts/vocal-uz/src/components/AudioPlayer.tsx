@@ -28,35 +28,35 @@ export function AudioPlayer({ src, label, variant, accentColor, isKids = false }
   const isBefore = variant === "before";
 
   const bgColor = isBefore
-    ? (isKids ? "#ffffff" : "#1c1c1c")
+    ? (isKids ? "#9aa0c0" : "#1c1c1c")
     : (isKids ? `${accentColor}50` : `${accentColor}2e`);
 
   const borderColor = isBefore
-    ? (isKids ? "rgba(0,0,0,0.14)" : "rgba(255,255,255,0.13)")
+    ? (isKids ? "rgba(0,0,0,0.18)" : "rgba(255,255,255,0.13)")
     : `${accentColor}88`;
 
   const btnBg = isBefore
-    ? (isKids ? "#9aa0c0" : "#424242")
+    ? (isKids ? "#ffffff" : "#424242")
     : accentColor;
 
   const btnIconColor = isBefore
-    ? (isKids ? "#2e3460" : "#c0c0c0")
+    ? (isKids ? "#4a5480" : "#c0c0c0")
     : "#fff";
 
   const trackBg = isBefore
-    ? (isKids ? "rgba(0,0,0,0.14)" : "rgba(255,255,255,0.13)")
+    ? (isKids ? "rgba(0,0,0,0.2)" : "rgba(255,255,255,0.13)")
     : (isKids ? "rgba(0,0,0,0.18)" : "rgba(255,255,255,0.18)");
 
   const fillColor = isBefore
-    ? (isKids ? "#7a81a8" : "#606060")
+    ? (isKids ? "rgba(255,255,255,0.75)" : "#606060")
     : accentColor;
 
   const labelColor = isBefore
-    ? (isKids ? "rgba(15,16,22,0.6)" : "rgba(240,238,234,0.62)")
+    ? (isKids ? "rgba(255,255,255,0.9)" : "rgba(240,238,234,0.62)")
     : (isKids ? "rgba(15,16,22,0.82)" : "rgba(240,238,234,0.88)");
 
   const timeColor = isBefore
-    ? (isKids ? "rgba(15,16,22,0.42)" : "rgba(240,238,234,0.45)")
+    ? (isKids ? "rgba(255,255,255,0.68)" : "rgba(240,238,234,0.45)")
     : (isKids ? "rgba(15,16,22,0.62)" : "rgba(240,238,234,0.68)");
 
   useEffect(() => {
