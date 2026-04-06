@@ -379,15 +379,15 @@ export function VoiceRangeWidget({
           </>
         )}
         <svg width={100} height={100} style={{ position: "absolute", inset: 0, pointerEvents: "none" }}>
-          <circle cx={50} cy={50} r={44} fill="none" stroke="rgba(255,255,255,0.08)" strokeWidth={3} />
+          <circle cx={50} cy={50} r={44} fill="none" stroke={isRecording ? "rgba(255,255,255,0.18)" : "rgba(255,255,255,0.1)"} strokeWidth={3} />
           {isRecording && (
             <circle
               cx={50} cy={50} r={44}
               fill="none"
-              stroke={accentColor}
+              stroke="rgba(255,255,255,0.95)"
               strokeWidth={3}
               strokeDasharray={CIRC}
-              strokeDashoffset={CIRC * recordProgress}
+              strokeDashoffset={CIRC * (1 - recordProgress)}
               strokeLinecap="round"
               transform="rotate(-90 50 50)"
               style={{ transition: "stroke-dashoffset 0.05s linear" }}
@@ -396,9 +396,9 @@ export function VoiceRangeWidget({
         </svg>
         <button
           style={{
-            position: "absolute", top: 6, left: 6, width: 88, height: 88,
+            position: "absolute", top: 10, left: 10, width: 80, height: 80,
             borderRadius: "50%",
-            border: `2px solid ${accentColor}`,
+            border: `2px solid ${isRecording ? "transparent" : accentColor}`,
             background: isRecording ? accentColor : "transparent",
             color: isRecording ? "#fff" : accentColor,
             fontSize: "1.6rem",
