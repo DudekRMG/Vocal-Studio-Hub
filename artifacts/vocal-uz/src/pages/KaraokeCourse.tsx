@@ -355,7 +355,7 @@ export default function KaraokeCourse() {
           </RevealSection>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-[1px] bg-white/[0.08]">
             {c.curriculum.map((lesson, i) => (
-              <RevealSection key={lesson.num} delay={i * 0.04}>
+              <RevealSection key={lesson.num} delay={i * 0.05}>
               <div className="bg-[#0f0f0f] p-8 relative group hover:bg-[#131109] transition-colors duration-300 h-full">
                 <div
                   className="font-display text-[4rem] leading-none absolute top-4 right-6 pointer-events-none"
