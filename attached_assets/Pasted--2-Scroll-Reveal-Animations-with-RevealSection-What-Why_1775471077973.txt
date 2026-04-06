@@ -1,0 +1,29 @@
+#2 - Scroll-Reveal Animations with RevealSection
+What & Why
+Add scroll-triggered entrance animations to all non-hero page sections so the site feels alive as the user scrolls. Uses a reusable useReveal hook (IntersectionObserver) and a RevealSection wrapper component so future sections automatically inherit the animation by adopting the wrapper. Respects the OS-level prefers-reduced-motion setting — users who have motion sensitivity enabled see no animation at all.
+The fadeUp and fadeIn keyframes already exist in index.css; no new animation CSS is needed.
+Done looks like
+•	Every content section below the hero (disciplines, about, stats, CTA banners, booking, course-content sections, FAQ, pricing, testimonials when added) fades and slides up into view as it enters the viewport while scrolling.
+•	Staggered card/grid reveals: when a section contains a grid of cards (e.g. pillar cards, FAQ items, perks), each card animates in with a small delay offset (0s, 0.1s, 0.2s…) creating a cascade effect.
+•	Hero sections are unaffected — they keep their existing load-time animate-[fadeUp] classes unchanged.
+•	On any device/OS with prefers-reduced-motion: reduce set, all scroll reveals are disabled and content is immediately visible (no opacity-0 flash).
+•	A new RevealSection wrapper component exists and is used by all current sections. Going forward, any new section added to the site should use RevealSection as its outer wrapper to inherit the animation automatically.
+Out of scope
+•	Changing existing hero animations (those remain as-is).
+•	Adding Framer Motion or any external animation library.
+•	Parallax or scroll-linked effects (only entrance animations on scroll into view).
+•	Animating the StageCanvas background — it manages its own animation loop.
+Tasks
+1.	Create useReveal hook — A small hook in src/lib/useReveal.ts that attaches an IntersectionObserver to a ref, sets a visible boolean when the element enters the viewport, and returns { ref, visible }. Must check window.matchMedia('(prefers-reduced-motion: reduce)') and return visible: true immediately when motion is reduced, so the content is never hidden.
+2.	Create RevealSection component — A thin wrapper in src/components/RevealSection.tsx that uses useReveal, starts invisible (opacity-0 translate-y-4), and applies animate-[fadeUp_0.7s_both] once visible. Accepts optional delay (number, in seconds) and className props so callers can stagger cards. When prefers-reduced-motion is active the wrapper renders children with no opacity or transform changes.
+3.	Apply to Home page sections — Wrap each non-hero section in Home.tsx with RevealSection: disciplines/courses strip, stats block, about section, red CTA banner, and booking section. Apply per-card stagger delay to the pillar cards grid.
+4.	Apply to all course pages — Wrap content sections in ExtremeVocals, PopVocals, KaraokeCourse, and KidsVocals pages using RevealSection. Sections to wrap: course-content, feature/pillar grids, FAQ, pricing, CTA banner, and booking section on each page. Apply stagger delay to any card grid within those sections.
+5.	Apply to testimonials section — When the testimonials section is added to any page, it must use RevealSection as its outer wrapper and apply stagger delay to individual testimonial cards. This task step serves as a standing convention: any new section should use RevealSection by default.
+Relevant files
+•	artifacts/vocal-uz/src/index.css:176-184
+•	artifacts/vocal-uz/src/pages/Home.tsx
+•	artifacts/vocal-uz/src/pages/ExtremeVocals.tsx
+•	artifacts/vocal-uz/src/pages/PopVocals.tsx
+•	artifacts/vocal-uz/src/pages/KaraokeCourse.tsx
+•	artifacts/vocal-uz/src/pages/KidsVocals.tsx
+•	artifacts/vocal-uz/src/components/StageCanvas.tsx:26
