@@ -377,6 +377,19 @@ export function VoiceRangeWidget({
         <svg width={100} height={100} style={{ position: "absolute", inset: 0, pointerEvents: "none" }}>
           <circle cx={50} cy={50} r={43} fill={accentColor} fillOpacity={isRecording ? 0.18 : 0} style={{ transition: "fill-opacity 0.15s" }} />
           <circle cx={50} cy={50} r={44} fill="none" stroke={accentColor} strokeWidth={2} opacity={isRecording ? 0 : 0.25} style={{ transition: "opacity 0.15s" }} />
+          {isRecording && (
+            <circle
+              cx={50} cy={50} r={44}
+              fill="none"
+              stroke={accentColor}
+              strokeWidth={3}
+              strokeDasharray={CIRC}
+              strokeDashoffset={CIRC * recordProgress}
+              strokeLinecap="round"
+              transform="rotate(-90 50 50)"
+              style={{ transition: "stroke-dashoffset 0.05s linear" }}
+            />
+          )}
         </svg>
         <button
           style={{
