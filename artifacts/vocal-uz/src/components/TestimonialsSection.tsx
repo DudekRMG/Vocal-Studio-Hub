@@ -52,6 +52,17 @@ export function TestimonialsSection({ accentColor, variant }: Props) {
       className="py-28 px-6 lg:px-12 border-t border-b"
       style={{ backgroundColor: sectionBg, borderColor: dividerColor }}
     >
+      <style>{`
+        @media (max-width: 74.9375rem) {
+          .testimonials-featured {
+            background-color: ${cardBg} !important;
+            border-color: ${dividerColor} !important;
+          }
+          .testimonials-featured .featured-duration {
+            color: ${textMuted} !important;
+          }
+        }
+      `}</style>
       <div className="max-w-[1100px] mx-auto">
 
         {/* ── Heading ── */}
@@ -76,7 +87,7 @@ export function TestimonialsSection({ accentColor, variant }: Props) {
         {/* ── Featured card ── */}
         {featured && (
           <div
-            className="mb-[1px] p-8 md:p-10"
+            className="testimonials-featured mb-[1px] p-8 md:p-10"
             style={{
               backgroundColor: featuredBg,
               border: `1px solid ${featuredBorder}`,
@@ -100,7 +111,7 @@ export function TestimonialsSection({ accentColor, variant }: Props) {
                       {featured.name}
                     </div>
                     <div
-                      className="text-[0.7rem] md:text-[0.72rem] md:tracking-[0.06em]"
+                      className="featured-duration text-[0.7rem] md:text-[0.72rem] md:tracking-[0.06em]"
                       style={{ color: accentColor }}
                     >
                       {featured.durationLabel}
