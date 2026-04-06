@@ -12,6 +12,7 @@ export function VideoPlayer({ src }: VideoPlayerProps) {
 
   const [phase, setPhase] = useState<Phase>("idle");
   const [muted, setMuted] = useState(true);
+  const [frameHovered, setFrameHovered] = useState(false);
 
   const phaseRef = useRef<Phase>("idle");
   const mutedRef = useRef(true);
@@ -145,8 +146,10 @@ export function VideoPlayer({ src }: VideoPlayerProps) {
     <div
       ref={containerRef}
       className="relative w-full overflow-hidden bg-black"
-      style={{ paddingBottom: "56.25%", cursor: isInteractive ? "pointer" : "default" }}
+      style={{ paddingBottom: "56.25%", cursor: isInteractive || phase === "ended" ? "pointer" : "default" }}
       onClick={handleFrameClick}
+      onMouseEnter={() => phase === "ended" && setFrameHovered(true)}
+      onMouseLeave={() => setFrameHovered(false)}
     >
       <video
         ref={videoRef}
@@ -186,11 +189,13 @@ export function VideoPlayer({ src }: VideoPlayerProps) {
           <button
             onClick={handleReplay}
             aria-label="Replay"
-            className="w-16 h-16 rounded-full flex items-center justify-center transition-opacity duration-150 hover:opacity-90"
+            className="w-16 h-16 rounded-full flex items-center justify-center"
             style={{
-              backgroundColor: "rgba(255,255,255,0.15)",
-              border: "2px solid rgba(255,255,255,0.55)",
+              backgroundColor: frameHovered ? "rgba(255,255,255,0.38)" : "rgba(255,255,255,0.15)",
+              border: frameHovered ? "2px solid rgba(255,255,255,1)" : "2px solid rgba(255,255,255,0.55)",
               backdropFilter: "blur(8px)",
+              transform: frameHovered ? "scale(1.13)" : "scale(1)",
+              transition: "background-color 0.18s, border-color 0.18s, transform 0.18s",
             }}
           >
             <svg width="22" height="22" viewBox="0 0 24 24" fill="white">
