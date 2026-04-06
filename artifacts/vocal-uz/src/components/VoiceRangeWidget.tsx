@@ -707,7 +707,7 @@ export function VoiceRangeWidget({
               <line x1="15" y1="51" x2="33" y2="51" stroke="rgba(240,238,234,0.7)" strokeWidth="2" strokeLinecap="round"/>
             </svg>
           </div>
-          <p style={{ color: "rgba(240,238,234,0.6)", fontSize: "0.88rem", lineHeight: 1.6, margin: 0 }}>
+          <p style={{ color: "rgba(240,238,234,0.6)", fontSize: "0.88rem", lineHeight: 1.6, margin: 0, textAlign: "left" }}>
             {tx.stepMicText}
           </p>
         </div>
@@ -722,7 +722,7 @@ export function VoiceRangeWidget({
       return (
         <div style={{ textAlign: "center", padding: "8px 0" }}>
           <div style={{ fontSize: "2rem", marginBottom: 16 }}>🚫</div>
-          <p style={{ color: "rgba(240,238,234,0.6)", fontSize: "0.85rem", lineHeight: 1.7, margin: "0 0 24px" }}>
+          <p style={{ color: "rgba(240,238,234,0.6)", fontSize: "0.85rem", lineHeight: 1.7, margin: "0 0 24px", textAlign: "left" }}>
             {msg}
           </p>
           {micError !== "unsupported" && (
@@ -762,7 +762,7 @@ export function VoiceRangeWidget({
           </div>
 
           <p style={{
-            textAlign: "center",
+            textAlign: "left",
             color: "rgba(240,238,234,0.75)",
             fontSize: "0.88rem",
             lineHeight: 1.7,
@@ -913,6 +913,7 @@ export function VoiceRangeWidget({
             maxWidth: 300,
             marginLeft: "auto",
             marginRight: "auto",
+            textAlign: "left",
           }}>
             {tx.holdInstructionTessitura}
           </p>
@@ -1077,6 +1078,7 @@ export function VoiceRangeWidget({
                   fontSize: "0.84rem",
                   lineHeight: 1.6,
                   margin: 0,
+                  textAlign: "left",
                 }}>
                   {tx.validationErrors[key]}
                 </p>
@@ -1133,6 +1135,7 @@ export function VoiceRangeWidget({
               lineHeight: 1.5,
               margin: "0 0 12px",
               fontStyle: "italic",
+              textAlign: "left",
             }}>
               {tx.qualifierLowFootnote}
             </p>
@@ -1142,6 +1145,7 @@ export function VoiceRangeWidget({
             fontSize: "0.88rem",
             lineHeight: 1.65,
             margin: "0 0 24px",
+            textAlign: "left",
           }}>
             {voiceTypeData.desc}
           </p>
@@ -1151,6 +1155,7 @@ export function VoiceRangeWidget({
             lineHeight: 1.65,
             margin: "0 0 28px",
             fontStyle: "italic",
+            textAlign: "left",
           }}>
             {tx.disclaimer}
           </p>
@@ -1179,6 +1184,7 @@ export function VoiceRangeWidget({
             lineHeight: 1.6,
             margin: "20px 0 0",
             fontStyle: "italic",
+            textAlign: "left",
           }}>
             {tx.disclaimerFooter}
           </p>
@@ -1289,7 +1295,7 @@ export function VoiceRangeWidget({
           }}>
             {tx.successTitle}
           </div>
-          <p style={{ color: "rgba(240,238,234,0.55)", fontSize: "0.85rem", lineHeight: 1.65, margin: 0 }}>
+          <p style={{ color: "rgba(240,238,234,0.55)", fontSize: "0.85rem", lineHeight: 1.65, margin: 0, textAlign: "left" }}>
             {tx.successText}
           </p>
         </div>
