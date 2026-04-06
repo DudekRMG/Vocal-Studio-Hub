@@ -17,7 +17,7 @@ const MAX_DURATION = 5000;
 const SAMPLE_INTERVAL = 50;
 const CIRC = 276; // 2π × 44 ≈ 276.46
 
-type Step = "closed" | "mic-check" | "mic-error" | "low" | "high" | "results" | "form" | "success";
+type Step = "closed" | "mic-check" | "mic-error" | "low" | "high" | "tessitura" | "results" | "form" | "success";
 type RecordState = "idle" | "recording" | "done";
 type MicError = "" | "denied" | "unsupported" | "general";
 
@@ -61,6 +61,10 @@ export function VoiceRangeWidget({
   const [highHz,   setHighHz]    = useState<number | null>(null);
   const [highError, setHighError] = useState<"" | "no-pitch" | "invalid-range">("");
 
+  const [tessituraRecordState, setTessituraRecordState] = useState<RecordState>("idle");
+  const [tessituraNote,        setTessituraNote]        = useState<string | null>(null);
+  const [tessituraError,       setTessituraError]       = useState<"" | "no-pitch">("");
+
   const [recordProgress, setRecordProgress] = useState(0);
   const [currentPitch,   setCurrentPitch]   = useState<string | null>(null);
 
@@ -73,16 +77,17 @@ export function VoiceRangeWidget({
   const analyserRef     = useRef<AnalyserNode | null>(null);
   const bufferRef       = useRef<Float32Array<ArrayBuffer> | null>(null);
   const isRecordingRef  = useRef(false);
-  const recordingForRef = useRef<"low" | "high">("low");
+  const recordingForRef = useRef<"low" | "high" | "tessitura">("low");
   const pitchSamplesRef = useRef<number[]>([]);
   const recordStartRef  = useRef(0);
   const lastSampleRef   = useRef(0);
   const rafRef          = useRef(0);
   const touchActiveRef  = useRef(false);
-  const lowHzRef           = useRef<number | null>(null);
-  const lowPitchSamplesRef  = useRef<number[]>([]);
-  const highPitchSamplesRef = useRef<number[]>([]);
-  const sessionRef          = useRef(0);
+  const lowHzRef              = useRef<number | null>(null);
+  const lowPitchSamplesRef    = useRef<number[]>([]);
+  const highPitchSamplesRef   = useRef<number[]>([]);
+  const tessituralPitchSamplesRef = useRef<number[]>([]);
+  const sessionRef            = useRef(0);
 
   useEffect(() => {
     if (step !== "closed") {
@@ -102,7 +107,7 @@ export function VoiceRangeWidget({
   }, []);
 
   useEffect(() => {
-    const isAnyRecording = lowRecordState === "recording" || highRecordState === "recording";
+    const isAnyRecording = lowRecordState === "recording" || highRecordState === "recording" || tessituraRecordState === "recording";
     if (!isAnyRecording) return;
     const stop = () => { if (isRecordingRef.current) finishRecordingRef.current(); };
     document.addEventListener("mouseup", stop);
@@ -111,7 +116,7 @@ export function VoiceRangeWidget({
       document.removeEventListener("mouseup", stop);
       document.removeEventListener("touchend", stop);
     };
-  }, [lowRecordState, highRecordState]);
+  }, [lowRecordState, highRecordState, tessituraRecordState]);
 
   function releaseAudio() {
     cancelAnimationFrame(rafRef.current);
@@ -179,10 +184,23 @@ export function VoiceRangeWidget({
       if (which === "low") {
         setLowRecordState("idle");
         setLowError("no-pitch");
-      } else {
+      } else if (which === "high") {
         setHighRecordState("idle");
         setHighError("no-pitch");
+      } else {
+        setTessituraRecordState("idle");
+        setTessituraError("no-pitch");
       }
+      return;
+    }
+
+    // Tessitura branch: save the full sample distribution; no min/max trimming.
+    // The median across all samples is computed later by computeTessitura().
+    if (which === "tessitura") {
+      tessituralPitchSamplesRef.current = samples;
+      setTessituraNote(frequencyToNote(samples[Math.floor(samples.length / 2)]));
+      setTessituraError("");
+      setTessituraRecordState("done");
       return;
     }
 
@@ -225,7 +243,7 @@ export function VoiceRangeWidget({
     }
   };
 
-  function startRecording(which: "low" | "high") {
+  function startRecording(which: "low" | "high" | "tessitura") {
     if (isRecordingRef.current) return;
     recordingForRef.current = which;
     isRecordingRef.current  = true;
@@ -236,9 +254,12 @@ export function VoiceRangeWidget({
     if (which === "low") {
       setLowRecordState("recording");
       setLowError("");
-    } else {
+    } else if (which === "high") {
       setHighRecordState("recording");
       setHighError("");
+    } else {
+      setTessituraRecordState("recording");
+      setTessituraError("");
     }
     setRecordProgress(0);
     setCurrentPitch(null);
@@ -285,16 +306,18 @@ export function VoiceRangeWidget({
     releaseAudio();
     setStep("closed");
     setMicError("");
-    setLowRecordState("idle");  setLowNote(null);  setLowHz(null);  setLowError("");
-    setHighRecordState("idle"); setHighNote(null); setHighHz(null); setHighError("");
+    setLowRecordState("idle");       setLowNote(null);       setLowHz(null);      setLowError("");
+    setHighRecordState("idle");      setHighNote(null);      setHighHz(null);     setHighError("");
+    setTessituraRecordState("idle"); setTessituraNote(null); setTessituraError("");
     lowHzRef.current = null;
-    lowPitchSamplesRef.current  = [];
-    highPitchSamplesRef.current = [];
+    lowPitchSamplesRef.current      = [];
+    highPitchSamplesRef.current     = [];
+    tessituralPitchSamplesRef.current = [];
     setRecordProgress(0); setCurrentPitch(null);
     setName(""); setContact(""); setSubmitStatus("idle");
   }
 
-  function handleHoldStart(which: "low" | "high") {
+  function handleHoldStart(which: "low" | "high" | "tessitura") {
     startRecording(which);
   }
 
@@ -302,7 +325,7 @@ export function VoiceRangeWidget({
     if (isRecordingRef.current) finishRecordingRef.current();
   }
 
-  function handleTouchStart(which: "low" | "high", e: React.TouchEvent) {
+  function handleTouchStart(which: "low" | "high" | "tessitura", e: React.TouchEvent) {
     e.preventDefault();
     touchActiveRef.current = true;
     startRecording(which);
@@ -340,14 +363,27 @@ export function VoiceRangeWidget({
     setCurrentPitch(null);
   }
 
+  function resetTessitura() {
+    cancelAnimationFrame(rafRef.current);
+    isRecordingRef.current = false;
+    setTessituraRecordState("idle");
+    setTessituraNote(null);
+    setTessituraError("");
+    tessituralPitchSamplesRef.current = [];
+    setRecordProgress(0);
+    setCurrentPitch(null);
+  }
+
   function resetAll() {
     cancelAnimationFrame(rafRef.current);
     isRecordingRef.current = false;
-    setLowRecordState("idle");  setLowNote(null);  setLowHz(null);  setLowError("");
-    setHighRecordState("idle"); setHighNote(null); setHighHz(null); setHighError("");
+    setLowRecordState("idle");       setLowNote(null);       setLowHz(null);      setLowError("");
+    setHighRecordState("idle");      setHighNote(null);      setHighHz(null);     setHighError("");
+    setTessituraRecordState("idle"); setTessituraNote(null); setTessituraError("");
     lowHzRef.current = null;
-    lowPitchSamplesRef.current  = [];
-    highPitchSamplesRef.current = [];
+    lowPitchSamplesRef.current        = [];
+    highPitchSamplesRef.current       = [];
+    tessituralPitchSamplesRef.current = [];
     setRecordProgress(0);
     setCurrentPitch(null);
     setStep("low");
@@ -369,8 +405,12 @@ export function VoiceRangeWidget({
       return;
     }
 
-    const allSamples    = [...lowPitchSamplesRef.current, ...highPitchSamplesRef.current];
-    const tessituraMidi = computeTessitura(allSamples);
+    const tessituraSourceSamples = tessituralPitchSamplesRef.current.length > 0
+      ? tessituralPitchSamplesRef.current
+      : null;
+    const tessituraMidi = tessituraSourceSamples
+      ? computeTessitura(tessituraSourceSamples)
+      : (stableLowMidi + stableHighMidi) / 2;
     const span          = stableHighMidi - stableLowMidi;
     const classification = classifyVoice(stableLowMidi, tessituraMidi, span);
 
@@ -424,12 +464,18 @@ export function VoiceRangeWidget({
     ? validateSession(stableLowMidi, stableHighMidi)
     : null;
 
+  const renderTessituraSource = tessituralPitchSamplesRef.current.length > 0
+    ? tessituralPitchSamplesRef.current
+    : null;
+
   const classification: VoiceClassification | null = (
     validation?.valid && stableLowMidi !== null && stableHighMidi !== null
   )
     ? classifyVoice(
         stableLowMidi,
-        computeTessitura([...lowPitchSamplesRef.current, ...highPitchSamplesRef.current]),
+        renderTessituraSource
+          ? computeTessitura(renderTessituraSource)
+          : (stableLowMidi + stableHighMidi) / 2,
         stableHighMidi - stableLowMidi,
       )
     : null;
@@ -460,8 +506,8 @@ export function VoiceRangeWidget({
     boxSizing: "border-box",
   };
 
-  function HoldButton({ which }: { which: "low" | "high" }) {
-    const rs = which === "low" ? lowRecordState : highRecordState;
+  function HoldButton({ which }: { which: "low" | "high" | "tessitura" }) {
+    const rs = which === "low" ? lowRecordState : which === "high" ? highRecordState : tessituraRecordState;
     const isRecording = rs === "recording";
     return (
       <div style={{ position: "relative", width: 100, height: 100, margin: "0 auto" }}>
@@ -583,7 +629,7 @@ export function VoiceRangeWidget({
       return (
         <div style={{ animation: "vrFadeIn 0.2s both" }}>
           <div style={{ display: "flex", gap: 6, marginBottom: 20, justifyContent: "center" }}>
-            {[0, 1].map((i) => (
+            {[0, 1, 2].map((i) => (
               <div key={i} style={{
                 width: 24, height: 3,
                 background: (isLow ? i === 0 : i === 1) ? accentColor : "rgba(255,255,255,0.18)",
@@ -688,7 +734,7 @@ export function VoiceRangeWidget({
                 <button
                   onClick={() => {
                     if (isLow) setStep("high");
-                    else setStep("results");
+                    else setStep("tessitura");
                   }}
                   style={{
                     background: accentColor,
@@ -709,6 +755,101 @@ export function VoiceRangeWidget({
                 </button>
               </div>
             </div>
+          )}
+        </div>
+      );
+    }
+
+    if (step === "tessitura") {
+      return (
+        <div style={{ textAlign: "center", animation: "vrFadeIn 0.25s both" }}>
+          <div style={{ display: "flex", gap: 6, marginBottom: 20, justifyContent: "center" }}>
+            {[0, 1, 2].map((i) => (
+              <div key={i} style={{
+                width: 24, height: 3,
+                background: i === 2 ? accentColor : "rgba(255,255,255,0.18)",
+                borderRadius: 2,
+                transition: "background 0.3s",
+              }} />
+            ))}
+          </div>
+          <p style={{
+            color: "rgba(240,238,234,0.55)",
+            fontSize: "0.78rem",
+            lineHeight: 1.7,
+            marginBottom: 24,
+            maxWidth: 300,
+            marginLeft: "auto",
+            marginRight: "auto",
+          }}>
+            {tx.holdInstructionTessitura}
+          </p>
+
+          {tessituraRecordState !== "done" && (
+            <>
+              <HoldButton which="tessitura" />
+              {tessituraRecordState === "recording" && currentPitch && (
+                <div style={{ marginTop: 14, fontSize: "0.72rem", letterSpacing: "0.18em", color: accentColor }}>
+                  {currentPitch}
+                </div>
+              )}
+              {tessituraError === "no-pitch" && (
+                <p style={{ marginTop: 14, color: "#e88", fontSize: "0.72rem", letterSpacing: "0.14em" }}>
+                  {tx.noPitchError}
+                </p>
+              )}
+            </>
+          )}
+
+          {tessituraRecordState === "done" && tessituraNote && (
+            <>
+              <div style={{ fontSize: "2.2rem", letterSpacing: "0.06em", marginBottom: 4 }}>
+                {tessituraNote}
+              </div>
+              <div style={{
+                fontSize: "0.62rem",
+                letterSpacing: "0.22em",
+                color: "rgba(240,238,234,0.45)",
+                textTransform: "uppercase",
+                marginBottom: 24,
+              }}>
+                {tx.tessituraDetectedLabel}
+              </div>
+              <div style={{ display: "flex", gap: 10, justifyContent: "center" }}>
+                <button
+                  onClick={() => resetTessitura()}
+                  style={{
+                    background: "transparent",
+                    color: "rgba(240,238,234,0.6)",
+                    border: "1px solid rgba(255,255,255,0.18)",
+                    padding: "0.55rem 1.2rem",
+                    cursor: "pointer",
+                    fontSize: "0.72rem",
+                    fontFamily: "var(--font-display-family)",
+                    letterSpacing: "0.14em",
+                    textTransform: "uppercase",
+                  }}
+                >
+                  {tx.reRecord}
+                </button>
+                <button
+                  onClick={() => setStep("results")}
+                  style={{
+                    background: accentColor,
+                    color: "#fff",
+                    border: "none",
+                    padding: "0.55rem 1.4rem",
+                    cursor: "pointer",
+                    fontSize: "0.72rem",
+                    fontFamily: "var(--font-display-family)",
+                    letterSpacing: "0.14em",
+                    textTransform: "uppercase",
+                  }}
+                >
+                  {tx.confirm}
+                </button>
+              </div>
+            </>
           )}
         </div>
       );
@@ -931,6 +1072,7 @@ export function VoiceRangeWidget({
     if (step === "mic-error")  return tx.stepMicTitle;
     if (step === "low")        return tx.stepLowTitle;
     if (step === "high")       return tx.stepHighTitle;
+    if (step === "tessitura")  return tx.stepTessituraTitle;
     if (step === "results")    return "";
     if (step === "form")       return tx.formTitle;
     if (step === "success")    return "✓";
