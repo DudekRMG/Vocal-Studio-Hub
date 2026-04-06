@@ -98,6 +98,12 @@ export function VideoPlayer({ src }: VideoPlayerProps) {
       setMutedSync(false);
       video.play().catch(() => {});
       setPhaseSync("playing");
+    } else if (p === "ended") {
+      video.muted = false;
+      setMutedSync(false);
+      video.currentTime = 0;
+      video.play().catch(() => {});
+      setPhaseSync("playing");
     }
   }, [setPhaseSync, setMutedSync]);
 
@@ -176,7 +182,6 @@ export function VideoPlayer({ src }: VideoPlayerProps) {
       {phase === "ended" && (
         <div
           className="absolute inset-0 flex items-center justify-center bg-black/50 z-20"
-          onClick={(e) => e.stopPropagation()}
         >
           <button
             onClick={handleReplay}
