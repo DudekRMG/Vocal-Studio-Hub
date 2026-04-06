@@ -429,7 +429,7 @@ export function VoiceRangeWidget({
           onTouchEnd={(e) => handleTouchEnd(e)}
           onTouchCancel={(e) => handleTouchEnd(e)}
         >
-          🎙️
+          🎤
         </button>
       </div>
     );
@@ -439,7 +439,7 @@ export function VoiceRangeWidget({
     if (step === "mic-check") {
       return (
         <div style={{ textAlign: "center", padding: "16px 0 8px" }}>
-          <div style={{ fontSize: "2.5rem", marginBottom: 16 }}>🎙️</div>
+          <div style={{ fontSize: "2.5rem", marginBottom: 16 }}>🎤</div>
           <p style={{ color: "rgba(240,238,234,0.6)", fontSize: "0.88rem", lineHeight: 1.6, margin: 0 }}>
             {tx.stepMicText}
           </p>
