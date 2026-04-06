@@ -114,12 +114,12 @@ export function AudioPlayer({ src, label, variant, accentColor, isKids = false }
 
   const isDraggingRef = useRef(false);
   const trackRef = useRef<HTMLDivElement>(null);
+  const trackRectRef = useRef<DOMRect | null>(null);
 
   const seekToClientX = useCallback((clientX: number) => {
     const audio = audioRef.current;
-    const track = trackRef.current;
-    if (!audio || !track || isEmpty || !audio.duration) return;
-    const rect = track.getBoundingClientRect();
+    const rect = trackRectRef.current;
+    if (!audio || !rect || isEmpty || !audio.duration) return;
     const ratio = Math.max(0, Math.min(1, (clientX - rect.left) / rect.width));
     audio.currentTime = ratio * audio.duration;
     setProgress(ratio);
@@ -128,38 +128,41 @@ export function AudioPlayer({ src, label, variant, accentColor, isKids = false }
   const handlePointerDown = useCallback((e: React.MouseEvent<HTMLDivElement>) => {
     if (isEmpty) return;
     isDraggingRef.current = true;
+    trackRectRef.current = e.currentTarget.getBoundingClientRect();
     seekToClientX(e.clientX);
   }, [isEmpty, seekToClientX]);
 
   const handleTouchStart = useCallback((e: React.TouchEvent<HTMLDivElement>) => {
     if (isEmpty) return;
     isDraggingRef.current = true;
+    trackRectRef.current = e.currentTarget.getBoundingClientRect();
     seekToClientX(e.touches[0].clientX);
   }, [isEmpty, seekToClientX]);
 
   useEffect(() => {
+    const stopDrag = () => { isDraggingRef.current = false; };
     const onMouseMove = (e: MouseEvent) => {
       if (!isDraggingRef.current) return;
       seekToClientX(e.clientX);
     };
-    const onMouseUp = () => { isDraggingRef.current = false; };
     const onTouchMove = (e: TouchEvent) => {
       if (!isDraggingRef.current) return;
       e.preventDefault();
       seekToClientX(e.touches[0].clientX);
     };
-    const onTouchEnd = () => { isDraggingRef.current = false; };
 
     window.addEventListener("mousemove", onMouseMove);
-    window.addEventListener("mouseup", onMouseUp);
+    window.addEventListener("mouseup", stopDrag);
     window.addEventListener("touchmove", onTouchMove, { passive: false });
-    window.addEventListener("touchend", onTouchEnd);
+    window.addEventListener("touchend", stopDrag);
+    window.addEventListener("touchcancel", stopDrag);
 
     return () => {
       window.removeEventListener("mousemove", onMouseMove);
-      window.removeEventListener("mouseup", onMouseUp);
+      window.removeEventListener("mouseup", stopDrag);
       window.removeEventListener("touchmove", onTouchMove);
-      window.removeEventListener("touchend", onTouchEnd);
+      window.removeEventListener("touchend", stopDrag);
+      window.removeEventListener("touchcancel", stopDrag);
     };
   }, [seekToClientX]);
 
