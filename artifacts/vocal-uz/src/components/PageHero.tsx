@@ -2,7 +2,7 @@ import { useEffect, type CSSProperties, type ReactNode } from "react";
 import { StageCanvas } from "./StageCanvas";
 import { useLang } from "@/lib/langContext";
 import { t } from "@/lib/i18n";
-import { VoiceRangeWidget } from "./VoiceRangeWidget";
+import { VoiceWidgetTrigger } from "./VoiceWidgetTrigger";
 
 interface PageHeroProps {
   accentColor?: string;
@@ -208,9 +208,8 @@ export function PageHero({
               >
                 {ctaLabel}
               </a>
-              <VoiceRangeWidget
+              <VoiceWidgetTrigger
                 accentColor={accentColor}
-                pageName={courseTag}
                 lightMode={lightMode}
               />
             </div>
@@ -310,9 +309,8 @@ export function PageHero({
               >
                 {ctaLabel}
               </a>
-              <VoiceRangeWidget
+              <VoiceWidgetTrigger
                 accentColor={accentColor}
-                pageName={courseTag}
                 lightMode={lightMode}
               />
             </div>

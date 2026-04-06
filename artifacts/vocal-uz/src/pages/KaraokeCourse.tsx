@@ -6,7 +6,8 @@ import { CourseStrip } from "@/components/CourseStrip";
 import { PageHero } from "@/components/PageHero";
 import { TestimonialsSection } from "@/components/TestimonialsSection";
 import { VideoPlayer } from "@/components/VideoPlayer";
-import { VoiceRangeWidget } from "@/components/VoiceRangeWidget";
+import { VoiceWidgetProvider } from "@/lib/voiceWidgetContext";
+import { VoiceWidgetTrigger } from "@/components/VoiceWidgetTrigger";
 
 const base = import.meta.env.BASE_URL.replace(/\/$/, "");
 const PROMO_VIDEO_SRC = `${base}/video/sample.mov`;
@@ -270,7 +271,7 @@ export default function KaraokeCourse() {
   const goldFaint = "rgba(201,168,76,0.06)";
 
   return (
-    <>
+    <VoiceWidgetProvider accentColor={gold} pageName={c.heroTag}>
       <SeoHead
         title={tx.seo.karaoke.title}
         description={tx.seo.karaoke.description}
@@ -386,10 +387,8 @@ export default function KaraokeCourse() {
             <p className="text-[0.9rem] text-[rgba(8,8,8,0.65)] mt-3">{c.ctaBannerSub}</p>
           </div>
           <div className="flex-shrink-0 flex flex-col gap-3 w-full md:w-auto">
-            <VoiceRangeWidget
-              accentColor="#c9a84c"
-              pageName={c.heroTag}
-              triggerSize="lg"
+            <VoiceWidgetTrigger
+              size="lg"
               triggerBorder="rgba(8,8,8,0.55)"
               triggerColor="#080808"
               triggerHoverBorder="#080808"
@@ -448,6 +447,6 @@ export default function KaraokeCourse() {
         </div>
         <CourseStrip exclude="karaoke" />
       </section>
-    </>
+    </VoiceWidgetProvider>
   );
 }

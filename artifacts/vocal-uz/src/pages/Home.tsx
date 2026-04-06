@@ -8,7 +8,8 @@ import { useSanityContent } from "@/lib/useSanityContent";
 import { StageCanvas } from "@/components/StageCanvas";
 import { TestimonialsSection } from "@/components/TestimonialsSection";
 import { VideoPlayer } from "@/components/VideoPlayer";
-import { VoiceRangeWidget } from "@/components/VoiceRangeWidget";
+import { VoiceWidgetProvider } from "@/lib/voiceWidgetContext";
+import { VoiceWidgetTrigger } from "@/components/VoiceWidgetTrigger";
 
 const base = import.meta.env.BASE_URL.replace(/\/$/, "");
 const PROMO_VIDEO_SRC = `${base}/video/sample.mov`;
@@ -28,7 +29,7 @@ export default function Home() {
   const statStudents = content?.about?.studentsCount || tx.about.stat3;
 
   return (
-    <>
+    <VoiceWidgetProvider accentColor="#e8002d" pageName={lang === "ru" ? "Главная" : "Home"}>
       <SeoHead
         title={tx.seo.home.title}
         description={tx.seo.home.description}
@@ -78,7 +79,7 @@ export default function Home() {
               <a href="#booking" className="bg-[#e8002d] text-[#f0eeea] font-display text-[0.72rem] tracking-[0.16em] px-6 py-3.5 no-underline transition-all duration-200 hover:bg-[#ff1a3d] uppercase">
                 {lang === "ru" ? "Пробный урок" : tx.hero.ctaBook}
               </a>
-              <VoiceRangeWidget accentColor="#e8002d" pageName={lang === "ru" ? "Главная" : "Home"} />
+              <VoiceWidgetTrigger />
             </div>
           </div>
         </div>
@@ -145,7 +146,7 @@ export default function Home() {
               <a href="#booking" className="bg-[#e8002d] text-[#f0eeea] font-display text-[0.72rem] tracking-[0.16em] px-6 py-3.5 no-underline transition-all duration-200 hover:bg-[#ff1a3d] uppercase">
                 {tx.hero.ctaBook}
               </a>
-              <VoiceRangeWidget accentColor="#e8002d" pageName={lang === "ru" ? "Главная" : "Home"} />
+              <VoiceWidgetTrigger />
             </div>
           </div>
         </div>
@@ -413,10 +414,8 @@ export default function Home() {
             </p>
           </div>
           <div className="flex-shrink-0 flex flex-col gap-3 w-full md:w-auto">
-            <VoiceRangeWidget
-              accentColor="#e8002d"
-              pageName={lang === "ru" ? "Главная" : "Home"}
-              triggerSize="lg"
+            <VoiceWidgetTrigger
+              size="lg"
               triggerBorder="rgba(240,238,234,0.6)"
               triggerColor="#f0eeea"
               triggerHoverBorder="#f0eeea"
@@ -472,6 +471,6 @@ export default function Home() {
         </div>
         <CourseStrip />
       </section>
-    </>
+    </VoiceWidgetProvider>
   );
 }

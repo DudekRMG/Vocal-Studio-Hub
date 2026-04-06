@@ -6,7 +6,8 @@ import { CourseStrip } from "@/components/CourseStrip";
 import { PageHero } from "@/components/PageHero";
 import { TestimonialsSection } from "@/components/TestimonialsSection";
 import { VideoPlayer } from "@/components/VideoPlayer";
-import { VoiceRangeWidget } from "@/components/VoiceRangeWidget";
+import { VoiceWidgetProvider } from "@/lib/voiceWidgetContext";
+import { VoiceWidgetTrigger } from "@/components/VoiceWidgetTrigger";
 
 const base = import.meta.env.BASE_URL.replace(/\/$/, "");
 const PROMO_VIDEO_SRC = `${base}/video/sample.mov`;
@@ -169,7 +170,7 @@ export default function PopVocals() {
   const faqTitle = isRu ? "Часто задаваемые вопросы" : "Frequently Asked Questions";
 
   return (
-    <>
+    <VoiceWidgetProvider accentColor="#9d4edd" pageName={hero.tag}>
       <SeoHead
         title={tx.seo.pop.title}
         description={tx.seo.pop.description}
@@ -267,10 +268,8 @@ export default function PopVocals() {
             <p className="text-[0.9rem] text-[rgba(255,255,255,0.75)] mt-3">{ctaBannerSub}</p>
           </div>
           <div className="flex-shrink-0 flex flex-col gap-3 w-full md:w-auto">
-            <VoiceRangeWidget
-              accentColor="#9d4edd"
-              pageName={isRu ? "Поп-вокал" : "Pop Vocals"}
-              triggerSize="lg"
+            <VoiceWidgetTrigger
+              size="lg"
               triggerBorder="rgba(255,255,255,0.7)"
               triggerColor="white"
               triggerHoverBorder="white"
@@ -329,6 +328,6 @@ export default function PopVocals() {
         </div>
         <CourseStrip exclude="pop" />
       </section>
-    </>
+    </VoiceWidgetProvider>
   );
 }

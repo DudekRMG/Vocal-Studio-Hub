@@ -26,30 +26,20 @@ interface VoiceRangeWidgetProps {
   accentColor: string;
   pageName: string;
   lightMode?: boolean;
-  triggerBorder?: string;
-  triggerColor?: string;
-  triggerHoverBorder?: string;
-  triggerHoverColor?: string;
-  triggerSize?: "sm" | "lg";
+  isOpen: boolean;
+  onClose: () => void;
 }
 
 export function VoiceRangeWidget({
   accentColor,
   pageName,
   lightMode = false,
-  triggerBorder,
-  triggerColor,
-  triggerHoverBorder,
-  triggerHoverColor,
-  triggerSize = "sm",
+  isOpen,
+  onClose,
 }: VoiceRangeWidgetProps) {
   const { lang } = useLang();
   const tx = t[lang].voiceWidget;
 
-  const tBorder      = triggerBorder      ?? accentColor;
-  const tColor       = triggerColor       ?? accentColor;
-  const tHoverBorder = triggerHoverBorder ?? accentColor;
-  const tHoverColor  = triggerHoverColor  ?? (lightMode ? "#0f1016" : "#f0eeea");
 
   const [step, setStep]               = useState<Step>("closed");
   const [micError, setMicError]       = useState<MicError>("");
@@ -333,7 +323,18 @@ export function VoiceRangeWidget({
     setRecordProgress(0); setCurrentPitch(null);
     setBiologicalSex(null);
     setName(""); setContact(""); setSubmitStatus("idle");
+    onClose();
   }
+
+  // Controlled open/close driven by parent context
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  useEffect(() => {
+    if (isOpen && step === "closed") {
+      open();
+    } else if (!isOpen && step !== "closed") {
+      close();
+    }
+  }, [isOpen]);
 
   function handleHoldStart(which: "low" | "high" | "tessitura") {
     startRecording(which);
@@ -1288,50 +1289,9 @@ export function VoiceRangeWidget({
     return "";
   }
 
-  return (
-    <>
-      {/* ── Trigger button ── */}
-      <button
-        className="font-display uppercase"
-        onClick={open}
-        style={triggerSize === "lg" ? {
-          fontSize: "1.1rem",
-          letterSpacing: "0.15em",
-          padding: "calc(1.25rem - 1px) calc(2.5rem - 1px)",
-          border: `1px solid ${tBorder}`,
-          color: tColor,
-          background: "transparent",
-          cursor: "pointer",
-          whiteSpace: "nowrap",
-          width: "100%",
-          display: "inline-flex",
-          alignItems: "center",
-          justifyContent: "center",
-          transition: "color 0.2s, border-color 0.2s",
-        } : {
-          fontSize: "0.72rem",
-          letterSpacing: "0.16em",
-          padding: "calc(0.875rem - 1px) calc(1.5rem - 1px)",
-          border: `1px solid ${tBorder}`,
-          color: tColor,
-          background: "transparent",
-          cursor: "pointer",
-          whiteSpace: "nowrap",
-          transition: "color 0.2s, border-color 0.2s",
-        }}
-        onMouseEnter={(e) => {
-          (e.currentTarget as HTMLButtonElement).style.color = tHoverColor;
-          (e.currentTarget as HTMLButtonElement).style.borderColor = tHoverBorder;
-        }}
-        onMouseLeave={(e) => {
-          (e.currentTarget as HTMLButtonElement).style.color = tColor;
-          (e.currentTarget as HTMLButtonElement).style.borderColor = tBorder;
-        }}
-      >
-        {tx.trigger}
-      </button>
+  if (step === "closed") return null;
 
-      {step !== "closed" && createPortal(
+  return createPortal(
         <div
           style={{
             position: "fixed", inset: 0, zIndex: 10000,
@@ -1402,8 +1362,6 @@ export function VoiceRangeWidget({
             {renderContent()}
           </div>
         </div>,
-        document.body
-      )}
-    </>
+    document.body
   );
 }
