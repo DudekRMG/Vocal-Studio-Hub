@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import { createPortal } from "react-dom";
 import { useLang } from "@/lib/langContext";
 import { t } from "@/lib/i18n";
+import { formatPhone } from "@/lib/phoneFormat";
 import {
   autocorrelate,
   frequencyToNote,
@@ -90,6 +91,7 @@ export function VoiceRangeWidget({
 
   const [name,         setName]        = useState("");
   const [contact,      setContact]     = useState("");
+  const [contactError, setContactError] = useState("");
   const [submitStatus, setSubmitStatus] = useState<"idle" | "sending" | "error">("idle");
 
   const audioCtxRef     = useRef<AudioContext | null>(null);
@@ -348,7 +350,7 @@ export function VoiceRangeWidget({
     tessituralPitchSamplesRef.current = [];
     setRecordProgress(0); setCurrentPitch(null);
     setBiologicalSex(null);
-    setName(""); setContact(""); setSubmitStatus("idle");
+    setName(""); setContact(""); setContactError(""); setSubmitStatus("idle");
   }
 
   function handleHoldStart(which: "low" | "high" | "tessitura") {
@@ -516,8 +518,66 @@ export function VoiceRangeWidget({
     window.open(url, "_blank");
   }
 
+  function handleContactKeyDown(e: React.KeyboardEvent<HTMLInputElement>) {
+    if (e.ctrlKey || e.metaKey) return;
+    if (e.key === "Backspace") {
+      e.preventDefault();
+      const cur = contact.replace(/\D/g, "");
+      const next = cur.slice(0, -1);
+      setContact(next ? formatPhone(next) : "");
+      setContactError("");
+      setSubmitStatus("idle");
+      return;
+    }
+    if (e.key === "Delete") { e.preventDefault(); return; }
+    if (["ArrowLeft", "ArrowRight", "Tab", "Home", "End", "Enter"].includes(e.key)) return;
+    if (/^\d$/.test(e.key)) {
+      e.preventDefault();
+      const cur = contact.replace(/\D/g, "");
+      if (cur.length >= 15) return;
+      setContact(formatPhone(cur + e.key));
+      setContactError("");
+      setSubmitStatus("idle");
+      return;
+    }
+    e.preventDefault();
+  }
+
+  function handleContactChange(e: React.ChangeEvent<HTMLInputElement>) {
+    const newValue = e.target.value;
+    const newDigits = newValue.replace(/\D/g, "").slice(0, 15);
+    const oldDigits = contact.replace(/\D/g, "");
+    let finalDigits: string;
+    if (newDigits.length < oldDigits.length) {
+      finalDigits = newDigits;
+    } else if (newDigits.length === oldDigits.length && newValue !== contact) {
+      finalDigits = oldDigits.slice(0, -1);
+    } else {
+      finalDigits = newDigits;
+    }
+    setContact(finalDigits ? formatPhone(finalDigits) : "");
+    setContactError("");
+    setSubmitStatus("idle");
+  }
+
+  function handleContactPaste(e: React.ClipboardEvent<HTMLInputElement>) {
+    e.preventDefault();
+    const text = e.clipboardData.getData("text");
+    const filtered = text.replace(/[^\d()\-\s]/g, "");
+    const digits = filtered.replace(/\D/g, "").slice(0, 15);
+    setContact(digits ? formatPhone(digits) : "");
+    setContactError("");
+    setSubmitStatus("idle");
+  }
+
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
+    const digits = contact.replace(/\D/g, "");
+    if (digits.length < 7) {
+      setContactError(lang === "ru" ? "Введите корректный номер телефона" : "Please enter a valid phone number");
+      return;
+    }
+    setContactError("");
     setSubmitStatus("sending");
 
     const stableLowMidi  = lowHz  ? frequencyToMidi(lowHz)  : 60;
@@ -1215,12 +1275,20 @@ export function VoiceRangeWidget({
                 style={inputStyle}
               />
               <input
+                type="tel"
                 required
                 value={contact}
-                onChange={(e) => { setContact(e.target.value); setSubmitStatus("idle"); }}
+                onChange={handleContactChange}
+                onKeyDown={handleContactKeyDown}
+                onPaste={handleContactPaste}
                 placeholder={tx.contactPlaceholder}
                 style={inputStyle}
               />
+              {contactError && (
+                <p style={{ color: "#e8002d", fontSize: "0.73rem", margin: "-4px 0 4px 2px" }}>
+                  {contactError}
+                </p>
+              )}
             </div>
             {submitStatus === "error" && (
               <p style={{ color: "#e8002d", fontSize: "0.78rem", marginBottom: 12, textAlign: "center" }}>
