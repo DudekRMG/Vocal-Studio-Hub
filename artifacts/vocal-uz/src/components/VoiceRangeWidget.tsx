@@ -49,6 +49,12 @@ export function VoiceRangeWidget({
   const { lang } = useLang();
   const tx = t[lang].voiceWidget;
 
+  /* Letter-spacing for body-font (DM Sans) labels — Cyrillic glyphs are
+     inherently wider than Latin so the English values look stretched in Russian. */
+  const lsXl = lang === "ru" ? "0.07em" : "0.24em";  // step title header
+  const lsLg = lang === "ru" ? "0.07em" : "0.22em";  // section labels / resultsTitle
+  const lsMd = lang === "ru" ? "0.07em" : "0.18em";  // hold-label / live pitch display
+
   const tBorder      = triggerBorder      ?? accentColor;
   const tColor       = triggerColor       ?? accentColor;
   const tHoverBorder = triggerHoverBorder ?? accentColor;
@@ -778,7 +784,7 @@ export function VoiceRangeWidget({
                 textAlign: "center",
                 color: rs === "recording" ? accentColor : "rgba(240,238,234,0.35)",
                 fontSize: "0.72rem",
-                letterSpacing: "0.18em",
+                letterSpacing: lsMd,
                 textTransform: "uppercase",
                 marginTop: 12,
               }}>
@@ -924,7 +930,7 @@ export function VoiceRangeWidget({
               {tessituraRecordState === "recording" && (
                 <>
                   {currentPitch && (
-                    <div style={{ marginTop: 14, fontSize: "0.72rem", letterSpacing: "0.18em", color: accentColor }}>
+                    <div style={{ marginTop: 14, fontSize: "0.72rem", letterSpacing: lsMd, color: accentColor }}>
                       {displayNote(currentPitch)}
                     </div>
                   )}
@@ -954,7 +960,7 @@ export function VoiceRangeWidget({
               <div style={{ fontSize: "2rem", marginBottom: 8 }}>✓</div>
               <div style={{
                 fontSize: "0.72rem",
-                letterSpacing: "0.22em",
+                letterSpacing: lsLg,
                 color: "rgba(240,238,234,0.6)",
                 textTransform: "uppercase",
                 marginBottom: 24,
@@ -1065,7 +1071,7 @@ export function VoiceRangeWidget({
             <p style={{
               color: "rgba(240,238,234,0.5)",
               fontSize: "0.68rem",
-              letterSpacing: "0.22em",
+              letterSpacing: lsLg,
               textTransform: "uppercase",
               marginBottom: 16,
             }}>
@@ -1112,7 +1118,7 @@ export function VoiceRangeWidget({
           <p style={{
             color: "rgba(240,238,234,0.4)",
             fontSize: "0.68rem",
-            letterSpacing: "0.22em",
+            letterSpacing: lsLg,
             textTransform: "uppercase",
             marginBottom: 12,
           }}>
@@ -1457,7 +1463,7 @@ export function VoiceRangeWidget({
               <p style={{
                 color: "rgba(240,238,234,0.35)",
                 fontSize: "0.65rem",
-                letterSpacing: "0.24em",
+                letterSpacing: lsXl,
                 textTransform: "uppercase",
                 margin: "0 0 20px",
                 paddingRight: 36,
