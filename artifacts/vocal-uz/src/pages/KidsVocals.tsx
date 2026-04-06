@@ -274,7 +274,7 @@ export default function KidsVocals() {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-[1px]" style={{ backgroundColor: "rgba(0,0,0,0.07)" }}>
             {c.ageGroups.map((group, i) => (
               <RevealSection key={group.range} delay={i * 0.08}>
-              <div className="p-10 relative group hover:opacity-95 transition-opacity" style={{ backgroundColor: i % 2 === 0 ? bgCard : bgCardAlt }}>
+              <div className="p-10 relative group hover:opacity-95 transition-opacity h-full" style={{ backgroundColor: i % 2 === 0 ? bgCard : bgCardAlt }}>
                 <div className="font-display text-[4rem] leading-none absolute top-4 right-6 pointer-events-none" style={{ color: "rgba(59,130,246,0.12)" }}>
                   {String(i + 1).padStart(2, "0")}
                 </div>
@@ -306,7 +306,7 @@ export default function KidsVocals() {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-[1px]" style={{ backgroundColor: "rgba(0,0,0,0.07)" }}>
             {c.styles.map((style, i) => (
               <RevealSection key={style.name} delay={i * 0.08}>
-              <div className="p-10 relative group hover:brightness-110 transition-all duration-300" style={{ backgroundColor: bgCard }}>
+              <div className="p-10 relative group hover:brightness-110 transition-all duration-300 h-full" style={{ backgroundColor: bgCard }}>
                 <span className="font-display text-[5rem] leading-none absolute top-4 right-6 pointer-events-none" style={{ color: "rgba(59,130,246,0.10)" }}>
                   {String(i + 1).padStart(2, "0")}
                 </span>
@@ -328,7 +328,7 @@ export default function KidsVocals() {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-[1px]" style={{ backgroundColor: "rgba(0,0,0,0.07)" }}>
             {c.processSteps.map((step, i) => (
               <RevealSection key={step.num} delay={i * 0.08}>
-              <div className="p-10" style={{ backgroundColor: bgCardAlt }}>
+              <div className="p-10 h-full" style={{ backgroundColor: bgCardAlt }}>
                 <div className="font-display text-[3.5rem] leading-none mb-6" style={{ color: "rgba(59,130,246,0.30)" }}>{step.num}</div>
                 <h3 className="font-display text-[1.15rem] tracking-[0.08em] mb-4 text-[#0f1016]">{step.title}</h3>
                 <p className="text-[0.82rem] leading-[1.8] text-[rgba(15,16,22,0.45)]">{step.desc}</p>

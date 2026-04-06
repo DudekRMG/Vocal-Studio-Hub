@@ -336,7 +336,7 @@ export default function KaraokeCourse() {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-[1px] bg-white/[0.08]">
             {c.forWhom.map((item, i) => (
               <RevealSection key={item.title} delay={i * 0.08}>
-              <div className="bg-[#080808] p-10 group hover:bg-[#0d0c09] transition-colors duration-300">
+              <div className="bg-[#080808] p-10 group hover:bg-[#0d0c09] transition-colors duration-300 h-full">
                 <div className="text-3xl mb-6">{item.icon}</div>
                 <h3 className="font-display text-[1.4rem] tracking-[0.05em] mb-4" style={{ color: gold }}>{item.title}</h3>
                 <p className="text-[0.85rem] leading-[1.8] text-[rgba(240,238,234,0.45)]">{item.desc}</p>
@@ -356,7 +356,7 @@ export default function KaraokeCourse() {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-[1px] bg-white/[0.08]">
             {c.curriculum.map((lesson, i) => (
               <RevealSection key={lesson.num} delay={i * 0.06}>
-              <div className="bg-[#0f0f0f] p-8 relative group hover:bg-[#131109] transition-colors duration-300">
+              <div className="bg-[#0f0f0f] p-8 relative group hover:bg-[#131109] transition-colors duration-300 h-full">
                 <div
                   className="font-display text-[4rem] leading-none absolute top-4 right-6 pointer-events-none"
                   style={{ color: goldFaint }}

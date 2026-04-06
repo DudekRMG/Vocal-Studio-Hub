@@ -227,7 +227,7 @@ export default function PopVocals() {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-[1px] bg-white/[0.08]">
             {forWhom.map((item, i) => (
               <RevealSection key={item.title} delay={i * 0.08}>
-              <div className="bg-[#141414] p-10">
+              <div className="bg-[#141414] p-10 h-full">
                 <h3 className="font-display text-[1.4rem] tracking-[0.08em] mb-4" style={{ color: "#9d4edd" }}>{item.title}</h3>
                 <p className="text-[0.85rem] leading-[1.8] text-[rgba(240,238,234,0.45)]">{item.desc}</p>
               </div>
@@ -246,7 +246,7 @@ export default function PopVocals() {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-[1px] bg-white/[0.08]">
             {programSteps.map((step, i) => (
               <RevealSection key={step.num} delay={i * 0.08}>
-              <div className="bg-[#0f0f0f] p-10">
+              <div className="bg-[#0f0f0f] p-10 h-full">
                 <div className="font-display text-[3.5rem] leading-none mb-6" style={{ color: "rgba(157,78,221,0.3)" }}>{step.num}</div>
                 <h3 className="font-display text-[1.2rem] tracking-[0.08em] mb-4 text-[#f0eeea]">{step.title}</h3>
                 <p className="text-[0.82rem] leading-[1.8] text-[rgba(240,238,234,0.45)]">{step.desc}</p>
