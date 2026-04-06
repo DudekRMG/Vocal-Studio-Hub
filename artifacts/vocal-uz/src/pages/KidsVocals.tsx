@@ -6,7 +6,6 @@ import { CourseStrip } from "@/components/CourseStrip";
 import { PageHero } from "@/components/PageHero";
 import { TestimonialsSection } from "@/components/TestimonialsSection";
 import { VideoPlayer } from "@/components/VideoPlayer";
-import { VoiceRangeWidget } from "@/components/VoiceRangeWidget";
 
 const base = import.meta.env.BASE_URL.replace(/\/$/, "");
 const PROMO_VIDEO_SRC = `${base}/video/sample.mov`;
@@ -370,34 +369,24 @@ export default function KidsVocals() {
             <h2 className="font-display text-[clamp(2rem,4vw,3.5rem)] leading-[1.1] text-[#f0eeea]">{c.ctaBanner}</h2>
             <p className="text-[0.9rem] text-[#f0eeea] mt-3">{c.ctaBannerSub}</p>
           </div>
-          <div className="flex flex-col items-center gap-3 flex-shrink-0">
-            <VoiceRangeWidget
-              accentColor="#3b82f6"
-              pageName={c.heroTag}
-              triggerBorder="rgba(255,255,255,0.5)"
-              triggerColor="rgba(255,255,255,0.9)"
-              triggerHoverBorder="rgba(255,255,255,0.9)"
-              triggerHoverColor="#ffffff"
-            />
-            <a
-              href="#book-kids"
-              onClick={(e) => {
-                e.preventDefault();
-                const el = document.getElementById("book-kids");
-                if (!el) return;
-                const nav = document.querySelector("nav");
-                const navH = nav ? (nav as HTMLElement).offsetHeight : 0;
-                window.scrollTo({ top: el.getBoundingClientRect().top + window.scrollY - navH, behavior: "smooth" });
-              }}
-              className="font-display text-[1.1rem] tracking-[0.15em] px-10 py-5 no-underline transition-all duration-200 whitespace-nowrap inline-flex items-center gap-3 group text-[#0f1016]"
-              style={{ backgroundColor: "#ffffff" }}
-              onMouseEnter={e => (e.currentTarget.style.backgroundColor = "#f0f0f0")}
-              onMouseLeave={e => (e.currentTarget.style.backgroundColor = "#ffffff")}
-            >
-              {c.ctaBtn}
-              <svg className="transition-transform duration-200 group-hover:translate-x-1" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M5 12h14M12 5l7 7-7 7" /></svg>
-            </a>
-          </div>
+          <a
+            href="#book-kids"
+            onClick={(e) => {
+              e.preventDefault();
+              const el = document.getElementById("book-kids");
+              if (!el) return;
+              const nav = document.querySelector("nav");
+              const navH = nav ? (nav as HTMLElement).offsetHeight : 0;
+              window.scrollTo({ top: el.getBoundingClientRect().top + window.scrollY - navH, behavior: "smooth" });
+            }}
+            className="flex-shrink-0 font-display text-[1.1rem] tracking-[0.15em] px-10 py-5 no-underline transition-all duration-200 whitespace-nowrap inline-flex items-center gap-3 group text-[#0f1016]"
+            style={{ backgroundColor: "#ffffff" }}
+            onMouseEnter={e => (e.currentTarget.style.backgroundColor = "#f0f0f0")}
+            onMouseLeave={e => (e.currentTarget.style.backgroundColor = "#ffffff")}
+          >
+            {c.ctaBtn}
+            <svg className="transition-transform duration-200 group-hover:translate-x-1" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M5 12h14M12 5l7 7-7 7" /></svg>
+          </a>
         </div>
       </section>
 
@@ -405,15 +394,6 @@ export default function KidsVocals() {
 
       {/* ── BOOKING ── */}
       <section id="book-kids" className="border-t" style={{ backgroundColor: bgCardAlt, borderColor: "rgba(0,0,0,0.07)" }}>
-        {/* Widget strip */}
-        <div className="px-6 lg:px-12 pt-10 pb-4 border-b" style={{ borderColor: "rgba(0,0,0,0.06)" }}>
-          <div className="max-w-[1100px] mx-auto flex flex-col sm:flex-row items-center sm:items-center gap-4">
-            <span className="text-[0.65rem] tracking-[0.22em] uppercase shrink-0" style={{ color: "rgba(15,16,22,0.3)" }}>
-              {lang === "ru" ? "Узнайте свой тип голоса:" : "Check your voice type first:"}
-            </span>
-            <VoiceRangeWidget accentColor="#3b82f6" pageName={c.heroTag} lightMode />
-          </div>
-        </div>
         {/* Row 1 — Full width heading */}
         <div className="pt-28 pb-12 px-6 lg:px-12">
           <div className="max-w-[1100px] mx-auto">

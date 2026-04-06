@@ -6,7 +6,6 @@ import { CourseStrip } from "@/components/CourseStrip";
 import { PageHero } from "@/components/PageHero";
 import { TestimonialsSection } from "@/components/TestimonialsSection";
 import { VideoPlayer } from "@/components/VideoPlayer";
-import { VoiceRangeWidget } from "@/components/VoiceRangeWidget";
 
 const base = import.meta.env.BASE_URL.replace(/\/$/, "");
 const PROMO_VIDEO_SRC = `${base}/video/sample.mov`;
@@ -292,20 +291,10 @@ export default function ExtremeVocals() {
             <h2 className="font-display text-[clamp(2rem,4vw,3.5rem)] leading-[1.1] text-[#f0eeea]">{c.ctaBanner}</h2>
             <p className="text-[0.9rem] text-[rgba(240,238,234,0.75)] mt-3">{c.ctaBannerSub}</p>
           </div>
-          <div className="flex flex-col items-center gap-3 flex-shrink-0">
-            <VoiceRangeWidget
-              accentColor="#e8002d"
-              pageName={c.heroTag}
-              triggerBorder="rgba(255,255,255,0.5)"
-              triggerColor="rgba(255,255,255,0.9)"
-              triggerHoverBorder="rgba(255,255,255,0.9)"
-              triggerHoverColor="#ffffff"
-            />
-            <a href="#book-extreme" className="bg-[#f0eeea] text-[#080808] font-display text-[1.1rem] tracking-[0.15em] px-10 py-5 no-underline hover:bg-white whitespace-nowrap inline-flex items-center gap-3 group transition-colors duration-200">
-              {c.ctaBtn}
-              <svg className="transition-transform duration-200 group-hover:translate-x-1" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M5 12h14M12 5l7 7-7 7" /></svg>
-            </a>
-          </div>
+          <a href="#book-extreme" className="flex-shrink-0 bg-[#f0eeea] text-[#080808] font-display text-[1.1rem] tracking-[0.15em] px-10 py-5 no-underline hover:bg-white whitespace-nowrap inline-flex items-center gap-3 group transition-colors duration-200">
+            {c.ctaBtn}
+            <svg className="transition-transform duration-200 group-hover:translate-x-1" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M5 12h14M12 5l7 7-7 7" /></svg>
+          </a>
         </div>
       </section>
 
@@ -313,15 +302,6 @@ export default function ExtremeVocals() {
 
       {/* ── BOOKING ── */}
       <section id="book-extreme" className="bg-[#141414] border-t border-white/[0.08]">
-        {/* Widget strip */}
-        <div className="px-6 lg:px-12 pt-10 pb-4 border-b border-white/[0.05]">
-          <div className="max-w-[1100px] mx-auto flex flex-col sm:flex-row items-center sm:items-center gap-4">
-            <span className="text-[0.65rem] tracking-[0.22em] uppercase text-[rgba(240,238,234,0.3)] shrink-0">
-              {lang === "ru" ? "Узнайте свой тип голоса:" : "Check your voice type first:"}
-            </span>
-            <VoiceRangeWidget accentColor="#e8002d" pageName={c.heroTag} />
-          </div>
-        </div>
         {/* Row 1 — Full width heading */}
         <div className="pt-28 pb-12 px-6 lg:px-12">
           <div className="max-w-[1100px] mx-auto">
