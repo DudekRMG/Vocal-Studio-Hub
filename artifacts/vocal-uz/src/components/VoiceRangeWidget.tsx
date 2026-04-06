@@ -379,6 +379,7 @@ export function VoiceRangeWidget({
           </>
         )}
         <svg width={100} height={100} style={{ position: "absolute", inset: 0, pointerEvents: "none" }}>
+          <circle cx={50} cy={50} r={43} fill={accentColor} fillOpacity={isRecording ? 0.18 : 0} style={{ transition: "fill-opacity 0.15s" }} />
           <circle cx={50} cy={50} r={44} fill="none" stroke={accentColor} strokeWidth={2} opacity={0.25} />
           {isRecording && (
             <circle
