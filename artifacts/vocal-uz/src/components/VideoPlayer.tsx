@@ -112,10 +112,20 @@ export function VideoPlayer({ src }: VideoPlayerProps) {
     e.stopPropagation();
     const video = videoRef.current;
     if (!video) return;
-    const next = !mutedRef.current;
-    video.muted = next;
-    setMutedSync(next);
-  }, [setMutedSync]);
+    if (phaseRef.current === "autoplaying") {
+      // First interaction via mute button: same as clicking the frame —
+      // restart from beginning with sound and transition to playing.
+      video.muted = false;
+      setMutedSync(false);
+      video.currentTime = 0;
+      video.play().catch(() => {});
+      setPhaseSync("playing");
+    } else {
+      const next = !mutedRef.current;
+      video.muted = next;
+      setMutedSync(next);
+    }
+  }, [setPhaseSync, setMutedSync]);
 
   const handleReplay = useCallback((e: React.MouseEvent) => {
     e.stopPropagation();
