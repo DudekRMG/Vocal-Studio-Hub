@@ -1,0 +1,227 @@
+This instruction covers all lead collection points on the site, Telegram bot infrastructure, SMS verification and delivery, database schema, and admin notification. The site has 5 pages: one home page and four course landing pages. There is an existing inquiry form on every page and a voice range checker widget. Read everything before starting.
+
+---
+
+## PART 1 — INQUIRY FORM (all 5 pages)
+
+### Current state
+The form currently POSTs to /api/contact and sends a Telegram message to the admin chat. This behavior must be preserved and extended — do not remove the existing Telegram admin notification.
+
+### Form fields
+- Home page: Name, Phone Number, Discipline (dropdown: Pop Vocals, Extreme Vocals, Express Karaoke, Kids Vocals, Multiple, Other)
+- Course pages: Name, Phone Number only. Discipline is inferred from the page and saved automatically as the course name.
+
+### Validation (keep existing)
+- Name: non-empty
+- Phone: at least 7 digits
+- Show inline errors if validation fails, do not submit
+
+### On valid submit — backend steps (in order)
+1. Save lead to Supabase leads table immediately (see Part 5 for schema). This is the safety net — data is captured before anything else.
+2. Generate a unique session_id (UUID) tied to this lead record.
+3. Send admin Telegram notification (preserve existing behavior): name, phone, discipline, page source, timestamp.
+4. Return session_id to the frontend.
+
+### On valid submit — frontend steps
+1. Hide the form fields (name, phone, discipline).
+2. Show confirmation text: "Thank you for your interest. We will contact you within 24 hours."
+3. Below the confirmation text, show a Telegram button: "CONTACT ME OVER TELEGRAM →"
+   - This is an anchor tag: https://t.me/YOUR_BOT_NAME?start=SESSION_ID
+   - Opens Telegram. User taps START. Bot handles the rest.
+   - Button styling: match the site's existing red CTA button style.
+4. Below the button in smaller muted text: "Or we'll reach you by phone."
+
+### When user starts the bot from an inquiry session
+Bot receives /start SESSION_ID:
+1. Look up session in Supabase by session_id.
+2. Save user's telegram_user_id and telegram_username to their lead record. Set bot_registered_at to now.
+3. Send user a message: "Hi [Name]! We received your inquiry at Vocal.uz. Our team will be in touch with you very soon. Feel free to ask us anything here in the meantime!"
+4. Send updated admin notification: "[Name] has connected on Telegram — now reachable via bot. Telegram ID: [ID]"
+
+---
+
+## PART 2 — VOICE WIDGET LEAD CAPTURE (Steps 5 & 6 replacement)
+
+The widget flow through Step 4 (voice type results) is unchanged. Replace Steps 5 and 6 as follows.
+
+### Step 5 — Lead capture form
+Show below the results:
+- Name field (text input, required)
+- Phone number field (text input, required, min 7 digits)
+- Two equal-width buttons side by side:
+  - Left button (red filled, primary): "GET FULL ANALYSIS ON TELEGRAM"
+  - Right button (outlined, secondary): "RECEIVE VIA SMS"
+
+### On either button click — backend steps (in order)
+1. Validate name (non-empty) and phone (min 7 digits). Show inline errors if invalid, do not proceed.
+2. Save lead to Supabase immediately: name, phone, voice_type, lowest_note, lowest_note_hz, highest_note, highest_note_hz, range_octaves, source_page, lead_source = 'voice_widget', timestamp. Phone number is the unique identifier — if a record with this phone already exists, update it rather than creating a duplicate.
+3. Generate session_id and return to frontend.
+4. Then branch based on which button was clicked.
+
+### Branch A — Telegram button
+1. Replace the form with confirmation screen:
+   - "Got it, [Name]! Open Telegram to receive your full vocal range report."
+   - Button: "OPEN TELEGRAM →" → https://t.me/YOUR_BOT_NAME?start=SESSION_ID
+   - Below in muted text: "Or we'll reach you by phone."
+
+When user starts bot from voice widget session:
+1. Look up session in Supabase.
+2. Save telegram_user_id and bot_registered_at.
+3. Send user their report message:
+   "Hi [Name]! Here are your Vocal.uz results:
+   Voice type: [Voice Type] — [one-line description]
+   Highest note: [Note] ([Hz] Hz)
+   Lowest note: [Note] ([Hz] Hz)
+   Vocal range: [X] octaves
+   
+   This is an approximate result from a short sample. A teacher can give you a full assessment.
+   
+   Ready to book a free trial lesson? → [website URL]"
+4. Send admin notification with all voice data + Telegram ID.
+
+### Branch B — SMS button
+The SMS flow happens entirely inline within the widget. Do not navigate away or open a new page.
+
+#### Step B1 — OTP verification
+1. Lock the phone field (make it non-editable, show the entered number).
+2. Hide the two buttons.
+3. Detect phone number country prefix:
+   - +998 → use Eskiz.uz API to send OTP
+   - All other prefixes → use Plivo API to send OTP
+4. Send a 4-digit OTP code to the phone number. Message text: "Your Vocal.uz verification code: [CODE]"
+5. Show inline below the locked phone field:
+   - Label: "We sent a code to [phone number]"
+   - Four single-digit input boxes (or one 4-digit input field) for the code
+   - Below: "Resend code" link, disabled with a 60-second countdown, re-enabled after countdown
+   - "Change number" link that resets back to the form
+
+#### Step B2 — Code verification
+- OTP is valid for 10 minutes.
+- If the user enters the correct code:
+  1. Mark phone as verified in the lead record (phone_verified = true).
+  2. Send the report SMS to their phone number via the appropriate provider:
+     Message: "Vocal.uz Report for [Name]: Voice type: [Voice Type]. Range: [X] octaves ([Lowest Note] to [Highest Note]). Book a free trial: [website URL]"
+  3. Show confirmation: "Your report has been sent to [phone number]."
+  4. Show a secondary CTA below: "Also get it on Telegram →" with the bot deep link, in case they want to connect.
+- If the code is wrong: show "Incorrect code. Try again." Allow up to 3 attempts.
+- After 3 failed attempts: show "Too many attempts. Please resend the code." and reset the input.
+- If OTP expires (10 min): show "Code expired. Please request a new one." and re-enable resend immediately.
+
+#### SMS provider logic
+- +998 numbers: Eskiz.uz REST API. Credentials: ESKIZ_EMAIL, ESKIZ_PASSWORD env variables. Use token-based auth (refresh token as needed). Sender ID: "Vocal.uz" (register this sender ID with Eskiz before going live).
+- All other numbers: Plivo API. Credentials: PLIVO_AUTH_ID, PLIVO_AUTH_TOKEN env variables.
+- If the selected provider fails: retry once after 5 seconds. If it fails again, show: "We couldn't send the SMS. Please try Telegram instead." and show the Telegram deep link button.
+
+---
+
+## PART 3 — TELEGRAM BOT INFRASTRUCTURE
+
+### Webhook
+- Set up POST /telegram-webhook endpoint on the existing backend.
+- Register it with Telegram's setWebhook API.
+- Use TELEGRAM_BOT_TOKEN env variable.
+
+### /start handler
+- /start SESSION_ID → handle as described in Part 1 and Part 2 Branch A above.
+- /start (no session ID, direct bot discovery) → reply: "Welcome to Vocal.uz! To get your voice type analysis, visit vocal.uz and try our free voice range checker." + website link.
+
+### Admin notifications
+All admin notifications go to TELEGRAM_ADMIN_CHAT_ID. Format them clearly with emojis for scannability:
+🎤 New [inquiry / voice widget] lead
+👤 [Name]
+📞 [Phone]
+🎯 [Discipline / Voice Type]
+📍 [Source page]
+🕐 [Timestamp]
+
+When bot is registered, send a follow-up:
+✅ [Name] connected on Telegram
+🆔 Telegram ID: [ID]
+@[username if available]
+
+---
+
+## PART 4 — SMS: DO NOT SEND IF TELEGRAM IS REGISTERED
+
+If a lead already has a telegram_user_id stored (meaning they connected the bot), do not send SMS even if they previously chose the SMS path. Telegram is free; SMS costs money. Check for existing telegram_user_id before triggering any SMS send.
+
+---
+
+## PART 5 — SUPABASE DATABASE SCHEMA
+
+Create a single `leads` table with the following columns:
+
+- id: uuid, primary key, auto-generated
+- name: text, not null
+- phone: text, not null, unique (used as deduplication key)
+- phone_verified: boolean, default false
+- telegram_username: text, nullable
+- telegram_user_id: text, nullable
+- voice_type: text, nullable
+- lowest_note: text, nullable
+- lowest_note_hz: numeric, nullable
+- highest_note: text, nullable
+- highest_note_hz: numeric, nullable
+- range_octaves: numeric, nullable
+- discipline: text, nullable
+- source_page: text, not null (e.g. 'home', 'extreme-vocals', 'pop-vocals', etc.)
+- lead_source: text, not null ('inquiry_form' or 'voice_widget')
+- session_id: uuid, not null, unique
+- lowest_rerecord_count: integer, default 0
+- highest_rerecord_count: integer, default 0
+- sms_sent: boolean, default false
+- sms_provider_used: text, nullable ('eskiz' or 'plivo')
+- bot_registered_at: timestamptz, nullable
+- created_at: timestamptz, default now()
+
+Create a separate `otp_codes` table:
+- id: uuid, primary key
+- phone: text, not null
+- code: text, not null (store hashed, not plaintext)
+- expires_at: timestamptz, not null (now + 10 minutes)
+- attempts: integer, default 0
+- used: boolean, default false
+- created_at: timestamptz, default now()
+
+---
+
+## PART 6 — ANALYTICS (GA4)
+
+Fire gtag() events at the following moments:
+- inquiry_form_submitted: { page_source, discipline }
+- inquiry_telegram_clicked: { page_source }
+- voice_widget_opened: { page_source }
+- voice_widget_lowest_confirmed: { note, hz, page_source }
+- voice_widget_highest_confirmed: { note, hz, page_source }
+- voice_widget_results_shown: { voice_type, range_octaves, page_source }
+- voice_widget_telegram_clicked: { page_source }
+- voice_widget_sms_clicked: { page_source }
+- voice_widget_sms_verified: { page_source, provider }
+- voice_widget_sms_sent: { page_source, provider }
+
+---
+
+## PART 7 — ENVIRONMENT VARIABLES REQUIRED
+
+- TELEGRAM_BOT_TOKEN
+- TELEGRAM_ADMIN_CHAT_ID
+- SUPABASE_URL
+- SUPABASE_SERVICE_ROLE_KEY
+- ESKIZ_EMAIL
+- ESKIZ_PASSWORD
+- PLIVO_AUTH_ID
+- PLIVO_AUTH_TOKEN
+- GA_MEASUREMENT_ID
+
+---
+
+## PART 8 — ERROR HANDLING SUMMARY
+
+- Supabase write fails: log error server-side, still show confirmation to user (do not block UX), retry once after 10 seconds.
+- Telegram admin notification fails: log, do not affect user flow, retry once.
+- Bot webhook fails: log, do not affect user flow.
+- Session not found on /start: bot replies "We couldn't find your session. Please visit vocal.uz and try again." + link.
+- SMS provider fails twice: show "We couldn't send the SMS. Please try Telegram instead." + Telegram deep link.
+- OTP wrong 3 times: lock input, show resend option.
+- OTP expired: show resend option immediately.
+- Phone already exists in leads table on new submission: update the existing record rather than creating a duplicate. Do not show an error to the user.
