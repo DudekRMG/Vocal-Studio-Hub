@@ -1,5 +1,4 @@
 import { useEffect, useRef, useState } from "react";
-import { createPortal } from "react-dom";
 import { useLang } from "@/lib/langContext";
 import { t } from "@/lib/i18n";
 import { formatPhone } from "@/lib/phoneFormat";
@@ -29,12 +28,6 @@ interface VoiceRangeWidgetProps {
   pageName: string;
   lightMode?: boolean;
   inline?: boolean;
-  triggerBorder?: string;
-  triggerColor?: string;
-  triggerHoverBorder?: string;
-  triggerHoverColor?: string;
-  triggerSize?: "sm" | "lg";
-  triggerLabel?: string;
 }
 
 interface HoldButtonProps {
@@ -103,12 +96,6 @@ export function VoiceRangeWidget({
   pageName,
   lightMode = false,
   inline = false,
-  triggerBorder,
-  triggerColor,
-  triggerHoverBorder,
-  triggerHoverColor,
-  triggerSize = "sm",
-  triggerLabel,
 }: VoiceRangeWidgetProps) {
   const { lang } = useLang();
   const tx = t[lang].voiceWidget;
@@ -118,11 +105,6 @@ export function VoiceRangeWidget({
   const lsXl = lang === "ru" ? "0.07em" : "0.24em";  // step title header
   const lsLg = lang === "ru" ? "0.07em" : "0.22em";  // section labels / resultsTitle
   const lsMd = lang === "ru" ? "0.07em" : "0.18em";  // hold-label / live pitch display
-
-  const tBorder      = triggerBorder      ?? accentColor;
-  const tColor       = triggerColor       ?? accentColor;
-  const tHoverBorder = triggerHoverBorder ?? accentColor;
-  const tHoverColor  = triggerHoverColor  ?? (lightMode ? "#0f1016" : "#f0eeea");
 
   function displayNote(note: string | null): string {
     if (!note) return "—";
@@ -1415,7 +1397,6 @@ export function VoiceRangeWidget({
     return "";
   }
 
-  const wvS = triggerSize === "lg" ? 1.5 : 1;
   const txIV = t[lang].inlineVoice;
 
   if (inline) {
@@ -1451,7 +1432,7 @@ export function VoiceRangeWidget({
     }
 
     return (
-      <div style={{ maxWidth: 480, width: "100%", margin: "0 auto", animation: "vrFadeIn 0.2s both" }}>
+      <div style={{ maxWidth: 480, width: "100%", margin: "0 auto", animation: "vrFadeIn 0.2s both", textAlign: "left" }}>
         <div
           style={{
             position: "relative",
@@ -1508,158 +1489,5 @@ export function VoiceRangeWidget({
     );
   }
 
-  return (
-    <>
-      {/* ── Trigger button ── */}
-      <button
-        className="font-display uppercase"
-        onClick={open}
-        style={triggerSize === "lg" ? {
-          fontSize: "1.1rem",
-          letterSpacing: "0.15em",
-          padding: "calc(1.25rem - 1px) calc(2.5rem - 1px)",
-          border: `1px solid ${tBorder}`,
-          color: tColor,
-          background: "transparent",
-          cursor: "pointer",
-          whiteSpace: "nowrap",
-          width: "100%",
-          display: "inline-flex",
-          alignItems: "center",
-          justifyContent: "center",
-          transition: "color 0.2s, border-color 0.2s",
-          position: "relative",
-        } : {
-          fontSize: "0.72rem",
-          letterSpacing: "0.16em",
-          padding: "calc(0.875rem - 1px) calc(1.5rem - 1px)",
-          border: `1px solid ${tBorder}`,
-          color: tColor,
-          background: "transparent",
-          cursor: "pointer",
-          whiteSpace: "nowrap",
-          transition: "color 0.2s, border-color 0.2s",
-          position: "relative",
-        }}
-        onMouseEnter={(e) => {
-          (e.currentTarget as HTMLButtonElement).style.color = tHoverColor;
-          (e.currentTarget as HTMLButtonElement).style.borderColor = tHoverBorder;
-        }}
-        onMouseLeave={(e) => {
-          (e.currentTarget as HTMLButtonElement).style.color = tColor;
-          (e.currentTarget as HTMLButtonElement).style.borderColor = tBorder;
-        }}
-      >
-        {triggerLabel ?? tx.trigger}
-        <span
-          aria-hidden="true"
-          style={{
-            position: "absolute",
-            bottom: Math.round(4 * wvS),
-            left: "50%",
-            transform: "translateX(-50%)",
-            display: "flex",
-            gap: Math.round(2 * wvS),
-            alignItems: "center",
-            height: Math.round(8 * wvS),
-            pointerEvents: "none",
-          }}
-        >
-          {([
-            [2, 0.82, 0.00], [3, 1.10, 0.08], [5, 0.70, 0.16], [7, 1.25, 0.04],
-            [8, 0.90, 0.20], [8, 1.15, 0.12], [7, 0.75, 0.28], [5, 1.30, 0.36],
-            [3, 0.85, 0.44], [2, 1.05, 0.24], [4, 0.78, 0.32], [6, 1.20, 0.40],
-          ] as [number, number, number][]).map(([h, dur, delay], i) => (
-            <span
-              key={i}
-              style={{
-                display: "inline-block",
-                width: Math.round(2 * wvS),
-                height: Math.round(h * wvS),
-                background: tColor,
-                opacity: 0.45,
-                borderRadius: 999,
-                transformOrigin: "center center",
-                animation: `vrWaveBar ${dur}s ${delay}s ease-in-out infinite`,
-              }}
-            />
-          ))}
-        </span>
-      </button>
-
-      {step !== "closed" && createPortal(
-        <div
-          style={{
-            position: "fixed", inset: 0, zIndex: 10000,
-            overflowY: "auto",
-            background: "rgba(0,0,0,0.82)",
-            backdropFilter: "blur(4px)",
-            WebkitBackdropFilter: "blur(4px)",
-            padding: 16,
-            animation: "vrFadeIn 0.15s both",
-            display: "flex",
-            alignItems: "flex-start",
-          }}
-          onClick={(e) => { if (e.target === e.currentTarget) close(); }}
-        >
-          <div
-            style={{
-              position: "relative",
-              width: "100%",
-              maxWidth: 440,
-              margin: "auto",
-              background: "#111111",
-              border: "1px solid rgba(255,255,255,0.1)",
-              padding: "18px 28px 28px",
-              boxSizing: "border-box",
-            }}
-          >
-            {/* Close button */}
-            <button
-              onClick={close}
-              style={{
-                position: "absolute", top: 14, right: 14,
-                width: 30, height: 30,
-                background: "transparent",
-                border: "1px solid rgba(255,255,255,0.14)",
-                color: "rgba(240,238,234,0.5)",
-                cursor: "pointer",
-                fontSize: "1rem",
-                display: "flex", alignItems: "center", justifyContent: "center",
-                transition: "color 0.2s, border-color 0.2s",
-              }}
-              onMouseEnter={(e) => {
-                (e.currentTarget as HTMLButtonElement).style.color = "#f0eeea";
-                (e.currentTarget as HTMLButtonElement).style.borderColor = "rgba(255,255,255,0.4)";
-              }}
-              onMouseLeave={(e) => {
-                (e.currentTarget as HTMLButtonElement).style.color = "rgba(240,238,234,0.5)";
-                (e.currentTarget as HTMLButtonElement).style.borderColor = "rgba(255,255,255,0.14)";
-              }}
-            >
-              ×
-            </button>
-
-            {/* Step title */}
-            {step !== "success" && getTitle() !== "" && (
-              <p style={{
-                color: "rgba(240,238,234,0.35)",
-                fontSize: "0.65rem",
-                letterSpacing: lsXl,
-                textTransform: "uppercase",
-                margin: "0 0 20px",
-                paddingRight: 36,
-              }}>
-                {getTitle()}
-              </p>
-            )}
-
-            {/* Content */}
-            {renderContent()}
-          </div>
-        </div>,
-        document.body
-      )}
-    </>
-  );
+  return null;
 }

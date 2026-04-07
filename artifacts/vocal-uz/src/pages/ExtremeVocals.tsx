@@ -304,11 +304,12 @@ export default function ExtremeVocals() {
 
       {/* ── INLINE VOICE CHECK ── */}
       <InlineVoiceSection
-        accentColor="#e8002d"
+        accentColor="#c90024"
         pageName={c.heroTag}
         bookingHref="#book-extreme"
         bookLabel={c.ctaBtn}
         subheading={c.ctaBanner}
+        sectionId="voice-check"
       />
 
       <TestimonialsSection accentColor="#e8002d" />

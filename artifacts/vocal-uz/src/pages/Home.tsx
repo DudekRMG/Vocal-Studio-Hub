@@ -8,7 +8,6 @@ import { useSanityContent } from "@/lib/useSanityContent";
 import { StageCanvas } from "@/components/StageCanvas";
 import { TestimonialsSection } from "@/components/TestimonialsSection";
 import { VideoPlayer } from "@/components/VideoPlayer";
-import { VoiceRangeWidget } from "@/components/VoiceRangeWidget";
 import { InlineVoiceSection } from "@/components/InlineVoiceSection";
 import { RevealSection } from "@/components/RevealSection";
 
@@ -80,7 +79,23 @@ export default function Home() {
               <a href="#booking" className="bg-[#e8002d] text-[#f0eeea] font-display text-[0.72rem] tracking-[0.16em] px-6 py-3.5 no-underline transition-all duration-200 hover:bg-[#ff1a3d] uppercase">
                 {lang === "ru" ? "Пробный урок" : tx.hero.ctaBook}
               </a>
-              <VoiceRangeWidget accentColor="#e8002d" pageName={lang === "ru" ? "Главная" : "Home"} triggerLabel={lang === "ru" ? "ОПРЕДЕЛИТЬ ГОЛОС" : undefined} />
+              <a
+                href="#voice-check"
+                onClick={(e) => {
+                  e.preventDefault();
+                  const el = document.getElementById("voice-check");
+                  if (!el) return;
+                  const nav = document.querySelector("nav");
+                  const navH = nav ? (nav as HTMLElement).offsetHeight : 0;
+                  window.scrollTo({ top: el.getBoundingClientRect().top + window.scrollY - navH, behavior: "smooth" });
+                }}
+                className="font-display text-[0.72rem] tracking-[0.16em] px-6 py-3.5 no-underline uppercase transition-all duration-200"
+                style={{ border: "1px solid rgba(240,238,234,0.45)", color: "rgba(240,238,234,0.8)", background: "transparent" }}
+                onMouseEnter={(e) => { const a = e.currentTarget as HTMLAnchorElement; a.style.borderColor = "#f0eeea"; a.style.color = "#f0eeea"; }}
+                onMouseLeave={(e) => { const a = e.currentTarget as HTMLAnchorElement; a.style.borderColor = "rgba(240,238,234,0.45)"; a.style.color = "rgba(240,238,234,0.8)"; }}
+              >
+                {lang === "ru" ? "ОПРЕДЕЛИТЬ ГОЛОС" : "CHECK YOUR VOICE TYPE"}
+              </a>
             </div>
           </div>
         </div>
@@ -147,7 +162,23 @@ export default function Home() {
               <a href="#booking" className="bg-[#e8002d] text-[#f0eeea] font-display text-[0.72rem] tracking-[0.16em] px-6 py-3.5 no-underline transition-all duration-200 hover:bg-[#ff1a3d] uppercase">
                 {tx.hero.ctaBook}
               </a>
-              <VoiceRangeWidget accentColor="#e8002d" pageName={lang === "ru" ? "Главная" : "Home"} />
+              <a
+                href="#voice-check"
+                onClick={(e) => {
+                  e.preventDefault();
+                  const el = document.getElementById("voice-check");
+                  if (!el) return;
+                  const nav = document.querySelector("nav");
+                  const navH = nav ? (nav as HTMLElement).offsetHeight : 0;
+                  window.scrollTo({ top: el.getBoundingClientRect().top + window.scrollY - navH, behavior: "smooth" });
+                }}
+                className="font-display text-[0.72rem] tracking-[0.16em] px-6 py-3.5 no-underline uppercase transition-all duration-200"
+                style={{ border: "1px solid rgba(240,238,234,0.45)", color: "rgba(240,238,234,0.8)", background: "transparent" }}
+                onMouseEnter={(e) => { const a = e.currentTarget as HTMLAnchorElement; a.style.borderColor = "#f0eeea"; a.style.color = "#f0eeea"; }}
+                onMouseLeave={(e) => { const a = e.currentTarget as HTMLAnchorElement; a.style.borderColor = "rgba(240,238,234,0.45)"; a.style.color = "rgba(240,238,234,0.8)"; }}
+              >
+                {lang === "ru" ? "ОПРЕДЕЛИТЬ ГОЛОС" : "CHECK YOUR VOICE TYPE"}
+              </a>
             </div>
           </div>
         </div>
@@ -410,11 +441,12 @@ export default function Home() {
 
       {/* ── INLINE VOICE CHECK ── */}
       <InlineVoiceSection
-        accentColor="#e8002d"
+        accentColor="#c90024"
         pageName={lang === "ru" ? "Главная" : "Home"}
         bookingHref="#booking"
         bookLabel={lang === "ru" ? "Записаться сейчас" : "Book Now"}
         subheading={lang === "ru" ? "Ваш голос ждёт своего потенциала" : "Your voice is waiting for its potential"}
+        sectionId="voice-check"
       />
 
       <TestimonialsSection accentColor="#e8002d" />

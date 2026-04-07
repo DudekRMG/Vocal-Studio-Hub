@@ -396,12 +396,13 @@ export default function KaraokeCourse() {
 
       {/* ── INLINE VOICE CHECK ── */}
       <InlineVoiceSection
-        accentColor={gold}
+        accentColor="#b49240"
         pageName={c.heroTag}
         bookingHref="#book-karaoke"
         bookLabel={c.ctaBtn}
         subheading={c.ctaBanner}
         isLightTheme
+        sectionId="voice-check"
         onBookClick={(e) => {
           e.preventDefault();
           const el = document.getElementById("book-karaoke");

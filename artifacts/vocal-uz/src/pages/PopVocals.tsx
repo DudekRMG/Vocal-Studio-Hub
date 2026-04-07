@@ -278,11 +278,12 @@ export default function PopVocals() {
 
       {/* ── INLINE VOICE CHECK ── */}
       <InlineVoiceSection
-        accentColor="#9d4edd"
+        accentColor="#7e30c4"
         pageName={isRu ? "Поп-вокал" : "Pop Vocals"}
         bookingHref="#book-pop"
         bookLabel={ctaBtn}
         subheading={ctaBannerText}
+        sectionId="voice-check"
         onBookClick={(e) => {
           e.preventDefault();
           const el = document.getElementById("book-pop");

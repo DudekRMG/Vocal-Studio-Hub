@@ -387,11 +387,12 @@ export default function KidsVocals() {
 
       {/* ── INLINE VOICE CHECK ── */}
       <InlineVoiceSection
-        accentColor="#3b82f6"
+        accentColor="#2b6cd4"
         pageName={c.heroTag}
         bookingHref="#book-kids"
         bookLabel={c.ctaBtn}
         subheading={c.ctaBanner}
+        sectionId="voice-check"
         onBookClick={(e) => {
           e.preventDefault();
           const el = document.getElementById("book-kids");

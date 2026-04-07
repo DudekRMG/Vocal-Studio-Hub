@@ -2,7 +2,6 @@ import { useEffect, type CSSProperties, type ReactNode } from "react";
 import { StageCanvas } from "./StageCanvas";
 import { useLang } from "@/lib/langContext";
 import { t } from "@/lib/i18n";
-import { VoiceRangeWidget } from "./VoiceRangeWidget";
 
 interface PageHeroProps {
   accentColor?: string;
@@ -208,12 +207,35 @@ export function PageHero({
               >
                 {ctaLabel}
               </a>
-              <VoiceRangeWidget
-                accentColor={accentColor}
-                pageName={courseTag}
-                lightMode={lightMode}
-                triggerLabel={lang === "ru" ? "ОПРЕДЕЛИТЬ ГОЛОС" : undefined}
-              />
+              <a
+                href="#voice-check"
+                onClick={(e) => {
+                  e.preventDefault();
+                  const el = document.getElementById("voice-check");
+                  if (!el) return;
+                  const nav = document.querySelector("nav");
+                  const navH = nav ? (nav as HTMLElement).offsetHeight : 0;
+                  window.scrollTo({ top: el.getBoundingClientRect().top + window.scrollY - navH, behavior: "smooth" });
+                }}
+                className="font-display text-[0.72rem] tracking-[0.16em] px-6 py-3.5 no-underline uppercase transition-all duration-200"
+                style={{
+                  border: lightMode ? "1px solid rgba(8,8,8,0.55)" : "1px solid rgba(240,238,234,0.45)",
+                  color: lightMode ? "#080808" : "rgba(240,238,234,0.8)",
+                  background: "transparent",
+                }}
+                onMouseEnter={(e) => {
+                  const a = e.currentTarget as HTMLAnchorElement;
+                  a.style.borderColor = lightMode ? "#080808" : "#f0eeea";
+                  a.style.color = lightMode ? "#080808" : "#f0eeea";
+                }}
+                onMouseLeave={(e) => {
+                  const a = e.currentTarget as HTMLAnchorElement;
+                  a.style.borderColor = lightMode ? "rgba(8,8,8,0.55)" : "rgba(240,238,234,0.45)";
+                  a.style.color = lightMode ? "#080808" : "rgba(240,238,234,0.8)";
+                }}
+              >
+                {lang === "ru" ? "ОПРЕДЕЛИТЬ ГОЛОС" : tx.voiceWidget.trigger}
+              </a>
             </div>
           </div>
         </div>
@@ -311,11 +333,35 @@ export function PageHero({
               >
                 {ctaLabel}
               </a>
-              <VoiceRangeWidget
-                accentColor={accentColor}
-                pageName={courseTag}
-                lightMode={lightMode}
-              />
+              <a
+                href="#voice-check"
+                onClick={(e) => {
+                  e.preventDefault();
+                  const el = document.getElementById("voice-check");
+                  if (!el) return;
+                  const nav = document.querySelector("nav");
+                  const navH = nav ? (nav as HTMLElement).offsetHeight : 0;
+                  window.scrollTo({ top: el.getBoundingClientRect().top + window.scrollY - navH, behavior: "smooth" });
+                }}
+                className="font-display text-[0.72rem] tracking-[0.16em] px-6 py-3.5 no-underline uppercase transition-all duration-200"
+                style={{
+                  border: lightMode ? "1px solid rgba(8,8,8,0.55)" : "1px solid rgba(240,238,234,0.45)",
+                  color: lightMode ? "#080808" : "rgba(240,238,234,0.8)",
+                  background: "transparent",
+                }}
+                onMouseEnter={(e) => {
+                  const a = e.currentTarget as HTMLAnchorElement;
+                  a.style.borderColor = lightMode ? "#080808" : "#f0eeea";
+                  a.style.color = lightMode ? "#080808" : "#f0eeea";
+                }}
+                onMouseLeave={(e) => {
+                  const a = e.currentTarget as HTMLAnchorElement;
+                  a.style.borderColor = lightMode ? "rgba(8,8,8,0.55)" : "rgba(240,238,234,0.45)";
+                  a.style.color = lightMode ? "#080808" : "rgba(240,238,234,0.8)";
+                }}
+              >
+                {lang === "ru" ? "ОПРЕДЕЛИТЬ ГОЛОС" : tx.voiceWidget.trigger}
+              </a>
             </div>
           </div>
         </div>
