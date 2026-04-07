@@ -392,6 +392,14 @@ export default function KidsVocals() {
         bookingHref="#book-kids"
         bookLabel={c.ctaBtn}
         subheading={c.ctaBanner}
+        onBookClick={(e) => {
+          e.preventDefault();
+          const el = document.getElementById("book-kids");
+          if (!el) return;
+          const nav = document.querySelector("nav");
+          const navH = nav ? (nav as HTMLElement).offsetHeight : 0;
+          window.scrollTo({ top: el.getBoundingClientRect().top + window.scrollY - navH, behavior: "smooth" });
+        }}
       />
 
       <TestimonialsSection accentColor="#3b82f6" variant="kids" />

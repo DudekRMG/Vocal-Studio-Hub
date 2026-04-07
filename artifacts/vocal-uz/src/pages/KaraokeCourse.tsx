@@ -402,6 +402,14 @@ export default function KaraokeCourse() {
         bookLabel={c.ctaBtn}
         subheading={c.ctaBanner}
         isLightTheme
+        onBookClick={(e) => {
+          e.preventDefault();
+          const el = document.getElementById("book-karaoke");
+          if (!el) return;
+          const nav = document.querySelector("nav");
+          const navH = nav ? (nav as HTMLElement).offsetHeight : 0;
+          window.scrollTo({ top: el.getBoundingClientRect().top + window.scrollY - navH, behavior: "smooth" });
+        }}
       />
 
       <TestimonialsSection accentColor="#c9a84c" />

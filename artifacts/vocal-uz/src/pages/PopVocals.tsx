@@ -283,6 +283,14 @@ export default function PopVocals() {
         bookingHref="#book-pop"
         bookLabel={ctaBtn}
         subheading={ctaBannerText}
+        onBookClick={(e) => {
+          e.preventDefault();
+          const el = document.getElementById("book-pop");
+          if (!el) return;
+          const nav = document.querySelector("nav");
+          const navH = nav ? (nav as HTMLElement).offsetHeight : 0;
+          window.scrollTo({ top: el.getBoundingClientRect().top + window.scrollY - navH, behavior: "smooth" });
+        }}
       />
 
       <TestimonialsSection accentColor="#9d4edd" />

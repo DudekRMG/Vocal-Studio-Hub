@@ -1,3 +1,4 @@
+import React from "react";
 import { useLang } from "@/lib/langContext";
 import { t } from "@/lib/i18n";
 import { RevealSection } from "@/components/RevealSection";
@@ -13,6 +14,7 @@ interface InlineVoiceSectionProps {
   subheading: string;
   sectionId?: string;
   isLightTheme?: boolean;
+  onBookClick?: (e: React.MouseEvent<HTMLAnchorElement>) => void;
 }
 
 export function InlineVoiceSection({
@@ -23,6 +25,7 @@ export function InlineVoiceSection({
   subheading,
   sectionId,
   isLightTheme = false,
+  onBookClick,
 }: InlineVoiceSectionProps) {
   const { lang } = useLang();
   const txIV = t[lang].inlineVoice;
@@ -91,6 +94,7 @@ export function InlineVoiceSection({
           {/* Book a lesson button */}
           <a
             href={bookingHref}
+            onClick={onBookClick}
             className="font-display text-[1.1rem] tracking-[0.15em] px-10 py-5 no-underline whitespace-nowrap inline-flex items-center justify-center gap-3 group transition-colors duration-200"
             style={{ backgroundColor: btnBg, color: btnText }}
             onMouseEnter={(e) => { (e.currentTarget as HTMLAnchorElement).style.backgroundColor = btnHoverBg; }}
