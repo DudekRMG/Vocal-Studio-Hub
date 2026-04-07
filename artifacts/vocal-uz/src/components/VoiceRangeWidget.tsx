@@ -1419,6 +1419,10 @@ export function VoiceRangeWidget({
   const txIV = t[lang].inlineVoice;
 
   if (inline) {
+    const startBg   = lightMode ? "#080808" : "#f0eeea";
+    const startText = lightMode ? "#f0eeea" : "#080808";
+    const startHover = lightMode ? "#1a1a1a" : "#ffffff";
+
     if (step === "closed") {
       return (
         <button
@@ -1429,17 +1433,17 @@ export function VoiceRangeWidget({
             maxWidth: 400,
             display: "block",
             margin: "0 auto",
-            background: accentColor,
-            color: "#ffffff",
+            background: startBg,
+            color: startText,
             border: "none",
             padding: "1.25rem 2rem",
             fontSize: "1.1rem",
             letterSpacing: "0.15em",
             cursor: "pointer",
-            transition: "opacity 0.2s",
+            transition: "background-color 0.2s",
           }}
-          onMouseEnter={(e) => { (e.currentTarget as HTMLButtonElement).style.opacity = "0.85"; }}
-          onMouseLeave={(e) => { (e.currentTarget as HTMLButtonElement).style.opacity = "1"; }}
+          onMouseEnter={(e) => { (e.currentTarget as HTMLButtonElement).style.backgroundColor = startHover; }}
+          onMouseLeave={(e) => { (e.currentTarget as HTMLButtonElement).style.backgroundColor = startBg; }}
         >
           {txIV.startBtn}
         </button>
