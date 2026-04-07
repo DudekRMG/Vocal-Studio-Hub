@@ -214,6 +214,10 @@ export function computeTessitura(allSamplesHz: number[]): number {
     : (sorted[mid - 1] + sorted[mid]) / 2;
 }
 
+// Pre-allocated buffer reused across autocorrelation calls to avoid GC pressure.
+// Grows only when a larger window is needed (never shrinks).
+let _acfBuffer: Float32Array | null = null;
+
 /**
  * Detects the dominant pitch in a Float32Array audio buffer using the ACF2+
  * autocorrelation algorithm.
@@ -241,14 +245,17 @@ export function autocorrelate(buffer: Float32Array<ArrayBufferLike>, sampleRate:
     if (Math.abs(buffer[SIZE - i]) < threshold) { r2 = SIZE - i; break; }
   }
 
-  const buf = buffer.slice(r1, r2 + 1);
-  const N = buf.length;
+  // Use r1/r2 bounds directly — no slice() allocation.
+  const N = r2 - r1 + 1;
 
-  // Compute full autocorrelation (ACF)
-  const c = new Float32Array(N);
+  // Reuse pre-allocated ACF output buffer; grow only when N increases.
+  if (!_acfBuffer || _acfBuffer.length < N) _acfBuffer = new Float32Array(N);
+  const c = _acfBuffer;
+
+  // Compute full autocorrelation (ACF), indexing buffer with r1 offset
   for (let lag = 0; lag < N; lag++) {
     let sum = 0;
-    for (let i = 0; i < N - lag; i++) sum += buf[i] * buf[i + lag];
+    for (let i = 0; i < N - lag; i++) sum += buffer[r1 + i] * buffer[r1 + i + lag];
     c[lag] = sum;
   }
 

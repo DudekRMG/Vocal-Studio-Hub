@@ -36,6 +36,67 @@ interface VoiceRangeWidgetProps {
   triggerLabel?: string;
 }
 
+interface HoldButtonProps {
+  which: "low" | "high" | "tessitura";
+  accentColor: string;
+  recordState: RecordState;
+  ringRef: React.RefObject<SVGCircleElement | null>;
+  touchActiveRef: React.MutableRefObject<boolean>;
+  onHoldStart: (which: "low" | "high" | "tessitura") => void;
+  onHoldEnd: () => void;
+  onTouchStart: (which: "low" | "high" | "tessitura", e: React.TouchEvent) => void;
+  onTouchEnd: (e: React.TouchEvent) => void;
+}
+
+function HoldButton({ which, accentColor, recordState, ringRef, touchActiveRef, onHoldStart, onHoldEnd, onTouchStart, onTouchEnd }: HoldButtonProps) {
+  const isRecording = recordState === "recording";
+  return (
+    <div style={{ position: "relative", width: 100, height: 100, margin: "0 auto" }}>
+      <svg width={100} height={100} style={{ position: "absolute", inset: 0, pointerEvents: "none" }}>
+        <circle cx={50} cy={50} r={43} fill={accentColor} fillOpacity={isRecording ? 0.18 : 0} style={{ transition: "fill-opacity 0.15s" }} />
+        <circle cx={50} cy={50} r={44} fill="none" stroke={accentColor} strokeWidth={2} opacity={isRecording ? 0 : 0.25} style={{ transition: "opacity 0.15s" }} />
+        {isRecording && (
+          <circle
+            ref={ringRef}
+            cx={50} cy={50} r={44}
+            fill="none"
+            stroke={accentColor}
+            strokeWidth={3}
+            strokeDasharray={CIRC}
+            strokeDashoffset={0}
+            strokeLinecap="round"
+            transform="rotate(-90 50 50)"
+          />
+        )}
+      </svg>
+      <button
+        style={{
+          position: "absolute", top: 6, left: 6, width: 88, height: 88,
+          borderRadius: "50%",
+          border: `2px solid ${isRecording ? "transparent" : accentColor}`,
+          background: "transparent",
+          color: accentColor,
+          fontSize: "1.6rem",
+          cursor: "pointer",
+          display: "flex", alignItems: "center", justifyContent: "center",
+          userSelect: "none",
+          WebkitUserSelect: "none",
+          touchAction: "none",
+          zIndex: 1,
+        }}
+        onMouseDown={() => !touchActiveRef.current && onHoldStart(which)}
+        onMouseUp={() => !touchActiveRef.current && onHoldEnd()}
+        onMouseLeave={() => !touchActiveRef.current && onHoldEnd()}
+        onTouchStart={(e) => onTouchStart(which, e)}
+        onTouchEnd={(e) => onTouchEnd(e)}
+        onTouchCancel={(e) => onTouchEnd(e)}
+      >
+        🎤
+      </button>
+    </div>
+  );
+}
+
 export function VoiceRangeWidget({
   accentColor,
   pageName,
@@ -84,7 +145,6 @@ export function VoiceRangeWidget({
   const [tessituraNote,        setTessituraNote]        = useState<string | null>(null);
   const [tessituraError,       setTessituraError]       = useState<"" | "no-pitch">("");
 
-  const [recordProgress, setRecordProgress] = useState(0);
   const [currentPitch,   setCurrentPitch]   = useState<string | null>(null);
 
   const [biologicalSex, setBiologicalSex] = useState<"male" | "female" | null>(null);
@@ -104,6 +164,7 @@ export function VoiceRangeWidget({
   const recordStartRef  = useRef(0);
   const lastSampleRef   = useRef(0);
   const rafRef          = useRef(0);
+  const ringRef         = useRef<SVGCircleElement>(null);
   const touchActiveRef  = useRef(false);
   const lowHzRef              = useRef<number | null>(null);
   const lowPitchSamplesRef    = useRef<number[]>([]);
@@ -201,7 +262,6 @@ export function VoiceRangeWidget({
     const which   = recordingForRef.current;
     const samples = [...pitchSamplesRef.current];
     pitchSamplesRef.current = [];
-    setRecordProgress(0);
     setCurrentPitch(null);
 
     if (samples.length === 0) {
@@ -295,14 +355,13 @@ export function VoiceRangeWidget({
       setTessituraRecordState("recording");
       setTessituraError("");
     }
-    setRecordProgress(0);
     setCurrentPitch(null);
 
     const loop = () => {
       if (!isRecordingRef.current) return;
       const elapsed = performance.now() - recordStartRef.current;
       const activeDuration = recordingForRef.current === "tessitura" ? TESSITURA_DURATION : MAX_DURATION;
-      setRecordProgress(Math.min(elapsed / activeDuration, 1));
+      if (ringRef.current) ringRef.current.style.strokeDashoffset = String(CIRC * (elapsed / activeDuration));
 
       const analyser = analyserRef.current;
       const buf      = bufferRef.current;
@@ -348,7 +407,7 @@ export function VoiceRangeWidget({
     lowPitchSamplesRef.current      = [];
     highPitchSamplesRef.current     = [];
     tessituralPitchSamplesRef.current = [];
-    setRecordProgress(0); setCurrentPitch(null);
+    setCurrentPitch(null);
     setBiologicalSex(null);
     setName(""); setContact(""); setContactError(""); setSubmitStatus("idle");
   }
@@ -383,7 +442,6 @@ export function VoiceRangeWidget({
     lowHzRef.current = null;
     lowPitchSamplesRef.current  = [];
     highPitchSamplesRef.current = [];
-    setRecordProgress(0);
     setCurrentPitch(null);
   }
 
@@ -395,7 +453,6 @@ export function VoiceRangeWidget({
     setHighHz(null);
     setHighError("");
     highPitchSamplesRef.current = [];
-    setRecordProgress(0);
     setCurrentPitch(null);
   }
 
@@ -406,7 +463,6 @@ export function VoiceRangeWidget({
     setTessituraNote(null);
     setTessituraError("");
     tessituralPitchSamplesRef.current = [];
-    setRecordProgress(0);
     setCurrentPitch(null);
   }
 
@@ -420,7 +476,6 @@ export function VoiceRangeWidget({
     lowPitchSamplesRef.current        = [];
     highPitchSamplesRef.current       = [];
     tessituralPitchSamplesRef.current = [];
-    setRecordProgress(0);
     setCurrentPitch(null);
     setBiologicalSex(null);
     setStep("low");
@@ -695,56 +750,6 @@ export function VoiceRangeWidget({
     boxSizing: "border-box",
   };
 
-  function HoldButton({ which }: { which: "low" | "high" | "tessitura" }) {
-    const rs = which === "low" ? lowRecordState : which === "high" ? highRecordState : tessituraRecordState;
-    const isRecording = rs === "recording";
-    return (
-      <div style={{ position: "relative", width: 100, height: 100, margin: "0 auto" }}>
-        <svg width={100} height={100} style={{ position: "absolute", inset: 0, pointerEvents: "none" }}>
-          <circle cx={50} cy={50} r={43} fill={accentColor} fillOpacity={isRecording ? 0.18 : 0} style={{ transition: "fill-opacity 0.15s" }} />
-          <circle cx={50} cy={50} r={44} fill="none" stroke={accentColor} strokeWidth={2} opacity={isRecording ? 0 : 0.25} style={{ transition: "opacity 0.15s" }} />
-          {isRecording && (
-            <circle
-              cx={50} cy={50} r={44}
-              fill="none"
-              stroke={accentColor}
-              strokeWidth={3}
-              strokeDasharray={CIRC}
-              strokeDashoffset={CIRC * recordProgress}
-              strokeLinecap="round"
-              transform="rotate(-90 50 50)"
-              style={{ transition: "stroke-dashoffset 0.05s linear" }}
-            />
-          )}
-        </svg>
-        <button
-          style={{
-            position: "absolute", top: 6, left: 6, width: 88, height: 88,
-            borderRadius: "50%",
-            border: `2px solid ${isRecording ? "transparent" : accentColor}`,
-            background: "transparent",
-            color: accentColor,
-            fontSize: "1.6rem",
-            cursor: "pointer",
-            display: "flex", alignItems: "center", justifyContent: "center",
-            userSelect: "none",
-            WebkitUserSelect: "none",
-            touchAction: "none",
-            zIndex: 1,
-          }}
-          onMouseDown={() => !touchActiveRef.current && handleHoldStart(which)}
-          onMouseUp={() => !touchActiveRef.current && handleHoldEnd()}
-          onMouseLeave={() => !touchActiveRef.current && handleHoldEnd()}
-          onTouchStart={(e) => handleTouchStart(which, e)}
-          onTouchEnd={(e) => handleTouchEnd(e)}
-          onTouchCancel={(e) => handleTouchEnd(e)}
-        >
-          🎤
-        </button>
-      </div>
-    );
-  }
-
   function renderContent() {
     if (step === "mic-check") {
       return (
@@ -840,7 +845,17 @@ export function VoiceRangeWidget({
 
             {rs !== "done" && (
             <>
-              <HoldButton which={isLow ? "low" : "high"} />
+              <HoldButton
+                which={isLow ? "low" : "high"}
+                accentColor={accentColor}
+                recordState={rs}
+                ringRef={ringRef}
+                touchActiveRef={touchActiveRef}
+                onHoldStart={handleHoldStart}
+                onHoldEnd={handleHoldEnd}
+                onTouchStart={handleTouchStart}
+                onTouchEnd={handleTouchEnd}
+              />
               <p style={{
                 textAlign: "center",
                 color: rs === "recording" ? accentColor : "rgba(240,238,234,0.35)",
@@ -986,7 +1001,17 @@ export function VoiceRangeWidget({
 
           {tessituraRecordState !== "done" && (
             <>
-              <HoldButton which="tessitura" />
+              <HoldButton
+                which="tessitura"
+                accentColor={accentColor}
+                recordState={tessituraRecordState}
+                ringRef={ringRef}
+                touchActiveRef={touchActiveRef}
+                onHoldStart={handleHoldStart}
+                onHoldEnd={handleHoldEnd}
+                onTouchStart={handleTouchStart}
+                onTouchEnd={handleTouchEnd}
+              />
               {tessituraRecordState === "recording" && (
                 <>
                   {currentPitch && (
@@ -1474,8 +1499,8 @@ export function VoiceRangeWidget({
             position: "fixed", inset: 0, zIndex: 10000,
             overflowY: "auto",
             background: "rgba(0,0,0,0.82)",
-            backdropFilter: "blur(10px)",
-            WebkitBackdropFilter: "blur(10px)",
+            backdropFilter: "blur(4px)",
+            WebkitBackdropFilter: "blur(4px)",
             padding: 16,
             animation: "vrFadeIn 0.15s both",
             display: "flex",
