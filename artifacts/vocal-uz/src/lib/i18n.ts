@@ -295,6 +295,12 @@ export const t = {
       errorMsg: "Не удалось отправить. Попробуйте ещё раз.",
       close: "Закрыть",
     },
+    inlineVoice: {
+      eyebrow: "ПРОВЕРЬТЕ ТИП ГОЛОСА",
+      heading: "Какой у вас тип голоса?",
+      body: "Сопрано, бас, тенор или меццо? Пройдите экспресс-тест — это займёт меньше минуты.",
+      startBtn: "НАЧАТЬ →",
+    },
   },
   en: {
     nav: {
@@ -583,6 +589,12 @@ export const t = {
       successText: "Your full vocal range report will be sent to you via Telegram.",
       errorMsg: "Failed to send. Please try again.",
       close: "Close",
+    },
+    inlineVoice: {
+      eyebrow: "CHECK YOUR VOICE TYPE",
+      heading: "What is your voice type?",
+      body: "Soprano, bass, tenor or mezzo? Take the quick test — it takes less than a minute.",
+      startBtn: "START →",
     },
   },
 };

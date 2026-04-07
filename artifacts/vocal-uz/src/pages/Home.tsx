@@ -9,6 +9,7 @@ import { StageCanvas } from "@/components/StageCanvas";
 import { TestimonialsSection } from "@/components/TestimonialsSection";
 import { VideoPlayer } from "@/components/VideoPlayer";
 import { VoiceRangeWidget } from "@/components/VoiceRangeWidget";
+import { InlineVoiceSection } from "@/components/InlineVoiceSection";
 import { RevealSection } from "@/components/RevealSection";
 
 const base = import.meta.env.BASE_URL.replace(/\/$/, "");
@@ -407,42 +408,14 @@ export default function Home() {
       </section>
       </RevealSection>
 
-      {/* ── CTA BANNER ── */}
-      <RevealSection>
-      <section className="py-20 px-6 lg:px-12 bg-[#e8002d] relative overflow-hidden">
-        <div className="absolute inset-0 opacity-[0.07] pointer-events-none" style={{ backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")`, backgroundSize: "120px" }} />
-        <div className="max-w-[1100px] mx-auto flex flex-col md:flex-row items-center justify-between gap-8">
-          <div>
-            <h2 className="font-display text-[clamp(2rem,4vw,3.5rem)] leading-[1.1] tracking-[0.02em] text-[#f0eeea]">
-              {lang === "ru" ? "Ваш голос ждёт своего потенциала" : "Your voice is waiting for its potential"}
-            </h2>
-            <p className="text-[0.9rem] text-[rgba(240,238,234,0.75)] mt-3">
-              {lang === "ru"
-                ? "Запишитесь на пробный урок и начните менять свой голос уже сегодня."
-                : "Book a trial lesson and start transforming your voice today."}
-            </p>
-          </div>
-          <div className="flex-shrink-0 flex flex-col gap-3 w-full md:w-auto">
-            <VoiceRangeWidget
-              accentColor="#e8002d"
-              pageName={lang === "ru" ? "Главная" : "Home"}
-              triggerSize="lg"
-              triggerBorder="rgba(240,238,234,0.6)"
-              triggerColor="#f0eeea"
-              triggerHoverBorder="#f0eeea"
-              triggerHoverColor="#f0eeea"
-            />
-            <a
-              href="#booking"
-              className="bg-[#f0eeea] text-[#080808] font-display text-[1.1rem] tracking-[0.15em] px-10 py-5 no-underline transition-all duration-200 hover:bg-white whitespace-nowrap inline-flex items-center justify-center gap-3 group"
-            >
-              {lang === "ru" ? "Записаться сейчас" : "Book Now"}
-              <svg className="transition-transform duration-200 group-hover:translate-x-1" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M5 12h14M12 5l7 7-7 7" /></svg>
-            </a>
-          </div>
-        </div>
-      </section>
-      </RevealSection>
+      {/* ── INLINE VOICE CHECK ── */}
+      <InlineVoiceSection
+        accentColor="#e8002d"
+        pageName={lang === "ru" ? "Главная" : "Home"}
+        bookingHref="#booking"
+        bookLabel={lang === "ru" ? "Записаться сейчас" : "Book Now"}
+        subheading={lang === "ru" ? "Ваш голос ждёт своего потенциала" : "Your voice is waiting for its potential"}
+      />
 
       <TestimonialsSection accentColor="#e8002d" />
 

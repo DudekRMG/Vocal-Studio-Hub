@@ -28,6 +28,7 @@ interface VoiceRangeWidgetProps {
   accentColor: string;
   pageName: string;
   lightMode?: boolean;
+  inline?: boolean;
   triggerBorder?: string;
   triggerColor?: string;
   triggerHoverBorder?: string;
@@ -101,6 +102,7 @@ export function VoiceRangeWidget({
   accentColor,
   pageName,
   lightMode = false,
+  inline = false,
   triggerBorder,
   triggerColor,
   triggerHoverBorder,
@@ -173,13 +175,14 @@ export function VoiceRangeWidget({
   const sessionRef            = useRef(0);
 
   useEffect(() => {
+    if (inline) return;
     if (step !== "closed") {
       document.body.style.overflow = "hidden";
     } else {
       document.body.style.overflow = "";
     }
     return () => { document.body.style.overflow = ""; };
-  }, [step]);
+  }, [step, inline]);
 
   useEffect(() => {
     return () => {
@@ -1413,6 +1416,93 @@ export function VoiceRangeWidget({
   }
 
   const wvS = triggerSize === "lg" ? 1.5 : 1;
+  const txIV = t[lang].inlineVoice;
+
+  if (inline) {
+    if (step === "closed") {
+      return (
+        <button
+          className="font-display uppercase"
+          onClick={open}
+          style={{
+            width: "100%",
+            maxWidth: 400,
+            display: "block",
+            margin: "0 auto",
+            background: accentColor,
+            color: "#ffffff",
+            border: "none",
+            padding: "1.25rem 2rem",
+            fontSize: "1.1rem",
+            letterSpacing: "0.15em",
+            cursor: "pointer",
+            transition: "opacity 0.2s",
+          }}
+          onMouseEnter={(e) => { (e.currentTarget as HTMLButtonElement).style.opacity = "0.85"; }}
+          onMouseLeave={(e) => { (e.currentTarget as HTMLButtonElement).style.opacity = "1"; }}
+        >
+          {txIV.startBtn}
+        </button>
+      );
+    }
+
+    return (
+      <div style={{ maxWidth: 480, width: "100%", margin: "0 auto", animation: "vrFadeIn 0.2s both" }}>
+        <div
+          style={{
+            position: "relative",
+            background: "#111111",
+            border: "1px solid rgba(255,255,255,0.1)",
+            padding: "18px 28px 28px",
+            boxSizing: "border-box",
+          }}
+        >
+          {/* Reset button — returns to idle start state */}
+          <button
+            onClick={close}
+            style={{
+              position: "absolute", top: 14, right: 14,
+              width: 30, height: 30,
+              background: "transparent",
+              border: "1px solid rgba(255,255,255,0.14)",
+              color: "rgba(240,238,234,0.5)",
+              cursor: "pointer",
+              fontSize: "1rem",
+              display: "flex", alignItems: "center", justifyContent: "center",
+              transition: "color 0.2s, border-color 0.2s",
+            }}
+            onMouseEnter={(e) => {
+              (e.currentTarget as HTMLButtonElement).style.color = "#f0eeea";
+              (e.currentTarget as HTMLButtonElement).style.borderColor = "rgba(255,255,255,0.4)";
+            }}
+            onMouseLeave={(e) => {
+              (e.currentTarget as HTMLButtonElement).style.color = "rgba(240,238,234,0.5)";
+              (e.currentTarget as HTMLButtonElement).style.borderColor = "rgba(255,255,255,0.14)";
+            }}
+          >
+            ×
+          </button>
+
+          {/* Step title */}
+          {step !== "success" && getTitle() !== "" && (
+            <p style={{
+              color: "rgba(240,238,234,0.35)",
+              fontSize: "0.65rem",
+              letterSpacing: lsXl,
+              textTransform: "uppercase",
+              margin: "0 0 20px",
+              paddingRight: 36,
+            }}>
+              {getTitle()}
+            </p>
+          )}
+
+          {/* Content */}
+          {renderContent()}
+        </div>
+      </div>
+    );
+  }
 
   return (
     <>
