@@ -28,6 +28,7 @@ interface VoiceRangeWidgetProps {
   pageName: string;
   lightMode?: boolean;
   inline?: boolean;
+  sectionId?: string;
 }
 
 interface HoldButtonProps {
@@ -96,6 +97,7 @@ export function VoiceRangeWidget({
   pageName,
   lightMode = false,
   inline = false,
+  sectionId,
 }: VoiceRangeWidgetProps) {
   const { lang } = useLang();
   const tx = t[lang].voiceWidget;
@@ -155,6 +157,15 @@ export function VoiceRangeWidget({
   const highPitchSamplesRef   = useRef<number[]>([]);
   const tessituralPitchSamplesRef = useRef<number[]>([]);
   const sessionRef            = useRef(0);
+  const panelRef              = useRef<HTMLDivElement>(null);
+  const [panelMinH, setPanelMinH] = useState(0);
+
+  // Track the tallest state the panel has ever reached and lock it in
+  useEffect(() => {
+    if (!panelRef.current || step === "closed") return;
+    const h = panelRef.current.offsetHeight;
+    setPanelMinH(prev => Math.max(prev, h));
+  });
 
   useEffect(() => {
     if (inline) return;
@@ -378,6 +389,21 @@ export function VoiceRangeWidget({
     setStep("mic-check");
     setMicError("");
     requestMic(sessionId);
+
+    if (sectionId) {
+      requestAnimationFrame(() => {
+        requestAnimationFrame(() => {
+          const section = document.getElementById(sectionId);
+          if (section) {
+            const rect = section.getBoundingClientRect();
+            const target = window.scrollY + rect.bottom - window.innerHeight;
+            if (target > window.scrollY) {
+              window.scrollTo({ top: target, behavior: "smooth" });
+            }
+          }
+        });
+      });
+    }
   }
 
   function close() {
@@ -1491,6 +1517,7 @@ export function VoiceRangeWidget({
     return (
       <div style={{ maxWidth: 480, width: "100%", margin: "0 auto", animation: "vrFadeIn 0.2s both", textAlign: "left" }}>
         <div
+          ref={panelRef}
           style={{
             position: "relative",
             background: IC_panelBg,
@@ -1500,6 +1527,8 @@ export function VoiceRangeWidget({
             borderLeft: `1px solid ${IC_panelBdr}`,
             padding: "18px 28px 28px",
             boxSizing: "border-box",
+            minHeight: panelMinH || undefined,
+            letterSpacing: lang === "ru" ? 0 : undefined,
           }}
         >
           {/* Reset button — returns to idle start state */}

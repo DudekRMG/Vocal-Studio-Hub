@@ -88,6 +88,7 @@ export function InlineVoiceSection({
               accentColor={accentColor}
               pageName={pageName}
               lightMode={isLightTheme}
+              sectionId={sectionId}
             />
           </div>
 
