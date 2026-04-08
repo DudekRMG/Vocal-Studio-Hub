@@ -1045,7 +1045,7 @@ export function VoiceRangeWidget({
 
           {tessituraRecordState === "done" && tessituraNote && (
             <>
-              <div style={{ fontSize: "2rem", marginBottom: 8 }}>✓</div>
+              <div style={{ fontSize: "2rem", marginBottom: 8, color: accentColor }}>✓</div>
               <div style={{
                 fontSize: "0.72rem",
                 letterSpacing: lsLg,
