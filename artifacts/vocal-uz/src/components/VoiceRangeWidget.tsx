@@ -159,19 +159,31 @@ export function VoiceRangeWidget({
   const sessionRef            = useRef(0);
   const prevStepRef           = useRef<Step>("closed");
 
-  // Scroll the section's bottom edge to the viewport bottom on first open
+  // Scroll on first open:
+  //   Mobile  → panel top sits ~48 px below the viewport top
+  //   Desktop → section bottom aligns with viewport bottom (original behaviour)
   useEffect(() => {
     const wasOpen = prevStepRef.current !== "closed";
     prevStepRef.current = step;
     if (!inline || wasOpen || step === "closed" || !sectionId) return;
     requestAnimationFrame(() => {
       requestAnimationFrame(() => {
-        const section = document.getElementById(sectionId);
-        if (!section) return;
-        const rect = section.getBoundingClientRect();
-        const target = window.scrollY + rect.bottom - window.innerHeight;
-        if (target > window.scrollY) {
-          window.scrollTo({ top: target, behavior: "smooth" });
+        const isMobile = window.innerWidth < 768;
+        if (isMobile) {
+          const panel = document.querySelector(`#${sectionId} [data-widget-panel]`) as HTMLElement | null;
+          if (panel) {
+            const rect = panel.getBoundingClientRect();
+            const target = window.scrollY + rect.top - 48;
+            if (target > 0) window.scrollTo({ top: target, behavior: "smooth" });
+          }
+        } else {
+          const section = document.getElementById(sectionId);
+          if (!section) return;
+          const rect = section.getBoundingClientRect();
+          const target = window.scrollY + rect.bottom - window.innerHeight;
+          if (target > window.scrollY) {
+            window.scrollTo({ top: target, behavior: "smooth" });
+          }
         }
       });
     });
@@ -1533,6 +1545,7 @@ export function VoiceRangeWidget({
     return (
       <div style={{ maxWidth: 480, width: "100%", margin: "0 auto", animation: "vrFadeIn 0.2s both", textAlign: "left" }}>
         <div
+          data-widget-panel
           style={{
             position: "relative",
             background: IC_panelBg,
@@ -1545,6 +1558,7 @@ export function VoiceRangeWidget({
             minHeight: 420,
             display: "flex",
             flexDirection: "column",
+            fontFamily: lang === "ru" ? "'Inter', sans-serif" : undefined,
             letterSpacing: lang === "ru" ? 0 : undefined,
           }}
         >
