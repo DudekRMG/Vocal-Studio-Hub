@@ -1400,11 +1400,18 @@ export function VoiceRangeWidget({
   const txIV = t[lang].inlineVoice;
 
   if (inline) {
-    const startBg   = lightMode ? "#080808" : "#f0eeea";
-    const startText = lightMode ? "#f0eeea" : "#080808";
-    const startHover = lightMode ? "#1a1a1a" : "#ffffff";
+    const startColor      = lightMode ? "rgba(8,8,8,0.80)"   : "rgba(240,238,234,0.80)";
+    const startBorder     = lightMode ? "rgba(8,8,8,0.40)"   : "rgba(255,255,255,0.40)";
+    const startHoverColor = lightMode ? "#080808"             : "#f0eeea";
+
+    const waveBarSm = ([
+      [2, 0.82, 0.00], [3, 1.10, 0.08], [5, 0.70, 0.16], [7, 1.25, 0.04],
+      [8, 0.90, 0.20], [8, 1.15, 0.12], [7, 0.75, 0.28], [5, 1.30, 0.36],
+      [3, 0.85, 0.44], [2, 1.05, 0.24], [4, 0.78, 0.32], [6, 1.20, 0.40],
+    ] as [number, number, number][]);
 
     if (step === "closed") {
+      const lgScale = 1.5;
       return (
         <button
           className="font-display uppercase"
@@ -1414,19 +1421,51 @@ export function VoiceRangeWidget({
             maxWidth: 400,
             display: "block",
             margin: "0 auto",
-            background: startBg,
-            color: startText,
-            border: "none",
-            padding: "1.25rem 2rem",
+            background: "transparent",
+            color: startColor,
+            border: `1px solid ${startBorder}`,
+            padding: `calc(1.25rem - 1px) calc(2.5rem - 1px)`,
             fontSize: "1.1rem",
             letterSpacing: "0.15em",
             cursor: "pointer",
-            transition: "background-color 0.2s",
+            position: "relative",
+            transition: "color 0.2s, border-color 0.2s",
           }}
-          onMouseEnter={(e) => { (e.currentTarget as HTMLButtonElement).style.backgroundColor = startHover; }}
-          onMouseLeave={(e) => { (e.currentTarget as HTMLButtonElement).style.backgroundColor = startBg; }}
+          onMouseEnter={(e) => {
+            const b = e.currentTarget as HTMLButtonElement;
+            b.style.color = startHoverColor;
+            b.style.borderColor = startHoverColor;
+          }}
+          onMouseLeave={(e) => {
+            const b = e.currentTarget as HTMLButtonElement;
+            b.style.color = startColor;
+            b.style.borderColor = startBorder;
+          }}
         >
           {txIV.startBtn}
+          <span aria-hidden="true" style={{
+            position: "absolute",
+            bottom: Math.round(4 * lgScale),
+            left: "50%",
+            transform: "translateX(-50%)",
+            display: "flex",
+            gap: Math.round(2 * lgScale),
+            alignItems: "center",
+            height: Math.round(8 * lgScale),
+            pointerEvents: "none",
+          }}>
+            {waveBarSm.map(([h, dur, delay], i) => (
+              <span key={i} style={{
+                display: "inline-block",
+                width: Math.round(2 * lgScale),
+                height: Math.round(h * lgScale),
+                background: startColor,
+                opacity: 0.5,
+                borderRadius: 999,
+                animation: `vrWaveBar ${dur}s ${delay}s ease-in-out infinite`,
+              }} />
+            ))}
+          </span>
         </button>
       );
     }
@@ -1436,8 +1475,11 @@ export function VoiceRangeWidget({
         <div
           style={{
             position: "relative",
-            background: "#111111",
-            border: "1px solid rgba(255,255,255,0.1)",
+            background: "rgba(0,0,0,0.45)",
+            borderTop: `2px solid ${accentColor}`,
+            borderRight: "1px solid rgba(255,255,255,0.10)",
+            borderBottom: "1px solid rgba(255,255,255,0.10)",
+            borderLeft: "1px solid rgba(255,255,255,0.10)",
             padding: "18px 28px 28px",
             boxSizing: "border-box",
           }}

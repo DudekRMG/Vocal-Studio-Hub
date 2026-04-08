@@ -299,7 +299,8 @@ export const t = {
       eyebrow: "ПРОВЕРЬТЕ ТИП ГОЛОСА",
       heading: "Какой у вас тип голоса?",
       body: "Сопрано, бас, тенор или меццо? Пройдите экспресс-тест — это займёт меньше минуты.",
-      startBtn: "НАЧАТЬ →",
+      startBtn: "НАЧАТЬ",
+      bookBtn: "Записаться на урок сейчас",
     },
   },
   en: {
@@ -594,7 +595,8 @@ export const t = {
       eyebrow: "CHECK YOUR VOICE TYPE",
       heading: "What is your voice type?",
       body: "Soprano, bass, tenor or mezzo? Take the quick test — it takes less than a minute.",
-      startBtn: "START →",
+      startBtn: "START",
+      bookBtn: "Book a lesson now",
     },
   },
 };

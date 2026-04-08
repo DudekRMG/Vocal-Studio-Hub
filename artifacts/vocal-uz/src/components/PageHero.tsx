@@ -217,24 +217,42 @@ export function PageHero({
                   const navH = nav ? (nav as HTMLElement).offsetHeight : 0;
                   window.scrollTo({ top: el.getBoundingClientRect().top + window.scrollY - navH, behavior: "smooth" });
                 }}
-                className="font-display text-[0.72rem] tracking-[0.16em] px-6 py-3.5 no-underline uppercase transition-all duration-200"
+                className="font-display uppercase"
                 style={{
-                  border: lightMode ? "1px solid rgba(8,8,8,0.55)" : "1px solid rgba(240,238,234,0.45)",
-                  color: lightMode ? "#080808" : "rgba(240,238,234,0.8)",
+                  fontSize: "0.72rem",
+                  letterSpacing: "0.16em",
+                  padding: "calc(0.875rem - 1px) calc(1.5rem - 1px)",
+                  border: `1px solid ${ghostBorder}`,
+                  color: ghostText,
                   background: "transparent",
+                  cursor: "pointer",
+                  whiteSpace: "nowrap",
+                  textDecoration: "none",
+                  display: "inline-block",
+                  transition: "color 0.2s, border-color 0.2s",
+                  position: "relative",
                 }}
                 onMouseEnter={(e) => {
                   const a = e.currentTarget as HTMLAnchorElement;
-                  a.style.borderColor = lightMode ? "#080808" : "#f0eeea";
-                  a.style.color = lightMode ? "#080808" : "#f0eeea";
+                  a.style.color = ghostHoverText;
+                  a.style.borderColor = ghostHoverBorder;
                 }}
                 onMouseLeave={(e) => {
                   const a = e.currentTarget as HTMLAnchorElement;
-                  a.style.borderColor = lightMode ? "rgba(8,8,8,0.55)" : "rgba(240,238,234,0.45)";
-                  a.style.color = lightMode ? "#080808" : "rgba(240,238,234,0.8)";
+                  a.style.color = ghostText;
+                  a.style.borderColor = ghostBorder;
                 }}
               >
                 {lang === "ru" ? "ОПРЕДЕЛИТЬ ГОЛОС" : tx.voiceWidget.trigger}
+                <span aria-hidden="true" style={{ position: "absolute", bottom: 4, left: "50%", transform: "translateX(-50%)", display: "flex", gap: 2, alignItems: "center", height: 8, pointerEvents: "none" }}>
+                  {([
+                    [2, 0.82, 0.00], [3, 1.10, 0.08], [5, 0.70, 0.16], [7, 1.25, 0.04],
+                    [8, 0.90, 0.20], [8, 1.15, 0.12], [7, 0.75, 0.28], [5, 1.30, 0.36],
+                    [3, 0.85, 0.44], [2, 1.05, 0.24], [4, 0.78, 0.32], [6, 1.20, 0.40],
+                  ] as [number, number, number][]).map(([h, dur, delay], i) => (
+                    <span key={i} style={{ display: "inline-block", width: 2, height: h, background: ghostBorder, opacity: 0.45, borderRadius: 999, animation: `vrWaveBar ${dur}s ${delay}s ease-in-out infinite` }} />
+                  ))}
+                </span>
               </a>
             </div>
           </div>
@@ -343,24 +361,42 @@ export function PageHero({
                   const navH = nav ? (nav as HTMLElement).offsetHeight : 0;
                   window.scrollTo({ top: el.getBoundingClientRect().top + window.scrollY - navH, behavior: "smooth" });
                 }}
-                className="font-display text-[0.72rem] tracking-[0.16em] px-6 py-3.5 no-underline uppercase transition-all duration-200"
+                className="font-display uppercase"
                 style={{
-                  border: lightMode ? "1px solid rgba(8,8,8,0.55)" : "1px solid rgba(240,238,234,0.45)",
-                  color: lightMode ? "#080808" : "rgba(240,238,234,0.8)",
+                  fontSize: "0.72rem",
+                  letterSpacing: "0.16em",
+                  padding: "calc(0.875rem - 1px) calc(1.5rem - 1px)",
+                  border: `1px solid ${ghostBorder}`,
+                  color: ghostText,
                   background: "transparent",
+                  cursor: "pointer",
+                  whiteSpace: "nowrap",
+                  textDecoration: "none",
+                  display: "inline-block",
+                  transition: "color 0.2s, border-color 0.2s",
+                  position: "relative",
                 }}
                 onMouseEnter={(e) => {
                   const a = e.currentTarget as HTMLAnchorElement;
-                  a.style.borderColor = lightMode ? "#080808" : "#f0eeea";
-                  a.style.color = lightMode ? "#080808" : "#f0eeea";
+                  a.style.color = ghostHoverText;
+                  a.style.borderColor = ghostHoverBorder;
                 }}
                 onMouseLeave={(e) => {
                   const a = e.currentTarget as HTMLAnchorElement;
-                  a.style.borderColor = lightMode ? "rgba(8,8,8,0.55)" : "rgba(240,238,234,0.45)";
-                  a.style.color = lightMode ? "#080808" : "rgba(240,238,234,0.8)";
+                  a.style.color = ghostText;
+                  a.style.borderColor = ghostBorder;
                 }}
               >
                 {lang === "ru" ? "ОПРЕДЕЛИТЬ ГОЛОС" : tx.voiceWidget.trigger}
+                <span aria-hidden="true" style={{ position: "absolute", bottom: 4, left: "50%", transform: "translateX(-50%)", display: "flex", gap: 2, alignItems: "center", height: 8, pointerEvents: "none" }}>
+                  {([
+                    [2, 0.82, 0.00], [3, 1.10, 0.08], [5, 0.70, 0.16], [7, 1.25, 0.04],
+                    [8, 0.90, 0.20], [8, 1.15, 0.12], [7, 0.75, 0.28], [5, 1.30, 0.36],
+                    [3, 0.85, 0.44], [2, 1.05, 0.24], [4, 0.78, 0.32], [6, 1.20, 0.40],
+                  ] as [number, number, number][]).map(([h, dur, delay], i) => (
+                    <span key={i} style={{ display: "inline-block", width: 2, height: h, background: ghostBorder, opacity: 0.45, borderRadius: 999, animation: `vrWaveBar ${dur}s ${delay}s ease-in-out infinite` }} />
+                  ))}
+                </span>
               </a>
             </div>
           </div>

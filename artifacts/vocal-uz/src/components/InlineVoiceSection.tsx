@@ -100,7 +100,7 @@ export function InlineVoiceSection({
             onMouseEnter={(e) => { (e.currentTarget as HTMLAnchorElement).style.backgroundColor = btnHoverBg; }}
             onMouseLeave={(e) => { (e.currentTarget as HTMLAnchorElement).style.backgroundColor = btnBg; }}
           >
-            {bookLabel}
+            {txIV.bookBtn}
             <svg
               className="transition-transform duration-200 group-hover:translate-x-1"
               width="16"
