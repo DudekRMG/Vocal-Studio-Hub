@@ -222,8 +222,8 @@ export function PageHero({
                   fontSize: "0.72rem",
                   letterSpacing: "0.16em",
                   padding: "calc(0.875rem - 1px) calc(1.5rem - 1px)",
-                  border: `1px solid ${ghostBorder}`,
-                  color: ghostText,
+                  border: `1px solid ${accentColor}`,
+                  color: accentColor,
                   background: "transparent",
                   cursor: "pointer",
                   whiteSpace: "nowrap",
@@ -233,14 +233,10 @@ export function PageHero({
                   position: "relative",
                 }}
                 onMouseEnter={(e) => {
-                  const a = e.currentTarget as HTMLAnchorElement;
-                  a.style.color = ghostHoverText;
-                  a.style.borderColor = ghostHoverBorder;
+                  (e.currentTarget as HTMLAnchorElement).style.color = lightMode ? "#0f1016" : "#f0eeea";
                 }}
                 onMouseLeave={(e) => {
-                  const a = e.currentTarget as HTMLAnchorElement;
-                  a.style.color = ghostText;
-                  a.style.borderColor = ghostBorder;
+                  (e.currentTarget as HTMLAnchorElement).style.color = accentColor;
                 }}
               >
                 {lang === "ru" ? "ОПРЕДЕЛИТЬ ГОЛОС" : tx.voiceWidget.trigger}
@@ -250,7 +246,7 @@ export function PageHero({
                     [8, 0.90, 0.20], [8, 1.15, 0.12], [7, 0.75, 0.28], [5, 1.30, 0.36],
                     [3, 0.85, 0.44], [2, 1.05, 0.24], [4, 0.78, 0.32], [6, 1.20, 0.40],
                   ] as [number, number, number][]).map(([h, dur, delay], i) => (
-                    <span key={i} style={{ display: "inline-block", width: 2, height: h, background: ghostBorder, opacity: 0.45, borderRadius: 999, animation: `vrWaveBar ${dur}s ${delay}s ease-in-out infinite` }} />
+                    <span key={i} style={{ display: "inline-block", width: 2, height: h, background: accentColor, opacity: 0.45, borderRadius: 999, animation: `vrWaveBar ${dur}s ${delay}s ease-in-out infinite` }} />
                   ))}
                 </span>
               </a>
@@ -366,8 +362,8 @@ export function PageHero({
                   fontSize: "0.72rem",
                   letterSpacing: "0.16em",
                   padding: "calc(0.875rem - 1px) calc(1.5rem - 1px)",
-                  border: `1px solid ${ghostBorder}`,
-                  color: ghostText,
+                  border: `1px solid ${accentColor}`,
+                  color: accentColor,
                   background: "transparent",
                   cursor: "pointer",
                   whiteSpace: "nowrap",
@@ -377,14 +373,10 @@ export function PageHero({
                   position: "relative",
                 }}
                 onMouseEnter={(e) => {
-                  const a = e.currentTarget as HTMLAnchorElement;
-                  a.style.color = ghostHoverText;
-                  a.style.borderColor = ghostHoverBorder;
+                  (e.currentTarget as HTMLAnchorElement).style.color = lightMode ? "#0f1016" : "#f0eeea";
                 }}
                 onMouseLeave={(e) => {
-                  const a = e.currentTarget as HTMLAnchorElement;
-                  a.style.color = ghostText;
-                  a.style.borderColor = ghostBorder;
+                  (e.currentTarget as HTMLAnchorElement).style.color = accentColor;
                 }}
               >
                 {lang === "ru" ? "ОПРЕДЕЛИТЬ ГОЛОС" : tx.voiceWidget.trigger}
@@ -394,7 +386,7 @@ export function PageHero({
                     [8, 0.90, 0.20], [8, 1.15, 0.12], [7, 0.75, 0.28], [5, 1.30, 0.36],
                     [3, 0.85, 0.44], [2, 1.05, 0.24], [4, 0.78, 0.32], [6, 1.20, 0.40],
                   ] as [number, number, number][]).map(([h, dur, delay], i) => (
-                    <span key={i} style={{ display: "inline-block", width: 2, height: h, background: ghostBorder, opacity: 0.45, borderRadius: 999, animation: `vrWaveBar ${dur}s ${delay}s ease-in-out infinite` }} />
+                    <span key={i} style={{ display: "inline-block", width: 2, height: h, background: accentColor, opacity: 0.45, borderRadius: 999, animation: `vrWaveBar ${dur}s ${delay}s ease-in-out infinite` }} />
                   ))}
                 </span>
               </a>
