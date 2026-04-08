@@ -793,7 +793,7 @@ export function VoiceRangeWidget({
   const IC_text1    = lightMode ? "rgba(255,255,255,0.85)"  : "#0f1016";
   const IC_text2    = lightMode ? "rgba(255,255,255,0.65)"  : "rgba(15,16,22,0.80)";
   const IC_text3    = lightMode ? "rgba(255,255,255,0.45)"  : "rgba(15,16,22,0.65)";
-  const IC_text4    = lightMode ? "rgba(255,255,255,0.32)"  : "rgba(15,16,22,0.50)";
+  const IC_text4    = lightMode ? "rgba(15,16,22,0.50)"     : "rgba(15,16,22,0.50)";
   const IC_dash     = lightMode ? "rgba(255,255,255,0.18)"  : "rgba(15,16,22,0.14)";
   const IC_ghost    = lightMode ? "rgba(255,255,255,0.22)"  : "rgba(15,16,22,0.18)";
   const IC_ghostFg  = lightMode ? "rgba(255,255,255,0.70)"  : "rgba(15,16,22,0.60)";
