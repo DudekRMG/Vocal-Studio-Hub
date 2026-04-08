@@ -788,7 +788,7 @@ export function VoiceRangeWidget({
   // ── Inline design tokens — adapt to banner darkness ───────────────────────
   // lightMode=true  → light banner (Express Karaoke)  → dark widget
   // lightMode=false → dark banner (all others)         → cream widget
-  const IC_panelBg  = lightMode ? "rgba(0,0,0,0.60)"       : "#F5F0E8";
+  const IC_panelBg  = lightMode ? "#080808"                 : "#F5F0E8";
   const IC_panelBdr = lightMode ? "rgba(255,255,255,0.10)"  : "rgba(15,16,22,0.18)";
   const IC_text1    = lightMode ? "rgba(255,255,255,0.85)"  : "#0f1016";
   const IC_text2    = lightMode ? "rgba(255,255,255,0.65)"  : "rgba(15,16,22,0.80)";
