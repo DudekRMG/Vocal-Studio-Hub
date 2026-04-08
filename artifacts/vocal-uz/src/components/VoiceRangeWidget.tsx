@@ -1400,9 +1400,9 @@ export function VoiceRangeWidget({
   const txIV = t[lang].inlineVoice;
 
   if (inline) {
-    const startColor      = lightMode ? "rgba(8,8,8,0.80)"   : "rgba(240,238,234,0.80)";
-    const startBorder     = lightMode ? "rgba(8,8,8,0.40)"   : "rgba(255,255,255,0.40)";
-    const startHoverColor = lightMode ? "#080808"             : "#f0eeea";
+    const startColor      = lightMode ? "#080808" : "#f0eeea";
+    const startBorder     = lightMode ? "rgba(8,8,8,0.50)"   : "rgba(240,238,234,0.50)";
+    const startHoverColor = startColor;
 
     const waveBarSm = ([
       [2, 0.82, 0.00], [3, 1.10, 0.08], [5, 0.70, 0.16], [7, 1.25, 0.04],
