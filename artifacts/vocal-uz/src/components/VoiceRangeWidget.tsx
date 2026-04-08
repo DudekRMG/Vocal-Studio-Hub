@@ -723,11 +723,22 @@ export function VoiceRangeWidget({
     ? Math.log2(highHz / lowHz).toFixed(1)
     : "—";
 
+  // ── Inline light-card design tokens ───────────────────────────────────────
+  const IC_text1    = "rgba(15,16,22,0.80)";
+  const IC_text2    = "rgba(15,16,22,0.60)";
+  const IC_text3    = "rgba(15,16,22,0.45)";
+  const IC_text4    = "rgba(15,16,22,0.32)";
+  const IC_dash     = "rgba(15,16,22,0.14)";
+  const IC_ghost    = "rgba(15,16,22,0.18)";
+  const IC_ghostFg  = "rgba(15,16,22,0.60)";
+  const IC_ghostHB  = "rgba(15,16,22,0.40)";
+  // ──────────────────────────────────────────────────────────────────────────
+
   const inputStyle: React.CSSProperties = {
     width: "100%",
-    background: "rgba(255,255,255,0.06)",
-    border: "1px solid rgba(255,255,255,0.14)",
-    color: "#f0eeea",
+    background: "rgba(15,16,22,0.05)",
+    border: `1px solid ${IC_ghost}`,
+    color: "#1a1a1a",
     padding: "0.65rem 0.9rem",
     fontSize: "0.88rem",
     outline: "none",
@@ -742,29 +753,29 @@ export function VoiceRangeWidget({
           <div style={{ marginBottom: 16, display: "flex", justifyContent: "center" }}>
             <svg width="48" height="58" viewBox="0 0 48 58" fill="none" xmlns="http://www.w3.org/2000/svg">
               {/* Ribbon capsule — tall narrow rectangle */}
-              <rect x="17" y="3" width="14" height="28" rx="2" stroke="rgba(240,238,234,0.7)" strokeWidth="1.8" fill="none"/>
+              <rect x="17" y="3" width="14" height="28" rx="2" stroke={accentColor} strokeWidth="1.8" fill="none"/>
               {/* Horizontal slats inside capsule */}
-              <line x1="19" y1="9"  x2="29" y2="9"  stroke="rgba(240,238,234,0.3)" strokeWidth="1.2" strokeLinecap="round"/>
-              <line x1="19" y1="13" x2="29" y2="13" stroke="rgba(240,238,234,0.3)" strokeWidth="1.2" strokeLinecap="round"/>
-              <line x1="19" y1="17" x2="29" y2="17" stroke="rgba(240,238,234,0.3)" strokeWidth="1.2" strokeLinecap="round"/>
-              <line x1="19" y1="21" x2="29" y2="21" stroke="rgba(240,238,234,0.3)" strokeWidth="1.2" strokeLinecap="round"/>
-              <line x1="19" y1="25" x2="29" y2="25" stroke="rgba(240,238,234,0.3)" strokeWidth="1.2" strokeLinecap="round"/>
+              <line x1="19" y1="9"  x2="29" y2="9"  stroke={IC_dash} strokeWidth="1.2" strokeLinecap="round"/>
+              <line x1="19" y1="13" x2="29" y2="13" stroke={IC_dash} strokeWidth="1.2" strokeLinecap="round"/>
+              <line x1="19" y1="17" x2="29" y2="17" stroke={IC_dash} strokeWidth="1.2" strokeLinecap="round"/>
+              <line x1="19" y1="21" x2="29" y2="21" stroke={IC_dash} strokeWidth="1.2" strokeLinecap="round"/>
+              <line x1="19" y1="25" x2="29" y2="25" stroke={IC_dash} strokeWidth="1.2" strokeLinecap="round"/>
               {/* Side brackets */}
-              <line x1="10" y1="10" x2="17" y2="10" stroke="rgba(240,238,234,0.6)" strokeWidth="1.6" strokeLinecap="round"/>
-              <line x1="10" y1="10" x2="10" y2="24" stroke="rgba(240,238,234,0.6)" strokeWidth="1.6" strokeLinecap="round"/>
-              <line x1="10" y1="24" x2="17" y2="24" stroke="rgba(240,238,234,0.6)" strokeWidth="1.6" strokeLinecap="round"/>
-              <line x1="31" y1="10" x2="38" y2="10" stroke="rgba(240,238,234,0.6)" strokeWidth="1.6" strokeLinecap="round"/>
-              <line x1="38" y1="10" x2="38" y2="24" stroke="rgba(240,238,234,0.6)" strokeWidth="1.6" strokeLinecap="round"/>
-              <line x1="31" y1="24" x2="38" y2="24" stroke="rgba(240,238,234,0.6)" strokeWidth="1.6" strokeLinecap="round"/>
+              <line x1="10" y1="10" x2="17" y2="10" stroke={accentColor} strokeWidth="1.6" strokeLinecap="round"/>
+              <line x1="10" y1="10" x2="10" y2="24" stroke={accentColor} strokeWidth="1.6" strokeLinecap="round"/>
+              <line x1="10" y1="24" x2="17" y2="24" stroke={accentColor} strokeWidth="1.6" strokeLinecap="round"/>
+              <line x1="31" y1="10" x2="38" y2="10" stroke={accentColor} strokeWidth="1.6" strokeLinecap="round"/>
+              <line x1="38" y1="10" x2="38" y2="24" stroke={accentColor} strokeWidth="1.6" strokeLinecap="round"/>
+              <line x1="31" y1="24" x2="38" y2="24" stroke={accentColor} strokeWidth="1.6" strokeLinecap="round"/>
               {/* Short handle */}
-              <rect x="21" y="31" width="6" height="12" rx="1.5" stroke="rgba(240,238,234,0.7)" strokeWidth="1.6" fill="none"/>
+              <rect x="21" y="31" width="6" height="12" rx="1.5" stroke={accentColor} strokeWidth="1.6" fill="none"/>
               {/* Stand rod */}
-              <line x1="24" y1="43" x2="24" y2="51" stroke="rgba(240,238,234,0.7)" strokeWidth="1.8" strokeLinecap="round"/>
+              <line x1="24" y1="43" x2="24" y2="51" stroke={accentColor} strokeWidth="1.8" strokeLinecap="round"/>
               {/* Base */}
-              <line x1="15" y1="51" x2="33" y2="51" stroke="rgba(240,238,234,0.7)" strokeWidth="2" strokeLinecap="round"/>
+              <line x1="15" y1="51" x2="33" y2="51" stroke={accentColor} strokeWidth="2" strokeLinecap="round"/>
             </svg>
           </div>
-          <p style={{ color: "rgba(240,238,234,0.6)", fontSize: "0.88rem", lineHeight: 1.6, margin: 0 }}>
+          <p style={{ color: IC_text2, fontSize: "0.88rem", lineHeight: 1.6, margin: 0 }}>
             {tx.stepMicText}
           </p>
         </div>
@@ -779,7 +790,7 @@ export function VoiceRangeWidget({
       return (
         <div style={{ textAlign: "center", padding: "8px 0" }}>
           <div style={{ fontSize: "2rem", marginBottom: 16 }}>🚫</div>
-          <p style={{ color: "rgba(240,238,234,0.6)", fontSize: "0.85rem", lineHeight: 1.7, margin: "0 0 24px" }}>
+          <p style={{ color: IC_text2, fontSize: "0.85rem", lineHeight: 1.7, margin: "0 0 24px" }}>
             {msg}
           </p>
           {micError !== "unsupported" && (
@@ -811,7 +822,7 @@ export function VoiceRangeWidget({
             {[0, 1, 2, 3].map((i) => (
               <div key={i} style={{
                 width: 24, height: 3,
-                background: (isLow ? i === 0 : i === 1) ? accentColor : "rgba(255,255,255,0.18)",
+                background: (isLow ? i === 0 : i === 1) ? accentColor : IC_dash,
                 borderRadius: 2,
                 transition: "background 0.3s",
               }} />
@@ -820,7 +831,7 @@ export function VoiceRangeWidget({
 
           <p style={{
             textAlign: "center",
-            color: "rgba(240,238,234,0.75)",
+            color: IC_text1,
             fontSize: "0.88rem",
             lineHeight: 1.7,
             margin: "0 0 28px",
@@ -843,7 +854,7 @@ export function VoiceRangeWidget({
               />
               <p style={{
                 textAlign: "center",
-                color: rs === "recording" ? accentColor : "rgba(240,238,234,0.35)",
+                color: rs === "recording" ? accentColor : IC_text4,
                 fontSize: "0.72rem",
                 letterSpacing: lsMd,
                 textTransform: "uppercase",
@@ -896,15 +907,15 @@ export function VoiceRangeWidget({
                   {noteToRussian(note)}
                 </div>
               )}
-              <p style={{ color: "rgba(240,238,234,0.4)", fontSize: "0.72rem", margin: "0 0 24px" }}>
+              <p style={{ color: IC_text3, fontSize: "0.72rem", margin: "0 0 24px" }}>
                 {tx.detectedNote} {displayNote(note)}
               </p>
               <div style={{ display: "flex", gap: 10, justifyContent: "center", flexWrap: "wrap" }}>
                 <button
                   onClick={() => isLow ? resetLow() : resetHigh()}
                   style={{
-                    border: "1px solid rgba(255,255,255,0.18)",
-                    color: "rgba(240,238,234,0.6)",
+                    border: `1px solid ${IC_ghost}`,
+                    color: IC_ghostFg,
                     background: "transparent",
                     padding: "0.55rem 1.2rem",
                     cursor: "pointer",
@@ -915,12 +926,12 @@ export function VoiceRangeWidget({
                     transition: "border-color 0.2s, color 0.2s",
                   }}
                   onMouseEnter={(e) => {
-                    (e.currentTarget as HTMLButtonElement).style.borderColor = "rgba(255,255,255,0.4)";
-                    (e.currentTarget as HTMLButtonElement).style.color = "#f0eeea";
+                    (e.currentTarget as HTMLButtonElement).style.borderColor = IC_ghostHB;
+                    (e.currentTarget as HTMLButtonElement).style.color = "#1a1a1a";
                   }}
                   onMouseLeave={(e) => {
-                    (e.currentTarget as HTMLButtonElement).style.borderColor = "rgba(255,255,255,0.18)";
-                    (e.currentTarget as HTMLButtonElement).style.color = "rgba(240,238,234,0.6)";
+                    (e.currentTarget as HTMLButtonElement).style.borderColor = IC_ghost;
+                    (e.currentTarget as HTMLButtonElement).style.color = IC_ghostFg;
                   }}
                 >
                   {tx.reRecord}
@@ -966,14 +977,14 @@ export function VoiceRangeWidget({
             {[0, 1, 2, 3].map((i) => (
               <div key={i} style={{
                 width: 24, height: 3,
-                background: i === 2 ? accentColor : "rgba(255,255,255,0.18)",
+                background: i === 2 ? accentColor : IC_dash,
                 borderRadius: 2,
                 transition: "background 0.3s",
               }} />
             ))}
           </div>
           <p style={{
-            color: "rgba(240,238,234,0.55)",
+            color: IC_text2,
             fontSize: "0.78rem",
             lineHeight: 1.7,
             marginBottom: 24,
@@ -1008,7 +1019,7 @@ export function VoiceRangeWidget({
                     marginTop: 10,
                     fontSize: "0.65rem",
                     letterSpacing: "0.14em",
-                    color: "rgba(240,238,234,0.4)",
+                    color: IC_text3,
                     maxWidth: 240,
                     margin: "10px auto 0",
                     lineHeight: 1.6,
@@ -1031,7 +1042,7 @@ export function VoiceRangeWidget({
               <div style={{
                 fontSize: "0.72rem",
                 letterSpacing: lsLg,
-                color: "rgba(240,238,234,0.6)",
+                color: IC_text2,
                 textTransform: "uppercase",
                 marginBottom: 24,
               }}>
@@ -1042,8 +1053,8 @@ export function VoiceRangeWidget({
                   onClick={() => resetTessitura()}
                   style={{
                     background: "transparent",
-                    color: "rgba(240,238,234,0.6)",
-                    border: "1px solid rgba(255,255,255,0.18)",
+                    color: IC_ghostFg,
+                    border: `1px solid ${IC_ghost}`,
                     padding: "0.55rem 1.2rem",
                     cursor: "pointer",
                     fontSize: "0.72rem",
@@ -1089,7 +1100,7 @@ export function VoiceRangeWidget({
             {[0, 1, 2, 3].map((i) => (
               <div key={i} style={{
                 width: 24, height: 3,
-                background: i === 3 ? accentColor : "rgba(255,255,255,0.18)",
+                background: i === 3 ? accentColor : IC_dash,
                 borderRadius: 2,
                 transition: "background 0.3s",
               }} />
@@ -1105,8 +1116,8 @@ export function VoiceRangeWidget({
                   maxWidth: 160,
                   padding: "1.1rem 0.5rem",
                   background: "transparent",
-                  border: `1px solid rgba(255,255,255,0.22)`,
-                  color: "rgba(240,238,234,0.75)",
+                  border: `1px solid ${IC_ghost}`,
+                  color: IC_ghostFg,
                   fontSize: "0.9rem",
                   fontFamily: "var(--font-display-family)",
                   letterSpacing: "0.1em",
@@ -1121,8 +1132,8 @@ export function VoiceRangeWidget({
                 }}
                 onMouseLeave={(e) => {
                   const btn = e.currentTarget as HTMLButtonElement;
-                  btn.style.borderColor = "rgba(255,255,255,0.22)";
-                  btn.style.color = "rgba(240,238,234,0.75)";
+                  btn.style.borderColor = IC_ghost;
+                  btn.style.color = IC_ghostFg;
                 }}
               >
                 {option === "male" ? tx.sexOptionMale : tx.sexOptionFemale}
@@ -1139,7 +1150,7 @@ export function VoiceRangeWidget({
           <div style={{ textAlign: "center", animation: "vrFadeIn 0.25s both" }}>
             <div style={{ fontSize: "2rem", marginBottom: 14 }}>⚠️</div>
             <p style={{
-              color: "rgba(240,238,234,0.5)",
+              color: IC_text3,
               fontSize: "0.68rem",
               letterSpacing: lsLg,
               textTransform: "uppercase",
@@ -1150,7 +1161,7 @@ export function VoiceRangeWidget({
             <div style={{ display: "flex", flexDirection: "column", gap: 10, marginBottom: 28 }}>
               {validation.errorKeys.map((key) => (
                 <p key={key} style={{
-                  color: "rgba(240,238,234,0.65)",
+                  color: IC_text1,
                   fontSize: "0.84rem",
                   lineHeight: 1.6,
                   margin: 0,
@@ -1185,7 +1196,7 @@ export function VoiceRangeWidget({
       return (
         <div style={{ textAlign: "center", animation: "vrFadeIn 0.25s both" }}>
           <p style={{
-            color: "rgba(240,238,234,0.4)",
+            color: IC_text3,
             fontSize: "0.68rem",
             letterSpacing: lsLg,
             textTransform: "uppercase",
@@ -1205,7 +1216,7 @@ export function VoiceRangeWidget({
           </div>
           {classification && classification.confidence === "low" && (
             <p style={{
-              color: "rgba(240,238,234,0.45)",
+              color: IC_text3,
               fontSize: "0.75rem",
               lineHeight: 1.5,
               margin: "0 0 12px",
@@ -1215,7 +1226,7 @@ export function VoiceRangeWidget({
             </p>
           )}
           <p style={{
-            color: "rgba(240,238,234,0.65)",
+            color: IC_text1,
             fontSize: "0.88rem",
             lineHeight: 1.65,
             margin: "0 0 24px",
@@ -1223,7 +1234,7 @@ export function VoiceRangeWidget({
             {voiceTypeData.desc}
           </p>
           <p style={{
-            color: "rgba(240,238,234,0.4)",
+            color: IC_text3,
             fontSize: "0.78rem",
             lineHeight: 1.65,
             margin: "0 0 28px",
@@ -1251,7 +1262,7 @@ export function VoiceRangeWidget({
             {tx.continueBtn}
           </button>
           <p style={{
-            color: "rgba(240,238,234,0.35)",
+            color: IC_text4,
             fontSize: "0.72rem",
             lineHeight: 1.6,
             margin: "20px 0 0",
@@ -1267,7 +1278,7 @@ export function VoiceRangeWidget({
       return (
         <div style={{ animation: "vrFadeIn 0.25s both" }}>
           <p style={{
-            color: "rgba(240,238,234,0.4)",
+            color: IC_text3,
             fontSize: "0.73rem",
             lineHeight: 1.65,
             marginBottom: 20,
@@ -1332,8 +1343,8 @@ export function VoiceRangeWidget({
                 style={{
                   flex: 1,
                   background: "transparent",
-                  color: "rgba(240,238,234,0.7)",
-                  border: "1px solid rgba(255,255,255,0.22)",
+                  color: IC_ghostFg,
+                  border: `1px solid ${IC_ghost}`,
                   padding: "0.75rem 0.5rem",
                   cursor: "pointer",
                   fontSize: "0.72rem",
@@ -1344,13 +1355,13 @@ export function VoiceRangeWidget({
                 }}
                 onMouseEnter={(e) => {
                   const btn = e.currentTarget as HTMLButtonElement;
-                  btn.style.borderColor = "rgba(255,255,255,0.5)";
-                  btn.style.color = "#f0eeea";
+                  btn.style.borderColor = IC_ghostHB;
+                  btn.style.color = "#1a1a1a";
                 }}
                 onMouseLeave={(e) => {
                   const btn = e.currentTarget as HTMLButtonElement;
-                  btn.style.borderColor = "rgba(255,255,255,0.22)";
-                  btn.style.color = "rgba(240,238,234,0.7)";
+                  btn.style.borderColor = IC_ghost;
+                  btn.style.color = IC_ghostFg;
                 }}
               >
                 {tx.smsButton}
@@ -1374,7 +1385,7 @@ export function VoiceRangeWidget({
           }}>
             {tx.successTitle}
           </div>
-          <p style={{ color: "rgba(240,238,234,0.55)", fontSize: "0.85rem", lineHeight: 1.65, margin: 0 }}>
+          <p style={{ color: IC_text2, fontSize: "0.85rem", lineHeight: 1.65, margin: 0 }}>
             {tx.successText}
           </p>
         </div>
@@ -1475,11 +1486,11 @@ export function VoiceRangeWidget({
         <div
           style={{
             position: "relative",
-            background: "rgba(0,0,0,0.45)",
+            background: "#F5F0E8",
             borderTop: `2px solid ${accentColor}`,
-            borderRight: "1px solid rgba(255,255,255,0.10)",
-            borderBottom: "1px solid rgba(255,255,255,0.10)",
-            borderLeft: "1px solid rgba(255,255,255,0.10)",
+            borderRight: `1px solid ${IC_ghost}`,
+            borderBottom: `1px solid ${IC_ghost}`,
+            borderLeft: `1px solid ${IC_ghost}`,
             padding: "18px 28px 28px",
             boxSizing: "border-box",
           }}
@@ -1491,20 +1502,20 @@ export function VoiceRangeWidget({
               position: "absolute", top: 14, right: 14,
               width: 30, height: 30,
               background: "transparent",
-              border: "1px solid rgba(255,255,255,0.14)",
-              color: "rgba(240,238,234,0.5)",
+              border: `1px solid ${IC_ghost}`,
+              color: IC_text3,
               cursor: "pointer",
               fontSize: "1rem",
               display: "flex", alignItems: "center", justifyContent: "center",
               transition: "color 0.2s, border-color 0.2s",
             }}
             onMouseEnter={(e) => {
-              (e.currentTarget as HTMLButtonElement).style.color = "#f0eeea";
-              (e.currentTarget as HTMLButtonElement).style.borderColor = "rgba(255,255,255,0.4)";
+              (e.currentTarget as HTMLButtonElement).style.color = "#1a1a1a";
+              (e.currentTarget as HTMLButtonElement).style.borderColor = IC_ghostHB;
             }}
             onMouseLeave={(e) => {
-              (e.currentTarget as HTMLButtonElement).style.color = "rgba(240,238,234,0.5)";
-              (e.currentTarget as HTMLButtonElement).style.borderColor = "rgba(255,255,255,0.14)";
+              (e.currentTarget as HTMLButtonElement).style.color = IC_text3;
+              (e.currentTarget as HTMLButtonElement).style.borderColor = IC_ghost;
             }}
           >
             ×
@@ -1513,7 +1524,7 @@ export function VoiceRangeWidget({
           {/* Step title */}
           {step !== "success" && getTitle() !== "" && (
             <p style={{
-              color: "rgba(240,238,234,0.35)",
+              color: IC_text4,
               fontSize: "0.65rem",
               letterSpacing: lsXl,
               textTransform: "uppercase",
