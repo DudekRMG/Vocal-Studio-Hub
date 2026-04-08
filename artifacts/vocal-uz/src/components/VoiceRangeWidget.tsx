@@ -177,6 +177,15 @@ export function VoiceRangeWidget({
     });
   }, [step, sectionId, inline]);
 
+  // Release mic as soon as we reach results — keeps it alive for re-recording
+  // on any earlier step (including tessitura re-do)
+  useEffect(() => {
+    if (step === "results" || step === "success") {
+      releaseAudio();
+    }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [step]);
+
   useEffect(() => {
     if (inline) return;
     if (step !== "closed") {
@@ -312,7 +321,6 @@ export function VoiceRangeWidget({
       setTessituraNote(frequencyToNote(medianHz));
       setTessituraError("");
       setTessituraRecordState("done");
-      releaseAudio();
       return;
     }
 
