@@ -723,22 +723,29 @@ export function VoiceRangeWidget({
     ? Math.log2(highHz / lowHz).toFixed(1)
     : "—";
 
-  // ── Inline light-card design tokens ───────────────────────────────────────
-  const IC_text1    = "rgba(15,16,22,0.80)";
-  const IC_text2    = "rgba(15,16,22,0.60)";
-  const IC_text3    = "rgba(15,16,22,0.45)";
-  const IC_text4    = "rgba(15,16,22,0.32)";
-  const IC_dash     = "rgba(15,16,22,0.14)";
-  const IC_ghost    = "rgba(15,16,22,0.18)";
-  const IC_ghostFg  = "rgba(15,16,22,0.60)";
-  const IC_ghostHB  = "rgba(15,16,22,0.40)";
+  // ── Inline design tokens — adapt to banner darkness ───────────────────────
+  // lightMode=true  → light banner (Express Karaoke)  → dark widget
+  // lightMode=false → dark banner (all others)         → cream widget
+  const IC_panelBg  = lightMode ? "rgba(0,0,0,0.60)"       : "#F5F0E8";
+  const IC_panelBdr = lightMode ? "rgba(255,255,255,0.10)"  : "rgba(15,16,22,0.18)";
+  const IC_text1    = lightMode ? "rgba(255,255,255,0.85)"  : "rgba(15,16,22,0.80)";
+  const IC_text2    = lightMode ? "rgba(255,255,255,0.65)"  : "rgba(15,16,22,0.60)";
+  const IC_text3    = lightMode ? "rgba(255,255,255,0.45)"  : "rgba(15,16,22,0.45)";
+  const IC_text4    = lightMode ? "rgba(255,255,255,0.32)"  : "rgba(15,16,22,0.32)";
+  const IC_dash     = lightMode ? "rgba(255,255,255,0.18)"  : "rgba(15,16,22,0.14)";
+  const IC_ghost    = lightMode ? "rgba(255,255,255,0.22)"  : "rgba(15,16,22,0.18)";
+  const IC_ghostFg  = lightMode ? "rgba(255,255,255,0.70)"  : "rgba(15,16,22,0.60)";
+  const IC_ghostHB  = lightMode ? "rgba(255,255,255,0.50)"  : "rgba(15,16,22,0.40)";
+  const IC_hoverFg  = lightMode ? "#f0eeea"                 : "#1a1a1a";
+  const IC_inputBg  = lightMode ? "rgba(255,255,255,0.07)"  : "rgba(15,16,22,0.05)";
+  const IC_inputClr = lightMode ? "#f0eeea"                 : "#1a1a1a";
   // ──────────────────────────────────────────────────────────────────────────
 
   const inputStyle: React.CSSProperties = {
     width: "100%",
-    background: "rgba(15,16,22,0.05)",
+    background: IC_inputBg,
     border: `1px solid ${IC_ghost}`,
-    color: "#1a1a1a",
+    color: IC_inputClr,
     padding: "0.65rem 0.9rem",
     fontSize: "0.88rem",
     outline: "none",
@@ -927,7 +934,7 @@ export function VoiceRangeWidget({
                   }}
                   onMouseEnter={(e) => {
                     (e.currentTarget as HTMLButtonElement).style.borderColor = IC_ghostHB;
-                    (e.currentTarget as HTMLButtonElement).style.color = "#1a1a1a";
+                    (e.currentTarget as HTMLButtonElement).style.color = IC_hoverFg;
                   }}
                   onMouseLeave={(e) => {
                     (e.currentTarget as HTMLButtonElement).style.borderColor = IC_ghost;
@@ -1356,7 +1363,7 @@ export function VoiceRangeWidget({
                 onMouseEnter={(e) => {
                   const btn = e.currentTarget as HTMLButtonElement;
                   btn.style.borderColor = IC_ghostHB;
-                  btn.style.color = "#1a1a1a";
+                  btn.style.color = IC_hoverFg;
                 }}
                 onMouseLeave={(e) => {
                   const btn = e.currentTarget as HTMLButtonElement;
@@ -1486,11 +1493,11 @@ export function VoiceRangeWidget({
         <div
           style={{
             position: "relative",
-            background: "#F5F0E8",
+            background: IC_panelBg,
             borderTop: `2px solid ${accentColor}`,
-            borderRight: `1px solid ${IC_ghost}`,
-            borderBottom: `1px solid ${IC_ghost}`,
-            borderLeft: `1px solid ${IC_ghost}`,
+            borderRight: `1px solid ${IC_panelBdr}`,
+            borderBottom: `1px solid ${IC_panelBdr}`,
+            borderLeft: `1px solid ${IC_panelBdr}`,
             padding: "18px 28px 28px",
             boxSizing: "border-box",
           }}
@@ -1510,7 +1517,7 @@ export function VoiceRangeWidget({
               transition: "color 0.2s, border-color 0.2s",
             }}
             onMouseEnter={(e) => {
-              (e.currentTarget as HTMLButtonElement).style.color = "#1a1a1a";
+              (e.currentTarget as HTMLButtonElement).style.color = IC_hoverFg;
               (e.currentTarget as HTMLButtonElement).style.borderColor = IC_ghostHB;
             }}
             onMouseLeave={(e) => {
