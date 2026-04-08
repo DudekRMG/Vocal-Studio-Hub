@@ -168,12 +168,14 @@ export function VoiceRangeWidget({
     if (!inline || wasOpen || step === "closed" || !sectionId) return;
     requestAnimationFrame(() => {
       requestAnimationFrame(() => {
-        const isMobile = window.innerWidth < 768;
+        // Mobile layout = below the site's md breakpoint (75rem = 1200px)
+        const isMobile = window.innerWidth < 1200;
         if (isMobile) {
           const panel = document.querySelector(`#${sectionId} [data-widget-panel]`) as HTMLElement | null;
           if (panel) {
+            const headerHeight = (document.querySelector("nav") as HTMLElement | null)?.offsetHeight ?? 76;
             const rect = panel.getBoundingClientRect();
-            const target = window.scrollY + rect.top - 48;
+            const target = window.scrollY + rect.top - headerHeight - 48;
             if (target > 0) window.scrollTo({ top: target, behavior: "smooth" });
           }
         } else {
