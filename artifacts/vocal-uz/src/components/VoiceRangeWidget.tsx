@@ -519,7 +519,13 @@ export function VoiceRangeWidget({
     tessituralPitchSamplesRef.current = [];
     setCurrentPitch(null);
     setBiologicalSex(null);
-    setStep("low");
+    // Audio was released when we entered "results" — re-request the mic
+    // before returning to step 1 so recording isn't silent.
+    sessionRef.current += 1;
+    const sessionId = sessionRef.current;
+    setMicError("");
+    setStep("mic-check");
+    requestMic(sessionId);
   }
 
   function handleSmsPreview() {
