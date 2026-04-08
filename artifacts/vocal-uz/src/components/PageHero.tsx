@@ -127,7 +127,14 @@ export function PageHero({
           >
             {courseTag}
           </div>
-          <div className="font-['Playfair_Display'] italic text-[0.9rem] mt-1 leading-[1.5]" style={{ color: bandSubColor }}>
+          <div
+            className="italic text-[0.9rem] mt-1 leading-[1.5]"
+            style={{
+              color: bandSubColor,
+              fontFamily: lang === "ru" ? "'Inter', sans-serif" : "'Playfair Display', serif",
+              letterSpacing: lang === "ru" ? 0 : undefined,
+            }}
+          >
             {courseSub}
           </div>
         </div>
@@ -180,7 +187,14 @@ export function PageHero({
 
           <div className="relative z-10 flex-1 flex flex-col items-center justify-center pointer-events-none text-center px-6 pt-[4.75rem]">
             <div className="[transform:translateY(7svh)]">
-              <div className="font-['Playfair_Display'] italic text-[clamp(1rem,1.8vw,1.35rem)] mb-4 leading-snug animate-[fadeUp_0.6s_0.3s_both]" style={{ color: sloganColor }}>
+              <div
+                className="italic text-[clamp(1rem,1.8vw,1.35rem)] mb-4 leading-snug animate-[fadeUp_0.6s_0.3s_both]"
+                style={{
+                  color: sloganColor,
+                  fontFamily: lang === "ru" ? "'Inter', sans-serif" : "'Playfair Display', serif",
+                  letterSpacing: lang === "ru" ? 0 : undefined,
+                }}
+              >
                 {tx.hero.slogan}
               </div>
               <div className="text-[clamp(3.8rem,10.5vw,10rem)] leading-none tracking-[0.1em] uppercase animate-[fadeUp_0.7s_0.4s_both]" style={{ fontFamily: "'Bebas Neue', sans-serif", color: titleColor }}>
@@ -323,7 +337,14 @@ export function PageHero({
         <div className="relative z-10 flex flex-col flex-1">
           <div className="flex-1 flex flex-col items-center justify-center pointer-events-none text-center px-6 pt-[calc(12vh_+_7rem)]">
             <div>
-              <div className="font-['Playfair_Display'] italic text-[clamp(1rem,1.8vw,1.35rem)] mb-4 leading-snug animate-[fadeUp_0.6s_0.3s_both]" style={{ color: sloganColor }}>
+              <div
+                className="italic text-[clamp(1rem,1.8vw,1.35rem)] mb-4 leading-snug animate-[fadeUp_0.6s_0.3s_both]"
+                style={{
+                  color: sloganColor,
+                  fontFamily: lang === "ru" ? "'Inter', sans-serif" : "'Playfair Display', serif",
+                  letterSpacing: lang === "ru" ? 0 : undefined,
+                }}
+              >
                 {tx.hero.slogan}
               </div>
               <div className="text-[clamp(3.8rem,10.5vw,10rem)] leading-none tracking-[0.1em] uppercase animate-[fadeUp_0.7s_0.4s_both]" style={{ fontFamily: "'Bebas Neue', sans-serif", color: titleColor }}>

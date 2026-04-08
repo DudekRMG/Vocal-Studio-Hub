@@ -68,7 +68,11 @@ export function InlineVoiceSection({
           {/* Per-page subheading (old banner h2) */}
           <p
             className="text-[1.05rem] leading-[1.5] mb-3 italic"
-            style={{ color: textSub }}
+            style={{
+              color: textSub,
+              fontFamily: lang === "ru" ? "'Inter', sans-serif" : undefined,
+              letterSpacing: lang === "ru" ? 0 : undefined,
+            }}
           >
             {subheading}
           </p>
