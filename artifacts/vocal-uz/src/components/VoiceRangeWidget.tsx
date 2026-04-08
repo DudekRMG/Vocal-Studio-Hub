@@ -157,15 +157,25 @@ export function VoiceRangeWidget({
   const highPitchSamplesRef   = useRef<number[]>([]);
   const tessituralPitchSamplesRef = useRef<number[]>([]);
   const sessionRef            = useRef(0);
-  const panelRef              = useRef<HTMLDivElement>(null);
-  const [panelMinH, setPanelMinH] = useState(0);
+  const prevStepRef           = useRef<Step>("closed");
 
-  // Track the tallest state the panel has ever reached and lock it in
+  // Scroll the section's bottom edge to the viewport bottom on first open
   useEffect(() => {
-    if (!panelRef.current || step === "closed") return;
-    const h = panelRef.current.offsetHeight;
-    setPanelMinH(prev => Math.max(prev, h));
-  });
+    const wasOpen = prevStepRef.current !== "closed";
+    prevStepRef.current = step;
+    if (!inline || wasOpen || step === "closed" || !sectionId) return;
+    requestAnimationFrame(() => {
+      requestAnimationFrame(() => {
+        const section = document.getElementById(sectionId);
+        if (!section) return;
+        const rect = section.getBoundingClientRect();
+        const target = window.scrollY + rect.bottom - window.innerHeight;
+        if (target > window.scrollY) {
+          window.scrollTo({ top: target, behavior: "smooth" });
+        }
+      });
+    });
+  }, [step, sectionId, inline]);
 
   useEffect(() => {
     if (inline) return;
@@ -230,6 +240,18 @@ export function VoiceRangeWidget({
         return;
       }
       streamRef.current = stream;
+
+      // When the OS revokes mic access (e.g. screen lock on mobile), all
+      // tracks end. Detect this and reset so the user can re-grant permission.
+      stream.getAudioTracks().forEach((track) => {
+        track.addEventListener("ended", () => {
+          if (sessionRef.current !== sessionId) return;
+          releaseAudio();
+          setMicError("denied");
+          setStep("mic-error");
+        });
+      });
+
       const ctx = new AC();
       audioCtxRef.current = ctx;
       const analyser = ctx.createAnalyser();
@@ -390,20 +412,6 @@ export function VoiceRangeWidget({
     setMicError("");
     requestMic(sessionId);
 
-    if (sectionId) {
-      requestAnimationFrame(() => {
-        requestAnimationFrame(() => {
-          const section = document.getElementById(sectionId);
-          if (section) {
-            const rect = section.getBoundingClientRect();
-            const target = window.scrollY + rect.bottom - window.innerHeight;
-            if (target > window.scrollY) {
-              window.scrollTo({ top: target, behavior: "smooth" });
-            }
-          }
-        });
-      });
-    }
   }
 
   function close() {
@@ -1517,7 +1525,6 @@ export function VoiceRangeWidget({
     return (
       <div style={{ maxWidth: 480, width: "100%", margin: "0 auto", animation: "vrFadeIn 0.2s both", textAlign: "left" }}>
         <div
-          ref={panelRef}
           style={{
             position: "relative",
             background: IC_panelBg,
@@ -1527,7 +1534,9 @@ export function VoiceRangeWidget({
             borderLeft: `1px solid ${IC_panelBdr}`,
             padding: "18px 28px 28px",
             boxSizing: "border-box",
-            minHeight: panelMinH || undefined,
+            minHeight: 420,
+            display: "flex",
+            flexDirection: "column",
             letterSpacing: lang === "ru" ? 0 : undefined,
           }}
         >
@@ -1566,13 +1575,16 @@ export function VoiceRangeWidget({
               textTransform: "uppercase",
               margin: "0 0 20px",
               paddingRight: 36,
+              flexShrink: 0,
             }}>
               {getTitle()}
             </p>
           )}
 
-          {/* Content */}
-          {renderContent()}
+          {/* Content — centered vertically in the remaining space */}
+          <div style={{ flex: 1, display: "flex", flexDirection: "column", justifyContent: "center" }}>
+            {renderContent()}
+          </div>
         </div>
       </div>
     );
